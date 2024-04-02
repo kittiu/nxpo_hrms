@@ -6,6 +6,34 @@ app_email = "kittiu@ecosoft.co.th"
 app_license = "mit"
 # required_apps = []
 
+fixtures = [
+    {
+        "doctype": "Custom Field",
+        "filters": [
+            [
+                "name",
+                "in",
+                (
+                    "Employee Transfer-custom_notify_users_by_email",
+                    "Employee Transfer-custom_transfer_activities",
+                    "Employee Transfer-custom_employee_transfer_template",
+                    "Employee Transfer-custom_section_activities",
+                    "Employee Transfer-custom_project",
+                    "Employee Transfer-custom_transition_status",
+                    "Employee Promotion-custom_employee_promotion_template",
+                    "Employee Promotion-custom_project",
+                    "Employee Promotion-custom_transition_status",
+                    "Employee Promotion-custom_notify_users_by_email",
+                    "Employee Promotion-custom_section_activities",
+                    "Employee Promotion-custom_promotion_activities",
+                )
+            ]
+        ]
+    }
+]
+
+
+
 # Includes in <head>
 # ------------------
 
@@ -29,10 +57,12 @@ app_license = "mit"
 
 # include js in doctype views
 doctype_js = {
-    "Employee Promotion": "public/js/employee_promotion.js"
+    "Employee Promotion": "public/js/employee_promotion.js",
+    "Employee Transfer": "public/js/employee_transfer.js"
 }
 doctype_list_js = {
-    "Employee Promotion": "public/js/employee_promotion_list.js"
+    "Employee Promotion": "public/js/employee_promotion_list.js",
+    "Employee Transfer": "public/js/employee_transfer_list.js"
 }
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -128,6 +158,12 @@ doctype_list_js = {
 
 doc_events = {
     "Employee Promotion": {
+        "validate": "nxpo_hrms.custom.employee_transition.remove_task_from_activities",
+        "on_submit": "nxpo_hrms.custom.employee_transition.create_project",
+        "on_cancel": "nxpo_hrms.custom.employee_transition.delete_project_task",
+        "on_update_after_submit": "nxpo_hrms.custom.employee_transition.create_task_and_notify_user",
+    },
+    "Employee Transfer": {
         "validate": "nxpo_hrms.custom.employee_transition.remove_task_from_activities",
         "on_submit": "nxpo_hrms.custom.employee_transition.create_project",
         "on_cancel": "nxpo_hrms.custom.employee_transition.delete_project_task",

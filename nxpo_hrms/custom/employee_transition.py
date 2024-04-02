@@ -12,20 +12,30 @@ from erpnext.setup.doctype.holiday_list.holiday_list import is_holiday
 
 def remove_task_from_activities(doc, method=None):
     # remove the task if linked before submitting the form
+    activities = (
+        doc.custom_promotion_activities
+        if doc.doctype == "Employee Promotion"
+        else doc.custom_transfer_activities
+    )
     if doc.amended_from:
-        for activity in doc.custom_promotion_activities:
+        for activity in activities:
             activity.task = ""
 
 
 def create_project(doc, method=None):
     # create the project for the given employee transition
     project_name = "{} : {}".format(doc.name, doc.employee_name)
+    action_date = (
+        doc.promotion_date
+        if doc.doctype == "Employee Promotion"
+        else doc.transfer_date
+    )
 
     project = frappe.get_doc(
         {
             "doctype": "Project",
             "project_name": project_name,
-            "expected_start_date": doc.promotion_date,
+            "expected_start_date": action_date,
             "department": doc.department,
             "company": doc.company,
         }
@@ -40,8 +50,12 @@ def create_project(doc, method=None):
 def create_task_and_notify_user(doc, method=None):
     # create the task for the given project and assign to the concerned person
     holiday_list = get_holiday_list(doc)
-
-    for activity in doc.custom_promotion_activities:
+    activities = (
+        doc.custom_promotion_activities
+        if doc.doctype == "Employee Promotion"
+        else doc.custom_transfer_activities
+    )
+    for activity in activities:
         if activity.task:
             continue
 
@@ -90,27 +104,28 @@ def create_task_and_notify_user(doc, method=None):
 
 
 def get_holiday_list(doc):
-    if doc.doctype == "Employee Separation":
+    if doc.employee:
         return get_holiday_list_for_employee(doc.employee)
     else:
-        if doc.employee:
-            return get_holiday_list_for_employee(doc.employee)
+        if not doc.holiday_list:
+            frappe.throw(_("Please set the Holiday List."), frappe.MandatoryError)
         else:
-            if not doc.holiday_list:
-                frappe.throw(_("Please set the Holiday List."), frappe.MandatoryError)
-            else:
-                return doc.holiday_list
+            return doc.holiday_list
 
 
 def get_task_dates(doc, activity, holiday_list):
     start_date = end_date = None
-
+    action_date = (
+        doc.promotion_date
+        if doc.doctype == "Employee Promotion"
+        else doc.transfer_date
+    )
     if activity.begin_on is not None:
-        start_date = add_days(doc.promotion_date, activity.begin_on)
+        start_date = add_days(action_date, activity.begin_on)
         start_date = update_if_holiday(start_date, holiday_list)
 
         if activity.duration is not None:
-            end_date = add_days(doc.promotion_date, activity.begin_on + activity.duration)
+            end_date = add_days(action_date, activity.begin_on + activity.duration)
             end_date = update_if_holiday(end_date, holiday_list)
 
     return [start_date, end_date]
@@ -141,7 +156,12 @@ def delete_project_task(doc, method=None):
         frappe.delete_doc("Task", task.name, force=1)
     frappe.delete_doc("Project", project, force=1)
     doc.db_set("custom_project", "")
-    for activity in doc.custom_promotion_activities:
+    activities = (
+        doc.custom_promotion_activities
+        if doc.doctype == "Employee Promotion"
+        else doc.custom_transfer_activities
+    )    
+    for activity in activities:
         activity.db_set("task", "")
 
     frappe.msgprint(

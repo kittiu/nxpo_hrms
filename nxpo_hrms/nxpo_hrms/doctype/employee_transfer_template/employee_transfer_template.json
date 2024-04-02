@@ -1,0 +1,104 @@
+{
+    "actions": [],
+    "autoname": "HR-EMP-TTP-.#####",
+    "creation": "2024-04-02 13:15:07.807550",
+    "doctype": "DocType",
+    "editable_grid": 1,
+    "engine": "InnoDB",
+    "field_order": [
+     "title",
+     "company",
+     "department",
+     "column_break_7",
+     "designation",
+     "employee_grade",
+     "disabled",
+     "section_break_7",
+     "activities"
+    ],
+    "fields": [
+     {
+      "fieldname": "title",
+      "fieldtype": "Data",
+      "in_list_view": 1,
+      "label": "Title",
+      "reqd": 1,
+      "translatable": 1
+     },
+     {
+      "fieldname": "company",
+      "fieldtype": "Link",
+      "label": "Company",
+      "options": "Company"
+     },
+     {
+      "fieldname": "department",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Department",
+      "options": "Department"
+     },
+     {
+      "fieldname": "column_break_7",
+      "fieldtype": "Column Break"
+     },
+     {
+      "fieldname": "designation",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Designation",
+      "options": "Designation"
+     },
+     {
+      "fieldname": "employee_grade",
+      "fieldtype": "Link",
+      "in_list_view": 1,
+      "label": "Employee Grade",
+      "options": "Employee Grade"
+     },
+     {
+      "fieldname": "section_break_7",
+      "fieldtype": "Section Break",
+      "label": "Activities"
+     },
+     {
+      "fieldname": "activities",
+      "fieldtype": "Table",
+      "label": "Activities",
+      "options": "Employee Transition Activity"
+     },
+     {
+      "default": "0",
+      "fieldname": "disabled",
+      "fieldtype": "Check",
+      "label": "Disabled"
+     }
+    ],
+    "links": [],
+    "modified": "2024-04-02 14:42:35.397597",
+    "modified_by": "Administrator",
+    "module": "NXPO HRMS",
+    "name": "Employee Transfer Template",
+    "naming_rule": "Expression (old style)",
+    "owner": "Administrator",
+    "permissions": [
+     {
+      "create": 1,
+      "delete": 1,
+      "email": 1,
+      "export": 1,
+      "print": 1,
+      "read": 1,
+      "report": 1,
+      "role": "System Manager",
+      "share": 1,
+      "write": 1
+     }
+    ],
+    "show_title_field_in_link": 1,
+    "sort_field": "modified",
+    "sort_order": "DESC",
+    "states": [],
+    "title_field": "title",
+    "track_changes": 1
+   }
