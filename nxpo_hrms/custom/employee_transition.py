@@ -23,6 +23,15 @@ def remove_task_from_activities(doc, method=None):
 
 def create_project(doc, method=None):
     # create the project for the given employee transition
+
+    activities = (
+        doc.custom_promotion_activities
+        if doc.doctype == "Employee Promotion"
+        else doc.custom_transfer_activities
+    )
+    if not activities:
+        return
+
     project_name = "{} : {}".format(doc.name, doc.employee_name)
     action_date = (
         doc.promotion_date
@@ -48,12 +57,17 @@ def create_project(doc, method=None):
 
 def create_task_and_notify_user(doc, method=None):
     # create the task for the given project and assign to the concerned person
-    holiday_list = get_holiday_list(doc)
+
     activities = (
         doc.custom_promotion_activities
         if doc.doctype == "Employee Promotion"
         else doc.custom_transfer_activities
     )
+    if not activities:
+        return
+
+    holiday_list = get_holiday_list(doc)
+
     for activity in activities:
         if activity.task:
             continue
