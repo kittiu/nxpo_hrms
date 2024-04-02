@@ -4,8 +4,7 @@
 import frappe
 from frappe import _
 from frappe.desk.form import assign_to
-from frappe.utils import add_days, flt, unique
-
+from frappe.utils import add_days, flt, unique, today
 from erpnext.setup.doctype.employee.employee import get_holiday_list_for_employee
 from erpnext.setup.doctype.holiday_list.holiday_list import is_holiday
 
@@ -209,3 +208,25 @@ def update_employee_transition_status(project, event=None):
 def update_task(task, method=None):
     if task.project and not task.flags.from_project:
         update_employee_transition_status(frappe.get_cached_doc("Project", task.project))
+
+
+def auto_submit():
+    # Auto submit with date arrives
+    doctypes = {
+        "Employee Promotion": {"date_field": "promotion_date"},
+        "Employee Transfer": {"date_field": "transfer_date"}
+    }
+    for key, vals in doctypes.items():
+        names = frappe.db.get_all(
+            key,
+            filters={
+                "custom_auto_submit": True,
+                "docstatus": 0,
+                vals["date_field"]: ["<=", today()]
+            },
+            pluck="name"
+        )
+        for name in names:
+            doc = frappe.get_doc(key, name)
+            doc.submit()
+            frappe.db.commit()

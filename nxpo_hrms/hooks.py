@@ -20,12 +20,14 @@ fixtures = [
                     "Employee Transfer-custom_section_activities",
                     "Employee Transfer-custom_project",
                     "Employee Transfer-custom_transition_status",
+                    "Employee Transfer-custom_auto_submit",
                     "Employee Promotion-custom_employee_promotion_template",
                     "Employee Promotion-custom_project",
                     "Employee Promotion-custom_transition_status",
                     "Employee Promotion-custom_notify_users_by_email",
                     "Employee Promotion-custom_section_activities",
                     "Employee Promotion-custom_promotion_activities",
+                    "Employee Promotion-custom_auto_submit",
                 )
             ]
         ]
@@ -178,23 +180,23 @@ doc_events = {
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"nxpo_hrms.tasks.all"
-# 	],
-# 	"daily": [
-# 		"nxpo_hrms.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"nxpo_hrms.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"nxpo_hrms.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"nxpo_hrms.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+    # "all": [
+    #     "nxpo_hrms.custom.employee_transition.auto_submit"
+    # ],
+    # "daily": [
+    # 	"nxpo_hrms.tasks.daily"
+    # ],
+    "hourly": [
+        "nxpo_hrms.custom.employee_transition.auto_submit"
+    ],
+    # "weekly": [
+    # 	"nxpo_hrms.tasks.weekly"
+    # ],
+    # "monthly": [
+    # 	"nxpo_hrms.tasks.monthly"
+    # ],
+}
 
 # Testing
 # -------
