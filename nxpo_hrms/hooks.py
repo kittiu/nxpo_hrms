@@ -28,8 +28,12 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
-# doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
+doctype_js = {
+    "Employee Promotion": "public/js/employee_promotion.js"
+}
+doctype_list_js = {
+    "Employee Promotion": "public/js/employee_promotion_list.js"
+}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
@@ -122,13 +126,18 @@ app_license = "mit"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+    "Employee Promotion": {
+        "validate": "nxpo_hrms.custom.employee_transition.remove_task_from_activities",
+        "on_submit": "nxpo_hrms.custom.employee_transition.create_project",
+        "on_cancel": "nxpo_hrms.custom.employee_transition.delete_project_task",
+        "on_update_after_submit": "nxpo_hrms.custom.employee_transition.create_task_and_notify_user",
+    },
+    "Project": {
+        "validate": "nxpo_hrms.custom.employee_transition.update_employee_transition_status"
+    },
+    "Task": {"on_update": "nxpo_hrms.custom.employee_transition.update_task"},
+}
 
 # Scheduled Tasks
 # ---------------
