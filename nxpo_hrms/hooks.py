@@ -28,6 +28,8 @@ fixtures = [
                     "Employee Promotion-custom_section_activities",
                     "Employee Promotion-custom_promotion_activities",
                     "Employee Promotion-custom_auto_submit",
+                    "Employee-custom_probation_days",
+                    "Employee-custom_date_pass_probation",
                 )
             ]
         ]
@@ -175,6 +177,9 @@ doc_events = {
         "validate": "nxpo_hrms.custom.employee_transition.update_employee_transition_status"
     },
     "Task": {"on_update": "nxpo_hrms.custom.employee_transition.update_task"},
+    "Employee": {
+        "validate": "nxpo_hrms.custom.employee.update_employee_data"
+    },
 }
 
 # Scheduled Tasks
