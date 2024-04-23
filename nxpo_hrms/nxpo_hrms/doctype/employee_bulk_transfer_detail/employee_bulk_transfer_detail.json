@@ -1,0 +1,91 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-04-23 14:15:21.519959",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "section_break_uktv",
+  "from_department",
+  "from_designation",
+  "from_grade",
+  "column_break_mxjb",
+  "to_department",
+  "to_designation",
+  "to_grade"
+ ],
+ "fields": [
+  {
+   "fieldname": "from_department",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "From Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "column_break_mxjb",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "to_department",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "To Department",
+   "options": "Department"
+  },
+  {
+   "fieldname": "from_designation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "From Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "to_designation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "To Designation",
+   "options": "Designation"
+  },
+  {
+   "fieldname": "from_grade",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "From Grade",
+   "options": "Employee Grade"
+  },
+  {
+   "fieldname": "to_grade",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "To Grade",
+   "options": "Employee Grade"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "section_break_uktv",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-04-23 14:30:38.002395",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Employee Bulk Transfer Detail",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
