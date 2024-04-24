@@ -43,5 +43,28 @@ frappe.ui.form.on("Employee Transfer", {
 				}
 			});
 		}
+	},
+
+	// Overwrite this function to allow only fields used in NXPO
+	setup_employee_property_button: function(frm, table) {
+		frm.fields_dict[table].grid.add_custom_button(__("Add Employee Property"), () => {
+			if (!frm.doc.employee) {
+				frappe.msgprint(__("Please select Employee first."));
+				return;
+			}
+			const allowed_fields = [
+				{
+					label: "Department",
+					value: "department",
+				},
+				{
+					label: "Designation",
+					value: "designation",
+				}
+			];
+			frappe.model.with_doctype("Employee", () => {
+				show_dialog(frm, table, allowed_fields);
+			});
+		});
 	}
 });

@@ -50,8 +50,6 @@ fixtures = [
                     "Employee-history_in_company-collapsible",
                     "Employee-previous_work_experience-collapsible_depends_on",
                     "Employee-educational_qualification-collapsible_depends_on",
-                    # Order
-                    "Employee-main-field_order",
                 )
             ]
         ]
