@@ -6,18 +6,38 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "effective_date"
+  "effective_date",
+  "column_break_lnlh",
+  "company"
  ],
  "fields": [
   {
    "fieldname": "effective_date",
    "fieldtype": "Date",
    "label": "Effective Date"
+  },
+  {
+   "fieldname": "column_break_lnlh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Company",
+   "options": "Company",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-04-24 16:56:07.881983",
+ "links": [
+  {
+   "link_doctype": "Department History",
+   "link_fieldname": "department_restructure"
+  }
+ ],
+ "modified": "2024-04-24 18:12:29.815294",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Department Restructure",
