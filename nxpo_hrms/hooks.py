@@ -6,56 +6,56 @@ app_email = "kittiu@ecosoft.co.th"
 app_license = "mit"
 # required_apps = []
 
-fixtures = [
-    {
-        "doctype": "Custom Field",
-        "filters": [
-            [
-                "name",
-                "in",
-                (
-                    "Employee Transfer-custom_notify_users_by_email",
-                    "Employee Transfer-custom_transfer_activities",
-                    "Employee Transfer-custom_employee_transfer_template",
-                    "Employee Transfer-custom_section_activities",
-                    "Employee Transfer-custom_project",
-                    "Employee Transfer-custom_transition_status",
-                    "Employee Transfer-custom_auto_submit",
-                    "Employee Promotion-custom_employee_promotion_template",
-                    "Employee Promotion-custom_project",
-                    "Employee Promotion-custom_transition_status",
-                    "Employee Promotion-custom_notify_users_by_email",
-                    "Employee Promotion-custom_section_activities",
-                    "Employee Promotion-custom_promotion_activities",
-                    "Employee Promotion-custom_auto_submit",
-                    "Employee-custom_probation_days",
-                    "Employee-custom_date_pass_probation",
-                    "Employee-custom_summary",
-                    "Employee-custom_summary_html",
-                    "Employee-custom_property_history_html",
-                    "Employee-custom_experience_ytd",
-                )
-            ]
-        ]
-    },
-    {
-        "doctype": "Property Setter",
-        "filters": [
-            [
-                "name",
-                "in",
-                (
-                    "Employee-internal_work_history-hidden",
-                    "Employee-internal_work_history-print_hide",
-                    "Employee-internal_work_history-report_hide",
-                    "Employee-history_in_company-collapsible",
-                    "Employee-previous_work_experience-collapsible_depends_on",
-                    "Employee-educational_qualification-collapsible_depends_on",
-                )
-            ]
-        ]
-    }
-]
+# fixtures = [
+#     {
+#         "doctype": "Custom Field",
+#         "filters": [
+#             [
+#                 "name",
+#                 "in",
+#                 (
+#                     "Employee Transfer-custom_notify_users_by_email",
+#                     "Employee Transfer-custom_transfer_activities",
+#                     "Employee Transfer-custom_employee_transfer_template",
+#                     "Employee Transfer-custom_section_activities",
+#                     "Employee Transfer-custom_project",
+#                     "Employee Transfer-custom_transition_status",
+#                     "Employee Transfer-custom_auto_submit",
+#                     "Employee Promotion-custom_employee_promotion_template",
+#                     "Employee Promotion-custom_project",
+#                     "Employee Promotion-custom_transition_status",
+#                     "Employee Promotion-custom_notify_users_by_email",
+#                     "Employee Promotion-custom_section_activities",
+#                     "Employee Promotion-custom_promotion_activities",
+#                     "Employee Promotion-custom_auto_submit",
+#                     "Employee-custom_probation_days",
+#                     "Employee-custom_date_pass_probation",
+#                     "Employee-custom_summary",
+#                     "Employee-custom_summary_html",
+#                     "Employee-custom_property_history_html",
+#                     "Employee-custom_experience_ytd",
+#                 )
+#             ]
+#         ]
+#     },
+#     {
+#         "doctype": "Property Setter",
+#         "filters": [
+#             [
+#                 "name",
+#                 "in",
+#                 (
+#                     "Employee-internal_work_history-hidden",
+#                     "Employee-internal_work_history-print_hide",
+#                     "Employee-internal_work_history-report_hide",
+#                     "Employee-history_in_company-collapsible",
+#                     "Employee-previous_work_experience-collapsible_depends_on",
+#                     "Employee-educational_qualification-collapsible_depends_on",
+#                 )
+#             ]
+#         ]
+#     }
+# ]
 
 
 

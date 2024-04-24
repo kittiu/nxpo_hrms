@@ -1,0 +1,49 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "field:employee_prefix",
+ "creation": "2024-04-24 21:42:46.889807",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee_prefix",
+  "employee_prefix_en"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee_prefix_en",
+   "fieldtype": "Data",
+   "label": "Employee Prefix (EN)"
+  },
+  {
+   "fieldname": "employee_prefix",
+   "fieldtype": "Data",
+   "label": "Employee Prefix",
+   "unique": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-04-24 21:45:52.135395",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Employee Prefix",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
