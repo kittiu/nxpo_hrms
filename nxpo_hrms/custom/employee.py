@@ -1,8 +1,9 @@
 # Copyright (c) 2021, Frappe Technologies Pvt. Ltd. and Contributors
 # License: GNU General Public License v3. See license.txt
-
+import frappe
 from dateutil.relativedelta import relativedelta
 from frappe.utils import getdate
+import json
 
 
 def update_employee_data(doc, method=None):
@@ -10,3 +11,46 @@ def update_employee_data(doc, method=None):
         getdate(doc.date_of_joining) +
         relativedelta(days=doc.custom_probation_days)
     )
+
+@frappe.whitelist()
+def get_employee_basic_html(employee):
+    data = json.loads(employee)
+    return frappe.render_template("nxpo_hrms/custom/employee/basic.html", {"data": data})
+
+@frappe.whitelist()
+def get_employee_property_history_html(employee):
+    employee = json.loads(employee)
+    employee = employee["name"]
+    docs = []
+    doctypes = {"Employee Transfer": "transfer_date", "Employee Promotion": "promotion_date"}
+    for doctype, docfield in doctypes.items():
+        docs += frappe.get_all(
+            doctype,
+            filters={
+                "docstatus": 1,
+                "employee": employee,
+            },
+            fields=["name", docfield],
+            as_list=True
+        )
+    docs = dict(docs)
+    data = frappe.get_all(
+            "Employee Property History",
+            filters={
+                "parent": ["in", docs.keys()],
+            },
+            fields=["parenttype", "parent", "property", "current", "new"]
+        )
+    for d in data:
+        d["date"] = docs[d["parent"]]
+    data = sorted(data, key=lambda x: (x["date"], x["property"], x["parent"]))
+    # remove date when same as previous for readability
+    result = []
+    prev_date = False
+    for d in data:
+        if d["date"] == prev_date:
+            d["date"] = False
+        else:
+            prev_date = d["date"]
+        result.append(d)
+    return frappe.render_template("nxpo_hrms/custom/employee/property_history.html", {"data": data})

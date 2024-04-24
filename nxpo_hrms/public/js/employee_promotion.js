@@ -3,8 +3,8 @@
 
 frappe.ui.form.on("Employee Promotion", {
 	setup: function(frm) {
-		frm.add_fetch("custom_employee_separation_template", "company", "company");
-		frm.add_fetch("custom_employee_separation_template", "department", "department");
+		frm.add_fetch("custom_employee_promotion_template", "company", "company");
+		frm.add_fetch("custom_employee_promotion_template", "department", "department");
 	},
 
 	refresh: function(frm) {

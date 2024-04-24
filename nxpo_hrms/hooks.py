@@ -30,6 +30,28 @@ fixtures = [
                     "Employee Promotion-custom_auto_submit",
                     "Employee-custom_probation_days",
                     "Employee-custom_date_pass_probation",
+                    "Employee-custom_summary",
+                    "Employee-custom_summary_html",
+                    "Employee-custom_property_history_html",
+                )
+            ]
+        ]
+    },
+    {
+        "doctype": "Property Setter",
+        "filters": [
+            [
+                "name",
+                "in",
+                (
+                    "Employee-internal_work_history-hidden",
+                    "Employee-internal_work_history-print_hide",
+                    "Employee-internal_work_history-report_hide",
+                    "Employee-history_in_company-collapsible",
+                    "Employee-previous_work_experience-collapsible_depends_on",
+                    "Employee-educational_qualification-collapsible_depends_on",
+                    # Order
+                    "Employee-main-field_order",
                 )
             ]
         ]
@@ -62,7 +84,8 @@ fixtures = [
 # include js in doctype views
 doctype_js = {
     "Employee Promotion": "public/js/employee_promotion.js",
-    "Employee Transfer": "public/js/employee_transfer.js"
+    "Employee Transfer": "public/js/employee_transfer.js",
+    "Employee": "public/js/employee.js",
 }
 doctype_list_js = {
     "Employee Promotion": "public/js/employee_promotion_list.js",
