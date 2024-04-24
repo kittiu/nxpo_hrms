@@ -33,6 +33,7 @@ fixtures = [
                     "Employee-custom_summary",
                     "Employee-custom_summary_html",
                     "Employee-custom_property_history_html",
+                    "Employee-custom_experience_ytd",
                 )
             ]
         ]
@@ -199,7 +200,7 @@ doc_events = {
     },
     "Task": {"on_update": "nxpo_hrms.custom.employee_transition.update_task"},
     "Employee": {
-        "validate": "nxpo_hrms.custom.employee.update_employee_data"
+        "validate": "nxpo_hrms.custom.employee.update_employee_data",
     },
 }
 
@@ -210,9 +211,9 @@ scheduler_events = {
     # "all": [
     #     "nxpo_hrms.custom.employee_transition.auto_submit"
     # ],
-    # "daily": [
-    # 	"nxpo_hrms.tasks.daily"
-    # ],
+    "daily": [
+        "nxpo_hrms.custom.employee.update_all_employee_data"
+    ],
     "hourly": [
         "nxpo_hrms.custom.employee_transition.auto_submit"
     ],
