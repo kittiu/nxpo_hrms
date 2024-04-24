@@ -73,3 +73,4 @@ def update_all_employee_data():
     for employee in frappe.get_all("Employee", pluck="name"):
         doc = frappe.get_doc("Employee", employee)
         update_employee_data(doc)
+        doc.save()
