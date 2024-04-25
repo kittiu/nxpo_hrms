@@ -1,118 +1,151 @@
 <div class="print-heading">
 	<h2>
-		<div>Employee</div><br><small class="sub-heading">{{ data.name }}</small>
+		<div>{{ data.name }} : {{ data.custom_prefix or "" }} {{ data.first_name or "" }} {{ data.last_name or "" }}</div>
 	</h2>
+	<br/>
+	<h3>{{ data.designation or "" }} </h3>
+	<h4>
+		{{ (data.custom_subdepartment or "") | replace(" - N", "")}},
+		{{ (data.department or "") | replace(" - N", "") }},
+		{{ (data.custom_directorate or "") | replace(" - N", "") }}
+	</h4>
 </div>
+<h4><u>ข้อมูลทั่วไป</u></h4>
 <div class="row section-break" data-label="">
 	<div class="col-xs-4 column-break">
 		<div class="row  data-field">
-			<div class="col-xs-6">
-				<label>Series: </label>
+			<div class="col-xs-5">
+				<label><b>เพศ:</b></label>
 			</div>
-			<div class="col-xs-6">
-				HR-EMP-
+			<div class="col-xs-7">
+				{{ data.gender or "" }}
 			</div>
 		</div>
-		<div class="row data-field">
-			<div class="col-xs-6">
-				<label>First Name: </label>
+		<div class="row  data-field">
+			<div class="col-xs-5">
+				<label><b>เลขประจำตัวประชาชน:</b></label>
 			</div>
-			<div class="col-xs-6">
-				Kitti
+			<div class="col-xs-7">
+				{{ data.citizen_id or "" }}
 			</div>
 		</div>
 	</div>
 	<div class="col-xs-4 column-break">
 		<div class="row  data-field">
-			<div class="col-xs-6">
-				<label>Series: </label>
+			<div class="col-xs-5">
+				<label><b>วันที่เริ่มงาน:</b></label>
 			</div>
-			<div class="col-xs-6">
-				HR-EMP-
+			<div class="col-xs-7">
+				{{ data.date_of_joining or "" }}
 			</div>
 		</div>
-		<div class="row data-field">
-			<div class="col-xs-6">
-				<label>First Name: </label>
+		<div class="row  data-field">
+			<div class="col-xs-5">
+				<label><b>ระยะเวลาทำงาน:</b></label>
 			</div>
-			<div class="col-xs-6">
-				Kitti
+			<div class="col-xs-7">
+				{{ (data.custom_experience_ytd or "") | replace("Years", "ปี") | replace("Months", "เดือน") | replace("Days", "วัน") }}
 			</div>
 		</div>
 	</div>
-
 	<div class="col-xs-4 column-break">
 		<div class="row  data-field">
-			<div class="col-xs-6">
-				<label>Series: </label>
+			<div class="col-xs-5">
+				<label><b>ประเภทงาน:</b></label>
 			</div>
-			<div class="col-xs-6">
-				HR-EMP- a;ldsjfalks
+			<div class="col-xs-7">
+				{{ data.custom_job_family or "" }}
 			</div>
 		</div>
-		<div class="row data-field">
-			<div class="col-xs-6">
-				<label>First Name: </label>
+		<div class="row  data-field">
+			<div class="col-xs-5">
+				<label><b>ระดับงาน:</b></label>
 			</div>
-			<div class="col-xs-6">
-				Kitti
+			<div class="col-xs-7">
+				{{ data.grade or "" }}
 			</div>
 		</div>
 	</div>
-
 </div>
-
-<div class="row section-break" data-label="History In Company">
-	<div class="col-xs-12 column-break">
-		<div>
-			<table class="table table-bordered table-condensed">
-				<thead>
-					<tr>
-						<th style="width: 40px" class="table-sr">Sr</th>
-
-						<th style="width: 150px;">
-							Designation</th>
-
-						<th style="width: 150px;">
-							From Date</th>
-
-						<th style="width: 150px;">
-							To Date</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td class="table-sr">1</td>
-						<td>
-							<div class="value">CFO
-							</div>
-						</td>
-						<td>
-							<div class="value">07/04/2011
-							</div>
-						</td>
-						<td>
-							<div class="value">03/04/2024
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td class="table-sr">2</td>
-						<td>
-							<div class="value">CEO
-							</div>
-						</td>
-						<td>
-							<div class="value">04/04/2024
-							</div>
-						</td>
-						<td>
-							<div class="value">
-							</div>
-						</td>
-					</tr>
-				</tbody>
-			</table>
+<hr/>
+<h4><u>ข้อมูลติดต่อ</u></h4>
+<div class="row section-break" data-label="">
+	<div class="col-xs-4 column-break">
+		<div class="row  data-field">
+			<div class="col-xs-5">
+				<label><b>เบอร์มือถือ:</b></label>
+			</div>
+			<div class="col-xs-7">
+				{{ data.cell_number or "" }}
+			</div>
+		</div>
+		<div class="row  data-field">
+			<div class="col-xs-5">
+				<label><b>เบอร์ติดต่อฉุกเฉิน:</b></label>
+			</div>
+			<div class="col-xs-7">
+				{{ data.emergency_phone_number or "" }}
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-4 column-break">
+		<div class="row  data-field">
+			<div class="col-xs-5">
+				<label><b>อีเมล์:</b></label>
+			</div>
+			<div class="col-xs-7">
+				{{ data.personal_email or "" }}
+			</div>
+		</div>
+		<div class="row  data-field">
+			<div class="col-xs-5">
+				<label><b>อีเมล์บริษัท:</b></label>
+			</div>
+			<div class="col-xs-7">
+				{{ data.company_email or "" }}
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-4 column-break">
+		<div class="row  data-field">
+			<div class="col-xs-5">
+				<label><b>ชื่อผู้ติดต่อ:</b></label>
+			</div>
+			<div class="col-xs-7">
+				{{ data.person_to_be_contacted or "" }}
+			</div>
+		</div>
+		<div class="row  data-field">
+			<div class="col-xs-5">
+				<label><b>ความสัมพันธ์:</b></label>
+			</div>
+			<div class="col-xs-7">
+				{{ data.relation or "" }}
+			</div>
+		</div>
+	</div>
+</div>
+<hr/>
+<h4><u>ที่อยู่</u></h4>
+<div class="row section-break" data-label="">
+	<div class="col-xs-6 column-break">
+		<div class="row  data-field">
+			<div class="col-xs-3">
+				<label><b>ที่อยู่ปัจจุบัน:</b></label>
+			</div>
+			<div class="col-xs-9">
+				{{ data.current_address or "" }}
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-6 column-break">
+		<div class="row  data-field">
+			<div class="col-xs-3">
+				<label><b>ที่อยู่ถาวร:</b></label>
+			</div>
+			<div class="col-xs-9">
+				{{ data.permanent_address or "" }}
+			</div>
 		</div>
 	</div>
 </div>
