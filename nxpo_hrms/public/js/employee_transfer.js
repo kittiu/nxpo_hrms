@@ -53,14 +53,14 @@ frappe.ui.form.on("Employee Transfer", {
 				return;
 			}
 			const allowed_fields = [
-				{
-					label: "Department",
-					value: "department",
-				},
-				{
-					label: "Designation",
-					value: "designation",
-				}
+				{label: "Sub-Department", value: "custom_subdepartment"},
+				{label: "Department", value: "department"},
+				{label: "Directorate", value: "custom_directorate"},
+				{label: "Designation", value: "designation"},
+				{label: "Employee Grade", value: "grade"},
+				{label: "Assignment Designation 1", value: "custom_assignment_designation_1"},
+				{label: "Assignment Designation 2", value: "custom_assignment_designation_2"},
+				{label: "Assignment Designation 3", value: "custom_assignment_designation_3"},
 			];
 			frappe.model.with_doctype("Employee", () => {
 				show_dialog(frm, table, allowed_fields);
