@@ -4,7 +4,7 @@
 frappe.ui.form.on("Department History", {
 	onload: function (frm) {
 		frm.set_query("parent_department_history", function () {
-			return { filters: [["Department", "is_group", "=", 1]] };
+			return { filters: [["Department History", "is_group", "=", 1]] };
 		});
 	},
 	refresh: function (frm) {

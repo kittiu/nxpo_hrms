@@ -55,7 +55,8 @@
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
    "label": "Parent Department",
-   "options": "Department History"
+   "options": "Department History",
+   "reqd": 1
   },
   {
    "fieldname": "department_name",
@@ -86,14 +87,13 @@
    "fieldname": "department_restructure",
    "fieldtype": "Link",
    "label": "Department Restructure",
-   "options": "Department Restructure",
-   "reqd": 1
+   "options": "Department Restructure"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_tree": 1,
  "links": [],
- "modified": "2024-04-24 18:00:45.422679",
+ "modified": "2024-04-25 12:38:55.433423",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Department History",

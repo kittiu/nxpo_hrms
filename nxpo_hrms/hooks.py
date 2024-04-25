@@ -168,6 +168,7 @@ doctype_list_js = {
 
 # before_install = "nxpo_hrms.install.before_install"
 # after_install = "nxpo_hrms.install.after_install"
+after_migrate = "nxpo_hrms.setup.install.after_migrate"
 
 # Uninstallation
 # ------------
