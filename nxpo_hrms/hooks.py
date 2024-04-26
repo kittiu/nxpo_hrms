@@ -233,9 +233,9 @@ scheduler_events = {
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-# 	"frappe.desk.doctype.event.event.get_events": "nxpo_hrms.event.get_events"
-# }
+override_whitelisted_methods = {
+	"erpnext.setup.doctype.department.department.get_children": "nxpo_hrms.custom.department.get_children"
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
