@@ -1,0 +1,51 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Recruitment Type",
+  "modified": "2024-04-26 14:46:07.514691",
+  "name": "สรรหา",
+  "recruitment_type": "สรรหา"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Recruitment Type",
+  "modified": "2024-04-26 14:46:07.525476",
+  "name": "คัดเลือก",
+  "recruitment_type": "คัดเลือก"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Recruitment Type",
+  "modified": "2024-04-26 14:46:07.531254",
+  "name": "ยืมตัว",
+  "recruitment_type": "ยืมตัว"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Recruitment Type",
+  "modified": "2024-04-26 14:46:07.538360",
+  "name": "นักเรียนทุน",
+  "recruitment_type": "นักเรียนทุน"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Recruitment Type",
+  "modified": "2024-04-26 14:46:07.544389",
+  "name": "แต่งตั้ง",
+  "recruitment_type": "แต่งตั้ง"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Recruitment Type",
+  "modified": "2024-04-26 14:46:07.551217",
+  "name": "โอนย้าย",
+  "recruitment_type": "โอนย้าย"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Recruitment Type",
+  "modified": "2024-04-26 14:46:07.557661",
+  "name": "ต่อสัญญา",
+  "recruitment_type": "ต่อสัญญา"
+ }
+]

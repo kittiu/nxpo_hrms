@@ -75,7 +75,7 @@
   }
  ],
  "links": [],
- "modified": "2024-04-02 14:42:35.397597",
+ "modified": "2024-04-26 14:12:53.168908",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Promotion Template",
@@ -91,6 +91,30 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR User",
    "share": 1,
    "write": 1
   }
