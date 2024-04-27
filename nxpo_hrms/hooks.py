@@ -229,7 +229,10 @@ doc_events = {
         "on_update_after_submit": "nxpo_hrms.custom.employee_transition.create_task_and_notify_user",
     },
     "Employee Transfer": {
-        "validate": "nxpo_hrms.custom.employee_transition.remove_task_from_activities",
+        "validate": [
+            "nxpo_hrms.custom.employee_transition.remove_task_from_activities",
+            "nxpo_hrms.custom.employee_transition.check_employee_internal_probation",
+        ],
         "on_submit": "nxpo_hrms.custom.employee_transition.create_project",
         "on_cancel": "nxpo_hrms.custom.employee_transition.delete_project_task",
         "on_update_after_submit": "nxpo_hrms.custom.employee_transition.create_task_and_notify_user",

@@ -182,6 +182,16 @@ def delete_project_task(doc, method=None):
     )
 
 
+def check_employee_internal_probation(doc, method=None):
+    if not doc.custom_employee_internal_probation:
+        return
+    if frappe.db.get_value("Employee Internal Probation", doc.custom_employee_internal_probation, "employee") != doc.employee:
+        frappe.throw(
+            ("Employee (%s) and Internal Probation (%s) mismatch!") %
+            (doc.employee, doc.custom_employee_internal_probation)
+        )
+
+
 @frappe.whitelist()
 def get_transition_details(parent, parenttype):
     return frappe.get_all(

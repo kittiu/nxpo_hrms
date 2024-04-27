@@ -3,8 +3,18 @@
 
 frappe.ui.form.on("Employee Transfer", {
 	setup: function(frm) {
-		frm.add_fetch("custom_employee_separation_template", "company", "company");
-		frm.add_fetch("custom_employee_separation_template", "department", "department");
+		frm.add_fetch("custom_employee_transfer_template", "company", "company");
+		frm.add_fetch("custom_employee_transfer_template", "department", "department");
+
+		// Filter
+		frm.set_query("custom_employee_internal_probation", function(doc) {
+			return {
+				filters: {
+					employee: doc.employee,
+					docstatus: 1
+				}
+			};
+		});
 	},
 
 	refresh: function(frm) {

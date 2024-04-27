@@ -1,0 +1,208 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:HR-IP-{###}",
+ "creation": "2024-04-26 15:29:52.347492",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "column_break_vdsq",
+  "status",
+  "section_break_stjx",
+  "date_start_probation",
+  "column_break_hsgr",
+  "probation_days",
+  "column_break_sblj",
+  "date_end_probation",
+  "section_break_vben",
+  "probation_designation",
+  "column_break_xdxe",
+  "department_type",
+  "probation_department",
+  "section_break_3pta",
+  "column_break_xwbs",
+  "column_break_rlbz",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_3pta",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Employee Internal Probation",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_stjx",
+   "fieldtype": "Section Break",
+   "label": "Probation Period"
+  },
+  {
+   "fieldname": "date_start_probation",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date Start Probation",
+   "reqd": 1
+  },
+  {
+   "default": "90",
+   "fieldname": "probation_days",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Probation Days",
+   "reqd": 1
+  },
+  {
+   "fieldname": "date_end_probation",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Date End Probation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_hsgr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_filter": 1,
+   "in_list_view": 1,
+   "label": "Status",
+   "mandatory_depends_on": "eval:doc.docstatus==1",
+   "no_copy": 1,
+   "options": "Pending\nUnder Probation\nPass\nNot Pass",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_vben",
+   "fieldtype": "Section Break",
+   "label": "Target of Probation"
+  },
+  {
+   "fieldname": "probation_designation",
+   "fieldtype": "Link",
+   "label": "Designation",
+   "options": "Designation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xwbs",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_rlbz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "probation_department",
+   "fieldtype": "Link",
+   "label": "Sub-Dept. / Dept. / Directorate",
+   "options": "Department",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xdxe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "department_type",
+   "fieldtype": "Select",
+   "label": "Unit Type",
+   "options": "\n\u0e01\u0e25\u0e38\u0e48\u0e21\u0e07\u0e32\u0e19\n\u0e1d\u0e48\u0e32\u0e22\u0e07\u0e32\u0e19\n\u0e41\u0e1c\u0e19\u0e01\u0e07\u0e32\u0e19",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_vdsq",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_sblj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_filter": 1,
+   "label": "Employee Name"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [
+  {
+   "link_doctype": "Employee Transfer",
+   "link_fieldname": "custom_employee_internal_probation"
+  }
+ ],
+ "modified": "2024-04-27 15:55:59.456358",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Employee Internal Probation",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR User",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

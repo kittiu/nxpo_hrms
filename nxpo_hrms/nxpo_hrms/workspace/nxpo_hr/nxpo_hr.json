@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"cj52OunfCw\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">NXPO HR</span>\",\"col\":12}},{\"id\":\"D1cF-XnvTL\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h3\\\">Shortcuts</span>\",\"col\":12}},{\"id\":\"MZs8EaUwOq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"NrX7zqfCb2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"E3zbVcyUMg\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"lqUE1DC6BP\",\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}}]",
+ "content": "[{\"id\":\"cj52OunfCw\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">NXPO HR</span>\",\"col\":12}},{\"id\":\"D1cF-XnvTL\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h3\\\">Shortcuts</span>\",\"col\":12}},{\"id\":\"MZs8EaUwOq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"MrCfBZqKcC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Internal Probation\",\"col\":3}},{\"id\":\"NrX7zqfCb2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"E3zbVcyUMg\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"lqUE1DC6BP\",\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}}]",
  "creation": "2024-04-26 14:17:10.521060",
  "custom_blocks": [],
  "docstatus": 0,
@@ -112,7 +112,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-04-26 14:34:18.202654",
+ "modified": "2024-04-26 16:20:12.420593",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "NXPO HR",
@@ -129,6 +129,14 @@
    "doc_view": "List",
    "label": "Employee",
    "link_to": "Employee",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Employee Internal Probation",
+   "link_to": "Employee Internal Probation",
    "stats_filter": "[]",
    "type": "DocType"
   }
