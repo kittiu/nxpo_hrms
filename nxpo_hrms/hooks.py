@@ -213,9 +213,9 @@ doctype_list_js = {
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	"Employee": "nxpo_hrms.custom.employee.EmployeeNXPO"
+}
 
 # Document Events
 # ---------------
@@ -253,9 +253,9 @@ scheduler_events = {
     # "all": [
     #     "nxpo_hrms.custom.employee_transition.auto_submit"
     # ],
-    "daily": [
-        "nxpo_hrms.custom.employee.update_all_employee_data"
-    ],
+    # "daily": [
+    #     "nxpo_hrms.custom.employee.update_all_employee_data"
+    # ],
     "hourly": [
         "nxpo_hrms.custom.employee_transition.auto_submit"
     ],
