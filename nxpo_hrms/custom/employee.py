@@ -9,18 +9,27 @@ from frappe.utils import (
 )
 import json
 
+from erpnext.setup.doctype.employee.employee import Employee
+
+
+class EmployeeNXPO(Employee):
+
+    @property
+    def custom_experience_ytd(self):
+        # Experience YTD
+        date = self.relieving_date or today()
+        diff = relativedelta(getdate(date), getdate(self.date_of_joining))
+        custom_experience_ytd = _("{0} Years {1} Months {2} Days").format(
+            diff.years, diff.months, diff.days
+        )
+        return custom_experience_ytd
+
 
 def update_employee_data(doc, method=None):
     # Date pass probation
     doc.custom_date_pass_probation = (
         getdate(doc.date_of_joining) +
         relativedelta(days=doc.custom_probation_days)
-    )
-    # Experience YTD
-    date = doc.relieving_date or today()
-    diff = relativedelta(getdate(date), getdate(doc.date_of_joining))
-    doc.custom_experience_ytd = _("{0} Years {1} Months {2} Days").format(
-        diff.years, diff.months, diff.days
     )
 
 @frappe.whitelist()
@@ -66,11 +75,3 @@ def get_employee_property_history_html(employee):
         result.append(d)
     return frappe.render_template("nxpo_hrms/custom/employee/property_history.html", {"data": data})
 
-# ----
-# JOBS
-# ----
-def update_all_employee_data():
-    for employee in frappe.get_all("Employee", pluck="name"):
-        doc = frappe.get_doc("Employee", employee)
-        update_employee_data(doc)
-        doc.save()
