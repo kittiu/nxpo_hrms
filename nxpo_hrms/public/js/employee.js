@@ -11,7 +11,7 @@ frappe.ui.form.on("Employee", {
 		frm.set_query("custom_subdepartment", function() {
 			return {
 				filters: {
-					custom_type: "กลุ่มงาน"
+					custom_type: "แผนกงาน"
 				}
 			};
 		});
@@ -25,7 +25,7 @@ frappe.ui.form.on("Employee", {
 		frm.set_query("custom_directorate", function() {
 			return {
 				filters: {
-					custom_type: "แผนกงาน"
+					custom_type: "กลุ่มงาน"
 				}
 			};
 		});
