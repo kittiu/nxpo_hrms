@@ -115,7 +115,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Reports",
-   "link_count": 2,
+   "link_count": 4,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -139,9 +139,29 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Payroll Report",
+   "link_count": 0,
+   "link_to": "Payroll Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "PVD Report",
+   "link_count": 0,
+   "link_to": "PVD Report",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-05-07 08:38:13.895614",
+ "modified": "2024-05-08 21:02:33.229736",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "NXPO HR",

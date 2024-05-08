@@ -174,7 +174,7 @@
  "is_standard": "Yes",
  "letter_head": "NXPO",
  "letterhead": null,
- "modified": "2024-05-08 20:21:32.749481",
+ "modified": "2024-05-08 20:43:14.640445",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Payroll Report",
@@ -189,13 +189,7 @@
    "role": "HR Manager"
   },
   {
-   "role": "Employee"
-  },
-  {
    "role": "HR User"
-  },
-  {
-   "role": "Employee Self Service"
   }
  ]
 }
