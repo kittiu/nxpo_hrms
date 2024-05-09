@@ -115,7 +115,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Reports",
-   "link_count": 4,
+   "link_count": 5,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -143,6 +143,16 @@
   {
    "hidden": 0,
    "is_query_report": 1,
+   "label": "PND1a w/ addrs cols",
+   "link_count": 0,
+   "link_to": "PND1a NXPO",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
    "label": "Payroll Report",
    "link_count": 0,
    "link_to": "Payroll Report",
@@ -161,7 +171,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-05-08 21:02:33.229736",
+ "modified": "2024-05-09 17:02:37.420972",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "NXPO HR",
