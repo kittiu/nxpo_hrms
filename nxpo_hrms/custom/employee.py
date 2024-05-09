@@ -32,6 +32,18 @@ def update_employee_data(doc, method=None):
         relativedelta(days=doc.custom_probation_days)
     )
 
+def update_current_address(doc, method=None):
+    addrs = [
+        doc.custom_house_no,
+        doc.custom_street,
+        doc.custom_subdistrict,
+        doc.custom_district,
+        doc.custom_province,
+        doc.custom_zip_code
+    ]
+    addrs = [x for x in addrs if x != None]
+    doc.current_address = ", ".join(addrs)
+
 @frappe.whitelist()
 def get_employee_basic_html(employee):
     data = json.loads(employee)

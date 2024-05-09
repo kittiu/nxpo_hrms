@@ -1,0 +1,32 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2024-05-09 15:49:58.375287",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "json": "{\"columns\":[{\"fieldname\":\"idx\",\"label\":\"\\u0e25\\u0e33\\u0e14\\u0e31\\u0e1a\\u0e17\\u0e35\\u0e48\",\"fieldtype\":\"Int\",\"options\":null,\"width\":null,\"id\":\"idx\",\"name\":\"\\u0e25\\u0e33\\u0e14\\u0e31\\u0e1a\\u0e17\\u0e35\\u0e48\",\"editable\":false,\"compareValue\":null},{\"fieldname\":\"tax_id\",\"label\":\"\\u0e40\\u0e25\\u0e02\\u0e17\\u0e30\\u0e40\\u0e1a\\u0e35\\u0e22\\u0e19\\u0e19\\u0e34\\u0e15\\u0e34\\u0e1a\\u0e38\\u0e04\\u0e04\\u0e25\",\"fieldtype\":\"Data\",\"options\":null,\"width\":null,\"id\":\"tax_id\",\"name\":\"\\u0e40\\u0e25\\u0e02\\u0e17\\u0e30\\u0e40\\u0e1a\\u0e35\\u0e22\\u0e19\\u0e19\\u0e34\\u0e15\\u0e34\\u0e1a\\u0e38\\u0e04\\u0e04\\u0e25\",\"editable\":false,\"compareValue\":null},{\"fieldname\":\"employee\",\"label\":\"\\u0e40\\u0e25\\u0e02\\u0e17\\u0e35\\u0e48\\u0e1e\\u0e19\\u0e31\\u0e01\\u0e07\\u0e32\\u0e19\",\"fieldtype\":\"Link\",\"options\":\"Employee\",\"width\":null,\"id\":\"employee\",\"name\":\"\\u0e40\\u0e25\\u0e02\\u0e17\\u0e35\\u0e48\\u0e1e\\u0e19\\u0e31\\u0e01\\u0e07\\u0e32\\u0e19\",\"editable\":false,\"compareValue\":null},{\"fieldname\":\"citizen_id\",\"label\":\"\\u0e40\\u0e25\\u0e02\\u0e1b\\u0e23\\u0e30\\u0e08\\u0e33\\u0e15\\u0e31\\u0e27\\u0e1c\\u0e39\\u0e49\\u0e40\\u0e2a\\u0e35\\u0e22\\u0e20\\u0e32\\u0e29\\u0e35\",\"fieldtype\":\"Data\",\"options\":null,\"width\":null,\"id\":\"citizen_id\",\"name\":\"\\u0e40\\u0e25\\u0e02\\u0e1b\\u0e23\\u0e30\\u0e08\\u0e33\\u0e15\\u0e31\\u0e27\\u0e1c\\u0e39\\u0e49\\u0e40\\u0e2a\\u0e35\\u0e22\\u0e20\\u0e32\\u0e29\\u0e35\",\"editable\":false,\"compareValue\":null},{\"fieldname\":\"custom_prefix\",\"fieldtype\":\"Link\",\"label\":\"Prefix\",\"insert_after_index\":-1,\"link_field\":{\"fieldname\":\"employee\",\"names\":{}},\"doctype\":\"Employee\",\"options\":\"Employee Prefix\",\"width\":100,\"id\":\"custom_prefix\",\"name\":\"Prefix\",\"editable\":false,\"compareValue\":null},{\"fieldname\":\"first_name\",\"label\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\",\"fieldtype\":\"Data\",\"options\":null,\"width\":null,\"id\":\"first_name\",\"name\":\"\\u0e0a\\u0e37\\u0e48\\u0e2d\",\"editable\":false,\"compareValue\":null},{\"fieldname\":\"last_name\",\"label\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\",\"fieldtype\":\"Data\",\"options\":null,\"width\":null,\"id\":\"last_name\",\"name\":\"\\u0e19\\u0e32\\u0e21\\u0e2a\\u0e01\\u0e38\\u0e25\",\"editable\":false,\"compareValue\":null},{\"fieldname\":\"pay_amount\",\"label\":\"\\u0e08\\u0e33\\u0e19\\u0e27\\u0e19\\u0e40\\u0e07\\u0e34\\u0e19\\u0e17\\u0e35\\u0e48\\u0e08\\u0e48\\u0e32\\u0e22\",\"fieldtype\":\"Currency\",\"options\":null,\"width\":null,\"id\":\"pay_amount\",\"name\":\"\\u0e08\\u0e33\\u0e19\\u0e27\\u0e19\\u0e40\\u0e07\\u0e34\\u0e19\\u0e17\\u0e35\\u0e48\\u0e08\\u0e48\\u0e32\\u0e22\",\"editable\":false,\"compareValue\":null},{\"fieldname\":\"deduct_amount\",\"label\":\"\\u0e08\\u0e33\\u0e19\\u0e27\\u0e19\\u0e40\\u0e07\\u0e34\\u0e19\\u0e20\\u0e32\\u0e29\\u0e35\\u0e17\\u0e35\\u0e48\\u0e2b\\u0e31\\u0e01\",\"fieldtype\":\"Currency\",\"options\":null,\"width\":null,\"id\":\"deduct_amount\",\"name\":\"\\u0e08\\u0e33\\u0e19\\u0e27\\u0e19\\u0e40\\u0e07\\u0e34\\u0e19\\u0e20\\u0e32\\u0e29\\u0e35\\u0e17\\u0e35\\u0e48\\u0e2b\\u0e31\\u0e01\",\"editable\":false,\"compareValue\":null},{\"fieldname\":\"tax_type\",\"label\":\"\\u0e40\\u0e07\\u0e34\\u0e19\\u0e44\\u0e14\\u0e49\\u0e15\\u0e32\\u0e21\\u0e21\\u0e32\\u0e15\\u0e23\\u0e32\",\"fieldtype\":\"Data\",\"options\":null,\"width\":null,\"id\":\"tax_type\",\"name\":\"\\u0e40\\u0e07\\u0e34\\u0e19\\u0e44\\u0e14\\u0e49\\u0e15\\u0e32\\u0e21\\u0e21\\u0e32\\u0e15\\u0e23\\u0e32\",\"editable\":false,\"compareValue\":null},{\"fieldname\":\"tax_cond\",\"label\":\"\\u0e40\\u0e07\\u0e37\\u0e48\\u0e2d\\u0e19\\u0e44\\u0e02\\u0e01\\u0e32\\u0e23\\u0e2b\\u0e31\\u0e01\",\"fieldtype\":\"Data\",\"options\":null,\"width\":null,\"id\":\"tax_cond\",\"name\":\"\\u0e40\\u0e07\\u0e37\\u0e48\\u0e2d\\u0e19\\u0e44\\u0e02\\u0e01\\u0e32\\u0e23\\u0e2b\\u0e31\\u0e01\",\"editable\":false,\"compareValue\":null}],\"filters\":{\"company\":\"NXPO\",\"payroll_period\":\"2024\",\"from_date\":\"2024-01-01\",\"to_date\":\"2024-12-31\",\"docstatus\":\"1\"}}",
+ "letter_head": "NXPO",
+ "letterhead": null,
+ "modified": "2024-05-09 15:55:42.492884",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "PND1a NXPO",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Salary Slip",
+ "reference_report": "PND1a",
+ "report_name": "PND1a NXPO",
+ "report_type": "Custom Report",
+ "roles": [
+  {
+   "role": "HR Manager"
+  },
+  {
+   "role": "HR User"
+  }
+ ]
+}
