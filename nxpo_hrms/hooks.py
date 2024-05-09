@@ -57,6 +57,18 @@ fixtures = [
                 )
             ]
         ]
+    },
+    {
+        "doctype": "Report",
+        "filters": [
+            [
+                "name",
+                "in",
+                (
+                    "PND1a NXPO",
+                )
+            ]
+        ]
     }
 ]
 
@@ -257,7 +269,10 @@ doc_events = {
     },
     "Task": {"on_update": "nxpo_hrms.custom.employee_transition.update_task"},
     "Employee": {
-        "validate": "nxpo_hrms.custom.employee.update_employee_data",
+        "validate": [
+            "nxpo_hrms.custom.employee.update_employee_data",
+            "nxpo_hrms.custom.employee.update_current_address",
+        ]
     },
 }
 
