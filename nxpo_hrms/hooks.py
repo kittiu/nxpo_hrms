@@ -283,9 +283,9 @@ scheduler_events = {
     # "all": [
     #     "nxpo_hrms.custom.employee_transition.auto_submit"
     # ],
-    # "daily": [
-    #     "nxpo_hrms.custom.employee.update_all_employee_data"
-    # ],
+    "daily": [
+        "nxpo_hrms.nxpo_hrms.doctype.wfh_request.wfh_request.auto_create_attendance_requests"
+    ],
     "hourly": [
         "nxpo_hrms.custom.employee_transition.auto_submit"
     ],
