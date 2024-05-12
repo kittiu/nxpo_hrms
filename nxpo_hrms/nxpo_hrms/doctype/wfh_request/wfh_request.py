@@ -6,6 +6,7 @@ from frappe import _
 from frappe.model.document import Document
 from frappe.utils import getdate
 from datetime import timedelta
+from frappe.desk.form.assign_to import add as add_assignment
 
 
 class WFHRequest(Document):
@@ -30,14 +31,23 @@ class WFHRequest(Document):
 			frappe.throw(_("Please make sure that all selected dates are not overlapping"))
 
 	def on_submit(self):
+		# Validate
 		for plan in self.plan_dates:
 			doc = frappe.new_doc("Attendance Request")
 			doc.employee = self.employee
 			doc.from_date = plan.from_date
 			doc.to_date = plan.to_date
 			doc.validate_request_overlap()
+		# Set Pending
 		self.db_set("status", "Pending")
-	
+		# Assign Approver to get notified
+		add_assignment({
+			"assign_to": [self.approver],
+			"doctype": self.doctype,
+			"name": self.name,
+			"description": self.note,
+		})
+
 	def on_cancel(self):
 		self.db_set("status", "Cancelled")
 	
