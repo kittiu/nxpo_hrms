@@ -27,6 +27,18 @@
    "width": 0
   },
   {
+   "fieldname": "back_salary",
+   "fieldtype": "Currency",
+   "label": "\u0e40\u0e07\u0e34\u0e19\u0e15\u0e01\u0e40\u0e1a\u0e34\u0e01",
+   "width": 0
+  },
+  {
+   "fieldname": "pvd_start_date",
+   "fieldtype": "Date",
+   "label": "\u0e27\u0e31\u0e19\u0e17\u0e35\u0e48\u0e40\u0e23\u0e34\u0e48\u0e21\u0e04\u0e34\u0e14\u0e2d\u0e32\u0e22\u0e38\u0e01\u0e2d\u0e07\u0e17\u0e38\u0e19",
+   "width": 0
+  },
+  {
    "fieldname": "pvd_emp",
    "fieldtype": "Currency",
    "label": "\u0e1e\u0e19\u0e31\u0e01\u0e07\u0e32\u0e19\u0e2a\u0e30\u0e2a\u0e21",
@@ -62,17 +74,17 @@
  "docstatus": 0,
  "doctype": "Report",
  "filters": [],
- "idx": 0,
+ "idx": 9,
  "is_standard": "Yes",
  "letter_head": "NXPO",
  "letterhead": null,
- "modified": "2024-05-08 21:45:24.981423",
+ "modified": "2024-05-13 09:44:55.381602",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "PVD Report",
  "owner": "Administrator",
  "prepared_report": 0,
- "query": "select\n    CONVERT(row_number() over(order by ss.employee), char) as idx,\n    ss.employee,\n    emp.employee_name,\n    salary.amount as salary,\n    pvd_emp.amount as pvd_emp,\n    ss.custom_pvd_employee as pvd_emp_percent,\n    pvd_com.amount as pvd_com,\n    ss.custom_pvd_company as pvd_com_percent,\n    \n    coalesce(pvd_emp.amount, 0) + coalesce(pvd_com.amount, 0) as pvd_total\nfrom `tabSalary Slip` ss\njoin `tabEmployee` emp on ss.employee = emp.name\n-- -------------------------------------------------------------\n-- salary = \u0e40\u0e07\u0e34\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19\u0e1b\u0e23\u0e30\u0e08\u0e33\nleft outer join `tabSalary Detail` salary on salary.parenttype = 'Salary Slip' and salary.parentfield = 'earnings'\nand salary.parent = ss.name and salary.salary_component = '\u0e40\u0e07\u0e34\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19\u0e1b\u0e23\u0e30\u0e08\u0e33'\n-- pvd_emp = \u0e01\u0e2d\u0e07\u0e17\u0e38\u0e19\u0e2a\u0e33\u0e23\u0e2d\u0e07\u0e40\u0e25\u0e35\u0e49\u0e22\u0e07\u0e0a\u0e35\u0e1e\nleft outer join `tabSalary Detail` pvd_emp on pvd_emp.parenttype = 'Salary Slip' and pvd_emp.parentfield = 'deductions'\nand pvd_emp.parent = ss.name and pvd_emp.salary_component = '\u0e01\u0e2d\u0e07\u0e17\u0e38\u0e19\u0e2a\u0e33\u0e23\u0e2d\u0e07\u0e40\u0e25\u0e35\u0e49\u0e22\u0e07\u0e0a\u0e35\u0e1e'\n-- pvd_com = \u0e01\u0e2d\u0e07\u0e17\u0e38\u0e19\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e2a\u0e21\u0e17\u0e1a\nleft outer join `tabSalary Detail` pvd_com on pvd_com.parenttype = 'Salary Slip' and pvd_com.parentfield = 'earnings'\nand pvd_com.parent = ss.name and pvd_com.salary_component = '\u0e01\u0e2d\u0e07\u0e17\u0e38\u0e19\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e2a\u0e21\u0e17\u0e1a'\n\nwhere ss.docstatus = %(docstatus)s\nand ss.start_date = %(from_date)s and end_date = %(to_date)s\nand ss.company = %(company)s\nand ss.custom_pvd_type = %(pvd_type)s\n",
+ "query": "select\n    CONVERT(row_number() over(order by ss.employee), char) as idx,\n    ss.employee,\n    emp.employee_name,\n    salary.amount as salary,\n    back_salary.amount as back_salary,\n    emp.date_of_joining as pvd_start_date,\n    pvd_emp.amount as pvd_emp,\n    ss.custom_pvd_employee as pvd_emp_percent,\n    pvd_com.amount as pvd_com,\n    ss.custom_pvd_company as pvd_com_percent,\n    coalesce(pvd_emp.amount, 0) + coalesce(pvd_com.amount, 0) as pvd_total\nfrom `tabSalary Slip` ss\njoin `tabEmployee` emp on ss.employee = emp.name\n-- -------------------------------------------------------------\n-- salary = \u0e40\u0e07\u0e34\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19\u0e1b\u0e23\u0e30\u0e08\u0e33\nleft outer join `tabSalary Detail` salary on salary.parenttype = 'Salary Slip' and salary.parentfield = 'earnings'\nand salary.parent = ss.name and salary.salary_component = '\u0e40\u0e07\u0e34\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19\u0e1b\u0e23\u0e30\u0e08\u0e33'\n-- back_salary = \u0e40\u0e07\u0e34\u0e19\u0e15\u0e01\u0e40\u0e1a\u0e34\u0e01\nleft outer join `tabSalary Detail` back_salary on back_salary.parenttype = 'Salary Slip' and back_salary.parentfield = 'earnings'\nand back_salary.parent = ss.name and back_salary.salary_component = '\u0e40\u0e07\u0e34\u0e19\u0e15\u0e01\u0e40\u0e1a\u0e34\u0e01'\n-- pvd_emp = \u0e01\u0e2d\u0e07\u0e17\u0e38\u0e19\u0e2a\u0e33\u0e23\u0e2d\u0e07\u0e40\u0e25\u0e35\u0e49\u0e22\u0e07\u0e0a\u0e35\u0e1e\nleft outer join `tabSalary Detail` pvd_emp on pvd_emp.parenttype = 'Salary Slip' and pvd_emp.parentfield = 'deductions'\nand pvd_emp.parent = ss.name and pvd_emp.salary_component = '\u0e01\u0e2d\u0e07\u0e17\u0e38\u0e19\u0e2a\u0e33\u0e23\u0e2d\u0e07\u0e40\u0e25\u0e35\u0e49\u0e22\u0e07\u0e0a\u0e35\u0e1e'\n-- pvd_com = \u0e01\u0e2d\u0e07\u0e17\u0e38\u0e19\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e2a\u0e21\u0e17\u0e1a\nleft outer join `tabSalary Detail` pvd_com on pvd_com.parenttype = 'Salary Slip' and pvd_com.parentfield = 'earnings'\nand pvd_com.parent = ss.name and pvd_com.salary_component = '\u0e01\u0e2d\u0e07\u0e17\u0e38\u0e19\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e2a\u0e21\u0e17\u0e1a'\n\nwhere ss.docstatus = %(docstatus)s\nand ss.start_date = %(from_date)s and end_date = %(to_date)s\nand ss.company = %(company)s\nand ss.custom_pvd_type = %(pvd_type)s\n",
  "ref_doctype": "Salary Slip",
  "reference_report": "",
  "report_name": "PVD Report",
