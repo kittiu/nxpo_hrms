@@ -6,6 +6,13 @@ app_email = "kittiu@ecosoft.co.th"
 app_license = "mit"
 # required_apps = []
 
+# Monkey patching
+# ------------------
+import hrms.payroll.doctype.payroll_entry.payroll_entry as origin
+import nxpo_hrms.custom.payroll_entry as custom
+origin.get_filtered_employees = custom.get_filtered_employees
+
+
 fixtures = [
     {
         "doctype": "Recruitment Type",
