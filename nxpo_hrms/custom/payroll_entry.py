@@ -29,7 +29,7 @@ def get_filtered_employees(
 		.where(
 			(SalaryStructureAssignment.docstatus == 1)
 			& (Employee.status != "Inactive")
-			& (Employee.custom_borrowing != 1)  # ---> Patch here, not a borrowed employee
+			& (Employee.custom_no_salary != 1)  # ---> Patch here, not a borrowed employee
 			& (Employee.company == filters.company)
 			& ((Employee.date_of_joining <= filters.end_date) | (Employee.date_of_joining.isnull()))
 			& ((Employee.relieving_date >= filters.start_date) | (Employee.relieving_date.isnull()))
