@@ -8,9 +8,14 @@ app_license = "mit"
 
 # Monkey patching
 # ------------------
-import hrms.payroll.doctype.payroll_entry.payroll_entry as origin
-import nxpo_hrms.custom.payroll_entry as custom
-origin.get_filtered_employees = custom.get_filtered_employees
+# 1. Get Employee on Payroll Entry
+import hrms.payroll.doctype.payroll_entry.payroll_entry as pe
+import nxpo_hrms.custom.payroll_entry as custom_pe
+pe.get_filtered_employees = custom_pe.get_filtered_employees
+# 2. Temp Patch before merged PR https://github.com/frappe/hrms/pull/1779
+import hrms.payroll.doctype.payroll_period.payroll_period as pp
+import nxpo_hrms.custom.payroll_period as custom_pp
+pp.get_period_factor = custom_pp.get_period_factor
 
 
 fixtures = [
