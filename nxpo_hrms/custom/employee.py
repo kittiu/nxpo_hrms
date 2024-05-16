@@ -31,6 +31,11 @@ def update_employee_data(doc, method=None):
         getdate(doc.date_of_joining) +
         relativedelta(days=doc.custom_probation_days)
     )
+    # Relieving Date from Effective Date
+    doc.relieving_date = doc.custom_exit_effective_date and (
+        getdate(doc.custom_exit_effective_date) -
+        relativedelta(days=1)
+    ) or ""
 
 def update_current_address(doc, method=None):
     addrs = [
