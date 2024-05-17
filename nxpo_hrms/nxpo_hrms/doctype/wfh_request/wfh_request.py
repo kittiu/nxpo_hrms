@@ -7,19 +7,21 @@ from frappe.model.document import Document
 from frappe.utils import getdate
 from datetime import timedelta
 from frappe.desk.form.assign_to import add as add_assignment
+from collections import Counter
 
 
 class WFHRequest(Document):
 
 	def validate(self):
-		# Check negative days
+		# 1. Check negative days
 		for plan in self.plan_dates:
 			plan.days = (getdate(plan.to_date) - getdate(plan.from_date)).days + 1
 			if plan.days <= 0:
 				frappe.throw(_("To Date before From Date is not allowed!"))
 		# Total days
 		self.total_days = sum([x.days for x in self.plan_dates])
-		# Check overlaps dates
+
+		# 2. Check overlaps dates
 		dates = []
 		for plan in self.plan_dates:
 			dates += [
@@ -29,6 +31,9 @@ class WFHRequest(Document):
 		unique_days = len(list(set(dates)))
 		if unique_days != self.total_days:
 			frappe.throw(_("Please make sure that all selected dates are not overlapping"))
+		
+		# 3. Validate no more than WFH policy
+		self.validate_wfh_policy(dates)
 
 	def on_submit(self):
 		# Validate
@@ -50,7 +55,33 @@ class WFHRequest(Document):
 
 	def on_cancel(self):
 		self.db_set("status", "Cancelled")
-	
+
+	def validate_wfh_policy(self, dates):
+		wfh_days_per_week = frappe.get_cached_value("Company", self.company, "custom_wfh_days_per_week")
+		# Get weeks from WFH request
+		week_list = list(map(lambda d: d.isocalendar()[1], dates))
+		# Get weeks from existing WFH attendance
+		Attendance = frappe.qb.DocType("Attendance")
+		wfh_dates = (
+			frappe.qb.from_(Attendance)
+			.select(Attendance.attendance_date)
+			.where(
+				(Attendance.employee == self.employee)
+				& (Attendance.docstatus < 2)
+				& (Attendance.status == "Work From Home")
+			)
+		).run()
+		wfh_dates = [d[0] for d in wfh_dates]
+		week_list += list(map(lambda d: d.isocalendar()[1], wfh_dates))
+		week_exceed = [str(k) for (k, v) in Counter(week_list).items() if v > wfh_days_per_week]
+		if week_exceed:
+			frappe.throw(
+				_("Your WFH request is exceeding {} days on the week {}").format(
+					wfh_days_per_week,
+					", ".join(week_exceed)
+				)
+			)
+
 	@frappe.whitelist()
 	def create_attendance_requests(self):
 		try:

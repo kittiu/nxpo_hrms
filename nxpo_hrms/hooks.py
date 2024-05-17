@@ -81,7 +81,20 @@ fixtures = [
                 )
             ]
         ]
-    }
+    },
+    {
+        "doctype": "Custom Field",
+        "filters": [
+            [
+                "name",
+                "in",
+                (
+                    "Company-custom_policy",
+                    "Company-custom_wfh_days_per_week",
+                )
+            ]
+        ]
+    },
 ]
 
 # fixtures = [
