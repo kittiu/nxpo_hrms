@@ -299,6 +299,17 @@ doc_events = {
             "nxpo_hrms.custom.employee.update_current_address",
         ]
     },
+    "Payroll Entry": {
+        "validate": [
+            "nxpo_hrms.custom.payroll_entry.validate_posting_date",
+        ]
+    },
+    "Salary Slip": {
+        "validate": [
+            "nxpo_hrms.custom.payroll_entry.validate_posting_date",
+        ]
+    },
+
 }
 
 # Scheduled Tasks

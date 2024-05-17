@@ -1,6 +1,7 @@
 # Copyright (c) 2021, Frappe Technologies Pvt. Ltd. and Contributors
 # License: GNU General Public License v3. See license.txt
 import frappe
+from frappe import _
 from hrms.payroll.doctype.payroll_entry.payroll_entry import (
     set_fields_to_select,
 	set_searchfield,
@@ -53,3 +54,9 @@ def get_filtered_employees(
 		query = query.offset(offset)
 
 	return query.run(as_dict=as_dict)
+
+
+# Hook method
+def validate_posting_date(doc, method=None):
+	if not (doc.start_date <= doc.posting_date <= doc.end_date):
+		frappe.throw(_("Posting date must be between start date and end date"))
