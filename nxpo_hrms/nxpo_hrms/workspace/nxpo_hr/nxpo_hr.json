@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"cj52OunfCw\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px; letter-spacing: 0.18px;\\\"><b>My Workspace</b></span>\",\"col\":12}},{\"id\":\"D1cF-XnvTL\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h3\\\">Shortcuts</span>\",\"col\":12}},{\"id\":\"MZs8EaUwOq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"MrCfBZqKcC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Internal Probation\",\"col\":3}},{\"id\":\"2K5y4Zqoms\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Wfh Request\",\"col\":3}},{\"id\":\"NrX7zqfCb2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"E3zbVcyUMg\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"lqUE1DC6BP\",\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}},{\"id\":\"CzNBCpnZhJ\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"cj52OunfCw\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px; letter-spacing: 0.18px;\\\"><b>My Workspace</b></span>\",\"col\":12}},{\"id\":\"D1cF-XnvTL\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h3\\\">Shortcuts</span>\",\"col\":12}},{\"id\":\"BYpklKiyvu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"My Salary Slips, WHT Cert\",\"col\":3}},{\"id\":\"MZs8EaUwOq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"MrCfBZqKcC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Internal Probation\",\"col\":3}},{\"id\":\"2K5y4Zqoms\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"WFH Request\",\"col\":3}},{\"id\":\"NrX7zqfCb2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"E3zbVcyUMg\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"lqUE1DC6BP\",\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}},{\"id\":\"CzNBCpnZhJ\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
  "creation": "2024-04-26 14:17:10.521060",
  "custom_blocks": [],
  "docstatus": 0,
@@ -171,7 +171,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-05-12 11:42:46.370597",
+ "modified": "2024-05-18 13:54:14.019528",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "NXPO HR",
@@ -186,7 +186,14 @@
   {
    "color": "Grey",
    "doc_view": "List",
-   "label": "Wfh Request",
+   "label": "My Salary Slips, WHT Cert",
+   "link_to": "my-documents",
+   "type": "Page"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "WFH Request",
    "link_to": "WFH Request",
    "stats_filter": "[]",
    "type": "DocType"
