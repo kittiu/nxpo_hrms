@@ -1,0 +1,85 @@
+.list-filters {
+	overflow-y: hidden;
+	padding: 5px
+}
+
+.list-filter-item {
+	min-width: 150px;
+	float: left;
+	margin: 5px;
+}
+
+.list-item_content {
+	flex: 1;
+	padding-right: 15px;
+	align-items: center;
+}
+
+.select-time, .select-doctype, .select-filter, .select-sort {
+	background: #f0f4f7;
+}
+
+.from-date-field .clearfix{
+	display: none;
+}
+
+.from-date-field {
+	margin-left: 10px;
+}
+
+.select-time:focus, .select-doctype:focus, .select-filter:focus, .select-sort:focus {
+	background: #f0f4f7;
+}
+
+.header-btn-base {
+	border: none;
+	outline: 0;
+	vertical-align: middle;
+	overflow: hidden;
+	text-decoration: none;
+	color: inherit;
+	background-color: inherit;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.header-btn-round {
+	border-radius: 4px;
+}
+
+.item-title-bold {
+	font-weight: bold;
+}
+
+.no{
+	max-width: 100px;
+}
+
+.my_documents .result {
+	border-top: 1px solid var(--border-color);
+}
+
+.my_documents .list-item {
+	padding-left: 45px;
+}
+
+.my_documents .list-item_content {
+	padding-right: 60px;
+}
+
+.my_documents-sidebar {
+	padding-left: 0;
+	position: fixed;
+}
+
+.my_documents-list {
+	padding: var(-padding-sm) 0;
+	min-height: 70vh;
+}
+
+.my_documents-empty-state {
+	align-items: center;
+	height: 70vh;
+	justify-content: center;
+	display: flex;
+}
