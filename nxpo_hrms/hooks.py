@@ -210,10 +210,10 @@ doctype_list_js = {
 # ----------
 
 # add methods and filters to jinja environment
-# jinja = {
-# 	"methods": "nxpo_hrms.utils.jinja_methods",
-# 	"filters": "nxpo_hrms.utils.jinja_filters"
-# }
+jinja = {
+	"methods": "nxpo_hrms.custom.payroll_entry.sum_amount_ss_component",
+	# "filters": "nxpo_hrms.utils.jinja_filters"
+}
 
 # Installation
 # ------------

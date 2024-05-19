@@ -2,13 +2,17 @@
 # License: GNU General Public License v3. See license.txt
 import frappe
 from frappe import _
+from frappe.query_builder.functions import Sum
 from hrms.payroll.doctype.payroll_entry.payroll_entry import (
     set_fields_to_select,
 	set_searchfield,
 	set_filter_conditions,
 	set_match_conditions
 )
+import ast
 
+
+# Monkey patch function
 def get_filtered_employees(
 	sal_struct,
 	filters,
@@ -60,3 +64,39 @@ def get_filtered_employees(
 def validate_posting_date(doc, method=None):
 	if not (doc.start_date <= doc.posting_date <= doc.end_date):
 		frappe.throw(_("Posting date must be between start date and end date"))
+
+
+# API to get payroll entry summary
+def sum_amount_ss_component(company, start_date, end_date, salary_component):
+	ss = frappe.qb.DocType("Salary Slip")
+	sd = frappe.qb.DocType("Salary Detail")
+	total_amt = (
+		frappe.qb.from_(ss)
+		.inner_join(sd)
+		.on(ss.name == sd.parent)
+		.select(Sum(sd.amount))
+		.where(
+			(ss.docstatus == 1)
+			& (ss.company == company)
+			& (ss.start_date >= start_date)
+			& (ss.end_date <= end_date)
+			& (sd.salary_component == salary_component)
+		)
+		.run()
+	)
+	total_amt = total_amt and total_amt[0][0] or 0
+	return total_amt
+
+
+@frappe.whitelist()
+def get_amount_by_ss_components(company, start_date, end_date, salary_components=[]):
+	if isinstance(salary_components, str):
+		salary_components = ast.literal_eval(salary_components)
+	if not isinstance(salary_components, list):
+		salary_components = []
+	ss_amount = {}
+	for component in salary_components:
+		ss_amount[component] = sum_amount_ss_component(
+			company, start_date, end_date, component
+		)
+	return ss_amount
