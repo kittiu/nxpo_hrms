@@ -11,7 +11,7 @@ def get_my_documents_config():
 			"fields": [
 				{"fieldname": "posting_date", "fieldtype": "Date"},
 				{"fieldname": "gross_pay", "fieldtype": "Currency"},
-				{"fieldname": "gross_pay", "fieldtype": "Currency"},
+				{"fieldname": "total_deduction", "fieldtype": "Currency"},
 				{"fieldname": "gross_year_to_date", "fieldtype": "Currency"},
 			],
 			"method": "nxpo_hrms.nxpo_hrms.page.my_documents.my_documents.get_salary_slips",
