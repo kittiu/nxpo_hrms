@@ -308,6 +308,7 @@ doc_events = {
     "Salary Slip": {
         "validate": [
             "nxpo_hrms.custom.payroll_entry.validate_posting_date",
+            "nxpo_hrms.custom.salary_slip.validate_no_salary",
         ]
     },
 
