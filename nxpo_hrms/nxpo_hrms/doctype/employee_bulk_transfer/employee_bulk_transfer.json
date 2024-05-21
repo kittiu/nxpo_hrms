@@ -1,0 +1,107 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-04-23 14:12:44.431390",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "column_break_dovi",
+  "column_break_kmah",
+  "status",
+  "section_break_mtqh",
+  "employee_transfers",
+  "section_break_yoht",
+  "employee_transfers_created",
+  "employee_transfers_submitted",
+  "column_break_nazv",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_yoht",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Employee Bulk Transfer",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "employee_transfers",
+   "fieldtype": "Table",
+   "label": "Employee Transfers",
+   "options": "Employee Bulk Transfer Detail"
+  },
+  {
+   "default": "0",
+   "fieldname": "employee_transfers_created",
+   "fieldtype": "Check",
+   "label": "Employee Transfers Created",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "employee_transfers_submitted",
+   "fieldtype": "Check",
+   "label": "Employee Transfers Submitted",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_nazv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_dovi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_kmah",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "no_copy": 1,
+   "options": "Draft\nSubmitted\nCancelled\nQueued\nFailed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_mtqh",
+   "fieldtype": "Section Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-04-23 18:32:32.382442",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Employee Bulk Transfer",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
