@@ -176,6 +176,7 @@ doctype_js = {
     "Employee Promotion": "public/js/employee_promotion.js",
     "Employee Transfer": "public/js/employee_transfer.js",
     "Employee": "public/js/employee.js",
+    "Salary Structure Assignment": "public/js/salary_structure_assignment.js",
 }
 doctype_list_js = {
     "Employee Promotion": "public/js/employee_promotion_list.js",
