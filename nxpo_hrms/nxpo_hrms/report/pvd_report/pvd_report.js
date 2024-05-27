@@ -39,7 +39,7 @@ frappe.query_reports["PVD Report"] = {
 			label: __("PVD Type"),
 			fieldtype: "Link",
 			options: "PVD Type",
-			reqd: 1,
+			reqd: 0,
 		},
     ],
 };

@@ -168,11 +168,20 @@ var report_columns = report.get_columns_for_print();
 {% let sum_pvd_com = 0 %}
 {% let sum_pvd_total = 0 %}
 
+{% let titleType = '' %}
+
+{% if filters.pvd_type %}
+    {% titleType += filters.pvd_type %}
+{% else %}
+	{% titleType += "กองทุนสำรองเลี้ยงชีพ" %}
+{% endif %}
+
 <body>
 
 <div class="page-break">
 	<h2 class="title">สำนักงานสภานโยบายการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรมแห่งชาติ</h2>
-	<h4 class="text-center">รายงาน{%= __(filters.pvd_type) %} วันที่คิดกองทุน {{ day }}/{{month_th}}/{{year}}</h4>
+	<h4 class="text-center">
+		รายงาน{{titleType}} วันที่คิดกองทุน  {{ day }}/{{month_th}}/{{year}}</h4>
 			
 	<p class="text-right" style="color: black; font-size:x-small">{{ __("Printed On") }} {%=
 				frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}</p>
