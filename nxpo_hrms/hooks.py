@@ -182,7 +182,9 @@ doctype_list_js = {
     "Employee Promotion": "public/js/employee_promotion_list.js",
     "Employee Transfer": "public/js/employee_transfer_list.js"
 }
-# doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
+doctype_tree_js = {
+    "Department" : "public/js/department_tree.js"
+}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
 # Svg Icons
@@ -343,9 +345,9 @@ scheduler_events = {
 # Overriding Methods
 # ------------------------------
 #
-override_whitelisted_methods = {
-	"erpnext.setup.doctype.department.department.get_children": "nxpo_hrms.custom.department.get_children"
-}
+# override_whitelisted_methods = {
+# 	"erpnext.setup.doctype.department.department.get_children": "nxpo_hrms.custom.department.get_children"
+# }
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
