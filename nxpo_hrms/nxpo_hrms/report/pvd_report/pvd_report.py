@@ -16,74 +16,74 @@ def get_columns(filters):
         {
             "fieldname": "idx",
             "fieldtype": "Data",
-            "label": "\u0e25\u0e33\u0e14\u0e31\u0e1a\u0e17\u0e35\u0e48",
+            "label": 'ลำดับที่',
             "width": 0
         },
         {
             "fieldname": "employee",
             "fieldtype": "Data",
-            "label": "\u0e23\u0e2b\u0e31\u0e2a\u0e1e\u0e19\u0e31\u0e01\u0e07\u0e32\u0e19",
+            "label": "รหัสพนักงาน",
             "options": "",
             "width": 0
         },
         {
             "fieldname": "employee_name",
             "fieldtype": "Data",
-            "label": "\u0e0a\u0e37\u0e48\u0e2d-\u0e19\u0e32\u0e21\u0e2a\u0e01\u0e38\u0e25",
+            "label": "ชื่อ-นามสกุล",
             "width": 0
         },
         {
             "fieldname": "salary",
             "fieldtype": "Currency",
-            "label": "\u0e40\u0e07\u0e34\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19",
+            "label": "เงินเดือน",
             "width": 0
         },
         {
             "fieldname": "back_salary",
             "fieldtype": "Currency",
-            "label": "\u0e15\u0e01\u0e40\u0e1a\u0e34\u0e01",
+            "label": "ตกเบิก",
             "width": 0
         },
         {
             "fieldname": "pvd_start_date",
             "fieldtype": "Date",
-            "label": "\u0e27\u0e31\u0e19\u0e17\u0e35\u0e48\u0e40\u0e23\u0e34\u0e48\u0e21\u0e04\u0e34\u0e14\u0e2d\u0e32\u0e22\u0e38\u0e01\u0e2d\u0e07\u0e17\u0e38\u0e19",
+            "label": "วันที่เริ่มคิดอายุกองทุน",
             "width": 0
         },
         {
             "fieldname": "pvd_emp",
             "fieldtype": "Currency",
-            "label": "\u0e1e\u0e19\u0e31\u0e01\u0e07\u0e32\u0e19\u0e2a\u0e30\u0e2a\u0e21",
+            "label": "พนักงานสะสม",
             "width": 0
         },
         {
             "fieldname": "pvd_emp_percent",
             "fieldtype": "Int",
-            "label": "% \u0e2a\u0e30\u0e2a\u0e21",
+            "label": "% สะสม",
             "width": 0
         },
         {
             "fieldname": "pvd_com",
             "fieldtype": "Currency",
-            "label": "\u0e1a\u0e23\u0e34\u0e29\u0e31\u0e17\u0e2a\u0e21\u0e17\u0e1a",
+            "label": "บริษัทสมทบ",
             "width": 0
         },
         {
             "fieldname": "pvd_com_percent",
             "fieldtype": "Int",
-            "label": "% \u0e2a\u0e30\u0e2a\u0e21",
+            "label": "% สะสม",
             "width": 0
         },
         {
             "fieldname": "pvd_total",
             "fieldtype": "Currency",
-            "label": "\u0e23\u0e27\u0e21\u0e17\u0e31\u0e49\u0e07\u0e2b\u0e21\u0e14",
+            "label": "รวมทั้งหมด",
             "width": 0
         },
         {
             "fieldname": "posting_date",
             "fieldtype": "Date",
-            "label": "Posting Date",
+            "label": "วันที่ประกาศ",
             "width": 0
         }
 	]
