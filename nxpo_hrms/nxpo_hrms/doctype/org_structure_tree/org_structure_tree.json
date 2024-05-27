@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-05-26 13:15:52.576726",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "type",
+  "level_1",
+  "level_2",
+  "level_3",
+  "level_4"
+ ],
+ "fields": [
+  {
+   "columns": 1,
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Type",
+   "options": "\u0e01\u0e25\u0e38\u0e48\u0e21\u0e07\u0e32\u0e19\n\u0e1d\u0e48\u0e32\u0e22\u0e07\u0e32\u0e19\n\u0e41\u0e1c\u0e19\u0e01\u0e07\u0e32\u0e19",
+   "reqd": 1
+  },
+  {
+   "fieldname": "level_1",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Level 1",
+   "mandatory_depends_on": "eval:doc.type=='\u0e01\u0e25\u0e38\u0e48\u0e21\u0e07\u0e32\u0e19'",
+   "options": "Department",
+   "read_only_depends_on": "eval:doc.type!='\u0e01\u0e25\u0e38\u0e48\u0e21\u0e07\u0e32\u0e19'"
+  },
+  {
+   "fieldname": "level_2",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Level 2",
+   "mandatory_depends_on": "eval:doc.type=='\u0e1d\u0e48\u0e32\u0e22\u0e07\u0e32\u0e19'",
+   "options": "Department",
+   "read_only_depends_on": "eval:doc.type!='\u0e1d\u0e48\u0e32\u0e22\u0e07\u0e32\u0e19'"
+  },
+  {
+   "fieldname": "level_3",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Level 3",
+   "mandatory_depends_on": "eval:doc.type=='\u0e41\u0e1c\u0e19\u0e01\u0e07\u0e32\u0e19'",
+   "options": "Department",
+   "read_only_depends_on": "eval:doc.type!='\u0e41\u0e1c\u0e19\u0e01\u0e07\u0e32\u0e19'"
+  },
+  {
+   "fieldname": "level_4",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "in_list_view": 1,
+   "label": "Level 4",
+   "options": "Department"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2024-05-26 13:56:58.508930",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Org Structure Tree",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
