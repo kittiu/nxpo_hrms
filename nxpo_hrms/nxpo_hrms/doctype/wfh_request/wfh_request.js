@@ -1,6 +1,5 @@
 // Copyright (c) 2024, Ecosoft and contributors
 // For license information, please see license.txt
-cur_frm.add_fetch("employee", "leave_approver", "approver");
 
 frappe.ui.form.on("WFH Request", {
 
@@ -15,6 +14,24 @@ frappe.ui.form.on("WFH Request", {
 		if (frm.doc.docstatus == 1) {
 			frm.events.add_create_attendance_button(frm);
 		}
+	},
+
+	employee: async function (frm) {
+        if (frm.doc.employee) {
+            let e = await frappe.db.get_doc("Employee", frm.doc.employee)
+            if (e && e.leave_approver) {  // Leave Approver from Employee
+                frm.set_value("approver", e.leave_approver)
+            } else if (e.department) {  // Leave Approver from Department
+                let d = await frappe.db.get_doc("Department", e.department)
+                if (d && d.leave_approvers.length) {
+                    frm.set_value("approver", d.leave_approvers[0]["approver"])
+                }
+            } else {
+                frm.set_value("approver", null) 
+            }
+        } else {
+            frm.set_value("approver", null)
+        }
 	},
 
     add_view_attendance_button: function (frm) {

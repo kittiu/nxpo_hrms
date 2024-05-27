@@ -4,6 +4,7 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
+from frappe.utils import today
 
 
 class OrgStructure(Document):
@@ -13,30 +14,8 @@ class OrgStructure(Document):
 		self._check_structure()
 	
 	def on_submit(self):
-		dept_names = [i.level_1 or i.level_2 or i.level_3 or i.level_4 for i in self.items]
-		# disable every department not in the list
-		to_disable = frappe.get_all(
-			"Department",
-			filters={
-				"company": self.company,
-				"name": ["not in", dept_names]
-			},
-			pluck="name"
-		)
-		for dept in to_disable:
-			frappe.set_value("Department", dept, "disabled", 1)
-		# enable all departmet in list and change its parent structure
-		prev_levels = {}
-		for idx, i in enumerate(self.items):
-			dept_name, level = get_dept_and_level(i)
-			parent_dept = prev_levels[level-1] if level > 1 else "All Departments"
-			frappe.db.set_value("Department", dept_name, {
-				"is_group": 1,
-				"disabled": 0,
-				"parent_department": parent_dept,
-				"custom_order": str(idx+1).zfill(3)
-			})
-			prev_levels[level] = dept_name
+		self._check_effective_date()
+		self._apply_org_structure()
 
 	def _check_type(self):
 		departments = frappe.get_all(
@@ -71,6 +50,36 @@ class OrgStructure(Document):
 			if (level - prev_level) > 1:
 				frappe.throw(_("Org Structure is skipping level in Line# {}").format(idx+1))
 			prev_level = level
+	
+	def _check_effective_date(self):
+		if self.effective_date > today():
+			frappe.throw(_("You cannot apply changes prior to effective date"))
+	
+	def _apply_org_structure(self):
+		dept_names = [i.level_1 or i.level_2 or i.level_3 or i.level_4 for i in self.items]
+		# disable every department not in the list
+		to_disable = frappe.get_all(
+			"Department",
+			filters={
+				"company": self.company,
+				"name": ["not in", dept_names]
+			},
+			pluck="name"
+		)
+		for dept in to_disable:
+			frappe.set_value("Department", dept, "disabled", 1)
+		# enable all departmet in list and change its parent structure
+		prev_levels = {}
+		for idx, i in enumerate(self.items):
+			dept_name, level = get_dept_and_level(i)
+			parent_dept = prev_levels[level-1] if level > 1 else "All Departments"
+			frappe.db.set_value("Department", dept_name, {
+				"is_group": 1,
+				"disabled": 0,
+				"parent_department": parent_dept,
+				"custom_order": str(idx+1).zfill(3)
+			})
+			prev_levels[level] = dept_name
 
 
 def get_dept_and_level(department):
