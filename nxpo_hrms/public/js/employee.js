@@ -42,6 +42,12 @@ frappe.ui.form.on("Employee", {
 	custom_assignment_designation_3: function(frm) {
 		frm.set_value("custom_assignment_department_3", "");
 	},
+	// relieving_date = custom_exit_effective_date + 1
+	custom_exit_effective_date: function(frm) {
+		var exitDate = frm.doc.custom_exit_effective_date;
+		var relievingDate = frappe.datetime.add_days(exitDate, 1);
+		frm.set_value("relieving_date", relievingDate);
+	},
 });
 
 function set_employee_basic_html(frm) {
