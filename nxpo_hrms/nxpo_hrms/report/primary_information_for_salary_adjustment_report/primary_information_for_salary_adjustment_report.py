@@ -142,7 +142,6 @@ def get_data(filters):
             emp.date_of_joining,
             emp.custom_date_pass_probation AS date_pass_probation,
             emp.custom_exit_effective_date AS exit_effective_date,
-            emp.employment_type,
             emp.custom_borrow_start_date,
             emp.custom_borrow_end_date
             
@@ -160,7 +159,7 @@ def get_data(filters):
 
     for rows in data:
         rows['test_work'] = "พ้นทดลองงาน"
-        period_work_before = calculate_months(rows['date_of_joining'], rows['date_pass_probation'])
+        period_work_before = calculate_months(rows['date_of_joining'], filters.get('year_end_date'))
         rows['period_work_before'] = period_work_before
         employee = rows['employee']
 
