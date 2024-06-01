@@ -44,9 +44,9 @@ frappe.ui.form.on("Employee", {
 	},
 	// relieving_date = custom_exit_effective_date + 1
 	custom_exit_effective_date: function(frm) {
-		var exitDate = frm.doc.custom_exit_effective_date;
-		var relievingDate = frappe.datetime.add_days(exitDate, 1);
-		frm.set_value("relieving_date", relievingDate);
+		var exit_date = frm.doc.custom_exit_effective_date;
+		var relieving_date = frappe.datetime.add_days(exit_date, -1);
+		frm.set_value("relieving_date", relieving_date);
 	},
 });
 

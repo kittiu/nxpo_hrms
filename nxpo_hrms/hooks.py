@@ -269,7 +269,7 @@ jinja = {
 # Override standard doctype classes
 
 override_doctype_class = {
-	"Employee": "nxpo_hrms.custom.employee.EmployeeNXPO"
+	"Employee": "nxpo_hrms.custom.employee.EmployeeNXPO",
 }
 
 # Document Events

@@ -26,17 +26,14 @@ def get_filtered_employees(
 ) -> list:
 	SalaryStructureAssignment = frappe.qb.DocType("Salary Structure Assignment")
 	Employee = frappe.qb.DocType("Employee")
-	EmploymentType = frappe.qb.DocType("Employment Type")  # kittiu
 	query = (
 		frappe.qb.from_(Employee)
-		.left_outer_join(EmploymentType)  # kittiu
-		.on(EmploymentType.name == Employee.employment_type)  # kittiu
 		.join(SalaryStructureAssignment)
 		.on(Employee.name == SalaryStructureAssignment.employee)
 		.where(
 			(SalaryStructureAssignment.docstatus == 1)
 			& (Employee.status != "Inactive")
-			& (EmploymentType.custom_no_salary != 1)  # kittiu
+			& (Employee.custom_no_salary != 1)  # kittiu
 			& (Employee.company == filters.company)
 			& ((Employee.date_of_joining <= filters.end_date) | (Employee.date_of_joining.isnull()))
 			& ((Employee.relieving_date >= filters.start_date) | (Employee.relieving_date.isnull()))
