@@ -270,6 +270,7 @@ jinja = {
 
 override_doctype_class = {
 	"Employee": "nxpo_hrms.custom.employee.EmployeeNXPO",
+	"Salary Structure Assignment": "nxpo_hrms.custom.salary_structure_assignment.SalaryStructureAssignmentNXPO",
 }
 
 # Document Events
