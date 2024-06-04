@@ -1,0 +1,26 @@
+{
+ "content": null,
+ "creation": "2024-05-29 11:07:56.366252",
+ "docstatus": 0,
+ "doctype": "Page",
+ "idx": 0,
+ "modified": "2024-05-29 11:08:15.280380",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "department-chart",
+ "owner": "Administrator",
+ "page_name": "department-chart",
+ "roles": [
+  {
+   "role": "HR User"
+  },
+  {
+   "role": "HR Manager"
+  }
+ ],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 0,
+ "title": "Department Chart"
+}
