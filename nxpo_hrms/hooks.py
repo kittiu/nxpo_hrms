@@ -214,7 +214,7 @@ doctype_tree_js = {
 
 # add methods and filters to jinja environment
 jinja = {
-	"methods": "nxpo_hrms.custom.payroll_entry.sum_amount_ss_component",
+	"methods": ["nxpo_hrms.custom.payroll_entry.sum_amount_ss_component", "nxpo_hrms.nxpo_hrms.print_format.organization_chart.func_organization_chart"],
 	# "filters": "nxpo_hrms.utils.jinja_filters"
 }
 
