@@ -8,11 +8,10 @@ from frappe.utils import (
 	today,
 )
 import json
+from hrms.overrides.employee_master import EmployeeMaster
 
-from erpnext.setup.doctype.employee.employee import Employee
 
-
-class EmployeeNXPO(Employee):
+class EmployeeNXPO(EmployeeMaster):
 
     @property
     def custom_experience_ytd(self):
