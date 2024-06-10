@@ -1,0 +1,73 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Data",
+   "label": "Employee Code",
+   "options": "Employee",
+   "width": 0
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "Name Name",
+   "width": 0
+  },
+  {
+   "fieldname": "creation",
+   "fieldtype": "Date",
+   "label": "Change Date",
+   "width": 0
+  },
+  {
+   "fieldname": "version",
+   "fieldtype": "Link",
+   "label": "Reference",
+   "options": "Version",
+   "width": 0
+  }
+ ],
+ "creation": "2024-06-10 17:55:58.061498",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "creation",
+   "fieldtype": "Date",
+   "label": "Changed After",
+   "mandatory": 1,
+   "options": "",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "NXPO",
+ "letterhead": null,
+ "modified": "2024-06-10 18:04:11.818662",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Employee Type Changed",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "select docname, employee_name, v.creation, v.name as version\nfrom `tabVersion` v\n    join `tabEmployee` e on e.name = v.docname\nwhere  data not like '%%\"changed\":[]%%'\n    and data like '%%changed%%'\n    and data like '%%employment_type%%'\n    and ref_doctype = 'Employee'\n    and v.creation > %(creation)s\norder by v.creation",
+ "ref_doctype": "Version",
+ "report_name": "Employee Type Changed",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "HR User"
+  },
+  {
+   "role": "HR Manager"
+  },
+  {
+   "role": "Employee"
+  },
+  {
+   "role": "Employee Self Service"
+  }
+ ]
+}
