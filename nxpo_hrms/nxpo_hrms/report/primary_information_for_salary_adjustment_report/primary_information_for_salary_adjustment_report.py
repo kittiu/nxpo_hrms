@@ -23,6 +23,12 @@ def get_columns(filters):
             "width": 0
         },
         {
+            "fieldname": "prefix",
+            "fieldtype": "Data",
+            "label": "คำนำหน้าชื่อ",
+            "width": 0
+        },
+        {
             "fieldname": "employee_name",
             "fieldtype": "Data",
             "label": 'ชื่อ-สกุล',
@@ -43,7 +49,7 @@ def get_columns(filters):
         {
             "fieldname": "employment_type",
             "fieldtype": "Data",
-            "label": 'Level',
+            "label": 'ประเภท',
             "width": 0
         },
         {
@@ -103,6 +109,12 @@ def get_columns(filters):
         {
             "fieldname": "base_salary",
             "fieldtype": "Currency",
+            "label": 'อัตราเงินเดือน',
+            "width": 0
+        },
+        {
+            "fieldname": "custom_salary_amount",
+            "fieldtype": "Currency",
             "label": 'เงินเดือนเดือนล่าสุดที่ได้รับ',
             "width": 0
         }
@@ -143,8 +155,9 @@ def get_data(filters):
             emp.custom_date_pass_probation AS date_pass_probation,
             emp.custom_exit_effective_date AS exit_effective_date,
             emp.custom_borrow_start_date,
-            emp.custom_borrow_end_date
-            
+            emp.custom_borrow_end_date,
+            emp.custom_prefix as prefix
+
         FROM `tabEmployee` emp 
         WHERE emp.custom_date_pass_probation <= %(year_end_date)s
             AND emp.company = %(company)s   
@@ -163,9 +176,10 @@ def get_data(filters):
         rows['period_work_before'] = period_work_before
         employee = rows['employee']
 
-        base_salary = get_latest_salary_structure(employee)
+        base_salary, custom_salary_amount = get_latest_salary_structure(employee)
         # print('base_salary', base_salary)
         rows['base_salary'] = base_salary
+        rows['custom_salary_amount'] = custom_salary_amount
 
         if rows['employment_type'] == 'พนักงานลาไปศึกษา':
             
@@ -212,7 +226,7 @@ def get_data_entry(filters):
 
 def get_latest_salary_structure(employee):
     query = """
-        SELECT base, from_date
+        SELECT base, custom_salary_amount
         FROM `tabSalary Structure Assignment`
         WHERE docstatus = 1 AND employee = %s
         ORDER BY from_date DESC
@@ -221,9 +235,9 @@ def get_latest_salary_structure(employee):
     result = frappe.db.sql(query, employee, as_dict=True)
     
     if result:
-        return result[0]['base']
+        return result[0]['base'], result[0]['custom_salary_amount']
     else:
-        return None
+        return None, None 
     
 
 # def get_conncet_hook(filters):
