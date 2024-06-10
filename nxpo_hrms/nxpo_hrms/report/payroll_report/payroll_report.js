@@ -34,6 +34,33 @@ frappe.query_reports["Payroll Report"] = {
 			default: 1,
 			reqd: 1,
 		},
+		{
+			fieldname: "status_emp",
+			label: __("Employee Status"),
+			fieldtype: "Select",
+			options: [
+				{value: "", label: __("Select Employee Status")},
+                {value: "Active", label: "Active"},
+                {value: "Inactive", label: "Inactive"},
+                {value: "Suspended", label: "Suspended"},
+				{value: "Left", label: "Left"},
+            ],
+			reqd: 0,
+		},
+		{
+			fieldname: "directorate",
+			label: __("Directorate"),
+			fieldtype: "Link",
+			options: "Department",
+			reqd: 0,
+		},
+		{
+			fieldname: "employment_type",
+			label: __("ประเภทพนักงาน"),
+			fieldtype: "Link",
+			options: "Employment Type",
+			reqd: 0,
+		},
     ],
     formatter: function (value, row, column, data, default_formatter) {
 		value = default_formatter(value, row, column, data);
