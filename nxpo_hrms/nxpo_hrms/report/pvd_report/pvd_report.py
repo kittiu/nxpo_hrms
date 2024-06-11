@@ -5,14 +5,14 @@ import frappe
 
 
 def execute(filters=None):
-	columns = get_columns(filters)
-	data = get_data(filters)
+    columns = get_columns(filters)
+    data = get_data(filters)
 
-	return columns, data
+    return columns, data
 
 
 def get_columns(filters):
-	columns = [
+    columns = [
         {
             "fieldname": "idx",
             "fieldtype": "Data",
@@ -23,7 +23,12 @@ def get_columns(filters):
             "fieldname": "employee",
             "fieldtype": "Data",
             "label": "รหัสพนักงาน",
-            "options": "",
+            "width": 0
+        },
+        {
+            "fieldname": "prefix",
+            "fieldtype": "Data",
+            "label": "คำนำหน้าชื่อ",
             "width": 0
         },
         {
@@ -65,13 +70,13 @@ def get_columns(filters):
         {
             "fieldname": "pvd_com",
             "fieldtype": "Currency",
-            "label": "บริษัทสมทบ",
+            "label": "สำนักงานสมทบ",
             "width": 0
         },
         {
             "fieldname": "pvd_com_percent",
             "fieldtype": "Int",
-            "label": "% สะสม",
+            "label": "% สมทบ",
             "width": 0
         },
         {
@@ -83,19 +88,19 @@ def get_columns(filters):
         {
             "fieldname": "posting_date",
             "fieldtype": "Date",
-            "label": "วันที่ประกาศ",
+            "label": "วันที่นำส่งกองทุน",
             "width": 0
         }
-	]
+    ]
 
-	return columns
+    return columns
 
 def get_data(filters):
     data = []
 
     conditions = get_conditions(filters)
     query_data = frappe.db.sql(
-		f"""SELECT
+        f"""SELECT
             CONVERT(row_number() OVER (ORDER BY ss.employee), char) AS idx,
             ss.employee,
             emp.employee_name,
@@ -107,7 +112,8 @@ def get_data(filters):
             pvd_com.amount AS pvd_com,
             ss.custom_pvd_company AS pvd_com_percent,
             COALESCE(pvd_emp.amount, 0) + COALESCE(pvd_com.amount, 0) AS pvd_total,
-            ss.posting_date
+            ss.posting_date,
+            emp.custom_prefix as prefix
         FROM `tabSalary Slip` ss
         JOIN `tabEmployee` emp ON ss.employee = emp.name
         LEFT JOIN `tabSalary Detail` salary ON salary.parenttype = 'Salary Slip' 
@@ -130,18 +136,61 @@ def get_data(filters):
             AND ss.start_date = %(from_date)s
             AND ss.end_date = %(to_date)s
             AND ss.company = %(company)s {conditions}""",
-		filters,
-		as_list=1,
-	)
+        filters,
+        as_dict=True,
+    )
 
     data = query_data
+
+    sum_salary = 0
+    sum_back_salary = 0
+    sum_pvd_emp = 0
+    sum_pvd_com = 0
+    sum_pvd_total = 0
+
+    for row in data:
+        if row['salary']:
+            sum_salary += row['salary']
+
+        if row['back_salary']:
+            sum_back_salary += row['back_salary']
+
+        if row['pvd_emp']:
+            sum_pvd_emp += row['pvd_emp']
+
+        if row['pvd_com']:
+            sum_pvd_com += row['pvd_com']
+        
+        if row['pvd_total']:
+            sum_pvd_total += row['pvd_total']
+        
+
+    # Add a new set of data (example)
+    total_data = {
+        'idx': 'Total',
+        'employee': '',
+        'employee_name': '',
+        'salary': sum_salary,
+        'back_salary': sum_back_salary,
+        'pvd_start_date': '',
+        'pvd_emp': sum_pvd_emp,
+        'pvd_emp_percent': None,
+        'pvd_com': sum_pvd_com,
+        'pvd_com_percent': None,
+        'pvd_total': sum_pvd_total,
+        'posting_date': '',
+        'prefix': ''
+    }
+    data.append(total_data)
+
+    
     return data
 
 
 def get_conditions(filters):
-	conditions = ""
+    conditions = ""
 
-	if filters.get("pvd_type"):
-		conditions += f"and ss.custom_pvd_type = %(pvd_type)s"
+    if filters.get("pvd_type"):
+        conditions += f"and ss.custom_pvd_type = %(pvd_type)s"
 
-	return conditions
+    return conditions

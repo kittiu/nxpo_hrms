@@ -1,6 +1,4 @@
-{%
-var report_columns = report.get_columns_for_print();
-%}
+{% var report_columns = report.get_columns_for_print(); %}
 <head>
 	<meta charset="UTF-8">
 	<!-- Chrome, Firefox OS and Opera -->
@@ -12,6 +10,7 @@ var report_columns = report.get_columns_for_print();
 	<meta content="utf-8" http-equiv="encoding">
 </head>
 <style>
+
 	.title {
 		color: black;
 		text-align: center;
@@ -149,12 +148,17 @@ var report_columns = report.get_columns_for_print();
 		padding-bottom: 0;  /* Assuming no additional padding is needed below the hr */
 	}
 
+	.logo1 {
+		width: 100px; /* Explicit width */
+		height: auto; /* Maintain aspect ratio */
+	}
+
 </style>
 
 {% let pay_date = data[0]['posting_date']; %}
 {% let dateConvert = String(pay_date) %}
 {% let date_parts = dateConvert.split('-') %}
-{% let year = Number(date_parts[0]) + 543 %}
+{% let year = Number(date_parts[0]) %}
 {% let month = date_parts[1] %}
 {% let day = date_parts[2] %}
 {% let month_th = {
@@ -178,8 +182,11 @@ var report_columns = report.get_columns_for_print();
 
 <body>
 
+
+	
 <div class="page-break">
-	<h2 class="title">สำนักงานสภานโยบายการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรมแห่งชาติ</h2>
+	<img src="/assets/nxpo_hrms/images/ssl/new_logo_th.png" alt="Company Logo" class="logo1">
+	<!-- <h2 class="title">สำนักงานสภานโยบายการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรมแห่งชาติ</h2> -->
 	<h4 class="text-center">
 		รายงาน{{titleType}} วันที่คิดกองทุน  {{ day }}/{{month_th}}/{{year}}</h4>
 			
@@ -191,18 +198,19 @@ var report_columns = report.get_columns_for_print();
 		<table class="table table-bordered table-condensed">
 			<thead>
 				<tr>
-					<th rowspan="2" style="width: 5%;"><label style="font-size: 10px;">#</label></th>
-					<th rowspan="2" style="width: 10%;"><label style="font-size: 10px;">รหัสพนักงาน</label></th>
+					<th rowspan="2" style="width: 5%; "><label style="font-size: 10px;"></label></th>
+					<th rowspan="2" style="width: 6%; text-align: left;"><label style="font-size: 10px;">คำนำหน้า</label></th>
+					<th rowspan="2" style="width: 8%;"><label style="font-size: 10px;">รหัสพนักงาน</label></th>
 					<th rowspan="2" style="width: 15%;"><label style="font-size: 10px;">ชื่อ-นามสกุล</label></th>
 					<th rowspan="2" style="width: 11%; text-align: right; font-size: 10px;">เงินเดือน</th>
 					<th rowspan="2" style="width: 11%;"><label style="text-align: right; font-size: 10px;">ตกเบิกเงินเดือน</label></th>
-					<th rowspan="2" style="width: 14%;"><label style="font-size: 10px;">วันที่เริ่มคิดอายุกองทุน</label></th>
-					<th colspan="3" style="width: 34%; text-align: center;"><label style="font-size: 10px;">กองทุนสำรองเลี้ยงชีพ</label></th>
+					<th rowspan="2" style="width: 11%;"><label style="font-size: 10px;">วันที่เริ่มคิดอายุกองทุน</label></th>
+					<th colspan="3" style="width: 33%; text-align: center;"><label style="font-size: 10px;">กองทุนฯสำนักงานสมทบ</label></th>
 				</tr>
 				<tr>
 					<th style="width: 11%;"><label style="text-align: right; font-size: 10px;">พนักงานสะสม</label></th>
-					<th style="width: 11%;"><label style="text-align: right; font-size: 10px;">บริษัทสมทบ</label></th>
-					<th style="width: 12%;"><label style="text-align: right; font-size: 10px;">รวมทั้งหมด</label></th>
+					<th style="width: 11%;"><label style="text-align: right; font-size: 10px;">สำนักงานสมทบ</label></th>
+					<th style="width: 11%;"><label style="text-align: right; font-size: 10px;">รวมทั้งหมด</label></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -220,6 +228,9 @@ var report_columns = report.get_columns_for_print();
 							</td>
 							<td class="text-left" style="font-size: 10px;">
 								{%= row['employee'] %}
+							</td>
+							<td class="text-left" style="font-size: 10px;">
+								{%= row['prefix'] %}
 							</td>
 							<td class="text-left" style="font-size: 10px;">
 								{%= row['employee_name'] %}
@@ -242,17 +253,21 @@ var report_columns = report.get_columns_for_print();
 								</div>
 							</td>
 							<td class="text-right">
+
 								<div class="value">
 									<label style="font-size: 10px;">
-										{%= format_number(row['pvd_emp'], null, 2) || 0.00 %} {{' '}}
-										{%=  row['pvd_emp_percent']%}%
+										{%= format_number(row['pvd_emp'], null, 2) || 0.00 %}
+										<span style="margin-right: 7px;"></span>
+										{%= row['pvd_emp_percent'] %}%
 									</label>
 								</div>
+
 							</td>
 							<td class="text-right">
 								<div class="value">
 									<label style="font-size: 10px;">
-										{%= format_number(row['pvd_com'], null, 2) || 0.00 %} {{' '}}
+										{%= format_number(row['pvd_com'], null, 2) || 0.00 %}
+										<span style="margin-right: 7px;"></span>
 										{%=  row['pvd_com_percent'] %}%
 									</label>
 								</div>
