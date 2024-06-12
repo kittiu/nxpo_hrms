@@ -34,11 +34,18 @@
  "doctype": "Report",
  "filters": [
   {
-   "fieldname": "creation",
+   "fieldname": "from_date",
    "fieldtype": "Date",
-   "label": "Changed After",
+   "label": "From Date",
    "mandatory": 1,
    "options": "",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "mandatory": 1,
    "wildcard_filter": 0
   }
  ],
@@ -46,13 +53,13 @@
  "is_standard": "Yes",
  "letter_head": "NXPO",
  "letterhead": null,
- "modified": "2024-06-10 20:03:32.139708",
+ "modified": "2024-06-12 22:11:27.506623",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employment Type Changes",
  "owner": "Administrator",
  "prepared_report": 0,
- "query": "select docname, employee_name, v.creation, v.name as version\nfrom `tabVersion` v\n    join `tabEmployee` e on e.name = v.docname\nwhere  data not like '%%\"changed\":[]%%'\n    and data like '%%changed%%'\n    and data like '%%employment_type%%'\n    and ref_doctype = 'Employee'\n    and v.creation > %(creation)s\norder by v.creation",
+ "query": "select docname, employee_name, v.creation, v.name as version\nfrom `tabVersion` v\n    join `tabEmployee` e on e.name = v.docname\nwhere  data not like '%%\"changed\":[]%%'\n    and data like '%%changed%%'\n    and data like '%%employment_type%%'\n    and ref_doctype = 'Employee'\n    and v.creation >= %(from_date)s\n    and v.creation <= %(to_date)s\norder by v.creation",
  "ref_doctype": "Version",
  "report_name": "Employment Type Changes",
  "report_type": "Query Report",
