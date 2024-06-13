@@ -102,6 +102,7 @@
    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e40\u0e07\u0e34\u0e19\u0e17\u0e35\u0e48\u0e43\u0e0a\u0e49\u0e44\u0e14\u0e49\u0e43\u0e19\u0e41\u0e15\u0e48\u0e25\u0e30\u0e23\u0e2d\u0e1a",
    "fieldname": "amount_per_round",
    "fieldtype": "Currency",
+   "hidden": 1,
    "label": "Budget Per Round",
    "read_only": 1
   },
@@ -110,6 +111,7 @@
    "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e1b\u0e35\u0e15\u0e48\u0e2d 1 \u0e23\u0e2d\u0e1a",
    "fieldname": "years_per_round",
    "fieldtype": "Int",
+   "hidden": 1,
    "label": "Years Per Round",
    "read_only": 1
   },
@@ -122,7 +124,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-13 21:49:30.556935",
+ "modified": "2024-06-13 21:59:43.086544",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Tailor Tracker",
