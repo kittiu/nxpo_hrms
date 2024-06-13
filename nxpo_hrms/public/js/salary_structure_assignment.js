@@ -5,7 +5,7 @@ frappe.ui.form.on("Salary Structure Assignment", {
 	// Onchange percent -> salary amount
 	custom_salary_percent: function(frm) {
 		if (frm.doc.custom_salary_percent == 0) { return; }
-		if (frm.doc.custom_calculation_way != 'Manual'){
+		if (frm.doc.custom_calculation_method != 'Manual'){
 			frm.set_value(
 				"custom_salary_amount",
 				parseFloat(frm.doc.custom_salary_percent) / 100 * parseFloat(frm.doc.base)
@@ -14,7 +14,7 @@ frappe.ui.form.on("Salary Structure Assignment", {
 	},
 	base: function(frm) {
 		if (frm.doc.custom_salary_percent == 0) { return; }
-		if (frm.doc.custom_calculation_way != 'Manual'){
+		if (frm.doc.custom_calculation_method != 'Manual'){
 			frm.set_value(
 				"custom_salary_amount",
 				parseFloat(frm.doc.custom_salary_percent) / 100 * parseFloat(frm.doc.base)
@@ -22,8 +22,8 @@ frappe.ui.form.on("Salary Structure Assignment", {
 		}
 
 	},
-	custom_calculation_way: function(frm) {
-		if (frm.doc.custom_calculation_way == 'Calculated by Percent') { 
+	custom_calculation_method: function(frm) {
+		if (frm.doc.custom_calculation_method == 'Percent') { 
 			frm.set_value(
 				"custom_salary_amount",
 				parseFloat(frm.doc.custom_salary_percent) / 100 * parseFloat(frm.doc.base)
