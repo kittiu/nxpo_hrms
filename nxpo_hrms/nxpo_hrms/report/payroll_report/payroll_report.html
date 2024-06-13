@@ -93,7 +93,7 @@ var report_columns = report.get_columns_for_print();
 
 	.data-field .value {
 		word-wrap: break-word;
-		font-size: 8px;
+		font-size: 7px;
 	}
 
 	.page-break {
@@ -130,7 +130,7 @@ var report_columns = report.get_columns_for_print();
 
 	.print-format {
 		background-color: white;
-		border-radius: 8px;
+		border-radius: 7px;
 		max-width: 100%;
 		min-height: 100%;
 		padding: 10px;
@@ -148,13 +148,18 @@ var report_columns = report.get_columns_for_print();
 	.dbt {
 		padding-bottom: 0;  /* Assuming no additional padding is needed below the hr */
 	}
+
+	.logo1 {
+		width: 100px; /* Explicit width */
+		height: auto; /* Maintain aspect ratio */
+	}
 	
 </style>
 
 {% let pay_date = data[0]['posting_date']; %}
 {% let dateConvert = String(pay_date) %}
 {% let date_parts = dateConvert.split('-') %}
-{% let year = Number(date_parts[0]) + 543 %}
+{% let year = Number(date_parts[0]) %}
 {% let month = date_parts[1] %}
 {% let day = date_parts[2] %}
 {% let month_th = {
@@ -163,6 +168,9 @@ var report_columns = report.get_columns_for_print();
 '09': 'กันยายน', '10': 'ตุลาคม', '11': 'พฤศจิกายน', '12': 'ธันวาคม'
 }[month] %}
 
+
+{% let sum_idx = 0 %}
+{% let sum_base = 0 %}
 {% let sum_e1 = 0 %}
 {% let sum_e6 = 0 %}
 {% let sum_e5 = 0 %}
@@ -181,7 +189,8 @@ var report_columns = report.get_columns_for_print();
 
 <body>
 <div class="page-break">
-			<h2 class="title">สำนักงานสภานโยบายการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรมแห่งชาติ</h2>
+			<!-- <h2 class="title">สำนักงานสภานโยบายการอุดมศึกษา วิทยาศาสตร์ วิจัยและนวัตกรรมแห่งชาติ</h2> -->
+			<img src="/assets/nxpo_hrms/images/ssl/new_logo_th.png" alt="Company Logo" class="logo1">
 			<h4 class="text-center">{%= __(report.report_name) %} {{ __("เดือน") }} {{month_th}} {{year}} {{ __("( วันที่จ่ายจริง ") }} {{ day }}/{{month_th}}/{{year}}  {{ __(" )") }}</h4>
 			
 			<p class="text-right" style="color: black; font-size:x-small">{{ __("Printed On") }} {%=
@@ -191,28 +200,32 @@ var report_columns = report.get_columns_for_print();
 				<table class="table table-bordered table-condensed">
 					<thead>
 						<tr>
-							<th data-fieldtype="Table" style="width: 7%;"><label style="font-size: 8px;">รหัสพนักงาน</label></th>
-							<th data-fieldtype="Table" style="width: 10%;"><label style="font-size: 8px;">ชื่อ-นามสกุล</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">จ่ายจริง</label></th>
-							<th data-fieldtype="Table" style="width: 8%;"><label style="text-align: right; font-size: 8px;">ตกเบิกเงินเดือน</label></th>
-							<th data-fieldtype="Table" style="width: 7%;"><label style="text-align: right; font-size: 8px;">เงินเพิ่มพิเศษ</label></th>
-							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 8px;">เงินได้อื่นๆ</label></th>
-							<th data-fieldtype="Table" style="width: 4%;"><label style="text-align: right; font-size: 8px;">ภาษี</label></th>
-							<th data-fieldtype="Table" style="width: 8%;"><label style="text-align: right; font-size: 8px;">กองทุนฯเงินพนง.</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">หักธอส</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">หักสหกรณ์</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">หักก.ย.ศ.</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">หักอื่นๆ</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">รวมเงินได้</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">รวมเงินหัก</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">สุทธิ</label></th>
-							<th data-fieldtype="Table" style="width: 10%;"><label style="text-align: right; font-size: 8px;">กองทุนบริษัทสมทบ</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: left; font-size: 7px;">รหัสพนักงาน</label></th>
+							<th data-fieldtype="Table" style="width: 4%;"><label style="text-align: left; font-size: 7px;">คำนำหน้า</label></th>
+							<th data-fieldtype="Table" style="width: 9%;"><label style="text-align: left; font-size: 7px;">ชื่อ-นามสกุล</label></th>
+							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">อัตราเงินเดือน</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px;">จ่ายจริง</label></th>
+							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">ตกเบิกเงินเดือน</label></th>
+							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">เงินเพิ่มพิเศษ</label></th>
+							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">เงินได้อื่นๆ</label></th>
+							<th data-fieldtype="Table" style="width: 4%;"><label style="text-align: right; font-size: 7px; color: red;">ภาษี</label></th>
+							<th data-fieldtype="Table" style="width: 7%;"><label style="text-align: right; font-size: 7px; color: red;">กองทุนฯเงินพนง.</label></th>
+							<th data-fieldtype="Table" style="width: 4%;"><label style="text-align: right; font-size: 7px; color: red;">หักธอส</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px; color: red;">หักสหกรณ์</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px; color: red;">หักกยศ.</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px; color: red;">หักอื่นๆ</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px;">รวมเงินได้</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px; color: red;">รวมเงินหัก</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px;">สุทธิ</label></th>
+							<th data-fieldtype="Table" style="width: 8%;"><label style="text-align: right; font-size: 7px;">กองทุนฯสนง.สมทบ</label></th>
 						</tr>
 					</thead>
 					<tbody>
 						{% for(var j=0, k=data.length; j<k; j++) { %} 
 						{% var row=data[j]; %} 
 
+						{% sum_idx += 1 %}
+						{% sum_base += row['base_salary'] %}
 						{% sum_e1 += row['e1'] %}
 						{% sum_e6 += row['e6'] %}
 						{% sum_e5 += row['e5'] %}
@@ -229,69 +242,77 @@ var report_columns = report.get_columns_for_print();
 						{% sum_pvd_com += row['pvd_com'] %}
 
 						<tr>
-							<td class="text-left" style="font-size: 8px;">
+							<td class="text-left" style="font-size: 7px;">
 								{%= row['employee'] %}
 							</td>
-							<td class="text-left" style="font-size: 8px;">
+							<td class="text-left" style="font-size: 7px;">
+								{%= row['prefix'] %}
+							</td>
+							<td class="text-left" style="font-size: 7px;">
 								{%= row['employee_name'] %}
 							</td>
 							<td class="text-right">
-								<div class="value" style="font-size: 8px;">
-									<label style="font-size: 8px;">{%= format_number(row['e1'], null, 2) || 0.00 %}</label>
+								<div class="value" style="font-size: 7px;">
+									<label style="font-size: 7px;">{%= format_number(row['base_salary'], null, 2) || 0.00 %}</label>
 								</div>
 							</td>
 							<td class="text-right">
-								<div class="value" style="font-size: 8px;">
-									<label style="font-size: 8px;">{%= format_number(row['e6'], null, 2) || 0.00 %}</label>
+								<div class="value" style="font-size: 7px;">
+									<label style="font-size: 7px;">{%= format_number(row['e1'], null, 2) || 0.00 %}</label>
+								</div>
+							</td>
+							<td class="text-right">
+								<div class="value" style="font-size: 7px;">
+									<label style="font-size: 7px;">{%= format_number(row['e6'], null, 2) || 0.00 %}</label>
 								</div>
 							</td>
 							<td class="text-right" >
 								<div class="value">
-									<label style="font-size: 8px;">{%= format_number(row['e5'], null, 2) || 0.00 %}</label>
+									<label style="font-size: 7px;">{%= format_number(row['e5'], null, 2) || 0.00 %}</label>
 								</div>
 							</td>
 							<td class="text-right">
 								<div class="value">
-									<label style="font-size: 8px;">{%= format_number(row['e7'], null, 2) || 0.00 %}</label>
+									<label style="font-size: 7px;">{%= format_number(row['e7'], null, 2) || 0.00 %}</label>
 								</div>
 							</td>
 							<td class="text-right">
-								<div class="value"><label style="font-size: 8px;">{%= format_number(row['d1'], null, 2) || 0.00 %}</label></div>
+								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d1'], null, 2) || 0.00 %}</label></div>
 							</td>
 							<td class="text-right">
-								<div class="value"><label style="font-size: 8px;">{%= format_number(row['d2'], null, 2) || 0.00 %}</label></div>
+								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d2'], null, 2) || 0.00 %}</label></div>
 							</td>
 							<td class="text-right">
-								<div class="value"><label style="font-size: 8px;">{%= format_number(row['d4'], null, 2) || 0.00 %}</label></div>
+								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d4'], null, 2) || 0.00 %}</label></div>
 							</td>
 							<td class="text-right">
-								<div class="value"><label style="font-size: 8px;">{%= format_number(row['d3'], null, 2) || 0.00 %}</label></div>
+								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d3'], null, 2) || 0.00 %}</label></div>
 							</td>
 							<td class="text-right">
-								<div class="value"><label style="font-size: 8px;">{%= format_number(row['d5'], null, 2) || 0.00 %}</label></div>
+								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d5'], null, 2) || 0.00 %}</label></div>
 							</td>
 							<td class="text-right">
-								<div class="value"><label style="font-size: 8px;">{%= format_number(row['d6'], null, 2) || 0.00 %}</label></div>
-							</td>
-							<td class="text-right">
-								<div class="value">
-									<label style="font-size: 8px;">{%= format_number(row['gross_pay'], null, 2) || 0.00 %}</label>
-								</div>
+								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d6'], null, 2) || 0.00 %}</label></div>
 							</td>
 							<td class="text-right">
 								<div class="value">
-									<label style="font-size: 8px;">{%= format_number(row['total_deduction'], null, 2) || 0.00 %}</label>
+									<label style="font-size: 7px;">{%= format_number(row['gross_pay'], null, 2) || 0.00 %}</label>
 								</div>
 							</td>
 							<td class="text-right">
 								<div class="value">
-									<label style="font-size: 8px;">{%= format_number(format_number(row['net_pay'], null, 2), null, 2) || 0.00 %}</label>
+									<label style="font-size: 7px; color: red;">{%= format_number(row['total_deduction'], null, 2) || 0.00 %}</label>
+								</div>
+							</td>
+							<td class="text-right">
+								<div class="value">
+									<label style="font-size: 7px;">{%= format_number(format_number(row['net_pay'], null, 2), null, 2) || 0.00 %}</label>
 
 								</div>
 							</td>
 							<td class="text-right">
 								<div class="value">
-									<label style="font-size: 8px;">{%= format_number(row['pvd_com'], null, 2) || 0.00 %}</label>
+									<label style="font-size: 7px;">{%= format_number(row['pvd_com'], null, 2) || 0.00 %}</label>
 								</div>
 							</td>
 
@@ -311,22 +332,24 @@ var report_columns = report.get_columns_for_print();
 				<table class="table table-bordered table-condensed">
 					<thead>
 						<tr>
-							<th data-fieldtype="Table" style="width: 7%;"><label style="visibility: hidden; font-size: 8px;">รหัสพนักงาน</label></th>
-							<th data-fieldtype="Table" style="width: 10%;"><label style="visibility: hidden; font-size: 8px;">ชื่อ-นามสกุล</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_e1, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 8%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_e6, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 7%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_e5, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_e7, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 4%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_d1, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 8%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_d2, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_d4, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_d3, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_d5, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_d6, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_gross_pay, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_total_deduction, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_net_pay, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 10%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_pvd_com, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: left; font-size: 7px;">รวม</label></th>
+							<th data-fieldtype="Table" style="width: 4%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_idx, null, 0) || 0%}</label></th>
+							<th data-fieldtype="Table" style="width: 9%;"><label style="visibility: hidden; text-align: left; font-size: 7px;">ชื่อ-นามสกุล</label></th>
+							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_base, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_e1, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_e6, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_e5, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_e7, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 4%;"><label style="text-align: right; font-size: 7px; color: red;">{%= format_number(sum_d1, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 7%;"><label style="text-align: right; font-size: 7px; color: red;">{%= format_number(sum_d2, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 4%;"><label style="text-align: right; font-size: 7px; color: red;">{%= format_number(sum_d4, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px; color: red;">{%= format_number(sum_d3, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px; color: red;">{%= format_number(sum_d5, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px; color: red;">{%= format_number(sum_d6, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_gross_pay, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px; color: red;">{%= format_number(sum_total_deduction, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_net_pay, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 8%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_pvd_com, null, 2) || 0.00 %}</label></th>
 						</tr>
 					</thead>
 				</table>
