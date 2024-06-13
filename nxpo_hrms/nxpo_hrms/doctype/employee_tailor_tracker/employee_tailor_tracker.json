@@ -1,0 +1,162 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2024-06-13 13:38:38.707584",
+ "default_view": "List",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "amount_per_round",
+  "years_per_round",
+  "column_break_cybj",
+  "tailor_date",
+  "tailor_amount",
+  "allow_over_budget",
+  "remarks",
+  "section_break_crpl",
+  "round",
+  "balance",
+  "column_break_hlec",
+  "start_date",
+  "end_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "tailor_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Tailor Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "column_break_cybj",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "round",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "label": "Round",
+   "read_only": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "balance",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Budget Balance",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_crpl",
+   "fieldtype": "Section Break",
+   "label": "Amount balance for this round after this tailor date"
+  },
+  {
+   "fieldname": "column_break_hlec",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tailor_amount",
+   "fieldtype": "Currency",
+   "in_list_view": 1,
+   "label": "Tailor Amount",
+   "reqd": 1
+  },
+  {
+   "default": "7500",
+   "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e40\u0e07\u0e34\u0e19\u0e17\u0e35\u0e48\u0e43\u0e0a\u0e49\u0e44\u0e14\u0e49\u0e43\u0e19\u0e41\u0e15\u0e48\u0e25\u0e30\u0e23\u0e2d\u0e1a",
+   "fieldname": "amount_per_round",
+   "fieldtype": "Currency",
+   "label": "Budget Per Round",
+   "read_only": 1
+  },
+  {
+   "default": "3",
+   "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e1b\u0e35\u0e15\u0e48\u0e2d 1 \u0e23\u0e2d\u0e1a",
+   "fieldname": "years_per_round",
+   "fieldtype": "Int",
+   "label": "Years Per Round",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "allow_over_budget",
+   "fieldtype": "Check",
+   "label": "Allow Over Budget"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-13 21:49:30.556935",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Employee Tailor Tracker",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "tailor_date",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "employee_name"
+}
