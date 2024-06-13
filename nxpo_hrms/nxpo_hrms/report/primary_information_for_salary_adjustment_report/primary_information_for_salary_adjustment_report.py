@@ -203,7 +203,12 @@ def get_data(filters):
 
 
             rows['deduct_other'] = deduct_other
-            
+        
+        elif rows['employment_type'] == 'พนักงานไปปฏิบัติงานที่หน่วยงานอื่น - ไม่จ่ายเงินเดือน':
+            rows['remark'] = "พนักงานไปปฏิบัติงานที่หน่วยงานอื่น - ไม่จ่ายเงินเดือน"
+            rows['deduct_other'] = ""
+            rows['deduct_result'] = period_work_before
+
         else:
             rows['remark'] = ""
             rows['deduct_other'] = ""
