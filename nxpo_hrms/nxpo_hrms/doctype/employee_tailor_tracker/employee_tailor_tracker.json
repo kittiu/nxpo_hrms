@@ -14,13 +14,14 @@
   "tailor_date",
   "tailor_amount",
   "allow_over_budget",
-  "remarks",
+  "tailor_detail",
   "section_break_crpl",
   "round",
-  "balance",
-  "column_break_hlec",
+  "end_date",
   "start_date",
-  "end_date"
+  "column_break_hlec",
+  "time",
+  "balance"
  ],
  "fields": [
   {
@@ -39,11 +40,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "remarks",
-   "fieldtype": "Small Text",
-   "label": "Remarks"
-  },
-  {
    "fieldname": "column_break_cybj",
    "fieldtype": "Column Break"
   },
@@ -51,6 +47,7 @@
    "fieldname": "round",
    "fieldtype": "Int",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Round",
    "read_only": 1
   },
@@ -108,7 +105,7 @@
   },
   {
    "default": "3",
-   "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e1b\u0e35\u0e15\u0e48\u0e2d 1 \u0e23\u0e2d\u0e1a",
+   "description": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e1b\u0e35\u0e15\u0e48\u0e2d\u0e23\u0e2d\u0e1a",
    "fieldname": "years_per_round",
    "fieldtype": "Int",
    "hidden": 1,
@@ -120,11 +117,25 @@
    "fieldname": "allow_over_budget",
    "fieldtype": "Check",
    "label": "Allow Over Budget"
+  },
+  {
+   "description": "\u0e04\u0e23\u0e31\u0e49\u0e07\u0e17\u0e35\u0e48 (\u0e43\u0e19\u0e23\u0e2d\u0e1a\u0e40\u0e14\u0e35\u0e22\u0e27\u0e01\u0e31\u0e19\u0e19\u0e35\u0e49)",
+   "fieldname": "time",
+   "fieldtype": "Int",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Time",
+   "read_only": 1
+  },
+  {
+   "fieldname": "tailor_detail",
+   "fieldtype": "Small Text",
+   "label": "Tailor Detail"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-13 21:59:43.086544",
+ "modified": "2024-06-14 14:55:44.732501",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Tailor Tracker",

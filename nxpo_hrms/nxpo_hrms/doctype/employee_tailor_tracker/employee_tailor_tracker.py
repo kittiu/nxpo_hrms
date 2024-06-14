@@ -22,6 +22,7 @@ class EmployeeTailorTracker(Document):
 	def compute_round_balance(self):
 		# Default
 		balance = self.amount_per_round
+		time = 0  # start with 1
 		# Find if the tailor date is in existing round
 		records = frappe.get_all(
 			self.doctype,
@@ -37,27 +38,35 @@ class EmployeeTailorTracker(Document):
 		# Found the records for the same round, recompute all
 		if records:
 			old_rec = list(filter(lambda x: x["round"], records))[0]
-			for doc in records + [self]: # Recompute all records on this round
+			time = 0
+			# Recompute all records on this round
+			sorted_records = sorted(
+				records + [self],
+				key=lambda x: getdate(x.tailor_date)
+			)
+			for doc in sorted_records:
 				balance -= doc.tailor_amount or 0
-				self.update_round_balance(doc.name, old_rec.round, old_rec.start_date, old_rec.end_date, balance)
+				time += 1
+				self.update_round_balance(doc.name, old_rec.round, old_rec.start_date, old_rec.end_date, time, balance)
 			self.reload()
 			return
 		# No existing round, find new round
 		round, start_date, end_date = self.get_new_round()
+		time = 1
 		balance -= self.tailor_amount
-		self.update_round_balance(self.name, round, start_date, end_date, balance)
+		self.update_round_balance(self.name, round, start_date, end_date, time, balance)
 		self.reload()
 	
-	def update_round_balance(self, doc_name, round, start_date, end_date, balance):
+	def update_round_balance(self, doc_name, round, start_date, end_date, time, balance):
 		if not self.allow_over_budget and balance < 0:
 			frappe.throw(
 				_("Tailor amount is {0} over budget")
 				.format(frappe.format(abs(balance), "Currency"))
 			)
-		print("---------------", doc_name, balance)
 		frappe.db.set_value(self.doctype, doc_name, "round", round)
 		frappe.db.set_value(self.doctype, doc_name, "start_date", start_date)
 		frappe.db.set_value(self.doctype, doc_name, "end_date", end_date)
+		frappe.db.set_value(self.doctype, doc_name, "time", time)
 		frappe.db.set_value(self.doctype, doc_name, 'balance', balance)
 
 	def get_new_round(self):

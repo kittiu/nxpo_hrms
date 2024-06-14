@@ -125,7 +125,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Reports",
-   "link_count": 6,
+   "link_count": 7,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -189,9 +189,19 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Employee Tailor Status",
+   "link_count": 0,
+   "link_to": "Employee Tailor Status",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-06-12 22:15:18.827554",
+ "modified": "2024-06-14 15:55:38.617903",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "NXPO HR",
