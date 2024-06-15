@@ -2,14 +2,13 @@ import frappe
 import json
 
 ECM_TO_FRAPPE = {
-    "employee_code": "name",  # Missing
+    "employee_code": "name",
     "prefix_th": "custom_prefix",
     "fname_th": "first_name",
     "lname_th": "last_name",
-    # "prefix_en": "custom_prefix_en",  # No need as related to prefix_th
     "fname_en": "custom_first_name_en",
     "lname_en": "custom_last_name_en",
-    "gender": "gender",  # Missing
+    "gender": "gender",
     "house_no": "custom_house_no",
     "street": "custom_street",
     "subdistrict": "custom_subdistrict",
@@ -17,7 +16,7 @@ ECM_TO_FRAPPE = {
     "province": "custom_province",
     "zipcode": "custom_zip_code",
     "date_birth": "date_of_birth",
-    "date_join": "date_of_joining",  # Missing
+    "date_join": "date_of_joining",
     "citizen_id": "custom_citizen_id",
     "mobile": "cell_number",
     "martial_status": "custom_married_status",
@@ -25,7 +24,7 @@ ECM_TO_FRAPPE = {
     "education": {
         "edu_level": "custom_degree",
         "edu_educational": "qualification",
-        "edu_datestart": "custom_year_of_admission",  # Missing
+        "edu_datestart": "custom_year_of_admission",
         "edu_dateend": "custom_year_of_graduation",
         "edu_academy": "school_univ",
         "edu_country": "custom_country",
