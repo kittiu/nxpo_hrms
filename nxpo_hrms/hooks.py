@@ -314,6 +314,9 @@ doc_events = {
             "nxpo_hrms.custom.salary_slip.validate_no_salary",
         ]
     },
+    "Department": {
+        "validate": "nxpo_hrms.custom.department.validate_department",
+    }
 
 }
 

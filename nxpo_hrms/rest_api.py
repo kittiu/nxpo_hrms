@@ -64,14 +64,11 @@ def _sql_employee():
             emp.cell_number as CURRENT_TEL,
             emp.company_email as EMAIL,  # Company Email is not in ECM
             emp.custom_house_no as CURRENT_ADDRESS,
-            # CURRENT_BUILDING
-            # CURRENT_SOI
             emp.custom_street as CURRENT_ROAD,
             emp.custom_subdistrict as DISTRICT_NAME,
             emp.custom_district as AMPHUR_NAME,
             emp.custom_province as PROVINCE_NAME,
             emp.custom_zip_code as CURRENT_ZIPCODE,
-            # SUPERVISOR_CODE ---> Duplicated with Manager ???
             dep.custom_department_sync_code as DEPARTMENT_CODE,
             dep.department_name as DEPARTMENT_NAME,
             dit.custom_department_sync_code as DIRECTORATE_CODE,
@@ -87,8 +84,8 @@ def _sql_employee():
             emp.bank_ac_no as BANK_ACCOUNT_NUMBER,
             sub.custom_department_sync_code as SUB_DEPARTMENT_CODE,
             sub.department_name as SUB_DEPARTMENT_NAME,
-            emp.reports_to as MANAGER,
-            rpt.employee_name as MANAGER_NAME,
+            dep.custom_chief as MANAGER,
+            dep.custom_chief_name as MANAGER_NAME,
             emp.modified as LAST_UPDATE,
             # ------- EXTRA ---------
             emp.status as STATUS
@@ -97,7 +94,6 @@ def _sql_employee():
         left outer join `tabDepartment` dep on emp.department = dep.name and dep.custom_type = 'ฝ่ายงาน'
         left outer join `tabDepartment` sub on emp.custom_subdepartment = sub.name and sub.custom_type = 'แผนกงาน'
         left outer join `tabDesignation` pos on emp.designation = pos.name
-        left outer join `tabEmployee` rpt on emp.reports_to = rpt.name
     """
 
 
@@ -136,11 +132,8 @@ def get_all_department():
             select dep.custom_department_sync_code as DEPARTMENT_CODE,
                 dep.department_name as DEPARTMENT_NAME,
                 dep.custom_department_en as DEPARTMENT_NAME_EN,
-                dep.custom_chief as MANAGER_CODE,
-                dep.custom_chief_name as MANAGER_NAME,
-                # ------- QUESTION ---------
-                # ASSISTANT_DEPUTY_CODE
-                # ASSISTANT_DEPUTY_NAME
+                dep.custom_chief as CHIEF_CODE,
+                dep.custom_chief_name as CHIEF_NAME,
                 dit.custom_department_sync_code as DIRECTORATE_CODE,
                 GREATEST(dep.modified, dit.modified) as LAST_UPDATE
             from `tabDepartment` dep
@@ -160,8 +153,10 @@ def get_all_directorate():
                 dit.department_name as DIRECTORATE_NAME,
                 dit.custom_department_en as DIRECTORATE_NAME_EN,
                 dit.modified as LAST_UPDATE,
-                dit.custom_chief as SUPERVISOR_CODE,
-                dit.custom_chief_name as SUPERVISOR_NAME,
+                dit.custom_chief as CHIEF_CODE,
+                dit.custom_chief_name as CHIEF_NAME,
+                dit.custom_assistant as ASSISTANT_CODE,
+                dit.custom_assistant_name as ASSISTANT_NAME,
                 dit.modified as LAST_UPDATE
             from `tabDepartment` dit
             where dit.custom_type = 'กลุ่มงาน'
