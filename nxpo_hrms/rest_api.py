@@ -21,6 +21,9 @@ ECM_TO_FRAPPE = {
     "mobile": "cell_number",
     "martial_status": "custom_married_status",
     "personal_email": "personal_email",
+    "company_email": "company_email",
+    "nick_name": "custom_nick_name",
+    "status": "status",
     "education": {
         "edu_level": "custom_degree",
         "edu_educational": "qualification",

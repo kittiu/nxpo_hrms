@@ -86,7 +86,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-17 09:20:01.943488",
+ "modified": "2024-06-19 11:25:08.587568",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Royal Decoration",
@@ -122,5 +122,6 @@
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
- "title_field": "employee_name"
+ "title_field": "employee_name",
+ "track_changes": 1
 }

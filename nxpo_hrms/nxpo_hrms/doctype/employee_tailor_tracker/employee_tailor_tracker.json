@@ -135,7 +135,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-14 14:55:44.732501",
+ "modified": "2024-06-19 11:25:18.712699",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Tailor Tracker",
@@ -171,5 +171,6 @@
  "sort_field": "tailor_date",
  "sort_order": "DESC",
  "states": [],
- "title_field": "employee_name"
+ "title_field": "employee_name",
+ "track_changes": 1
 }

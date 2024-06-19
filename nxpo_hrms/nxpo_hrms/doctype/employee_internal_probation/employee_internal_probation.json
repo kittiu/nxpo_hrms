@@ -155,7 +155,7 @@
    "link_fieldname": "custom_employee_internal_probation"
   }
  ],
- "modified": "2024-04-27 15:55:59.456358",
+ "modified": "2024-06-19 11:26:07.182874",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Internal Probation",
@@ -204,5 +204,6 @@
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }
