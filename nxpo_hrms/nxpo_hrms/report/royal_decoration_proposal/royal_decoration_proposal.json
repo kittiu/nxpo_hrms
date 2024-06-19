@@ -1,0 +1,125 @@
+{
+ "add_total_row": 0,
+ "columns": [
+  {
+   "fieldname": "employee_code",
+   "fieldtype": "Data",
+   "label": "\u0e23\u0e2b\u0e31\u0e2a",
+   "width": 0
+  },
+  {
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "label": "\u0e0a\u0e37\u0e48\u0e2d-\u0e19\u0e32\u0e21\u0e2a\u0e01\u0e38\u0e25",
+   "width": 0
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "\u0e15\u0e33\u0e41\u0e2b\u0e19\u0e48\u0e07",
+   "width": 0
+  },
+  {
+   "fieldname": "directorate",
+   "fieldtype": "Data",
+   "label": "\u0e01\u0e25\u0e38\u0e48\u0e21",
+   "width": 0
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "\u0e1d\u0e48\u0e32\u0e22",
+   "width": 0
+  },
+  {
+   "fieldname": "year_propose",
+   "fieldtype": "Data",
+   "label": "\u0e1b\u0e35\u0e17\u0e35\u0e48\u0e40\u0e2a\u0e19\u0e2d\u0e43\u0e2b\u0e49\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e23\u0e32\u0e0a\u0e2f",
+   "width": 0
+  },
+  {
+   "fieldname": "offered_royal_decoration",
+   "fieldtype": "Data",
+   "label": "\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e23\u0e32\u0e0a\u0e2f\u0e17\u0e35\u0e48\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e01\u0e32\u0e23\u0e40\u0e2a\u0e19\u0e2d",
+   "width": 0
+  },
+  {
+   "fieldname": "date_of_birth",
+   "fieldtype": "Date",
+   "label": "\u0e27\u0e31\u0e19\u0e40\u0e01\u0e34\u0e14",
+   "width": 0
+  },
+  {
+   "fieldname": "age",
+   "fieldtype": "Data",
+   "label": "\u0e2d\u0e32\u0e22\u0e38",
+   "width": 0
+  },
+  {
+   "fieldname": "date_of_joining",
+   "fieldtype": "Date",
+   "label": "\u0e27\u0e31\u0e19\u0e17\u0e35\u0e48\u0e40\u0e23\u0e34\u0e48\u0e21\u0e07\u0e32\u0e19",
+   "width": 0
+  },
+  {
+   "fieldname": "exp",
+   "fieldtype": "Data",
+   "label": "\u0e2d\u0e32\u0e22\u0e38\u0e07\u0e32\u0e19",
+   "width": 0
+  },
+  {
+   "fieldname": "fiscal_year",
+   "fieldtype": "Data",
+   "label": "\u0e1b\u0e35\u0e25\u0e48\u0e32\u0e2a\u0e38\u0e14\u0e17\u0e35\u0e48\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e23\u0e32\u0e0a",
+   "width": 0
+  },
+  {
+   "fieldname": "received_royal_decoration",
+   "fieldtype": "Data",
+   "label": "\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e23\u0e32\u0e0a\u0e2f\u0e17\u0e35\u0e48\u0e40\u0e04\u0e22\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a",
+   "width": 0
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Data",
+   "label": "\u0e2b\u0e21\u0e32\u0e22\u0e40\u0e2b\u0e15\u0e38",
+   "width": 0
+  }
+ ],
+ "creation": "2024-06-19 21:12:16.384581",
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [
+  {
+   "fieldname": "year_propose",
+   "fieldtype": "Link",
+   "label": "Year Propose",
+   "mandatory": 1,
+   "options": "Fiscal Year",
+   "wildcard_filter": 0
+  }
+ ],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "NXPO",
+ "letterhead": null,
+ "modified": "2024-06-19 21:51:30.772301",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Royal Decoration Proposal",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "query": "select emp.name as employee_code,\n    emp.employee_name,\n    emp.designation,\n    (select department_name from tabDepartment where name = emp.custom_directorate) as directorate,\n    (select department_name from tabDepartment where name = emp.department) as department,\n    erd.fiscal_year as year_propose,\n    erd.offered_royal_decoration,\n    emp.date_of_birth,\n    CONCAT(\n    TIMESTAMPDIFF(YEAR, emp.date_of_birth, CURDATE()), ' \u0e1b\u0e35 ',\n    TIMESTAMPDIFF(MONTH, emp.date_of_birth, CURDATE()) %% 12, ' \u0e40\u0e14\u0e37\u0e2d\u0e19 ',\n    DATEDIFF(\n    CURDATE(),\n    DATE_ADD(\n      DATE_ADD(emp.date_of_birth, INTERVAL TIMESTAMPDIFF(YEAR, emp.date_of_birth, CURDATE()) YEAR),\n      INTERVAL TIMESTAMPDIFF(MONTH, emp.date_of_birth, CURDATE()) %% 12 MONTH\n    )\n    ), ' \u0e27\u0e31\u0e19') as age,\n    emp.date_of_joining,\n    REPLACE(REPLACE(REPLACE(emp.custom_experience_ytd, 'Years', '\u0e1b\u0e35'), 'Months', '\u0e40\u0e14\u0e37\u0e2d\u0e19'), 'Days', '\u0e27\u0e31\u0e19') as exp,\n    (\n        select fiscal_year\n        from `tabEmployee Royal Decoration`\n        where fiscal_year < %(year_propose)s\n        and employee = erd.employee\n        order by fiscal_year\n        limit 1\n    ) as fiscal_year,\n    (\n        select received_royal_decoration\n        from `tabEmployee Royal Decoration`\n        where fiscal_year < %(year_propose)s\n        and employee = erd.employee\n        order by fiscal_year\n        limit 1\n    ) as received_royal_decoration,\n    (\n        select remarks\n        from `tabEmployee Royal Decoration`\n        where fiscal_year < %(year_propose)s\n        and employee = erd.employee\n        order by fiscal_year\n        limit 1\n    ) as remarks\nfrom `tabEmployee Royal Decoration` erd\njoin `tabEmployee` emp on emp.name = erd.employee\nwhere fiscal_year = %(year_propose)s\norder by erd.employee\n",
+ "ref_doctype": "Employee Royal Decoration",
+ "report_name": "Royal Decoration Proposal",
+ "report_type": "Query Report",
+ "roles": [
+  {
+   "role": "HR Manager"
+  },
+  {
+   "role": "HR User"
+  }
+ ]
+}
