@@ -2,6 +2,10 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Employee", {
+	refresh: function (frm) {
+		// Change label of a field name using jquery
+		$("[data-fieldname='__newname']").find("label").text("Employee ID");
+	},
 	onload: function (frm) {
 		// Overview HTML
 		set_employee_basic_html(frm);
