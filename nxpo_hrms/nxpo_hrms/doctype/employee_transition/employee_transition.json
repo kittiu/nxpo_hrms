@@ -28,6 +28,8 @@
   "department",
   "directorate",
   "section_break_fjxx",
+  "employee_internal_probation",
+  "column_break_mbaf",
   "amended_from"
  ],
  "fields": [
@@ -209,12 +211,22 @@
    "options": "Company",
    "remember_last_selected_value": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "employee_internal_probation",
+   "fieldtype": "Link",
+   "label": "Employee Internal Probation",
+   "options": "Employee Internal Probation"
+  },
+  {
+   "fieldname": "column_break_mbaf",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-06-22 16:22:45.519095",
+ "modified": "2024-06-22 17:16:34.075963",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Transition",

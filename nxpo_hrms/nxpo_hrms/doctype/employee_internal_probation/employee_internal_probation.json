@@ -152,11 +152,11 @@
  "is_submittable": 1,
  "links": [
   {
-   "link_doctype": "Employee Transfer",
-   "link_fieldname": "custom_employee_internal_probation"
+   "link_doctype": "Employee Transition",
+   "link_fieldname": "employee_internal_probation"
   }
  ],
- "modified": "2024-06-20 22:33:57.252045",
+ "modified": "2024-06-22 17:17:23.094795",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Internal Probation",
