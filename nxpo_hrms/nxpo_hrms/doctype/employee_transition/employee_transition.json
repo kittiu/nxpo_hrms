@@ -1,0 +1,251 @@
+{
+ "actions": [],
+ "autoname": "format:HR-TS-{####}",
+ "creation": "2024-06-20 19:46:13.826537",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "employee_name",
+  "previous_transition",
+  "previous_designation",
+  "previous_business_unit",
+  "previous_subdepartment",
+  "previous_department",
+  "previous_directorate",
+  "column_break_lghi",
+  "company",
+  "transition_type",
+  "transition_date",
+  "set_end_date_manually",
+  "end_date",
+  "duration",
+  "new_section",
+  "designation",
+  "business_unit",
+  "column_break_qvur",
+  "subdepartment",
+  "department",
+  "directorate",
+  "section_break_fjxx",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_fjxx",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Employee Transition",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_lghi",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "transition_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Transition Date",
+   "reqd": 1
+  },
+  {
+   "default": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07",
+   "fieldname": "transition_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Transition Type",
+   "options": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\n\u0e42\u0e2d\u0e19\u0e22\u0e49\u0e32\u0e22",
+   "reqd": 1
+  },
+  {
+   "fieldname": "previous_transition",
+   "fieldtype": "Link",
+   "label": "Previous Transition",
+   "options": "Employee Transition",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.docstatus==1",
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "mandatory_depends_on": "eval:doc.set_end_date_manually",
+   "read_only_depends_on": "eval:!doc.set_end_date_manually"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "duration",
+   "fieldtype": "Data",
+   "label": "Duration",
+   "read_only": 1
+  },
+  {
+   "fieldname": "new_section",
+   "fieldtype": "Section Break",
+   "label": "Transition To"
+  },
+  {
+   "fieldname": "column_break_qvur",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "previous_designation",
+   "fieldtype": "Link",
+   "label": "Previous Designation",
+   "options": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Designation",
+   "options": "Designation",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "subdepartment.parent_department",
+   "fetch_if_empty": 1,
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "allow_on_submit": 1,
+   "default": "0",
+   "description": "By default, end date will be set by the next transition.<br>\nSelect this if you want to set it manually.",
+   "fieldname": "set_end_date_manually",
+   "fieldtype": "Check",
+   "label": "Set End Date Manually"
+  },
+  {
+   "description": "Smallest unit to transit, Sub-Department / Department / Directorate.",
+   "fieldname": "business_unit",
+   "fieldtype": "Link",
+   "label": "Business Unit",
+   "options": "Department",
+   "reqd": 1
+  },
+  {
+   "fieldname": "subdepartment",
+   "fieldtype": "Link",
+   "label": "Sub-Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "department.parent_department",
+   "fetch_if_empty": 1,
+   "fieldname": "directorate",
+   "fieldtype": "Link",
+   "label": "Directorate",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "previous_business_unit",
+   "fieldtype": "Link",
+   "label": "Previous Business Unit",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "previous_subdepartment",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Previous Subdepartment",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "previous_department",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Previous Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "previous_directorate",
+   "fieldtype": "Link",
+   "hidden": 1,
+   "label": "Previous Directorate",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "links": [],
+ "modified": "2024-06-22 16:22:45.519095",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Employee Transition",
+ "naming_rule": "Expression",
+ "nsm_parent_field": "parent_employee_transition",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "export": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR User",
+   "submit": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

@@ -125,7 +125,7 @@
    "hidden": 0,
    "is_query_report": 0,
    "label": "Reports",
-   "link_count": 7,
+   "link_count": 8,
    "link_type": "DocType",
    "onboard": 0,
    "type": "Card Break"
@@ -199,9 +199,19 @@
    "link_type": "Report",
    "onboard": 0,
    "type": "Link"
+  },
+  {
+   "hidden": 0,
+   "is_query_report": 1,
+   "label": "Employee Work History",
+   "link_count": 0,
+   "link_to": "Employee Work History",
+   "link_type": "Report",
+   "onboard": 0,
+   "type": "Link"
   }
  ],
- "modified": "2024-06-14 15:55:38.617903",
+ "modified": "2024-06-22 15:05:52.029773",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "NXPO HR",

@@ -10,6 +10,7 @@ ECM_TO_FRAPPE = {
     "lname_en": "custom_last_name_en",
     "gender": "gender",
     "house_no": "custom_house_no",
+    "soi": "custom_soi",
     "street": "custom_street",
     "subdistrict": "custom_subdistrict",
     "district": "custom_district",
@@ -67,6 +68,7 @@ def _sql_employee():
             emp.cell_number as CURRENT_TEL,
             emp.company_email as EMAIL,  # Company Email is not in ECM
             emp.custom_house_no as CURRENT_ADDRESS,
+            emp.custom_soi as CURRENT_SOI,
             emp.custom_street as CURRENT_ROAD,
             emp.custom_subdistrict as DISTRICT_NAME,
             emp.custom_district as AMPHUR_NAME,

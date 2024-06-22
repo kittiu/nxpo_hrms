@@ -48,7 +48,8 @@
    "in_list_view": 1,
    "label": "Employee",
    "options": "Employee",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fieldname": "section_break_stjx",
@@ -155,7 +156,7 @@
    "link_fieldname": "custom_employee_internal_probation"
   }
  ],
- "modified": "2024-06-19 11:26:07.182874",
+ "modified": "2024-06-20 22:33:57.252045",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Internal Probation",

@@ -19,7 +19,8 @@
    "in_standard_filter": 1,
    "label": "Employee",
    "options": "Employee",
-   "reqd": 1
+   "reqd": 1,
+   "search_index": 1
   },
   {
    "fetch_from": "employee.employee_name",
@@ -58,7 +59,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-19 11:27:58.496252",
+ "modified": "2024-06-20 22:33:31.523673",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Disciplinary Violation",
