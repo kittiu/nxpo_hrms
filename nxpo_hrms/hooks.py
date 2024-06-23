@@ -105,20 +105,6 @@ fixtures = [
 #                 "name",
 #                 "in",
 #                 (
-#                     "Employee Transfer-custom_notify_users_by_email",
-#                     "Employee Transfer-custom_transfer_activities",
-#                     "Employee Transfer-custom_employee_transfer_template",
-#                     "Employee Transfer-custom_section_activities",
-#                     "Employee Transfer-custom_project",
-#                     "Employee Transfer-custom_transition_status",
-#                     "Employee Transfer-custom_auto_submit",
-#                     "Employee Promotion-custom_employee_promotion_template",
-#                     "Employee Promotion-custom_project",
-#                     "Employee Promotion-custom_transition_status",
-#                     "Employee Promotion-custom_notify_users_by_email",
-#                     "Employee Promotion-custom_section_activities",
-#                     "Employee Promotion-custom_promotion_activities",
-#                     "Employee Promotion-custom_auto_submit",
 #                     "Employee-custom_probation_days",
 #                     "Employee-custom_date_pass_probation",
 #                     "Employee-custom_summary",
@@ -173,14 +159,8 @@ fixtures = [
 
 # include js in doctype views
 doctype_js = {
-    "Employee Promotion": "public/js/employee_promotion.js",
-    "Employee Transfer": "public/js/employee_transfer.js",
     "Employee": "public/js/employee.js",
     "Salary Structure Assignment": "public/js/salary_structure_assignment.js",
-}
-doctype_list_js = {
-    "Employee Promotion": "public/js/employee_promotion_list.js",
-    "Employee Transfer": "public/js/employee_transfer_list.js"
 }
 doctype_tree_js = {
     "Department" : "public/js/department_tree.js"
@@ -278,25 +258,6 @@ override_doctype_class = {
 # Hook on document methods and events
 
 doc_events = {
-    "Employee Promotion": {
-        "validate": "nxpo_hrms.custom.employee_transition.remove_task_from_activities",
-        "on_submit": "nxpo_hrms.custom.employee_transition.create_project",
-        "on_cancel": "nxpo_hrms.custom.employee_transition.delete_project_task",
-        "on_update_after_submit": "nxpo_hrms.custom.employee_transition.create_task_and_notify_user",
-    },
-    "Employee Transfer": {
-        "validate": [
-            "nxpo_hrms.custom.employee_transition.remove_task_from_activities",
-            "nxpo_hrms.custom.employee_transition.check_employee_internal_probation",
-        ],
-        "on_submit": "nxpo_hrms.custom.employee_transition.create_project",
-        "on_cancel": "nxpo_hrms.custom.employee_transition.delete_project_task",
-        "on_update_after_submit": "nxpo_hrms.custom.employee_transition.create_task_and_notify_user",
-    },
-    "Project": {
-        "validate": "nxpo_hrms.custom.employee_transition.update_employee_transition_status"
-    },
-    "Task": {"on_update": "nxpo_hrms.custom.employee_transition.update_task"},
     "Employee": {
         "validate": [
             "nxpo_hrms.custom.employee.update_employee_data",
@@ -324,22 +285,10 @@ doc_events = {
 # ---------------
 
 scheduler_events = {
-    # "all": [
-    #     "nxpo_hrms.custom.employee_transition.auto_submit"
-    # ],
     "daily": [
         "nxpo_hrms.nxpo_hrms.doctype.wfh_request.wfh_request.auto_create_attendance_requests",
         "nxpo_hrms.nxpo_hrms.doctype.employee_special_assignment.employee_special_assignment.job_update_active",
     ],
-    "hourly": [
-        "nxpo_hrms.custom.employee_transition.auto_submit"
-    ],
-    # "weekly": [
-    # 	"nxpo_hrms.tasks.weekly"
-    # ],
-    # "monthly": [
-    # 	"nxpo_hrms.tasks.monthly"
-    # ],
 }
 
 # Testing
