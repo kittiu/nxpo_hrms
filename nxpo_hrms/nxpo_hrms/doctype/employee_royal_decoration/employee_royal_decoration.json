@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "autoname": "autoincrement",
  "creation": "2024-06-17 09:05:43.706815",
  "doctype": "DocType",
@@ -87,7 +88,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-20 22:33:17.002928",
+ "modified": "2024-06-23 11:22:12.794937",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Royal Decoration",

@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "autoname": "autoincrement",
  "creation": "2024-06-13 13:38:38.707584",
  "default_view": "List",
@@ -136,7 +137,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-20 22:33:04.619190",
+ "modified": "2024-06-23 11:21:52.004574",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Tailor Tracker",

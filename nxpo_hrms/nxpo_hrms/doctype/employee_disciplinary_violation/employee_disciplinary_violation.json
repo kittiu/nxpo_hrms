@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "autoname": "autoincrement",
  "creation": "2024-06-19 11:16:30.611046",
  "doctype": "DocType",
@@ -59,7 +60,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-20 22:33:31.523673",
+ "modified": "2024-06-23 11:24:49.211573",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Disciplinary Violation",

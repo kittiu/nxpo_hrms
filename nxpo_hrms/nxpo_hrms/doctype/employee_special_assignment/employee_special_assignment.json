@@ -1,0 +1,178 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2024-06-23 10:19:36.016746",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "company",
+  "employee",
+  "employee_name",
+  "column_break_oqxr",
+  "assignment_type",
+  "from_date",
+  "to_date",
+  "duration",
+  "active",
+  "assignment_section",
+  "designation",
+  "business_unit",
+  "column_break_lvvh",
+  "subdepartment",
+  "department",
+  "directorate"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1,
+   "search_index": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_oqxr",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date"
+  },
+  {
+   "fieldname": "assignment_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Assignment Type",
+   "options": "\n\u0e23\u0e31\u0e01\u0e29\u0e32\u0e01\u0e32\u0e23\n\u0e23\u0e31\u0e01\u0e29\u0e32\u0e01\u0e32\u0e23\u0e41\u0e17\u0e19\n\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e2b\u0e19\u0e49\u0e32\u0e0a\u0e48\u0e27\u0e22",
+   "reqd": 1
+  },
+  {
+   "fieldname": "assignment_section",
+   "fieldtype": "Section Break",
+   "label": "Assignment"
+  },
+  {
+   "fieldname": "designation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Designation",
+   "options": "Designation",
+   "reqd": 1
+  },
+  {
+   "description": "Smallest unit to transit, Sub-Department / Department / Directorate.",
+   "fieldname": "business_unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Business Unit",
+   "options": "Department",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_lvvh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "subdepartment",
+   "fieldtype": "Link",
+   "label": "Sub-Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fieldname": "directorate",
+   "fieldtype": "Link",
+   "label": "Directorate",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "Assignment is active if it fall between From Date / To Date",
+   "fieldname": "active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Active",
+   "read_only": 1
+  },
+  {
+   "fieldname": "duration",
+   "fieldtype": "Data",
+   "label": "Duration",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-06-23 12:29:25.160585",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Employee Special Assignment",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "HR User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "show_title_field_in_link": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "employee_name",
+ "track_changes": 1
+}

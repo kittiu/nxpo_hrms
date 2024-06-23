@@ -1,6 +1,6 @@
 # Copyright (c) 2024, Ecosoft and contributors
 # For license information, please see license.txt
-
+ 
 import frappe
 from frappe import _
 from frappe.model.document import Document
@@ -185,7 +185,7 @@ class EmployeeTransition(Document):
 				department = business_unit
 				directorate = frappe.db.get_value("Department", department, "parent_department")
 			if type == "กลุ่มงาน":
-				directorate = self.business_unit
+				directorate = business_unit
 		return frappe._dict({
 			"subdepartment": subdepartment,
 			"department": department,

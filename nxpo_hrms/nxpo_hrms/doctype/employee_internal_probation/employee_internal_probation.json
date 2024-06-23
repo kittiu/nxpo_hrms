@@ -1,5 +1,6 @@
 {
  "actions": [],
+ "allow_import": 1,
  "allow_rename": 1,
  "autoname": "format:HR-IP-{###}",
  "creation": "2024-04-26 15:29:52.347492",
@@ -156,7 +157,7 @@
    "link_fieldname": "employee_internal_probation"
   }
  ],
- "modified": "2024-06-22 17:17:23.094795",
+ "modified": "2024-06-23 11:25:11.071332",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Internal Probation",
