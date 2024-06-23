@@ -9,7 +9,9 @@ frappe.ui.form.on("Employee", {
 	onload: function (frm) {
 		// Overview HTML
 		set_employee_basic_html(frm);
-		set_employee_property_history_html(frm);
+		set_employee_transition_html(frm);
+		set_external_work_html(frm);
+		set_education_html(frm);
 	},
 	setup: function(frm) {
 		frm.set_query("custom_subdepartment", function() {
@@ -66,14 +68,41 @@ function set_employee_basic_html(frm) {
 	});
 }
 
-function set_employee_property_history_html(frm) {
+function set_employee_transition_html(frm) {
 	frappe.call({
-		method: "nxpo_hrms.custom.employee.get_employee_property_history_html",
+		method: "nxpo_hrms.custom.employee.get_employee_transition_html",
 		args: {
-			employee: frm.doc,
+			employee: frm.doc.name,
 		},
 		callback: (r) => {
-			frm.get_field("custom_property_history_html").$wrapper.html(r.message);
+			console.log(r.message)
+			frm.get_field("custom_employee_transition_html").$wrapper.html(r.message);
+		},
+	});
+}
+
+function set_external_work_html(frm) {
+	frappe.call({
+		method: "nxpo_hrms.custom.employee.get_external_work_html",
+		args: {
+			employee: frm.doc.name,
+		},
+		callback: (r) => {
+			console.log(r.message)
+			frm.get_field("custom_external_work_html").$wrapper.html(r.message);
+		},
+	});
+}
+
+function set_education_html(frm) {
+	frappe.call({
+		method: "nxpo_hrms.custom.employee.get_education_html",
+		args: {
+			employee: frm.doc.name,
+		},
+		callback: (r) => {
+			console.log(r.message)
+			frm.get_field("custom_education_html").$wrapper.html(r.message);
 		},
 	});
 }

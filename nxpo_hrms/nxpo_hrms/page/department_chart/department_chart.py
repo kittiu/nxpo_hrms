@@ -31,7 +31,6 @@ def get_children(parent=None, company=None, exclude_node=None):
 	)
 
 	for department in departments:
-		print('department', department)
 		department.connections = get_connections(department.id, department.lft, department.rgt)
 		department.expandable = bool(department.connections)
 

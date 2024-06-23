@@ -23,6 +23,22 @@ class EmployeeNXPO(EmployeeMaster):
         )
         return custom_experience_ytd
 
+    @property
+    def custom_business_unit(self):
+        names = []
+        if self.custom_subdepartment:
+            names.append(frappe.get_value(
+                "Department", self.custom_subdepartment, "department_name", cache=True
+            ))
+        if self.department:
+            names.append(frappe.get_value(
+                "Department", self.department, "department_name", cache=True
+            ))
+        if self.custom_directorate:
+            names.append(frappe.get_value(
+                "Department", self.custom_directorate, "department_name", cache=True
+            ))
+        return ", ".join(names)
 
 def update_employee_data(doc, method=None):
     # Date pass probation
@@ -39,6 +55,7 @@ def update_employee_data(doc, method=None):
 def update_current_address(doc, method=None):
     addrs = [
         doc.custom_house_no,
+        doc.custom_soi,
         doc.custom_street,
         doc.custom_subdistrict,
         doc.custom_district,
@@ -54,39 +71,71 @@ def get_employee_basic_html(employee):
     return frappe.render_template("nxpo_hrms/custom/employee/basic.html", {"data": data})
 
 @frappe.whitelist()
-def get_employee_property_history_html(employee):
-    employee = json.loads(employee)
-    employee = employee["name"]
-    docs = []
-    doctypes = {"Employee Transfer": "transfer_date", "Employee Promotion": "promotion_date"}
-    for doctype, docfield in doctypes.items():
-        docs += frappe.get_all(
-            doctype,
-            filters={
-                "docstatus": 1,
-                "employee": employee,
-            },
-            fields=["name", docfield],
-            as_list=True
-        )
-    docs = dict(docs)
-    data = frappe.get_all(
-            "Employee Property History",
-            filters={
-                "parent": ["in", docs.keys()],
-            },
-            fields=["parenttype", "parent", "property", "current", "new"]
-        )
-    for d in data:
-        d["date"] = docs[d["parent"]]
-    data = sorted(data, key=lambda x: (x["date"], x["property"], x["parent"]))
-    # remove date when same as previous for readability
-    result = []
-    prev_date = False
-    for d in data:
-        if d["date"] == prev_date:
-            d["date"] = False
-        else:
-            prev_date = d["date"]
-        result.append(d)
-    return frappe.render_template("nxpo_hrms/custom/employee/property_history.html", {"data": data})
+def get_employee_transition_html(employee):
+    trans = frappe.get_all(
+        "Employee Transition",
+        fields=[
+            "employee",
+            "department",
+            "directorate",
+            "designation",
+            "transition_date as from_date",
+            "end_date as to_date",
+        ],
+        filters={
+            "docstatus": 1,
+            "employee": employee,
+        },
+        order_by="employee, transition_date desc",
+    )
+    for rec in trans:
+        rec["directorate"] = frappe.get_value(
+			"Department",
+			rec["directorate"],
+			"department_name",  # To remove - N suffix
+			cache=True
+		)
+        rec["department"] = frappe.get_value(
+			"Department",
+			rec["department"],
+			"department_name",  # To remove - N suffix
+			cache=True
+		)
+    return frappe.render_template("nxpo_hrms/custom/employee/employee_transition.html", {"data": trans})
+
+@frappe.whitelist()
+def get_external_work_html(employee):
+    externals = frappe.get_all(
+        "Employee External Work History",
+        fields=[
+            "parent as employee",
+            "company_name as company",
+            "designation",
+            "custom_date_joining as from_date",
+            "custom_relieving_date as to_date",
+        ],
+        filters={
+            "parent": employee
+        },
+        order_by="parent, custom_date_joining desc",
+    )
+    return frappe.render_template("nxpo_hrms/custom/employee/external_work.html", {"data": externals})
+
+
+@frappe.whitelist()
+def get_education_html(employee):
+    educations = frappe.get_all(
+        "Employee Education",
+        fields=[
+            "school_univ as school",
+            "custom_degree as degree",
+            "custom_major as major",
+            "custom_year_of_admission as admission_year",
+        ],
+        filters={
+            "parent": employee
+        },
+        order_by="parent, custom_year_of_admission desc",
+    )
+    return frappe.render_template("nxpo_hrms/custom/employee/education.html", {"data": educations})
+

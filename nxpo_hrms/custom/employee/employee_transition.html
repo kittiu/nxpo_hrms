@@ -1,0 +1,24 @@
+
+<h4><u>ประวัติการทำงานภายใน</u></h4>
+<table class="table table-bordered table-condensed">
+	<thead style="background-color: lightseagreen;">
+		<tr>
+			<th>กลุ่มงาน</th>
+			<th>ฝ่ายงาน</th>
+			<th>ตำแหน่ง</th>
+			<th>เริ่มต้น</th>
+			<th>สิ้นสุด</th>
+		</tr>
+	</thead>
+	<tbody>
+		{%- for d in data -%}
+		<tr>
+			<td class="value">{{ d.directorate or "" }}</td>
+			<td class="value">{{ d.department or "" }}</td>
+			<td class="value">{{ d.designation or "" }}</td>
+			<td class="value">{{ frappe.format(d.from_date, "Date") or ""}}</td>
+			<td class="value">{{ frappe.format(d.to_date, "Date") or "ปัจจุบัน" }}</td>
+		</tr>
+		{%- endfor -%}
+	</tbody>
+</table>
