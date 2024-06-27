@@ -29,9 +29,9 @@
   "department",
   "directorate",
   "section_break_fjxx",
-  "employee_internal_probation",
+  "amended_from",
   "column_break_mbaf",
-  "amended_from"
+  "employee_internal_probation"
  ],
  "fields": [
   {
@@ -227,7 +227,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-06-23 11:21:16.980949",
+ "modified": "2024-06-27 18:00:45.168374",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Transition",

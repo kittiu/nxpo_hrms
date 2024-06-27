@@ -277,6 +277,7 @@ doc_events = {
     },
     "Department": {
         "validate": "nxpo_hrms.custom.department.validate_department",
+        "on_update": "nxpo_hrms.custom.department.reset_approval_role",
     }
 
 }
@@ -299,9 +300,9 @@ scheduler_events = {
 # Overriding Methods
 # ------------------------------
 #
-# override_whitelisted_methods = {
-# 	"erpnext.setup.doctype.department.department.get_children": "nxpo_hrms.custom.department.get_children"
-# }
+override_whitelisted_methods = {
+    "frappe.core.doctype.user.user.get_all_roles": "nxpo_hrms.custom.user.get_all_roles",
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
