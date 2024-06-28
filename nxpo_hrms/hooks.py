@@ -277,7 +277,9 @@ doc_events = {
     },
     "Department": {
         "validate": "nxpo_hrms.custom.department.validate_department",
-        "on_update": "nxpo_hrms.custom.department.reset_approval_role",
+    },
+    "User": {
+        "on_update": "nxpo_hrms.custom.user.reset_user_own_role",
     }
 
 }
