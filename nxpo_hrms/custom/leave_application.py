@@ -44,38 +44,35 @@ def get_leave_approvers(leave):
     For leave type = อื่นๆ, approvers are
     1. Employee's Leave Approver
     """
-    role_dept_chief = None
-    role_dir_chief = None
-    role_dir_assist = None
-    role_leave_approver = None
+    approvers = []
     employee = frappe.get_doc("Employee", leave.employee)
-    # ลาพักผ่อน
-    if leave.leave_type == "ลาพักผ่อน":
+    # Case Multi Level Approval
+    multi_level_types = frappe.get_all("Leave Type", filters={"custom_multi_level_approval": 1}, pluck="name")
+    if leave.leave_type in multi_level_types:
         if employee.department:
             department = frappe.get_doc("Department", employee.department)
-            role_dept_chief = get_employee_role(department.custom_chief, department.custom_chief_name)
+            if department.custom_chief != doc.employee: # Skip if Employee is Department Chief
+                role_dept_chief = get_employee_role(department.custom_chief, department.custom_chief_name)
+                approvers.append(("ผู้อำนวยการฝ่ายงาน", role_dept_chief))
         if employee.custom_directorate:
             directorate = frappe.get_doc("Department", employee.custom_directorate)
-            role_dir_chief = get_employee_role(directorate.custom_chief, directorate.custom_chief_name)
-            role_dir_assist = get_employee_role(directorate.custom_assistant, directorate.custom_assistant_name)
-        else: # for CEO only, use leave approver
-            role_leave_approver = "{}{}".format(OWN_ROLE_PREFIX, employee.leave_approver)
-    # Others
-    else:
+            # Add only assitant and chief is not this employee
+            if directorate.custom_assistant != doc.employee and directorate.custom_chief != doc.employee:
+                role_dir_assist = get_employee_role(directorate.custom_assistant, directorate.custom_assistant_name)
+                approvers.append(("ผู้ช่วยผู้อำนวยการกลุ่มงาน", role_dir_assist))
+            if directorate.custom_chief != doc.employee:
+                role_dir_chief = get_employee_role(directorate.custom_chief, directorate.custom_chief_name)
+                approvers.append(("ผู้อำนวยการกลุ่มงาน", role_dir_chief))
+        approvers = filter(lambda x: x[1], approvers)
+    # Else Single Level Approval or CEO, Heads that has no approvers
+    if not approvers:
         if not employee.leave_approver:
             frappe.throw(_("No Leave Approver setup for {}: {}").format(
                 get_link_to_form("Employee", employee.name),
                 employee.employee_name
             ))
         role_leave_approver = "{}{}".format(OWN_ROLE_PREFIX, employee.leave_approver)
-    # Set approvers table
-    approvers = [
-        ("ผู้อำนวยการฝ่ายงาน", role_dept_chief),
-        ("ผู้ช่วยผู้อำนวยการกลุ่มงาน", role_dir_assist),
-        ("ผู้อำนวยการกลุ่มงาน", role_dir_chief),
-        ("ผู้อนุมัติการลาของพนักงาน", role_leave_approver)
-    ]
-    approvers = filter(lambda x: x[1], approvers)
+        approvers.append(("ผู้อนุมัติการลาของพนักงาน", role_leave_approver))
     return approvers
 
 
