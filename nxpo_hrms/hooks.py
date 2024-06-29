@@ -20,6 +20,32 @@ pp.get_period_factor = custom_pp.get_period_factor
 
 fixtures = [
     {
+        "doctype": "Workflow State",
+        "filters": [
+            [
+                "name",
+                "in",
+                (
+                    "Pending Approval",
+                    "Pending Approval 1",
+                    "Pending Approval 2",
+                )
+            ]
+        ]
+    },
+    {
+        "doctype": "Workflow",
+        "filters": [
+            [
+                "name",
+                "in",
+                (
+                    "NXPO Leave Application",
+                )
+            ]
+        ]
+    },
+    {
         "doctype": "Recruitment Type",
         "filters": [
             [
@@ -279,7 +305,11 @@ doc_events = {
         "validate": "nxpo_hrms.custom.department.validate_department",
     },
     "User": {
-        "on_update": "nxpo_hrms.custom.user.reset_user_own_role",
+        "on_update": "nxpo_hrms.custom.user.create_user_own_role",
+    },
+    "Leave Application": {
+        "validate": "nxpo_hrms.custom.leave_application.compute_approvers",
+        "on_update": "nxpo_hrms.custom.leave_application.share_to_approvers",
     }
 
 }
