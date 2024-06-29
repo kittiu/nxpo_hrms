@@ -4,11 +4,26 @@
   "doctype": "Workflow",
   "document_type": "Leave Application",
   "is_active": 1,
-  "modified": "2024-06-29 17:21:40.448939",
+  "modified": "2024-06-29 18:37:24.513397",
   "name": "NXPO Leave Application",
   "override_status": 0,
   "send_email_alert": 0,
   "states": [
+   {
+    "allow_edit": "Employee",
+    "avoid_status_override": 0,
+    "doc_status": "0",
+    "is_optional_state": 0,
+    "message": null,
+    "next_action_email_template": null,
+    "parent": "NXPO Leave Application",
+    "parentfield": "states",
+    "parenttype": "Workflow",
+    "state": "Open",
+    "update_field": null,
+    "update_value": null,
+    "workflow_builder_id": null
+   },
    {
     "allow_edit": "HR User",
     "avoid_status_override": 0,
@@ -86,6 +101,21 @@
    }
   ],
   "transitions": [
+   {
+    "action": "Submit",
+    "allow_self_approval": 1,
+    "allowed": "Employee",
+    "condition": null,
+    "custom_role": "Employee",
+    "custom_role_formula": null,
+    "custom_use_role_formula": 0,
+    "next_state": "Pending Approval",
+    "parent": "NXPO Leave Application",
+    "parentfield": "transitions",
+    "parenttype": "Workflow",
+    "state": "Open",
+    "workflow_builder_id": null
+   },
    {
     "action": "Approve",
     "allow_self_approval": 1,
