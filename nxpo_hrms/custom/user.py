@@ -33,7 +33,8 @@ def create_user_own_role(user, method):
 		{"role_name": "{}{}".format(OWN_ROLE_PREFIX, user.name)},
 		"role_name"
 	)
-	if own_role:  # Already exists
+	if own_role:  # Already exists, just make sure user has it
+		user.append_roles(own_role)
 		return
 	# Create
 	own_role = "{}{}".format(OWN_ROLE_PREFIX, user.name)
@@ -43,5 +44,5 @@ def create_user_own_role(user, method):
 	})
 	role.insert(ignore_permissions=True)
 	# Assign
-	user.add_roles(role.name)
+	user.append_roles(role.name)
 

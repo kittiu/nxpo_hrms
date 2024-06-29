@@ -305,7 +305,7 @@ doc_events = {
         "validate": "nxpo_hrms.custom.department.validate_department",
     },
     "User": {
-        "on_update": "nxpo_hrms.custom.user.create_user_own_role",
+        "validate": "nxpo_hrms.custom.user.create_user_own_role",
     },
     "Leave Application": {
         "validate": "nxpo_hrms.custom.leave_application.compute_approvers",
