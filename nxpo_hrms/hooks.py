@@ -187,6 +187,7 @@ fixtures = [
 doctype_js = {
     "Employee": "public/js/employee.js",
     "Salary Structure Assignment": "public/js/salary_structure_assignment.js",
+    "Leave Allocation": "public/js/leave_allocation.js",
 }
 doctype_tree_js = {
     "Department" : "public/js/department_tree.js"
@@ -277,6 +278,7 @@ jinja = {
 override_doctype_class = {
 	"Employee": "nxpo_hrms.custom.employee.EmployeeNXPO",
 	"Salary Structure Assignment": "nxpo_hrms.custom.salary_structure_assignment.SalaryStructureAssignmentNXPO",
+    "Leave Allocation": "nxpo_hrms.custom.leave_allocation.LeaveAllocationNXPO",
 }
 
 # Document Events
