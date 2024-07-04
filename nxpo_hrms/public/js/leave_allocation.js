@@ -8,7 +8,6 @@ frappe.ui.form.on("Leave Allocation", {
 			frm.toggle_display("custom_total_unused_leave", false);
 		}else{
 			if (frm.doc.custom_is_add_unused_leave) {
-				// frm.set_df_property('custom_add_unused_leave', "read_only", 1);
 				frm.toggle_display("custom_add_unused_leave", false);
 				frm.toggle_display("custom_cancel_unused_leave", true);
 			}else{
@@ -22,8 +21,7 @@ frappe.ui.form.on("Leave Allocation", {
 	custom_add_unused_leave: function(frm) {
 		if (!frm.doc.custom_is_add_unused_leave) {
 			frm.call({
-				doc: frm.doc,
-				method: 'get_leave_ledger',
+				method: 'nxpo_hrms.custom.leave_allocation.get_unused_leave',
 				args: {
 					data: frm.doc
 				},
