@@ -15,7 +15,7 @@
 			<td class="value">{{ d.company or "" }}</td>
 			<td class="value">{{ d.designation or "" }}</td>
 			<td class="value">{{ frappe.format(d.from_date, "Date") or ""}}</td>
-			<td class="value">{{ frappe.format(d.to_date, "Date") or "ปัจจุบัน" }}</td>
+			<td class="value">{{ frappe.format(d.to_date, "Date") or "" }}</td>
 		</tr>
 		{%- endfor -%}
 	</tbody>
