@@ -51,16 +51,16 @@ def get_leave_approvers(leave):
     if leave.leave_type in multi_level_types:
         if employee.department:
             department = frappe.get_doc("Department", employee.department)
-            if department.custom_chief != doc.employee: # Skip if Employee is Department Chief
+            if department.custom_chief != leave.employee: # Skip if Employee is Department Chief
                 role_dept_chief = get_employee_role(department.custom_chief, department.custom_chief_name)
                 approvers.append(("ผู้อำนวยการฝ่ายงาน", role_dept_chief))
         if employee.custom_directorate:
             directorate = frappe.get_doc("Department", employee.custom_directorate)
             # Add only assitant and chief is not this employee
-            if directorate.custom_assistant != doc.employee and directorate.custom_chief != doc.employee:
+            if directorate.custom_assistant != leave.employee and directorate.custom_chief != leave.employee:
                 role_dir_assist = get_employee_role(directorate.custom_assistant, directorate.custom_assistant_name)
                 approvers.append(("ผู้ช่วยผู้อำนวยการกลุ่มงาน", role_dir_assist))
-            if directorate.custom_chief != doc.employee:
+            if directorate.custom_chief != leave.employee:
                 role_dir_chief = get_employee_role(directorate.custom_chief, directorate.custom_chief_name)
                 approvers.append(("ผู้อำนวยการกลุ่มงาน", role_dir_chief))
         approvers = filter(lambda x: x[1], approvers)
