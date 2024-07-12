@@ -205,7 +205,7 @@
 					<th rowspan="2" style="width: 11%; text-align: right; font-size: 10px;">เงินเดือน</th>
 					<th rowspan="2" style="width: 11%;"><label style="text-align: right; font-size: 10px;">ตกเบิกเงินเดือน</label></th>
 					<th rowspan="2" style="width: 11%;"><label style="font-size: 10px;">วันที่เริ่มคิดอายุกองทุน</label></th>
-					<th colspan="3" style="width: 33%; text-align: center;"><label style="font-size: 10px;">กองทุนฯสำนักงานสมทบ</label></th>
+					<th colspan="3" style="width: 33%; text-align: center;"><label style="font-size: 10px;">กองทุนสำรองเลี้ยงชีพ</label></th>
 				</tr>
 				<tr>
 					<th style="width: 11%;"><label style="text-align: right; font-size: 10px;">พนักงานสะสม</label></th>
@@ -223,31 +223,31 @@
 						{% sum_pvd_total += row['pvd_total'] %}
 						
 						<tr>
-							<td class="text-left" style="font-size: 10px;">
+							<td class="text-left" style="font-size: 8px;">
 								{%= row['idx'] %}
 							</td>
-							<td class="text-left" style="font-size: 10px;">
+							<td class="text-left" style="font-size: 8px;">
 								{%= row['employee'] %}
 							</td>
-							<td class="text-left" style="font-size: 10px;">
+							<td class="text-left" style="font-size: 8px;">
 								{%= row['prefix'] %}
 							</td>
-							<td class="text-left" style="font-size: 10px;">
+							<td class="text-left" style="font-size: 8px;">
 								{%= row['employee_name'] %}
 							</td>
 							<td class="text-right">
-								<div class="value" style="font-size: 10px;">
-									<label style="font-size: 10px;">{%= format_number(row['salary'], null, 2) || 0.00 %}</label>
+								<div class="value" style="font-size: 8px;">
+									<label style="font-size: 8px;">{%= format_number(row['salary'], null, 2) || 0.00 %}</label>
 								</div>
 							</td>
 							<td class="text-right">
-								<div class="value" style="font-size: 10px;">
-									<label style="font-size: 10px;">{%= format_number(row['back_salary'], null, 2) || 0.00 %}</label>
+								<div class="value" style="font-size: 8px;">
+									<label style="font-size: 8px;">{%= format_number(row['back_salary'], null, 2) || 0.00 %}</label>
 								</div>
 							</td>
-							<td class="text-left" >
+							<td class="text-right" >
 								<div class="value">
-									<label style="font-size: 10px;">
+									<label style="font-size: 8px;">
 										{%= frappe.datetime.str_to_user(row['pvd_start_date']) %}
 									</label>
 								</div>
@@ -255,9 +255,9 @@
 							<td class="text-right">
 
 								<div class="value">
-									<label style="font-size: 10px;">
+									<label style="font-size: 8px;">
 										{%= format_number(row['pvd_emp'], null, 2) || 0.00 %}
-										<span style="margin-right: 7px;"></span>
+										<span style="margin-right: 3px;"></span>
 										{%= row['pvd_emp_percent'] %}%
 									</label>
 								</div>
@@ -265,15 +265,15 @@
 							</td>
 							<td class="text-right">
 								<div class="value">
-									<label style="font-size: 10px;">
+									<label style="font-size: 8px;">
 										{%= format_number(row['pvd_com'], null, 2) || 0.00 %}
-										<span style="margin-right: 7px;"></span>
+										<span style="margin-right: 3px;"></span>
 										{%=  row['pvd_com_percent'] %}%
 									</label>
 								</div>
 							</td>
 							<td class="text-right">
-								<div class="value"><label style="font-size: 10px;">{%= format_number(row['pvd_total'], null, 2) || 0.00 %}</label></div>
+								<div class="value"><label style="font-size: 8px;">{%= format_number(row['pvd_total'], null, 2) || 0.00 %}</label></div>
 							</td>
 						</tr>
 					{% } %}
@@ -286,11 +286,11 @@
 			<table class="table table-bordered table-condensed">
 				<thead>
 					<tr>
-						<th data-fieldtype="Table" style="width: 11%;"><label style="text-align: left; font-size: 10px;">รวมทั้งหมด</label></th>
-						<th colspan="5" data-fieldtype="Table" style="width: 55%;"><label style="text-align: right; font-size: 10px;">{{sum_emp}} คน</label></th>
-						<th data-fieldtype="Table" style="width: 11%;"><label style="text-align: right; font-size: 10px;">{%= format_number(sum_pvd_emp, null, 2) || 0.00 %}</label></th>
-						<th data-fieldtype="Table" style="width: 11%;"><label style="text-align: right; font-size: 10px;">{%= format_number(sum_pvd_com, null, 2) || 0.00 %}</label></th>
-						<th data-fieldtype="Table" style="width: 12%;"><label style="text-align: right; font-size: 10px;">{%= format_number(sum_pvd_total, null, 2) || 0.00 %}</label></th>
+						<th data-fieldtype="Table" style="width: 12%;"><label style="text-align: left; font-size: 8px;">รวมทั้งหมด</label></th>
+						<th colspan="5" data-fieldtype="Table" style="width: 55%;"><label style="text-align: right; font-size: 8px;">{{sum_emp}} คน</label></th>
+						<th data-fieldtype="Table" style="width: 11%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_pvd_emp, null, 2) || 0.00 %}</label></th>
+						<th data-fieldtype="Table" style="width: 11%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_pvd_com, null, 2) || 0.00 %}</label></th>
+						<th data-fieldtype="Table" style="width: 11%;"><label style="text-align: right; font-size: 8px;">{%= format_number(sum_pvd_total, null, 2) || 0.00 %}</label></th>
 					</tr>
 				</thead>
 			</table>
