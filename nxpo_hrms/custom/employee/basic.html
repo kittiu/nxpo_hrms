@@ -32,7 +32,7 @@
 				<label><b>เลขประจำตัวประชาชน:</b></label>
 			</div>
 			<div class="col-xs-7">
-				{{ data.citizen_id or "" }}
+				{{ data.custom_citizen_id or "" }}
 			</div>
 		</div>
 	</div>
@@ -55,7 +55,7 @@
 		</div>
 		<div class="row  data-field">
 			<div class="col-xs-5">
-				<label><b>ระยะเวลาทำงาน:</b></label>
+				<label><b>อายุงาน:</b></label>
 			</div>
 			<div class="col-xs-7">
 				{{ (data.custom_experience_ytd or "") | replace("Years", "ปี") | replace("Months", "เดือน") | replace("Days", "วัน") }}
@@ -105,7 +105,7 @@
 	<div class="col-xs-6 column-break">
 		<div class="row  data-field">
 			<div class="col-xs-3">
-				<label><b>ที่อยู่ถาวร:</b></label>
+				<label><b>ที่อยู่ตามบัตรประชาชน:</b></label>
 			</div>
 			<div class="col-xs-9">
 				{{ data.permanent_address or "" }}
@@ -127,7 +127,7 @@
 		</div>
 		<div class="row  data-field">
 			<div class="col-xs-5">
-				<label><b>เบอร์ติดต่อฉุกเฉิน:</b></label>
+				<label><b>เบอร์ฉุกเฉิน:</b></label>
 			</div>
 			<div class="col-xs-7">
 				{{ data.emergency_phone_number or "" }}
@@ -137,28 +137,28 @@
 	<div class="col-xs-4 column-break">
 		<div class="row  data-field">
 			<div class="col-xs-5">
-				<label><b>อีเมล์:</b></label>
-			</div>
-			<div class="col-xs-7">
-				{{ data.personal_email or "" }}
-			</div>
-		</div>
-		<div class="row  data-field">
-			<div class="col-xs-5">
-				<label><b>อีเมล์บริษัท:</b></label>
+				<label><b>อีเมลสำนักงาน:</b></label>
 			</div>
 			<div class="col-xs-7">
 				{{ data.company_email or "" }}
 			</div>
 		</div>
-	</div>
-	<div class="col-xs-4 column-break">
 		<div class="row  data-field">
 			<div class="col-xs-5">
 				<label><b>ชื่อผู้ติดต่อ:</b></label>
 			</div>
 			<div class="col-xs-7">
 				{{ data.person_to_be_contacted or "" }}
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-4 column-break">
+		<div class="row  data-field">
+			<div class="col-xs-5">
+				<label><b>อีเมลส่วนตัว:</b></label>
+			</div>
+			<div class="col-xs-7">
+				{{ data.personal_email or "" }}
 			</div>
 		</div>
 		<div class="row  data-field">

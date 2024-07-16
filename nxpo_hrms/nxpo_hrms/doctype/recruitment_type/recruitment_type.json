@@ -7,7 +7,8 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "recruitment_type"
+  "recruitment_type",
+  "description"
  ],
  "fields": [
   {
@@ -15,11 +16,16 @@
    "fieldtype": "Data",
    "label": "Recruitment Type",
    "unique": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Text",
+   "label": "Description"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-04-26 14:38:38.905878",
+ "modified": "2024-07-15 15:24:48.530044",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Recruitment Type",
