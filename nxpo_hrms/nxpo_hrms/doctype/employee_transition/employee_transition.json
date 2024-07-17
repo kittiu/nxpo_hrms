@@ -130,6 +130,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Designation",
+   "link_filters": "[[\"Designation\",\"custom_disabled\",\"=\",0]]",
    "options": "Designation",
    "reqd": 1
   },
@@ -227,7 +228,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-06-27 18:00:45.168374",
+ "modified": "2024-07-17 11:52:07.784655",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Transition",
