@@ -131,6 +131,7 @@ def get_education_html(employee):
             "custom_degree as degree",
             "custom_major as major",
             "custom_year_of_admission as admission_year",
+            "maj_opt_subj",
         ],
         filters={
             "parent": employee

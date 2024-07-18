@@ -5,6 +5,7 @@
 		<tr>
 			<th>สถาบันการศึกษา</th>
 			<th>ระดับการศึกษา</th>
+			<th>คณะ</th>
 			<th>สาขาวิชา</th>
 			<th>ปีการศึกษา</th>
 		</tr>
@@ -15,6 +16,7 @@
 			<td class="value">{{ d.school or "" }}</td>
 			<td class="value">{{ d.degree or "" }}</td>
 			<td class="value">{{ d.major or "" }}</td>
+			<td class="value">{{ d.maj_opt_subj or "" }}</td>
 			<td class="value">{{ d.admission_year or "" }}</td>
 		</tr>
 		{%- endfor -%}

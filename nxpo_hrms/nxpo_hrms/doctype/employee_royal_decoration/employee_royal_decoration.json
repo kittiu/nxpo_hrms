@@ -71,6 +71,7 @@
   {
    "fieldname": "remarks",
    "fieldtype": "Small Text",
+   "in_list_view": 1,
    "label": "Remarks"
   },
   {
@@ -88,7 +89,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-23 11:22:12.794937",
+ "modified": "2024-07-18 15:02:07.137724",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Royal Decoration",
