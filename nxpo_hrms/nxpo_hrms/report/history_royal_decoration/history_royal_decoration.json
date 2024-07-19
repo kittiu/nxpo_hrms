@@ -70,7 +70,7 @@
   {
    "fieldname": "fiscal_year",
    "fieldtype": "Data",
-   "label": "\u0e1b\u0e35\u0e25\u0e48\u0e32\u0e2a\u0e38\u0e14\u0e17\u0e35\u0e48\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e23\u0e32\u0e0a",
+   "label": "\u0e1b\u0e35\u0e17\u0e35\u0e48\u0e40\u0e04\u0e22\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e23\u0e32\u0e0a",
    "width": 0
   },
   {
@@ -86,7 +86,7 @@
    "width": 0
   }
  ],
- "creation": "2024-06-19 21:12:16.384581",
+ "creation": "2024-07-19 16:25:24.281471",
  "disabled": 0,
  "docstatus": 0,
  "doctype": "Report",
@@ -104,16 +104,16 @@
  "is_standard": "Yes",
  "letter_head": "NXPO",
  "letterhead": null,
- "modified": "2024-06-19 22:04:14.678737",
+ "modified": "2024-07-19 16:25:24.281471",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
- "name": "Royal Decoration Proposal",
+ "name": "History Royal Decoration",
  "owner": "Administrator",
  "prepared_report": 0,
- "query": "select emp.name as employee_code,\n    emp.employee_name,\n    emp.designation,\n    (select department_name from tabDepartment where name = emp.custom_directorate) as directorate,\n    (select department_name from tabDepartment where name = emp.department) as department,\n    erd.fiscal_year as year_propose,\n    erd.offered_royal_decoration,\n    emp.date_of_birth,\n    CONCAT(\n    TIMESTAMPDIFF(YEAR, emp.date_of_birth, CURDATE()), ' \u0e1b\u0e35 ',\n    TIMESTAMPDIFF(MONTH, emp.date_of_birth, CURDATE()) %% 12, ' \u0e40\u0e14\u0e37\u0e2d\u0e19 ',\n    DATEDIFF(\n    CURDATE(),\n    DATE_ADD(\n      DATE_ADD(emp.date_of_birth, INTERVAL TIMESTAMPDIFF(YEAR, emp.date_of_birth, CURDATE()) YEAR),\n      INTERVAL TIMESTAMPDIFF(MONTH, emp.date_of_birth, CURDATE()) %% 12 MONTH\n    )\n    ), ' \u0e27\u0e31\u0e19') as age,\n    emp.date_of_joining,\n    REPLACE(REPLACE(REPLACE(emp.custom_experience_ytd, 'Years', '\u0e1b\u0e35'), 'Months', '\u0e40\u0e14\u0e37\u0e2d\u0e19'), 'Days', '\u0e27\u0e31\u0e19') as exp,\n    (\n        select fiscal_year\n        from `tabEmployee Royal Decoration`\n        where fiscal_year < %(year_propose)s\n        and employee = erd.employee\n        order by fiscal_year desc\n        limit 1\n    ) as fiscal_year,\n    (\n        select received_royal_decoration\n        from `tabEmployee Royal Decoration`\n        where fiscal_year < %(year_propose)s\n        and employee = erd.employee\n        order by fiscal_year desc\n        limit 1\n    ) as received_royal_decoration,\n    (\n        select remarks\n        from `tabEmployee Royal Decoration`\n        where fiscal_year < %(year_propose)s\n        and employee = erd.employee\n        order by fiscal_year desc\n        limit 1\n    ) as remarks\nfrom `tabEmployee Royal Decoration` erd\njoin `tabEmployee` emp on emp.name = erd.employee\nwhere fiscal_year = %(year_propose)s\norder by erd.employee\n",
+ "query": "select emp.name as employee_code,\n    emp.employee_name,\n    emp.designation,\n    (select department_name from tabDepartment where name = emp.custom_directorate) as directorate,\n    (select department_name from tabDepartment where name = emp.department) as department,\n    erd.fiscal_year as year_propose,\n    erd.offered_royal_decoration,\n    emp.date_of_birth,\n    CONCAT(\n    TIMESTAMPDIFF(YEAR, emp.date_of_birth, CURDATE()), ' \u0e1b\u0e35 ',\n    TIMESTAMPDIFF(MONTH, emp.date_of_birth, CURDATE()) %% 12, ' \u0e40\u0e14\u0e37\u0e2d\u0e19 ',\n    DATEDIFF(\n    CURDATE(),\n    DATE_ADD(\n      DATE_ADD(emp.date_of_birth, INTERVAL TIMESTAMPDIFF(YEAR, emp.date_of_birth, CURDATE()) YEAR),\n      INTERVAL TIMESTAMPDIFF(MONTH, emp.date_of_birth, CURDATE()) %% 12 MONTH\n    )\n    ), ' \u0e27\u0e31\u0e19') as age,\n    emp.date_of_joining,\n    REPLACE(REPLACE(REPLACE(emp.custom_experience_ytd, 'Years', '\u0e1b\u0e35'), 'Months', '\u0e40\u0e14\u0e37\u0e2d\u0e19'), 'Days', '\u0e27\u0e31\u0e19') as exp,\n    (\n        select fiscal_year\n        from `tabEmployee Royal Decoration`\n        where fiscal_year < erd.fiscal_year\n        and employee = erd.employee\n        order by fiscal_year desc\n        limit 1\n    ) as fiscal_year,\n    (\n        select received_royal_decoration\n        from `tabEmployee Royal Decoration`\n        where fiscal_year < erd.fiscal_year\n        and employee = erd.employee\n        order by fiscal_year desc\n        limit 1\n    ) as received_royal_decoration,\n    (\n        select remarks\n        from `tabEmployee Royal Decoration`\n        where fiscal_year < erd.fiscal_year\n        and employee = erd.employee\n        order by fiscal_year desc\n        limit 1\n    ) as remarks\nfrom `tabEmployee Royal Decoration` erd\njoin `tabEmployee` emp on emp.name = erd.employee\nwhere fiscal_year = %(year_propose)s\norder by erd.fiscal_year desc\n",
  "ref_doctype": "Employee Royal Decoration",
- "report_name": "Royal Decoration Proposal",
- "report_type": "Query Report",
+ "report_name": "History Royal Decoration",
+ "report_type": "Script Report",
  "roles": [
   {
    "role": "HR Manager"
