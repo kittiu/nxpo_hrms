@@ -5,18 +5,19 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "company",
-  "employee",
   "employee_name",
-  "ref_doc_number",
-  "column_break_larf",
-  "designation",
-  "employee_grade",
   "department",
-  "directorate",
-  "column_break_hdnp",
   "fiscal_year",
+  "column_break_larf",
+  "employee",
+  "directorate",
+  "ref_doc_number",
+  "column_break_hdnp",
+  "designation",
+  "company",
   "grade",
+  "column_break_ybeo",
+  "employee_grade",
   "score"
  ],
  "fields": [
@@ -103,11 +104,15 @@
   {
    "fieldname": "column_break_hdnp",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ybeo",
+   "fieldtype": "Column Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-30 10:09:35.318557",
+ "modified": "2024-07-24 16:26:47.402652",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Performance",
