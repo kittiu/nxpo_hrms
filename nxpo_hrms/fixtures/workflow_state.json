@@ -7,23 +7,5 @@
   "name": "Pending Approval",
   "style": "Warning",
   "workflow_state_name": "Pending Approval"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-06-29 16:24:11.574157",
-  "name": "Pending Approval 1",
-  "style": "Warning",
-  "workflow_state_name": "Pending Approval 1"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow State",
-  "icon": "",
-  "modified": "2024-06-29 16:24:19.922920",
-  "name": "Pending Approval 2",
-  "style": "Warning",
-  "workflow_state_name": "Pending Approval 2"
  }
 ]

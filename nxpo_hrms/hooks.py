@@ -27,8 +27,6 @@ fixtures = [
                 "in",
                 (
                     "Pending Approval",
-                    "Pending Approval 1",
-                    "Pending Approval 2",
                 )
             ]
         ]
@@ -310,8 +308,8 @@ doc_events = {
         "validate": "nxpo_hrms.custom.user.create_user_own_role",
     },
     "Leave Application": {
-        "validate": "nxpo_hrms.custom.leave_application.compute_approvers",
-        "on_update": "nxpo_hrms.custom.leave_application.share_to_approvers",
+        "validate": "nxpo_hrms.custom.leave_application.compute_approver",
+        "on_update": "nxpo_hrms.custom.leave_application.share_to_approver",
     }
 
 }

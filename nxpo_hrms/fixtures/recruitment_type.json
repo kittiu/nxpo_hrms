@@ -1,5 +1,6 @@
 [
  {
+  "description": null,
   "docstatus": 0,
   "doctype": "Recruitment Type",
   "modified": "2024-04-26 14:46:07.514691",
@@ -7,6 +8,7 @@
   "recruitment_type": "สรรหา"
  },
  {
+  "description": null,
   "docstatus": 0,
   "doctype": "Recruitment Type",
   "modified": "2024-04-26 14:46:07.525476",
@@ -14,6 +16,7 @@
   "recruitment_type": "คัดเลือก"
  },
  {
+  "description": null,
   "docstatus": 0,
   "doctype": "Recruitment Type",
   "modified": "2024-04-26 14:46:07.531254",
@@ -21,6 +24,7 @@
   "recruitment_type": "ยืมตัว"
  },
  {
+  "description": null,
   "docstatus": 0,
   "doctype": "Recruitment Type",
   "modified": "2024-04-26 14:46:07.538360",
@@ -28,6 +32,7 @@
   "recruitment_type": "นักเรียนทุน"
  },
  {
+  "description": null,
   "docstatus": 0,
   "doctype": "Recruitment Type",
   "modified": "2024-04-26 14:46:07.544389",
@@ -35,6 +40,7 @@
   "recruitment_type": "แต่งตั้ง"
  },
  {
+  "description": null,
   "docstatus": 0,
   "doctype": "Recruitment Type",
   "modified": "2024-04-26 14:46:07.551217",
@@ -42,6 +48,7 @@
   "recruitment_type": "โอนย้าย"
  },
  {
+  "description": null,
   "docstatus": 0,
   "doctype": "Recruitment Type",
   "modified": "2024-04-26 14:46:07.557661",

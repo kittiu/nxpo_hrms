@@ -16,72 +16,48 @@ def get_employee_role(employee, employee_name):
     return
 
 
-def compute_approvers(doc, method):
-    doc.custom_approvers = []  # Reset table
-    for (position, approver) in get_leave_approvers(doc):
-        doc.append(
-            "custom_approvers",
-            {
-                "position": position,
-                "approver_role": approver,
-            }
-        )
-    if not doc.custom_approvers:
-        frappe.throw(_("Approvers not found for {}: {}").format(
+def compute_approver(doc, method):
+    doc.custom_approver = get_leave_approver_role(doc)
+    if not doc.custom_approver:
+        frappe.throw(_("Approver not found for {}: {}").format(
             get_link_to_form("Employee", doc.employee),
             doc.employee_name
         ))
-    doc.custom_approver_count = len(doc.custom_approvers)
 
 
-def get_leave_approvers(leave):
+def get_leave_approver_role(leave):
     """
-    For leave type = ลาพัก, approvers are
-    1. Employee's Department Chief
-    2. Employee's Directorate Assistant
-    3. Employee's Directorate Chief
-    If Employee do not have Directorate or leave type = อื่นๆ then
-    For leave type = อื่นๆ, approvers are
-    1. Employee's Leave Approver
+    * If Employee's Leave Approver is set, use it as approver role
+    * If Employee has Department, use Department Chief as approver role
+    * If Employee has Department, but is Department Chief himself, use Directorate Assistant as approver role
+    * If Employee has only Directorate, use Directorate Chief as approver role
+    * Else return None
     """
-    approvers = []
     employee = frappe.get_doc("Employee", leave.employee)
-    # Case Multi Level Approval
-    multi_level_types = frappe.get_all("Leave Type", filters={"custom_multi_level_approval": 1}, pluck="name")
-    if leave.leave_type in multi_level_types:
-        if employee.department:
-            department = frappe.get_doc("Department", employee.department)
-            if department.custom_chief != leave.employee: # Skip if Employee is Department Chief
-                role_dept_chief = get_employee_role(department.custom_chief, department.custom_chief_name)
-                approvers.append(("ผู้อำนวยการฝ่ายงาน", role_dept_chief))
-        if employee.custom_directorate:
-            directorate = frappe.get_doc("Department", employee.custom_directorate)
-            # Add only assitant and chief is not this employee
-            if directorate.custom_assistant != leave.employee and directorate.custom_chief != leave.employee:
-                role_dir_assist = get_employee_role(directorate.custom_assistant, directorate.custom_assistant_name)
-                approvers.append(("ผู้ช่วยผู้อำนวยการกลุ่มงาน", role_dir_assist))
-            if directorate.custom_chief != leave.employee:
-                role_dir_chief = get_employee_role(directorate.custom_chief, directorate.custom_chief_name)
-                approvers.append(("ผู้อำนวยการกลุ่มงาน", role_dir_chief))
-        approvers = filter(lambda x: x[1], approvers)
-    # Else Single Level Approval or CEO, Heads that has no approvers
-    if not approvers:
-        if not employee.leave_approver:
-            frappe.throw(_("No Leave Approver setup for {}: {}").format(
-                get_link_to_form("Employee", employee.name),
-                employee.employee_name
-            ))
+    if employee.leave_approver:
         role_leave_approver = "{}{}".format(OWN_ROLE_PREFIX, employee.leave_approver)
-        approvers.append(("ผู้อนุมัติการลาของพนักงาน", role_leave_approver))
-    return approvers
+        return role_leave_approver
+    # Employee has Department
+    if employee.department:
+        department = frappe.get_doc("Department", employee.department)
+        if department.custom_chief != leave.employee:
+            return get_employee_role(department.custom_chief, department.custom_chief_name)
+        directorate = frappe.get_doc("Department", employee.custom_directorate)
+        return get_employee_role(directorate.custom_assistant, directorate.custom_assistant_name)
+    # Employee has only Directorate
+    if employee.custom_directorate:
+        directorate = frappe.get_doc("Department", employee.custom_directorate)
+        if directorate.custom_chief != leave.employee:
+            return get_employee_role(directorate.custom_chief, directorate.custom_chief_name)
+    return None
 
 
-def share_to_approvers(doc, method):
+def share_to_approver(doc, method):
     # Share with approvers to allow access
-    approvers = [x.approver_role.replace(OWN_ROLE_PREFIX, "") for x in doc.custom_approvers]
+    approver = doc.custom_approver.replace(OWN_ROLE_PREFIX, "")
     shared_users = [x.user for x in frappe.share.get_users(doc.doctype, doc.name)]
     # For shared users not in approvers list, remove share
-    for user in (set(shared_users) - set(approvers)):
+    for user in (set(shared_users) - set([approver])):
         frappe.share.remove(
             doc.doctype,
             doc.name,
@@ -89,7 +65,7 @@ def share_to_approvers(doc, method):
             flags={"ignore_share_permission": True}
         )
     # For approvers not in shared users list, add share
-    for user in (set(approvers) - set(shared_users)):
+    for user in (set([approver]) - set(shared_users)):
         frappe.share.add_docshare(
             doc.doctype,
             doc.name,
@@ -97,4 +73,3 @@ def share_to_approvers(doc, method):
             read=1, write=1, submit=1, notify=0,
             flags={"ignore_share_permission": True}
         )
-
