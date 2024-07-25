@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"cj52OunfCw\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px; letter-spacing: 0.18px;\\\"><b>My Workspace</b></span>\",\"col\":12}},{\"id\":\"D1cF-XnvTL\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h3\\\">Shortcuts</span>\",\"col\":12}},{\"id\":\"BYpklKiyvu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"My Salary Slips, WHT Cert\",\"col\":3}},{\"id\":\"MZs8EaUwOq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"MrCfBZqKcC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Internal Probation\",\"col\":3}},{\"id\":\"2K5y4Zqoms\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"WFA Request\",\"col\":3}},{\"id\":\"NrX7zqfCb2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"E3zbVcyUMg\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"lqUE1DC6BP\",\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}},{\"id\":\"CzNBCpnZhJ\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
+ "content": "[{\"id\":\"cj52OunfCw\",\"type\":\"header\",\"data\":{\"text\":\"<span style=\\\"font-size: 18px; letter-spacing: 0.18px;\\\"><b>My Workspace</b></span>\",\"col\":12}},{\"id\":\"D1cF-XnvTL\",\"type\":\"paragraph\",\"data\":{\"text\":\"<span class=\\\"h3\\\">Shortcuts</span>\",\"col\":12}},{\"id\":\"BYpklKiyvu\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"My Salary Slips, WHT Cert\",\"col\":3}},{\"id\":\"MZs8EaUwOq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee\",\"col\":3}},{\"id\":\"MrCfBZqKcC\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Employee Internal Probation\",\"col\":3}},{\"id\":\"lhJx0_daCf\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"WFA Request\",\"col\":3}},{\"id\":\"NrX7zqfCb2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"E3zbVcyUMg\",\"type\":\"card\",\"data\":{\"card_name\":\"Master Data\",\"col\":4}},{\"id\":\"lqUE1DC6BP\",\"type\":\"card\",\"data\":{\"card_name\":\"Tools\",\"col\":4}},{\"id\":\"CzNBCpnZhJ\",\"type\":\"card\",\"data\":{\"card_name\":\"Reports\",\"col\":4}}]",
  "creation": "2024-04-26 14:17:10.521060",
  "custom_blocks": [],
  "docstatus": 0,
@@ -211,7 +211,7 @@
    "type": "Link"
   }
  ],
- "modified": "2024-06-22 15:05:52.029773",
+ "modified": "2024-07-25 21:23:39.814871",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "NXPO HR",

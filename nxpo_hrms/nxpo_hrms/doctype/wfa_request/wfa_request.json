@@ -1,6 +1,5 @@
 {
  "actions": [],
- "allow_rename": 1,
  "autoname": "format:WFA-{employee}-{###}",
  "creation": "2024-05-10 15:28:00.586446",
  "doctype": "DocType",
@@ -9,11 +8,9 @@
   "employee",
   "employee_name",
   "total_days",
-  "column_break_yemk",
-  "approver",
-  "approver_name",
   "column_break_jbgd",
   "company",
+  "custom_approver",
   "status",
   "section_break_csge",
   "plan_dates",
@@ -46,17 +43,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_yemk",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "approver",
-   "fieldtype": "Link",
-   "label": "Approver",
-   "options": "User",
-   "reqd": 1
-  },
-  {
    "fieldname": "note",
    "fieldtype": "Small Text",
    "label": "Note"
@@ -80,14 +66,9 @@
    "label": "Employee Name"
   },
   {
-   "fetch_from": "approver.full_name",
-   "fieldname": "approver_name",
-   "fieldtype": "Data",
-   "label": "Approver Name"
-  },
-  {
    "fieldname": "total_days",
    "fieldtype": "Int",
+   "in_list_view": 1,
    "label": "Total WFA Days",
    "read_only": 1
   },
@@ -111,7 +92,15 @@
    "in_standard_filter": 1,
    "label": "Status",
    "no_copy": 1,
-   "options": "Draft\nPending\nCompleted\nCancelled"
+   "options": "Draft\nPending\nCompleted\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "custom_approver",
+   "fieldtype": "Link",
+   "label": "Approver",
+   "options": "Role",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -122,7 +111,7 @@
    "link_fieldname": "custom_wfa_request"
   }
  ],
- "modified": "2024-05-12 01:41:36.742952",
+ "modified": "2024-07-25 22:01:31.535978",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "WFA Request",

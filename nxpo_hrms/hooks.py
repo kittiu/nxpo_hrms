@@ -27,6 +27,7 @@ fixtures = [
                 "in",
                 (
                     "Pending Approval",
+                    "Cancelled",
                 )
             ]
         ]
@@ -308,6 +309,10 @@ doc_events = {
         "validate": "nxpo_hrms.custom.user.create_user_own_role",
     },
     "Leave Application": {
+        "validate": "nxpo_hrms.custom.leave_application.compute_approver",
+        "on_update": "nxpo_hrms.custom.leave_application.share_to_approver",
+    },
+    "WFA Request": {  # Reusing exact same logic for approver as Leave Application
         "validate": "nxpo_hrms.custom.leave_application.compute_approver",
         "on_update": "nxpo_hrms.custom.leave_application.share_to_approver",
     }

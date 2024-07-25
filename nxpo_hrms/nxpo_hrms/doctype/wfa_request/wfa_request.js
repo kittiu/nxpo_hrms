@@ -16,23 +16,23 @@ frappe.ui.form.on("WFA Request", {
 		}
 	},
 
-	employee: async function (frm) {
-        if (frm.doc.employee) {
-            let e = await frappe.db.get_doc("Employee", frm.doc.employee)
-            if (e && e.leave_approver) {  // Leave Approver from Employee
-                frm.set_value("approver", e.leave_approver)
-            } else if (e.department) {  // Leave Approver from Department
-                let d = await frappe.db.get_doc("Department", e.department)
-                if (d && d.leave_approvers.length) {
-                    frm.set_value("approver", d.leave_approvers[0]["approver"])
-                }
-            } else {
-                frm.set_value("approver", null) 
-            }
-        } else {
-            frm.set_value("approver", null)
-        }
-	},
+	// employee: async function (frm) {
+    //     if (frm.doc.employee) {
+    //         let e = await frappe.db.get_doc("Employee", frm.doc.employee)
+    //         if (e && e.leave_approver) {  // Leave Approver from Employee
+    //             frm.set_value("approver", e.leave_approver)
+    //         } else if (e.department) {  // Leave Approver from Department
+    //             let d = await frappe.db.get_doc("Department", e.department)
+    //             if (d && d.leave_approvers.length) {
+    //                 frm.set_value("approver", d.leave_approvers[0]["approver"])
+    //             }
+    //         } else {
+    //             frm.set_value("approver", null) 
+    //         }
+    //     } else {
+    //         frm.set_value("approver", null)
+    //     }
+	// },
 
     add_view_attendance_button: function (frm) {
         frappe.db.get_list("Attendance Request", {
