@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:WFH-{employee}-{###}",
+ "autoname": "format:WFA-{employee}-{###}",
  "creation": "2024-05-10 15:28:00.586446",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -31,7 +31,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "WFH Request",
+   "options": "WFA Request",
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
@@ -66,11 +66,11 @@
    "fieldtype": "Section Break"
   },
   {
-   "description": "Future attendance request will be converted into WFH attendance when time arrives.",
+   "description": "Future attendance request will be converted into WFA attendance when time arrives.",
    "fieldname": "plan_dates",
    "fieldtype": "Table",
    "label": "Attendance Requests",
-   "options": "WFH Request Line",
+   "options": "WFA Request Line",
    "reqd": 1
   },
   {
@@ -88,7 +88,7 @@
   {
    "fieldname": "total_days",
    "fieldtype": "Int",
-   "label": "Total WFH Days",
+   "label": "Total WFA Days",
    "read_only": 1
   },
   {
@@ -119,13 +119,13 @@
  "links": [
   {
    "link_doctype": "Attendance Request",
-   "link_fieldname": "custom_wfh_request"
+   "link_fieldname": "custom_wfa_request"
   }
  ],
  "modified": "2024-05-12 01:41:36.742952",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
- "name": "WFH Request",
+ "name": "WFA Request",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [

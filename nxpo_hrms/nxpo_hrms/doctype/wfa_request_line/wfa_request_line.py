@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class WFHRequestLine(Document):
+class WFARequestLine(Document):
 	pass

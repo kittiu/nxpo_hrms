@@ -114,7 +114,7 @@ fixtures = [
                 "in",
                 (
                     "Company-custom_policy",
-                    "Company-custom_wfh_days_per_week",
+                    "Company-custom_wfa_days_per_week",
                 )
             ]
         ]
@@ -319,7 +319,7 @@ doc_events = {
 
 scheduler_events = {
     "daily": [
-        "nxpo_hrms.nxpo_hrms.doctype.wfh_request.wfh_request.auto_create_attendance_requests",
+        "nxpo_hrms.nxpo_hrms.doctype.wfa_request.wfa_request.auto_create_attendance_requests",
         "nxpo_hrms.nxpo_hrms.doctype.employee_special_assignment.employee_special_assignment.job_update_active",
     ],
 }

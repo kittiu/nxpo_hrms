@@ -1,7 +1,7 @@
 // Copyright (c) 2024, Ecosoft and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on("WFH Request", {
+frappe.ui.form.on("WFA Request", {
 
 	refresh: function (frm) {
         // hide [+] button from linked document
@@ -36,7 +36,7 @@ frappe.ui.form.on("WFH Request", {
 
     add_view_attendance_button: function (frm) {
         frappe.db.get_list("Attendance Request", {
-            filters: { custom_wfh_request: frm.doc.name },
+            filters: { custom_wfa_request: frm.doc.name },
             fields: ["name"]
         }).then((res) => {
             let requests = [];
@@ -44,7 +44,7 @@ frappe.ui.form.on("WFH Request", {
                 requests.push(request.name);
             });
             if (requests && requests.length) {
-                frm.add_custom_button(__("View All WFH Attendances"), function () {
+                frm.add_custom_button(__("View All WFA Attendances"), function () {
                     frappe.set_route("List", "Attendance", { attendance_request: ["in", requests] });
                 });
             }
@@ -67,7 +67,7 @@ frappe.ui.form.on("WFH Request", {
 });
 
 
-frappe.ui.form.on("WFH Request Line", {
+frappe.ui.form.on("WFA Request Line", {
 
 	from_date: function (frm, cdt, cdn) {
 		var row = locals[cdt][cdn];
