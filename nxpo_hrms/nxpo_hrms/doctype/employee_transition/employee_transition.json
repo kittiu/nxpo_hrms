@@ -9,6 +9,7 @@
   "company",
   "employee",
   "employee_name",
+  "reference_doc",
   "previous_transition",
   "previous_designation",
   "previous_business_unit",
@@ -78,12 +79,12 @@
    "reqd": 1
   },
   {
-   "default": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07",
+   "default": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e15\u0e33\u0e41\u0e2b\u0e19\u0e48\u0e07",
    "fieldname": "transition_type",
    "fieldtype": "Select",
    "in_list_view": 1,
    "label": "Transition Type",
-   "options": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\n\u0e42\u0e2d\u0e19\u0e22\u0e49\u0e32\u0e22",
+   "options": "\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e15\u0e33\u0e41\u0e2b\u0e19\u0e48\u0e07\n\u0e42\u0e2d\u0e19\u0e22\u0e49\u0e32\u0e22",
    "reqd": 1
   },
   {
@@ -223,12 +224,17 @@
   {
    "fieldname": "column_break_mbaf",
    "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "reference_doc",
+   "fieldtype": "Small Text",
+   "label": "Reference Doc."
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-07-17 11:52:07.784655",
+ "modified": "2024-07-25 11:14:03.801424",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Transition",
