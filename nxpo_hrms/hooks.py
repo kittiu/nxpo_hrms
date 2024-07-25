@@ -41,6 +41,7 @@ fixtures = [
                 "in",
                 (
                     "NXPO Leave Application",
+                    "NXPO WFA Request",
                 )
             ]
         ]
