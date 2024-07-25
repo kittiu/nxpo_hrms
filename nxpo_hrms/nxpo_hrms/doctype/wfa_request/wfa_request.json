@@ -7,10 +7,13 @@
  "field_order": [
   "employee",
   "employee_name",
+  "custom_approver",
+  "column_break_uvrv",
+  "type",
+  "development",
   "total_days",
   "column_break_jbgd",
   "company",
-  "custom_approver",
   "status",
   "section_break_csge",
   "plan_dates",
@@ -101,6 +104,25 @@
    "label": "Approver",
    "options": "Role",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_uvrv",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "label": "Type",
+   "options": "\nWFA\nDevelopment",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.type==='Development';",
+   "fieldname": "development",
+   "fieldtype": "Select",
+   "label": "Development",
+   "mandatory_depends_on": "eval:doc.type==='Development';",
+   "options": "\n\u0e01\u0e32\u0e23\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e07\u0e32\u0e19\u0e19\u0e2d\u0e01\u0e2a\u0e16\u0e32\u0e19\u0e17\u0e35\u0e48\n\u0e2d\u0e1a\u0e23\u0e21/\u0e2a\u0e31\u0e21\u0e19\u0e32\n\u0e1b\u0e23\u0e30\u0e0a\u0e38\u0e21"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -111,7 +133,7 @@
    "link_fieldname": "custom_wfa_request"
   }
  ],
- "modified": "2024-07-25 22:01:31.535978",
+ "modified": "2024-07-25 22:39:04.164223",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "WFA Request",

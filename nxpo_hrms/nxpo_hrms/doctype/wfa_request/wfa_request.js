@@ -16,6 +16,11 @@ frappe.ui.form.on("WFA Request", {
 		}
 	},
 
+    // Onchange field Type will change field Development to null
+    type: function (frm) {
+        frm.set_value("development", null)
+    },
+
 	// employee: async function (frm) {
     //     if (frm.doc.employee) {
     //         let e = await frappe.db.get_doc("Employee", frm.doc.employee)
