@@ -12,6 +12,7 @@ app_license = "mit"
 import hrms.payroll.doctype.payroll_entry.payroll_entry as pe
 import nxpo_hrms.custom.payroll_entry as custom_pe
 pe.get_filtered_employees = custom_pe.get_filtered_employees
+
 # 2. Temp Patch before merged PR https://github.com/frappe/hrms/pull/1779
 import hrms.payroll.doctype.payroll_period.payroll_period as pp
 import nxpo_hrms.custom.payroll_period as custom_pp
