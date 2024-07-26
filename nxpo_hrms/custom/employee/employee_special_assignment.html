@@ -1,0 +1,27 @@
+<h4><u>ประวัติการดำรงตำแหน่งรักษาการ</u></h4>
+<table class="table table-bordered table-condensed">
+	<thead style="background-color: rgb(238, 238, 238);;">
+		<tr>
+			<th>ประเภท</th>
+			<th>ตำแหน่ง</th>
+			<th>กลุ่มงาน</th>
+			<th>ฝ่ายงาน</th>
+			<th>เริ่มต้น</th>
+			<th>สิ้นสด</th>
+			<th>ระยะเวลา</th>
+		</tr>
+	</thead>
+	<tbody>
+		{%- for d in data -%}
+		<tr>
+			<td class="value">{{ d.type or "" }}</td>
+			<td class="value">{{ d.designation or "" }}</td>
+			<td class="value">{{ d.department or "" }}</td>
+			<td class="value">{{ d.directorate or "" }}</td>
+			<td class="value">{{ frappe.format(d.from_date, "Date") or ""}}</td>
+			<td class="value">{{ frappe.format(d.to_date, "Date") or "" }}</td>
+			<td class="value">{{ d.duration or "" }}</td>
+		</tr>
+		{%- endfor -%}
+	</tbody>
+</table>

@@ -10,6 +10,7 @@ frappe.ui.form.on("Employee", {
 		// Overview HTML
 		set_employee_basic_html(frm);
 		set_employee_transition_html(frm);
+		set_employee_special_assignment(frm);
 		set_external_work_html(frm);
 		set_education_html(frm);
 	},
@@ -106,3 +107,17 @@ function set_education_html(frm) {
 		},
 	});
 }
+
+function set_employee_special_assignment(frm) {
+	frappe.call({
+		method: "nxpo_hrms.custom.employee.get_employee_special_assignment",
+		args: {
+			employee: frm.doc.name,
+		},
+		callback: (r) => {
+			console.log(r.message)
+			frm.get_field("custom_employee_special_assignment_html").$wrapper.html(r.message);
+		},
+	});
+}
+

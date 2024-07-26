@@ -7,10 +7,11 @@
  "engine": "InnoDB",
  "field_order": [
   "employee",
-  "employee_name",
+  "start_date",
   "attached_evidence",
   "column_break_mtxt",
-  "effective_date",
+  "employee_name",
+  "end_date",
   "violation_details"
  ],
  "fields": [
@@ -45,22 +46,24 @@
    "reqd": 1
   },
   {
-   "fieldname": "effective_date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Effective Date",
-   "reqd": 1
-  },
-  {
    "fieldname": "attached_evidence",
    "fieldtype": "Attach",
    "label": "Violation Evidence"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date"
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-23 11:24:49.211573",
+ "modified": "2024-07-26 10:57:51.012834",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Disciplinary Violation",

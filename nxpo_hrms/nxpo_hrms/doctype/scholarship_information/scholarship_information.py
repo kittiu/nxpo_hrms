@@ -12,7 +12,7 @@ from frappe.utils import (
 
 class ScholarshipInformation(Document):
     @frappe.whitelist()
-    def dateOfDuration(self):
+    def get_diff_date_duration(self):
         start_date = self.start_date
         end_date = self.end_date
         diff = relativedelta(getdate(self.end_date), getdate(self.start_date))

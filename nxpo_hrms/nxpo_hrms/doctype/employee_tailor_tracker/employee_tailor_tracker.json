@@ -11,6 +11,7 @@
   "employee_name",
   "amount_per_round",
   "years_per_round",
+  "tailor_type",
   "column_break_cybj",
   "tailor_date",
   "tailor_amount",
@@ -18,8 +19,8 @@
   "tailor_detail",
   "section_break_crpl",
   "round",
-  "end_date",
   "start_date",
+  "end_date",
   "column_break_hlec",
   "time",
   "balance"
@@ -133,11 +134,18 @@
    "fieldname": "tailor_detail",
    "fieldtype": "Small Text",
    "label": "Tailor Detail"
+  },
+  {
+   "fieldname": "tailor_type",
+   "fieldtype": "Select",
+   "label": "Tailor Type",
+   "options": "\u0e0a\u0e38\u0e14\u0e02\u0e32\u0e27\n\u0e0a\u0e38\u0e14\u0e2a\u0e39\u0e17",
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-23 11:21:52.004574",
+ "modified": "2024-07-26 09:52:49.622982",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Tailor Tracker",

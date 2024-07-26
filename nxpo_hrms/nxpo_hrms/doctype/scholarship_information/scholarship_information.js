@@ -9,7 +9,7 @@ frappe.ui.form.on("Scholarship Information", {
     start_date: function(frm) {
 		if (frm.doc.end_date) { 
             frappe.call({
-                method: "dateOfDuration",
+                method: "get_diff_date_duration",
                 doc: frm.doc,
                 callback: function(response) {
                     frm.set_value('scholarship_duration', response.message);
@@ -21,7 +21,7 @@ frappe.ui.form.on("Scholarship Information", {
     end_date: function(frm) {
 		if (frm.doc.start_date) { 
             frappe.call({
-                method: "dateOfDuration",
+                method: "get_diff_date_duration",
                 doc: frm.doc,
                 callback: function(response) {
                     frm.set_value('scholarship_duration', response.message);
