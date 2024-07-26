@@ -188,6 +188,21 @@ def get_employee_special_assignment(employee):
         },
         order_by="from_date desc",
     )
+
+    for esa in employee_special_assignment:
+        esa["directorate"] = frappe.get_value(
+			"Department",
+			esa["directorate"],
+			"department_name",  # To remove - N suffix
+			cache=True
+		)
+        esa["department"] = frappe.get_value(
+			"Department",
+			esa["department"],
+			"department_name",  # To remove - N suffix
+			cache=True
+		)
+
     return frappe.render_template("nxpo_hrms/custom/employee/employee_special_assignment.html", {"data": employee_special_assignment})
 
 
