@@ -24,6 +24,36 @@ class EmployeeNXPO(EmployeeMaster):
         return custom_experience_ytd
 
     @property
+    def custom_years_of_experience(self):
+        transitions = frappe.get_all(
+            "Employee Transition",
+            fields=[
+                "employee",
+                "transition_date as from_date",
+                "end_date as to_date",
+            ],
+            filters={
+                "employee": self.employee,
+                "docstatus": 1,
+            },
+            order_by="transition_date asc",
+            limit_page_length=1
+        )
+
+        if transitions[0]['from_date']:
+            from_date = transitions[0]['from_date']
+            date = self.relieving_date or today()
+            diff = relativedelta(getdate(date), getdate(from_date))
+            custom_years_of_experience = _("{0} Years {1} Months {2} Days").format(
+                diff.years, diff.months, diff.days
+            )
+            return custom_years_of_experience
+        else:
+            return ""
+
+
+
+    @property
     def custom_business_unit(self):
         names = []
         if self.custom_subdepartment:
@@ -139,4 +169,42 @@ def get_education_html(employee):
         order_by="parent, custom_year_of_admission desc",
     )
     return frappe.render_template("nxpo_hrms/custom/employee/education.html", {"data": educations})
+
+@frappe.whitelist()
+def get_employee_special_assignment(employee):
+    employee_special_assignment = frappe.get_all(
+        "Employee Special Assignment",
+        fields=[
+            "assignment_type as type",
+            "designation",
+            "department",
+            "directorate",
+            "from_date",
+            "to_date",
+            "duration"
+        ],
+        filters={
+            "employee": employee
+        },
+        order_by="from_date desc",
+    )
+
+    for esa in employee_special_assignment:
+        esa["directorate"] = frappe.get_value(
+			"Department",
+			esa["directorate"],
+			"department_name",  # To remove - N suffix
+			cache=True
+		)
+        esa["department"] = frappe.get_value(
+			"Department",
+			esa["department"],
+			"department_name",  # To remove - N suffix
+			cache=True
+		)
+
+    return frappe.render_template("nxpo_hrms/custom/employee/employee_special_assignment.html", {"data": employee_special_assignment})
+
+
+
 
