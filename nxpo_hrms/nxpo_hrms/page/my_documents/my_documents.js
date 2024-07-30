@@ -277,7 +277,7 @@ class MyDocuments {
 
 	render_list_header() {
 		const _selected_filter = this.options.selected_filter.map((i) => frappe.model.unscrub(i));
-		const fields = ["no", "name", this.options.selected_filter_item, "employee_name"];
+		const fields = ["no", "name","month_period", this.options.selected_filter_item, "employee_name"];
 		const filters = fields
 			.map((filter) => {
 				const col = __(frappe.model.unscrub(filter));
@@ -335,6 +335,11 @@ class MyDocuments {
 			})
 		);
 
+		// Transform posting_date to "Month YYYY"
+		const date = new Date(item.posting_date);
+		const options_date = { year: 'numeric', month: 'long' };
+		const month_period = date.toLocaleDateString('en-US', options_date);
+			
 		const link = `/app/${frappe.router.slug(this.options.selected_doctype)}/${item.name}`;
 		const name_html = item.formatted_name
 			? `<span class="text-muted ellipsis list-id">${item.formatted_name}</span>`
@@ -346,6 +351,9 @@ class MyDocuments {
   				<div class="list-item_content ellipsis list-item__content--flex-2 name">
   					${name_html}
   				</div>
+				<div class="list-item_content ellipsis list-item__content--flex-2 month_period">
+				  ${month_period}
+			  	</div>
   				<div class="list-item_content ellipsis list-item__content--flex-2 value text-right">
   					<span class="text-muted ellipsis">${value}</span>
   				</div>

@@ -40,7 +40,7 @@ def get_filtered_employees(
 			& (SalaryStructureAssignment.salary_structure.isin(sal_struct))
 			& (SalaryStructureAssignment.payroll_payable_account == filters.payroll_payable_account)
 			& (filters.end_date >= SalaryStructureAssignment.from_date)
-		)
+		).orderby(Employee.name)
 	)
 
 	query = set_fields_to_select(query, fields)
