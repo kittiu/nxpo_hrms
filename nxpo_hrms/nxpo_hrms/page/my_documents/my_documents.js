@@ -335,8 +335,8 @@ class MyDocuments {
 			})
 		);
 
-		// Transform posting_date to "Month YYYY"
-		const date = new Date(item.posting_date);
+		// Transform month_period to "Month YYYY"
+		const date = new Date(item.month_period);
 		const options_date = { year: 'numeric', month: 'long' };
 		const month_period = date.toLocaleDateString('en-US', options_date);
 			
