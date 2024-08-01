@@ -272,7 +272,32 @@ def get_data(filters):
 
     data = query_data
 
+    #  Initialize totals
+    sum_base = 0
+    sum_e1 = 0
+    sum_e2 = 0
+    sum_e3 = 0
+    sum_e4 = 0
+    sum_e5 = 0
+    sum_e6 = 0
+    sum_e7 = 0
+    sum_d1 = 0
+    sum_d2 = 0
+    sum_d3 = 0
+    sum_d4 = 0
+    sum_d5 = 0
+    sum_d6 = 0
+    
+    sum_custom_min = 0
+    sum_custom_max = 0
+    
+    sum_net_pay = 0
+    sum_gross_pay = 0
+    sum_deductions = 0
+    sum_pvd_com = 0
+
     for row in data:
+
         employee = row['employee']
         start = filters.get('from_date')
         end = filters.get('to_date')
@@ -289,14 +314,72 @@ def get_data(filters):
                 result2 = custom_max - custom_min
                 result3 = result1 / result2
                 result4 = result3 * 100
-                # row['percentile'] = ( base_salary - custom_min ) / ( custom_max- custom_min ) * 100
                 row['percentile'] = result4
             else: 
                 row['percentile'] = None
         else:
             row['percentile'] = None
+        
+        # Calculate total amounts
+        sum_e1 += row['e1'] if row['e1'] is not None else 0
+        sum_e2 += row['e2'] if row['e2'] is not None else 0
+        sum_e3 += row['e3'] if row['e3'] is not None else 0
+        sum_e4 += row['e4'] if row['e4'] is not None else 0
+        sum_e6 += row['e6'] if row['e6'] is not None else 0
+        sum_e5 += row['e5'] if row['e5'] is not None else 0
+        sum_e7 += row['e7'] if row['e7'] is not None else 0
+        sum_d1 += row['d1'] if row['d1'] is not None else 0
+        sum_d2 += row['d2'] if row['d2'] is not None else 0
+        sum_d4 += row['d4'] if row['d4'] is not None else 0
+        sum_d3 += row['d3'] if row['d3'] is not None else 0
+        sum_d5 += row['d5'] if row['d5'] is not None else 0
+        sum_d6 += row['d6'] if row['d6'] is not None else 0
 
-    # print('data', data)
+        sum_custom_min += row['custom_min'] if row['custom_min'] is not None else 0
+        sum_custom_max += row['custom_max'] if row['custom_max'] is not None else 0
+
+
+        sum_base += base_salary if base_salary is not None else 0
+
+        sum_net_pay += row['net_pay'] if row['net_pay'] is not None else 0
+        sum_gross_pay += row['gross_pay'] if row['gross_pay'] is not None else 0
+        sum_deductions += row['total_deduction'] if row['total_deduction'] is not None else 0
+        sum_pvd_com += row['pvd_com'] if row['pvd_com'] is not None else 0
+
+
+    # Append the total row
+    total_row = {
+        'employee': 'Total',
+        'e1': sum_e1,
+        'e2': sum_e2,
+        'e3': sum_e3,
+        'e4': sum_e4,
+        'e6': sum_e6,
+        'e5': sum_e5,
+        'e7': sum_e7,
+        'd1': sum_d1,
+        'd2': sum_d2,
+        'd4': sum_d4,
+        'd3': sum_d3,
+        'd5': sum_d5,
+        'd6': sum_d6,
+
+        'base_salary': sum_base,
+
+        'custom_min': sum_custom_min,
+        'custom_max': sum_custom_max,
+
+        'net_pay': sum_net_pay,
+        'gross_pay': sum_gross_pay,
+        'total_deduction': sum_deductions,
+        'pvd_com': sum_pvd_com,
+        
+        'percentile': None
+
+
+    }
+    data.append(total_row)
+
     return data
 
 def get_conditions(filters):

@@ -221,104 +221,105 @@ var report_columns = report.get_columns_for_print();
 						</tr>
 					</thead>
 					<tbody>
-						{% for(var j=0, k=data.length; j<k; j++) { %} 
+					{% for(var j=0, k=data.length; j<k; j++) { %} 
 						{% var row=data[j]; %} 
+						{% if(row['employee'] !== 'Total') { %}
+							
+							{% sum_idx += 1 %}
+							{% sum_base += row['base_salary'] %}
+							{% sum_e1 += row['e1'] %}
+							{% sum_e6 += row['e6'] %}
+							{% sum_e5 += row['e5'] %}
+							{% sum_e7 += row['e7'] %}
+							{% sum_d1 += row['d1'] %}
+							{% sum_d2 += row['d2'] %}
+							{% sum_d4 += row['d4'] %}
+							{% sum_d3 += row['d3'] %}
+							{% sum_d5 += row['d5'] %}
+							{% sum_d6 += row['d6'] %}
+							{% sum_gross_pay += row['gross_pay'] %}
+							{% sum_total_deduction += row['total_deduction'] %}
+							{% sum_net_pay += row['net_pay'] %}
+							{% sum_pvd_com += row['pvd_com'] %}
 
-						{% sum_idx += 1 %}
-						{% sum_base += row['base_salary'] %}
-						{% sum_e1 += row['e1'] %}
-						{% sum_e6 += row['e6'] %}
-						{% sum_e5 += row['e5'] %}
-						{% sum_e7 += row['e7'] %}
-						{% sum_d1 += row['d1'] %}
-						{% sum_d2 += row['d2'] %}
-						{% sum_d4 += row['d4'] %}
-						{% sum_d3 += row['d3'] %}
-						{% sum_d5 += row['d5'] %}
-						{% sum_d6 += row['d6'] %}
-						{% sum_gross_pay += row['gross_pay'] %}
-						{% sum_total_deduction += row['total_deduction'] %}
-						{% sum_net_pay += row['net_pay'] %}
-						{% sum_pvd_com += row['pvd_com'] %}
+							<tr>
+								<td class="text-left" style="font-size: 7px;">
+									{%= row['employee'] %}
+								</td>
+								<td class="text-left" style="font-size: 7px;">
+									{%= row['prefix'] %}
+								</td>
+								<td class="text-left" style="font-size: 7px;">
+									{%= row['employee_name'] %}
+								</td>
+								<td class="text-right">
+									<div class="value" style="font-size: 7px;">
+										<label style="font-size: 7px;">{%= format_number(row['base_salary'], null, 2) || 0.00 %}</label>
+									</div>
+								</td>
+								<td class="text-right">
+									<div class="value" style="font-size: 7px;">
+										<label style="font-size: 7px;">{%= format_number(row['e1'], null, 2) || 0.00 %}</label>
+									</div>
+								</td>
+								<td class="text-right">
+									<div class="value" style="font-size: 7px;">
+										<label style="font-size: 7px;">{%= format_number(row['e6'], null, 2) || 0.00 %}</label>
+									</div>
+								</td>
+								<td class="text-right" >
+									<div class="value">
+										<label style="font-size: 7px;">{%= format_number(row['e5'], null, 2) || 0.00 %}</label>
+									</div>
+								</td>
+								<td class="text-right">
+									<div class="value">
+										<label style="font-size: 7px;">{%= format_number(row['e7'], null, 2) || 0.00 %}</label>
+									</div>
+								</td>
+								<td class="text-right">
+									<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d1'], null, 2) || 0.00 %}</label></div>
+								</td>
+								<td class="text-right">
+									<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d2'], null, 2) || 0.00 %}</label></div>
+								</td>
+								<td class="text-right">
+									<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d4'], null, 2) || 0.00 %}</label></div>
+								</td>
+								<td class="text-right">
+									<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d3'], null, 2) || 0.00 %}</label></div>
+								</td>
+								<td class="text-right">
+									<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d5'], null, 2) || 0.00 %}</label></div>
+								</td>
+								<td class="text-right">
+									<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d6'], null, 2) || 0.00 %}</label></div>
+								</td>
+								<td class="text-right">
+									<div class="value">
+										<label style="font-size: 7px;">{%= format_number(row['gross_pay'], null, 2) || 0.00 %}</label>
+									</div>
+								</td>
+								<td class="text-right">
+									<div class="value">
+										<label style="font-size: 7px; color: red;">{%= format_number(row['total_deduction'], null, 2) || 0.00 %}</label>
+									</div>
+								</td>
+								<td class="text-right">
+									<div class="value">
+										<label style="font-size: 7px;">{%= format_number(format_number(row['net_pay'], null, 2), null, 2) || 0.00 %}</label>
 
-						<tr>
-							<td class="text-left" style="font-size: 7px;">
-								{%= row['employee'] %}
-							</td>
-							<td class="text-left" style="font-size: 7px;">
-								{%= row['prefix'] %}
-							</td>
-							<td class="text-left" style="font-size: 7px;">
-								{%= row['employee_name'] %}
-							</td>
-							<td class="text-right">
-								<div class="value" style="font-size: 7px;">
-									<label style="font-size: 7px;">{%= format_number(row['base_salary'], null, 2) || 0.00 %}</label>
-								</div>
-							</td>
-							<td class="text-right">
-								<div class="value" style="font-size: 7px;">
-									<label style="font-size: 7px;">{%= format_number(row['e1'], null, 2) || 0.00 %}</label>
-								</div>
-							</td>
-							<td class="text-right">
-								<div class="value" style="font-size: 7px;">
-									<label style="font-size: 7px;">{%= format_number(row['e6'], null, 2) || 0.00 %}</label>
-								</div>
-							</td>
-							<td class="text-right" >
-								<div class="value">
-									<label style="font-size: 7px;">{%= format_number(row['e5'], null, 2) || 0.00 %}</label>
-								</div>
-							</td>
-							<td class="text-right">
-								<div class="value">
-									<label style="font-size: 7px;">{%= format_number(row['e7'], null, 2) || 0.00 %}</label>
-								</div>
-							</td>
-							<td class="text-right">
-								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d1'], null, 2) || 0.00 %}</label></div>
-							</td>
-							<td class="text-right">
-								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d2'], null, 2) || 0.00 %}</label></div>
-							</td>
-							<td class="text-right">
-								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d4'], null, 2) || 0.00 %}</label></div>
-							</td>
-							<td class="text-right">
-								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d3'], null, 2) || 0.00 %}</label></div>
-							</td>
-							<td class="text-right">
-								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d5'], null, 2) || 0.00 %}</label></div>
-							</td>
-							<td class="text-right">
-								<div class="value"><label style="font-size: 7px; color: red;">{%= format_number(row['d6'], null, 2) || 0.00 %}</label></div>
-							</td>
-							<td class="text-right">
-								<div class="value">
-									<label style="font-size: 7px;">{%= format_number(row['gross_pay'], null, 2) || 0.00 %}</label>
-								</div>
-							</td>
-							<td class="text-right">
-								<div class="value">
-									<label style="font-size: 7px; color: red;">{%= format_number(row['total_deduction'], null, 2) || 0.00 %}</label>
-								</div>
-							</td>
-							<td class="text-right">
-								<div class="value">
-									<label style="font-size: 7px;">{%= format_number(format_number(row['net_pay'], null, 2), null, 2) || 0.00 %}</label>
+									</div>
+								</td>
+								<td class="text-right">
+									<div class="value">
+										<label style="font-size: 7px;">{%= format_number(row['pvd_com'], null, 2) || 0.00 %}</label>
+									</div>
+								</td>
 
-								</div>
-							</td>
-							<td class="text-right">
-								<div class="value">
-									<label style="font-size: 7px;">{%= format_number(row['pvd_com'], null, 2) || 0.00 %}</label>
-								</div>
-							</td>
-
-						</tr>
-						
+							</tr>
 						{% } %}
+					{% } %}
 
 
 
