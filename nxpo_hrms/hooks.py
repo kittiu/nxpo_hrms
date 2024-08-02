@@ -189,6 +189,7 @@ doctype_js = {
     "Employee": "public/js/employee.js",
     "Salary Structure Assignment": "public/js/salary_structure_assignment.js",
     "Leave Allocation": "public/js/leave_allocation.js",
+    "Additional Salary": "public/js/additional_salary.js",
 }
 doctype_tree_js = {
     "Department" : "public/js/department_tree.js"
