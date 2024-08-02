@@ -26,8 +26,10 @@
   "scholarship_duration",
   "other_details_section",
   "expected_graduate_date",
+  "pay_back_start_date",
   "column_break_zqzw",
   "pay_back_date",
+  "pay_back_end_date",
   "column_break_cfwp",
   "educational_status"
  ],
@@ -179,11 +181,23 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status"
+  },
+  {
+   "description": "\u0e27\u0e31\u0e19\u0e40\u0e23\u0e34\u0e48\u0e21\u0e15\u0e49\u0e19\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e07\u0e32\u0e19\u0e0a\u0e14\u0e43\u0e0a\u0e49\u0e17\u0e38\u0e19",
+   "fieldname": "pay_back_start_date",
+   "fieldtype": "Date",
+   "label": "Pay Back Start Date"
+  },
+  {
+   "description": "\u0e27\u0e31\u0e19\u0e2a\u0e34\u0e49\u0e19\u0e2a\u0e38\u0e14\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e07\u0e32\u0e19\u0e0a\u0e14\u0e43\u0e0a\u0e49\u0e17\u0e38\u0e19",
+   "fieldname": "pay_back_end_date",
+   "fieldtype": "Date",
+   "label": "Pay Back End Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-25 17:11:40.294201",
+ "modified": "2024-08-02 08:48:45.913134",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Scholarship Information",
