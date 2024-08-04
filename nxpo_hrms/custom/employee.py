@@ -40,7 +40,7 @@ class EmployeeNXPO(EmployeeMaster):
             limit_page_length=1
         )
 
-        if transitions[0]['from_date']:
+        if transitions and transitions[0]['from_date']:
             from_date = transitions[0]['from_date']
             date = self.relieving_date or today()
             diff = relativedelta(getdate(date), getdate(from_date))
