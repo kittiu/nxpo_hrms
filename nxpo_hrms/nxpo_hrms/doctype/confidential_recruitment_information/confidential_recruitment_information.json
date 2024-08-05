@@ -1,0 +1,140 @@
+{
+ "actions": [],
+ "autoname": "autoincrement",
+ "creation": "2024-08-05 09:26:35.611599",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "employee",
+  "column_break_xyaz",
+  "prefix",
+  "column_break_alyh",
+  "full_name",
+  "section_break_iztj",
+  "title",
+  "column_break_xspc",
+  "type",
+  "column_break_mvbe",
+  "attach_file",
+  "section_break_sogl",
+  "base_salary",
+  "column_break_hcdt",
+  "other_details",
+  "column_break_kjci"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xyaz",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.custom_prefix",
+   "fieldname": "prefix",
+   "fieldtype": "Data",
+   "label": "Prefix",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_alyh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "full_name",
+   "fieldtype": "Data",
+   "label": "Full Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_iztj",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "title",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Title",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_xspc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "\u0e1b\u0e23\u0e30\u0e40\u0e20\u0e17\u0e02\u0e2d\u0e07\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23",
+   "fieldname": "type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Type",
+   "options": "\u0e40\u0e07\u0e34\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19\u0e15\u0e31\u0e49\u0e07\u0e15\u0e49\u0e19\n\u0e40\u0e07\u0e34\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19\u0e2b\u0e25\u0e31\u0e07\u0e1c\u0e48\u0e32\u0e19\u0e01\u0e32\u0e23\u0e17\u0e14\u0e25\u0e2d\u0e07\u0e07\u0e32\u0e19\n\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e40\u0e1b\u0e25\u0e35\u0e48\u0e22\u0e19\u0e41\u0e1b\u0e25\u0e07\u0e40\u0e07\u0e34\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19\u0e2d\u0e37\u0e48\u0e19\n\u0e40\u0e2d\u0e01\u0e2a\u0e32\u0e23\u0e2b\u0e23\u0e37\u0e2d\u0e2a\u0e31\u0e0d\u0e0d\u0e32\u0e17\u0e35\u0e48\u0e40\u0e1b\u0e47\u0e19\u0e04\u0e27\u0e32\u0e21\u0e25\u0e31\u0e1a\n\u0e02\u0e49\u0e2d\u0e21\u0e39\u0e25\u0e2d\u0e37\u0e48\u0e19\u0e46",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_mvbe",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "attach_file",
+   "fieldtype": "Attach",
+   "label": "Attach File"
+  },
+  {
+   "fieldname": "section_break_sogl",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "\u0e40\u0e07\u0e34\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19\u0e15\u0e31\u0e49\u0e07\u0e15\u0e49\u0e19\u0e2b\u0e23\u0e37\u0e2d\u0e40\u0e07\u0e34\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19\u0e2b\u0e25\u0e31\u0e07\u0e1c\u0e48\u0e32\u0e19\u0e01\u0e32\u0e23\u0e17\u0e14\u0e25\u0e2d\u0e07\u0e07\u0e32\u0e19",
+   "fieldname": "base_salary",
+   "fieldtype": "Currency",
+   "label": "Base Salary"
+  },
+  {
+   "fieldname": "column_break_hcdt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "\u0e23\u0e32\u0e22\u0e25\u0e30\u0e40\u0e2d\u0e35\u0e22\u0e14\u0e40\u0e1e\u0e34\u0e48\u0e21\u0e40\u0e15\u0e34\u0e21",
+   "fieldname": "other_details",
+   "fieldtype": "Long Text",
+   "label": "Other Details"
+  },
+  {
+   "fieldname": "column_break_kjci",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-08-05 09:47:09.019693",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Confidential Recruitment Information",
+ "naming_rule": "Autoincrement",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
