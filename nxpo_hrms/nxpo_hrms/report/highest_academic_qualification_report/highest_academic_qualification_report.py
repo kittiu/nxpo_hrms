@@ -32,6 +32,12 @@ def get_columns(filters):
                 "width": 0
             },
             {
+                "fieldname": "custom_directorate",
+                "fieldtype": "Data",
+                "label": "Directorate",
+                "width": 0
+            },
+            {
                 "fieldname": "schooluniversity",
                 "fieldtype": "Data",
                 "label": "School / University",
@@ -97,7 +103,8 @@ def get_data(filters):
         f"""select 
                 emp.employee,
                 emp.custom_prefix as prefix,
-                emp.employee_name
+                emp.employee_name,
+                emp.custom_directorate
             from `tabEmployee` emp
             WHERE emp.company = %(company)s {conditions}
             """,
@@ -133,6 +140,20 @@ def get_conditions(filters):
 
     if filters.get("employee"):
         conditions += f"and emp.employee = %(employee)s"
+
+    if filters.get("directorate") and filters.get("pmu_or_nxpo") is None:
+        conditions += f"and emp.custom_directorate = %(directorate)s"
+    
+    pmu_conditions = [
+        "emp.custom_directorate = 'บพข. - N'",
+        "emp.custom_directorate = 'บพค. - N'",
+        "emp.custom_directorate = 'บพท. - N'"
+    ]
+
+    if filters.get("pmu_or_nxpo") == 'pmu':
+        conditions += f"and ({' or '.join(pmu_conditions)})"
+    elif filters.get("pmu_or_nxpo") == 'nxpo':
+        conditions += f"and not ({' or '.join(pmu_conditions)})"
     
 
     return conditions

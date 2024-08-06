@@ -142,9 +142,13 @@ def calculate_months(date_of_joining, custom_date_pass_probation):
         return months_diff
 
 def get_data(filters):
+
     data = []
+
+    conditions = get_conditions(filters)
+
     query_data = frappe.db.sql(
-        """SELECT
+        f"""SELECT
             emp.name AS employee,
             emp.employee_name,
             emp.designation,
@@ -160,7 +164,7 @@ def get_data(filters):
 
         FROM `tabEmployee` emp 
         WHERE emp.custom_date_pass_probation <= %(year_end_date)s
-            AND emp.company = %(company)s   
+            AND emp.company = %(company)s {conditions}
         """,
         filters,
         as_dict=True,
@@ -215,6 +219,26 @@ def get_data(filters):
             rows['deduct_result'] = period_work_before
     
     return data
+
+def get_conditions(filters):
+    conditions = ""
+
+    if filters.get("directorate") and filters.get("pmu_or_nxpo") is None:
+        conditions += f"and emp.custom_directorate = %(directorate)s"
+    
+    pmu_conditions = [
+        "emp.custom_directorate = 'บพข. - N'",
+        "emp.custom_directorate = 'บพค. - N'",
+        "emp.custom_directorate = 'บพท. - N'"
+    ]
+
+    if filters.get("pmu_or_nxpo") == 'pmu':
+        conditions += f"and ({' or '.join(pmu_conditions)})"
+    elif filters.get("pmu_or_nxpo") == 'nxpo':
+        conditions += f"and not ({' or '.join(pmu_conditions)})"
+    
+
+    return conditions
 
 def get_data_entry(filters):
 

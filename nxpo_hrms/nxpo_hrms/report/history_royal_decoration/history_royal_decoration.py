@@ -128,12 +128,29 @@ def get_data(filters):
 def get_conditions(filters):
     conditions = []
 
+    # Year and employee filters
     if filters.get("year"):
         conditions.append("YEAR(erd.received_date) <= %(year)s")
     if filters.get("employee"):
         conditions.append("emp.name = %(employee)s")
 
-    if conditions:
-        return "WHERE " + " AND ".join(conditions)
-    else:
-        return ""
+    # Directorate filter when pmu_or_nxpo is None
+    if filters.get("directorate") and filters.get("pmu_or_nxpo") is None:
+        conditions.append("emp.custom_directorate = %(directorate)s")
+    
+    # PMU or NXPO conditions
+    pmu_conditions = [
+        "emp.custom_directorate = 'บพข. - N'",
+        "emp.custom_directorate = 'บพค. - N'",
+        "emp.custom_directorate = 'บพท. - N'"
+    ]
+
+    pmu_or_nxpo = filters.get("pmu_or_nxpo")
+    if pmu_or_nxpo == 'pmu':
+        conditions.append(f"({' or '.join(pmu_conditions)})")
+    elif pmu_or_nxpo == 'nxpo':
+        conditions.append(f"NOT ({' or '.join(pmu_conditions)})")
+
+    # Build the WHERE clause
+    return "WHERE " + " AND ".join(conditions) if conditions else ""
+
