@@ -38,6 +38,12 @@ def get_columns(filters):
             "width": 0
         },
         {
+            "fieldname": "custom_directorate",
+            "fieldtype": "Data",
+            "label": "Directorate",
+            "width": 0
+        },
+        {
             "fieldname": "salary",
             "fieldtype": "Currency",
             "label": "เงินเดือน",
@@ -104,6 +110,7 @@ def get_data(filters):
             CONVERT(row_number() OVER (ORDER BY ss.employee), char) AS idx,
             ss.employee,
             emp.employee_name,
+            emp.custom_directorate,
             salary.amount AS salary,
             back_salary.amount AS back_salary,
             emp.date_of_joining AS pvd_start_date,
@@ -192,5 +199,20 @@ def get_conditions(filters):
 
     if filters.get("pvd_type"):
         conditions += f"and ss.custom_pvd_type = %(pvd_type)s"
+
+    if filters.get("directorate") and filters.get("pmu_or_nxpo") is None:
+        conditions += f"and emp.custom_directorate = %(directorate)s"
+
+    pmu_conditions = [
+        "emp.custom_directorate = 'บพข. - N'",
+        "emp.custom_directorate = 'บพค. - N'",
+        "emp.custom_directorate = 'บพท. - N'"
+    ]
+
+    if filters.get("pmu_or_nxpo") == 'pmu':
+        conditions += f"and ({' or '.join(pmu_conditions)})"
+    elif filters.get("pmu_or_nxpo") == 'nxpo':
+        conditions += f"and not ({' or '.join(pmu_conditions)})"
+    
 
     return conditions

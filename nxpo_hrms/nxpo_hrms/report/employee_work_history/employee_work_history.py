@@ -116,13 +116,35 @@ def get_employee_transition(filters):
         trans_filters = {
             "docstatus": 1,
         }
-        if filters.get("directorate"):
+        if filters.get("directorate") and filters.get("pmu_or_nxpo") is None:
             employees = frappe.get_all(
                 "Employee",
                 filters=[["custom_directorate", "in", filters.get("directorate")]],
                 pluck="name"
             )
             trans_filters["employee"] = ["in", employees]
+
+        if filters.get("pmu_or_nxpo"):
+            pmu_or_nxpo = filters.get("pmu_or_nxpo")
+            if pmu_or_nxpo == 'pmu':
+                employees = frappe.get_all(
+                    "Employee",
+                    filters=[["custom_directorate", "in", ["บพข. - N", "บพค. - N", "บพท. - N"]]],
+                    pluck="name"
+                )
+                trans_filters["employee"] = ["in", employees]
+
+
+            elif pmu_or_nxpo == 'nxpo':
+                employees = frappe.get_all(
+                        "Employee",
+                        filters=[["custom_directorate", "not in", ["บพข. - N", "บพค. - N", "บพท. - N"]]],
+                        pluck="name"
+                )
+                trans_filters["employee"] = ["in", employees]
+
+
+
         trans = frappe.get_all(
             "Employee Transition",
             fields=[
@@ -145,13 +167,35 @@ def get_external_work_history(filters):
     externals = []
     if filters.get("external"):
         external_filters = {}
-        if filters.get("directorate"):
+        if filters.get("directorate") and filters.get("pmu_or_nxpo") is None:
             employees = frappe.get_all(
                 "Employee",
                 filters=[["custom_directorate", "in", filters.get("directorate")]],
                 pluck="name"
             )
             external_filters["parent"] = ["in", employees]
+
+
+        if filters.get("pmu_or_nxpo"):
+            pmu_or_nxpo = filters.get("pmu_or_nxpo")
+            if pmu_or_nxpo == 'pmu':
+                employees = frappe.get_all(
+                    "Employee",
+                    filters=[["custom_directorate", "in", ["บพข. - N", "บพค. - N", "บพท. - N"]]],
+                    pluck="name"
+                )
+                external_filters["parent"] = ["in", employees]
+
+
+            elif pmu_or_nxpo == 'nxpo':
+                employees = frappe.get_all(
+                        "Employee",
+                        filters=[["custom_directorate", "not in", ["บพข. - N", "บพค. - N", "บพท. - N"]]],
+                        pluck="name"
+                )
+                external_filters["parent"] = ["in", employees]
+
+            
         externals = frappe.get_all(
             "Employee External Work History",
             fields=[

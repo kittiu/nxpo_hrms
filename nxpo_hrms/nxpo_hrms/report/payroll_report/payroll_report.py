@@ -388,11 +388,26 @@ def get_conditions(filters):
     if filters.get("status_emp"):
         conditions += f"and emp.status = %(status_emp)s"
     
-    if filters.get("directorate"):
+    if filters.get("directorate") and filters.get("pmu_or_nxpo") is None:
         conditions += f"and emp.custom_directorate = %(directorate)s"
 
     if filters.get("employment_type"):
         conditions += f"and emp.employment_type = %(employment_type)s"
+
+    if filters.get("posting_date"):
+        conditions += f"and ss.posting_date = %(posting_date)s"
+
+    pmu_conditions = [
+        "emp.custom_directorate = 'บพข. - N'",
+        "emp.custom_directorate = 'บพค. - N'",
+        "emp.custom_directorate = 'บพท. - N'"
+    ]
+
+    if filters.get("pmu_or_nxpo") == 'pmu':
+        conditions += f"and ({' or '.join(pmu_conditions)})"
+    elif filters.get("pmu_or_nxpo") == 'nxpo':
+        conditions += f"and not ({' or '.join(pmu_conditions)})"
+    
 
     return conditions
 
