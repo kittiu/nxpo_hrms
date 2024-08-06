@@ -35,6 +35,14 @@ class WFARequest(Document):
 		# 3. Validate no more than WFA policy
 		self.validate_wfa_policy(dates)
 
+		# 4. Validate half day date
+		for plan in self.plan_dates:
+			if plan.half_day:
+				if not getdate(plan.from_date) <= getdate(plan.half_day_date) <= getdate(plan.to_date):
+					frappe.throw(_("Half day date should be in between from date and to date"))
+			else:
+				plan.half_day_date = None
+
 	def on_submit(self):
 		# Validate
 		for plan in self.plan_dates:
@@ -94,6 +102,8 @@ class WFARequest(Document):
 					"to_date": plan.to_date,
 					"reason": "Work From Home",
 					"explanation": self.note,
+					"half_day": plan.half_day,
+					"half_day_date": plan.half_day_date,
 					"custom_wfa_request": self.name,
 				})
 				attend.submit()

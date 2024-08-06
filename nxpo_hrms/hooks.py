@@ -190,6 +190,7 @@ doctype_js = {
     "Salary Structure Assignment": "public/js/salary_structure_assignment.js",
     "Leave Allocation": "public/js/leave_allocation.js",
     "Additional Salary": "public/js/additional_salary.js",
+    "Attendance": "public/js/attendance.js",
 }
 doctype_tree_js = {
     "Department" : "public/js/department_tree.js"
@@ -319,8 +320,13 @@ doc_events = {
     "WFA Request": {  # Reusing exact same logic for approver as Leave Application
         "validate": "nxpo_hrms.custom.leave_application.compute_approver",
         "on_update": "nxpo_hrms.custom.leave_application.share_to_approver",
-    }
-
+    },
+    "Attendance": {
+        "validate": "nxpo_hrms.custom.attendance.validate_status_wfh",
+    },
+    "Attendance Request": {
+        "validate": "nxpo_hrms.custom.attendance_request.validate_status_wfh",
+    },
 }
 
 # Scheduled Tasks

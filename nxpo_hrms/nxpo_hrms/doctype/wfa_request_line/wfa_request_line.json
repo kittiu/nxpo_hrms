@@ -8,7 +8,10 @@
  "field_order": [
   "from_date",
   "to_date",
-  "days"
+  "days",
+  "column_break_tnyc",
+  "half_day",
+  "half_day_date"
  ],
  "fields": [
   {
@@ -31,12 +34,31 @@
    "in_list_view": 1,
    "label": "Days",
    "read_only": 1
+  },
+  {
+   "fieldname": "column_break_tnyc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "half_day",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Half Day"
+  },
+  {
+   "depends_on": "half_day",
+   "fieldname": "half_day_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Half Day Date",
+   "mandatory_depends_on": "half_day"
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2024-05-10 16:01:28.624049",
+ "modified": "2024-08-06 13:06:21.983420",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "WFA Request Line",
