@@ -51,6 +51,12 @@
    "width": 0
   },
   {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "\u0e27\u0e31\u0e19\u0e40\u0e14\u0e37\u0e2d\u0e19\u0e1b\u0e35\u0e17\u0e35\u0e48\u0e08\u0e48\u0e32\u0e22",
+   "width": 0
+  },
+  {
    "fieldname": "pay_amount",
    "fieldtype": "Currency",
    "label": "\u0e08\u0e33\u0e19\u0e27\u0e19\u0e40\u0e07\u0e34\u0e19\u0e17\u0e35\u0e48\u0e08\u0e48\u0e32\u0e22",
@@ -69,7 +75,7 @@
    "width": 0
   }
  ],
- "creation": "2024-08-07 12:15:20.094216",
+ "creation": "2024-08-07 09:26:39.649392",
  "disabled": 0,
  "docstatus": 0,
  "doctype": "Report",
@@ -78,15 +84,15 @@
  "is_standard": "Yes",
  "letter_head": "",
  "letterhead": null,
- "modified": "2024-08-07 12:17:00.408847",
+ "modified": "2024-08-07 09:35:45.318060",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
- "name": "PND1a NXPO",
+ "name": "PND1 NXPO",
  "owner": "Administrator",
  "prepared_report": 0,
- "query": "select \n    '401N' as tax_type,\n    c.tax_id,\n    row_number() over(order by a.employee) as idx,\n    a.employee,\n    replace(e.custom_citizen_id, '-', '') as citizen_id,\n    e.salutation,\n    e.first_name,\n    e.last_name,\n    a.pay_amount,\n    a.deduct_amount,\n    '1' as tax_cond\nfrom\n(select \n    ss.company,\n    ss.employee,\n    sum(round(ss.gross_pay, 2)) as pay_amount,\n    sum(round(sd.amount, 2)) as deduct_amount\nfrom `tabSalary Slip` ss\n    join `tabSalary Detail` sd on sd.parent = ss.name\n    join `tabSalary Component` sc\n        on sc.name = sd.salary_component\n        and sc.is_income_tax_component = true\nwhere ss.docstatus = %(docstatus)s\n    and posting_date >= %(from_date)s and posting_date <= %(to_date)s\n    and ss.company = %(company)s\ngroup by ss.company, ss.employee\norder by ss.employee) a\njoin `tabCompany` c on c.name = a.company\njoin `tabPayroll Period` p on p.name = %(payroll_period)s\njoin `tabEmployee` e on e.name = a.employee\n",
+ "query": "select \n    '401N' as tax_type,\n    c.tax_id,\n    row_number() over(order by emp.name) as idx,\n    emp.name as employee,\n    replace(emp.custom_citizen_id, '-', '') as citizen_id,\n    emp.salutation,\n    emp.first_name,\n    emp.last_name,\n    ss.posting_date,\n    round(ss.gross_pay, 2) as pay_amount,\n    round(sd.amount, 2) as deduct_amount,\n    1 as tax_cond\nfrom `tabSalary Slip` ss join `tabEmployee` emp on ss.employee = emp.name\n    join `tabCompany` c on ss.company = c.name\n    join `tabSalary Detail` sd on sd.parent = ss.name\n    join `tabSalary Component` sc\n        on sc.name = sd.salary_component\n        and sc.is_income_tax_component = true\nwhere posting_date >= %(from_date)s and posting_date <= %(to_date)s\n    and ss.docstatus = %(docstatus)s\n    and emp.company = %(company)s\norder by emp.name",
  "ref_doctype": "Salary Slip",
- "report_name": "PND1a NXPO",
+ "report_name": "PND1 NXPO",
  "report_type": "Script Report",
  "roles": [
   {

@@ -62,12 +62,12 @@
  "docstatus": 0,
  "doctype": "Report",
  "filters": [],
- "idx": 0,
+ "idx": 4,
  "is_standard": "Yes",
  "json": "{}",
  "letter_head": "NXPO",
  "letterhead": null,
- "modified": "2024-06-14 15:34:22.049086",
+ "modified": "2024-08-07 10:39:31.830876",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Tailor Status",
@@ -76,7 +76,7 @@
  "query": "select a.name,\n    a.employee,\n    a.employee_name,\n    a.round,\n    a.time,\n    b.latest_tailor_date,\n    timestampdiff(month, current_date,  a.end_date) remaining_months,\n    a.end_date,\n    a.balance\nfrom `tabEmployee Tailor Tracker` a\njoin\n(select employee, max(tailor_date) latest_tailor_date\nfrom `tabEmployee Tailor Tracker`\ngroup by employee) b\non a.employee = b.employee and a.tailor_date = b.latest_tailor_date\norder by a.employee\n",
  "ref_doctype": "Employee Tailor Tracker",
  "report_name": "Employee Tailor Status",
- "report_type": "Query Report",
+ "report_type": "Script Report",
  "roles": [
   {
    "role": "HR Manager"
