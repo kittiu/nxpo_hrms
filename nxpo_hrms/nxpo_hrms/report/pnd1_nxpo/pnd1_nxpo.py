@@ -44,7 +44,7 @@ def get_columns(filters):
                 "width": 0
             },
             {
-                "fieldname": "salutation",
+                "fieldname": "prefix",
                 "fieldtype": "Data",
                 "label": "คำนำหน้าชื่อ",
                 "width": 0
@@ -106,7 +106,7 @@ def get_data(filters):
                 row_number() over(order by emp.name) as idx,
                 emp.name as employee,
                 replace(emp.custom_citizen_id, '-', '') as citizen_id,
-                emp.salutation,
+                emp.custom_prefix as prefix,
                 emp.first_name,
                 emp.last_name,
                 emp.custom_directorate AS directorate,
