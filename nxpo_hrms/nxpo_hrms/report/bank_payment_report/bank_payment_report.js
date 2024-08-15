@@ -12,19 +12,19 @@ frappe.query_reports["Bank Payment Report"] = {
 			default: frappe.defaults.get_user_default("Company"),
 		},
 		{
-			fieldname: "from_date",
-			label: __("From Date"),
+			fieldname: "date",
+			label: __("Date"),
 			fieldtype: "Date",
 			reqd: 1,
-            default: frappe.datetime.month_start(),
+            // default: frappe.datetime.month_start(),
 		},
-		{
-			fieldname: "to_date",
-			label: __("To Date"),
-			fieldtype: "Date",
-			reqd: 1,
-            default: frappe.datetime.month_end(),
-		},
+		// {
+		// 	fieldname: "date_for_split_tax",
+		// 	label: __("Date For Split Tax"),
+		// 	fieldtype: "Date",
+		// 	reqd: 1,
+        //     // default: frappe.datetime.month_end(),
+		// },
 		{
 			fieldname: "docstatus",
 			label: __("Document Status"),
@@ -35,6 +35,17 @@ frappe.query_reports["Bank Payment Report"] = {
                 {value: 2, label: "Cancelled"},
             ],
 			default: 1,
+			reqd: 1,
+		},
+		{
+			fieldname: "nob",
+			label: __("Normal or Bonus"),
+			fieldtype: "Select",
+			options: [
+                {value: 'normal', label: "Normal"},
+                {value: 'bonus', label: "Bonus"},
+            ],
+			default: 'normal',
 			reqd: 1,
 		},
 	]

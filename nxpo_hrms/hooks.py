@@ -117,6 +117,12 @@ fixtures = [
             ]
         ]
     },
+    {
+        "doctype": "Role",
+        "filters": [
+            ["name", "in", ["Payroll User"]]
+        ]
+    },
 ]
 
 # fixtures = [
