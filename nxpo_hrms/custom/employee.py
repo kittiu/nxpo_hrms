@@ -111,6 +111,7 @@ def get_employee_transition_html(employee):
             "designation",
             "transition_date as from_date",
             "end_date as to_date",
+            "duration"
         ],
         filters={
             "docstatus": 1,

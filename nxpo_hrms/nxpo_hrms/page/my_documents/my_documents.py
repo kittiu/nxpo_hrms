@@ -46,7 +46,7 @@ def get_salary_slips(date_range, company=None, field=None, employee=None, limit=
 
 	salary_slips = frappe.get_list(
 		doctype="Salary Slip",
-		fields=["name", "posting_date as month_period", select_field, "employee_name"],
+		fields=["name", "posting_date as month_period", select_field, "employee_name", 'custom_date_for_split_tax_component as date_for_split_tax_component'],
 		filters=filters
 	)
 

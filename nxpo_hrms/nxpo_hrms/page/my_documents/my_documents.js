@@ -276,8 +276,12 @@ class MyDocuments {
 	}
 
 	render_list_header() {
+		
 		const _selected_filter = this.options.selected_filter.map((i) => frappe.model.unscrub(i));
-		const fields = ["no", "name","month_period", this.options.selected_filter_item, "employee_name"];
+		const selected_tab = this.options.selected_doctype;
+
+		const fields = ["no", "name","month_period", ...(selected_tab === 'Salary Slip' ? ['Bonus Date'] : []), this.options.selected_filter_item, "employee_name"];
+
 		const filters = fields
 			.map((filter) => {
 				const col = __(frappe.model.unscrub(filter));
@@ -339,7 +343,14 @@ class MyDocuments {
 		const date = new Date(item.month_period);
 		const options_date = { year: 'numeric', month: 'long' };
 		const month_period = date.toLocaleDateString('en-US', options_date);
-			
+
+		const selected_tab = this.options.selected_doctype;
+		const date_for_split_tax_component = item.date_for_split_tax_component || '';
+
+		// Format the date using frappe.format
+		const formatted_date_for_split_tax_component = frappe.format(date_for_split_tax_component, { fieldtype: 'Date' });
+		
+
 		const link = `/app/${frappe.router.slug(this.options.selected_doctype)}/${item.name}`;
 		const name_html = item.formatted_name
 			? `<span class="text-muted ellipsis list-id">${item.formatted_name}</span>`
@@ -354,6 +365,10 @@ class MyDocuments {
 				<div class="list-item_content ellipsis list-item__content--flex-2 month_period">
 				  ${month_period}
 			  	</div>
+				${selected_tab === 'Salary Slip' ? `
+				<div class="list-item_content ellipsis list-item__content--flex-2 month_period">
+					${formatted_date_for_split_tax_component}
+				</div>` : ''}
   				<div class="list-item_content ellipsis list-item__content--flex-2 value text-right">
   					<span class="text-muted ellipsis">${value}</span>
   				</div>
