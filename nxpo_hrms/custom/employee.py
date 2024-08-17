@@ -95,6 +95,19 @@ def update_current_address(doc, method=None):
     addrs = [x for x in addrs if x != None]
     doc.current_address = ", ".join(addrs)
 
+def update_permanent_address(doc, method=None):
+    addrs = [
+        doc.custom_perm_house_no,
+        doc.custom_perm_soi,
+        doc.custom_perm_street,
+        doc.custom_perm_subdistrict,
+        doc.custom_perm_district,
+        doc.custom_perm_province,
+        doc.custom_perm_zip_code
+    ]
+    addrs = [x for x in addrs if x != None]
+    doc.permanent_address = ", ".join(addrs)
+
 @frappe.whitelist()
 def get_employee_basic_html(employee):
     data = json.loads(employee)

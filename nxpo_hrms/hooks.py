@@ -295,6 +295,7 @@ doc_events = {
         "validate": [
             "nxpo_hrms.custom.employee.update_employee_data",
             "nxpo_hrms.custom.employee.update_current_address",
+            "nxpo_hrms.custom.employee.update_permanent_address",
         ]
     },
     "Payroll Entry": {

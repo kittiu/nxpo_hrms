@@ -63,42 +63,65 @@ def _sql_employee():
     return """
         select emp.name as EMPLOYEE_CODE,
             emp.custom_prefix as INITIAL_NAME,
+            emp.gender as GENDER,
+            emp.custom_prefix as PREFIX_NAME,
+            emp.custom_prefix_en as PREFIX_NAME_EN,
             emp.first_name as FNAME,
             emp.last_name as LNAME,
+            emp.custom_first_name_en as FNAME_EN,
+            emp.custom_last_name_en as LNAME_EN,
+            emp.custom_nick_name as NICK_NAME,
+            emp.custom_citizen_id as CITIZEN_ID,
+            emp.date_of_birth as BIRTHDAY,
             emp.cell_number as CURRENT_TEL,
             emp.company_email as EMAIL,  # Company Email is not in ECM
             emp.custom_house_no as CURRENT_ADDRESS,
             emp.custom_soi as CURRENT_SOI,
             emp.custom_street as CURRENT_ROAD,
-            emp.custom_subdistrict as DISTRICT_NAME,
-            emp.custom_district as AMPHUR_NAME,
-            emp.custom_province as PROVINCE_NAME,
+            emp.custom_subdistrict as CURRENT_DISTRICT_NAME,
+            emp.custom_district as CURRENT_AMPHUR_NAME,
+            emp.custom_province as CURRENT_PROVINCE_NAME,
             emp.custom_zip_code as CURRENT_ZIPCODE,
+            emp.custom_perm_house_no as PERMANENT_ADDRESS,
+            emp.custom_perm_soi as PERMANENT_SOI,
+            emp.custom_perm_street as PERMANENT_ROAD,
+            emp.custom_perm_subdistrict as PERMANENT_DISTRICT_NAME,
+            emp.custom_perm_district as PERMANENT_AMPHUR_NAME,
+            emp.custom_perm_province as PERMANENT_PROVINCE_NAME,
+            emp.custom_perm_zip_code as PERMANENT_ZIPCODE,
             dep.custom_department_sync_code as DEPARTMENT_CODE,
             dep.department_name as DEPARTMENT_NAME,
             dit.custom_department_sync_code as DIRECTORATE_CODE,
             dit.department_name as DIRECTORATE_NAME,
             pos.custom_sync_code as POSITION_CODE,
             emp.designation as POSITION_NAME,
-            # BANK_ID
-            # BANK_CODE
             emp.custom_bank as BANK_NAME,
-            # BRANCH_BANK_CODE
-            # BRANCH_BANK_NAME
-            # BRANCH_BANK_NAME_EN
+            emp.custom_bank_branch_code as BRANCH_BANK_CODE,
+            emp.custom_bank_branch as BRANCH_BANK_NAME,
+            bank.custom_bank_code as BANK_CODE,
+            bank.custom_bank_symbol as BANK_SYMBOL,
+            bank.custom_bank_name_en as BANK_NAME_EN,
+            bank.custom_detail as DETAIL,
+            bank.custom_detail2 as DETAIL2,
             emp.bank_ac_no as BANK_ACCOUNT_NUMBER,
             sub.custom_department_sync_code as SUB_DEPARTMENT_CODE,
             sub.department_name as SUB_DEPARTMENT_NAME,
             dep.custom_chief as MANAGER,
             dep.custom_chief_name as MANAGER_NAME,
             emp.modified as LAST_UPDATE,
-            # ------- EXTRA ---------
-            emp.status as STATUS
+            emp.date_of_joining as START_DATE,
+            emp.relieving_date as END_DATE,
+            emp.status as STATUS,
+            emp.custom_job_family as POSITION_GROUP_ID,
+            emp.grade as POSITION_LEVEL_ID,
+            emp.custom_probation_days as PROBATION_DAY,
+            emp.image as AVATAR_URL
         from `tabEmployee` emp
         left outer join `tabDepartment` dit on emp.custom_directorate = dit.name and dit.custom_type = 'กลุ่มงาน'
         left outer join `tabDepartment` dep on emp.department = dep.name and dep.custom_type = 'ฝ่ายงาน'
         left outer join `tabDepartment` sub on emp.custom_subdepartment = sub.name and sub.custom_type = 'แผนกงาน'
         left outer join `tabDesignation` pos on emp.designation = pos.name
+        left outer join `tabBank` bank on emp.custom_bank = bank.name
     """
 
 
@@ -119,7 +142,12 @@ def get_all_subdepartment():
                 sub.department_name as SUB_DEPARTMENT_NAME,
                 dep.custom_department_sync_code as DEPARTMENT_CODE,
                 dit.custom_department_sync_code as DIRECTORATE_CODE,
-                GREATEST(sub.modified, dep.modified, dit.modified) as LAST_UPDATE
+                GREATEST(sub.modified, dep.modified, dit.modified) as LAST_UPDATE,
+                case
+                    when dit.disabled = 1 then 0
+                    when dit.disabled = 0 then 1
+                    else 1
+                end as ACTIVE
             from `tabDepartment` sub
             join `tabDepartment` dep on sub.parent_department = dep.name
             join `tabDepartment` dit on dep.parent_department = dit.name
@@ -140,7 +168,12 @@ def get_all_department():
                 dep.custom_chief as CHIEF_CODE,
                 dep.custom_chief_name as CHIEF_NAME,
                 dit.custom_department_sync_code as DIRECTORATE_CODE,
-                GREATEST(dep.modified, dit.modified) as LAST_UPDATE
+                GREATEST(dep.modified, dit.modified) as LAST_UPDATE,
+                case
+                    when dit.disabled = 1 then 0
+                    when dit.disabled = 0 then 1
+                    else 1
+                end as ACTIVE
             from `tabDepartment` dep
             join `tabDepartment` dit on dep.parent_department = dit.name
             where dep.custom_type = 'ฝ่ายงาน'
@@ -162,7 +195,12 @@ def get_all_directorate():
                 dit.custom_chief_name as CHIEF_NAME,
                 dit.custom_assistant as ASSISTANT_CODE,
                 dit.custom_assistant_name as ASSISTANT_NAME,
-                dit.modified as LAST_UPDATE
+                dit.modified as LAST_UPDATE,
+                case
+                    when dit.disabled = 1 then 0
+                    when dit.disabled = 0 then 1
+                    else 1
+                end as ACTIVE
             from `tabDepartment` dit
             where dit.custom_type = 'กลุ่มงาน'
         """,
@@ -175,8 +213,21 @@ def get_all_directorate():
 def create_employee_grade():
     # nxpo_hrms.rest_api.create_employee_grade
     data = frappe._dict(json.loads(frappe.request.data))
-    print(data)
     data["doctype"] = "Employee Performance"
-    print(data)
     grade = frappe.get_doc(data)
     return grade.insert()
+
+
+@frappe.whitelist(methods=["GET"])
+def get_holiday(holiday_list=None, weekly_holiday=None):
+    sql = """
+        select parent as holiday_list, holiday_date, description, weekly_off
+        from tabHoliday
+        where 1 = 1
+    """
+    if holiday_list is not None:
+        sql += " and parent = '{0}'".format(holiday_list)
+    if weekly_holiday is not None:
+        sql += " and weekly_off = '{0}'".format(weekly_holiday)
+    data = frappe.db.sql(sql, as_dict=True)
+    return data
