@@ -210,7 +210,7 @@ def get_all_directorate():
 
 
 @frappe.whitelist(methods=["POST"])
-def create_employee_grade():
+def create_employee_performance():
     # nxpo_hrms.rest_api.create_employee_grade
     data = frappe._dict(json.loads(frappe.request.data))
     data["doctype"] = "Employee Performance"
