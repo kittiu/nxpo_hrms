@@ -9,6 +9,7 @@ from frappe.utils import (
 )
 import json
 from hrms.overrides.employee_master import EmployeeMaster
+import re
 
 
 class EmployeeNXPO(EmployeeMaster):
@@ -81,6 +82,13 @@ def update_employee_data(doc, method=None):
         getdate(doc.custom_exit_effective_date) -
         relativedelta(days=1)
     ) or ""
+    # PIN
+    doc.custom_pin = get_last_valid_integer(doc.name)
+
+def get_last_valid_integer(input_string):
+    parts = re.split(r'\D+', input_string)
+    integers = [int(part) for part in parts if part.isdigit()]
+    return str(integers[-1]) if integers else ""
 
 def update_current_address(doc, method=None):
     addrs = [
