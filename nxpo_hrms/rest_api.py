@@ -245,3 +245,17 @@ def get_holiday(holiday_list=None, weekly_holiday=None):
         sql += " and weekly_off = '{0}'".format(weekly_holiday)
     data = frappe.db.sql(sql, as_dict=True)
     return data
+
+
+@frappe.whitelist(methods=["GET"])
+def get_employee_family(employee=None):
+    sql = """
+        select parent as employee, prefix, first_name, last_name, citizen_id,
+            relationship, date_of_birth, custom_gender, age, phone
+        from `tabEmployee Family Members`
+        where 1 = 1
+    """
+    if employee is not None:
+        sql += " and parent = '{0}'".format(employee)
+    data = frappe.db.sql(sql, as_dict=True)
+    return data
