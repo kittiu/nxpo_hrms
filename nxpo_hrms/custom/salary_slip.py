@@ -2,12 +2,11 @@
 # License: GNU General Public License v3. See license.txt
 import frappe
 from frappe import _
-from frappe.utils import date_diff
-from hrms.payroll.doctype.salary_slip.salary_slip import SalarySlip
+from thai_payroll.custom.salary_slip import SalarySlipThaiPayroll
 from hrms.payroll.doctype.salary_slip.salary_slip import calculate_tax_by_tax_slab
 
 
-class SalarySlipNXPO(SalarySlip):
+class SalarySlipNXPO(SalarySlipThaiPayroll):
 
     def calculate_variable_based_on_taxable_salary(self, tax_component):
         tax_amount = super().calculate_variable_based_on_taxable_salary(tax_component)
