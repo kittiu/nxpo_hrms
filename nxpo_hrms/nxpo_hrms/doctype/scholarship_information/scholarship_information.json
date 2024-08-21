@@ -5,11 +5,12 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "employee_information_section",
-  "employee",
+  "primary_information_section",
+  "type_of_information",
   "column_break_okhv",
+  "employee",
   "prefix",
-  "column_break_zbkk",
+  "other_prefix",
   "full_name",
   "scholarship_details_section",
   "government_agreement",
@@ -35,18 +36,13 @@
  ],
  "fields": [
   {
-   "fieldname": "employee_information_section",
-   "fieldtype": "Section Break",
-   "label": "Employee Information"
-  },
-  {
    "fieldname": "employee",
    "fieldtype": "Link",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Employee",
-   "options": "Employee",
-   "reqd": 1
+   "mandatory_depends_on": "eval:doc.type_of_information =='\u0e1e\u0e19\u0e31\u0e01\u0e07\u0e32\u0e19'",
+   "options": "Employee"
   },
   {
    "fieldname": "column_break_okhv",
@@ -60,15 +56,10 @@
    "read_only": 1
   },
   {
-   "fieldname": "column_break_zbkk",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fetch_from": "employee.employee_name",
    "fieldname": "full_name",
    "fieldtype": "Data",
-   "label": "Full Name",
-   "read_only": 1
+   "in_list_view": 1,
+   "label": "Full Name"
   },
   {
    "fieldname": "scholarship_details_section",
@@ -79,15 +70,12 @@
    "description": "\u0e2a\u0e31\u0e0d\u0e0d\u0e32\u0e17\u0e38\u0e19\u0e23\u0e31\u0e10\u0e1a\u0e32\u0e25\u0e2f",
    "fieldname": "government_agreement",
    "fieldtype": "Data",
-   "in_standard_filter": 1,
    "label": "Government Agreement"
   },
   {
    "description": "\u0e0a\u0e37\u0e48\u0e2d\u0e17\u0e38\u0e19\u0e17\u0e35\u0e48\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a",
    "fieldname": "name_of_scholarship",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Name of Scholarship"
   },
   {
@@ -100,7 +88,6 @@
    "description": "\u0e23\u0e30\u0e14\u0e31\u0e1a\u0e17\u0e38\u0e19\u0e17\u0e35\u0e48\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a",
    "fieldname": "degree_of_scholarship",
    "fieldtype": "Data",
-   "in_standard_filter": 1,
    "label": "Degree of Scholarship"
   },
   {
@@ -157,7 +144,6 @@
    "description": "\u0e27\u0e31\u0e19\u0e17\u0e35\u0e48\u0e04\u0e32\u0e14\u0e27\u0e48\u0e32\u0e08\u0e30\u0e2a\u0e33\u0e40\u0e23\u0e47\u0e08\u0e01\u0e32\u0e23\u0e28\u0e36\u0e01\u0e29\u0e32",
    "fieldname": "expected_graduate_date",
    "fieldtype": "Date",
-   "in_list_view": 1,
    "label": "Expected Graduate Date"
   },
   {
@@ -168,6 +154,7 @@
    "description": "\u0e27\u0e31\u0e19\u0e23\u0e32\u0e22\u0e07\u0e32\u0e19\u0e15\u0e31\u0e27\u0e40\u0e02\u0e49\u0e32\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e07\u0e32\u0e19\u0e0a\u0e14\u0e43\u0e0a\u0e49\u0e17\u0e38\u0e19",
    "fieldname": "pay_back_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Pay Back Date"
   },
   {
@@ -177,10 +164,11 @@
   {
    "description": "\u0e2a\u0e16\u0e32\u0e19\u0e20\u0e32\u0e1e\u0e01\u0e32\u0e23\u0e28\u0e36\u0e01\u0e29\u0e32",
    "fieldname": "educational_status",
-   "fieldtype": "Data",
+   "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
-   "label": "Status"
+   "label": "Status",
+   "options": "\n\u0e2d\u0e22\u0e39\u0e48\u0e23\u0e30\u0e2b\u0e27\u0e48\u0e32\u0e07\u0e01\u0e32\u0e23\u0e28\u0e36\u0e01\u0e29\u0e32\n\u0e2d\u0e22\u0e39\u0e48\u0e23\u0e30\u0e2b\u0e27\u0e48\u0e32\u0e07\u0e01\u0e32\u0e23\u0e40\u0e15\u0e23\u0e35\u0e22\u0e21\u0e15\u0e31\u0e27\n\u0e2a\u0e33\u0e40\u0e23\u0e47\u0e08\u0e01\u0e32\u0e23\u0e28\u0e36\u0e01\u0e29\u0e32\n\u0e2a\u0e33\u0e40\u0e23\u0e47\u0e08\u0e01\u0e32\u0e23\u0e28\u0e36\u0e01\u0e29\u0e32 \u0e22\u0e38\u0e15\u0e34\u0e01\u0e32\u0e23\u0e28\u0e36\u0e01\u0e29\u0e32 \u0e1b.\u0e40\u0e2d\u0e01"
   },
   {
    "description": "\u0e27\u0e31\u0e19\u0e40\u0e23\u0e34\u0e48\u0e21\u0e15\u0e49\u0e19\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e07\u0e32\u0e19\u0e0a\u0e14\u0e43\u0e0a\u0e49\u0e17\u0e38\u0e19",
@@ -193,11 +181,29 @@
    "fieldname": "pay_back_end_date",
    "fieldtype": "Date",
    "label": "Pay Back End Date"
+  },
+  {
+   "fieldname": "primary_information_section",
+   "fieldtype": "Section Break",
+   "label": "Primary Information"
+  },
+  {
+   "fieldname": "type_of_information",
+   "fieldtype": "Select",
+   "label": "Type of information",
+   "options": "\u0e1e\u0e19\u0e31\u0e01\u0e07\u0e32\u0e19\n\u0e1a\u0e38\u0e04\u0e04\u0e25\u0e20\u0e32\u0e22\u0e19\u0e2d\u0e01",
+   "reqd": 1
+  },
+  {
+   "fieldname": "other_prefix",
+   "fieldtype": "Link",
+   "label": "Prefix",
+   "options": "Employee Prefix"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-02 08:48:45.913134",
+ "modified": "2024-08-20 12:18:26.189204",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Scholarship Information",

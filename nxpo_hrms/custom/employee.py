@@ -4,12 +4,13 @@ import frappe
 from frappe import _
 from dateutil.relativedelta import relativedelta
 from frappe.utils import (
-	getdate,
-	today,
+    getdate,
+    today,
 )
 import json
 from hrms.overrides.employee_master import EmployeeMaster
 import re
+from datetime import datetime
 
 
 class EmployeeNXPO(EmployeeMaster):
@@ -24,12 +25,15 @@ class EmployeeNXPO(EmployeeMaster):
         )
         return custom_experience_ytd
 
+
     @property
-    def custom_years_of_experience(self):
+    def custom_years_of_current_designation(self):
         transitions = frappe.get_all(
             "Employee Transition",
             fields=[
                 "employee",
+                "designation",
+                "duration",
                 "transition_date as from_date",
                 "end_date as to_date",
             ],
@@ -37,22 +41,37 @@ class EmployeeNXPO(EmployeeMaster):
                 "employee": self.employee,
                 "docstatus": 1,
             },
-            order_by="transition_date asc",
-            limit_page_length=1
+            order_by="transition_date desc",
         )
 
-        if transitions and transitions[0]['from_date']:
-            from_date = transitions[0]['from_date']
-            date = self.relieving_date or today()
-            diff = relativedelta(getdate(date), getdate(from_date))
-            custom_years_of_experience = _("{0} Years {1} Months {2} Days").format(
-                diff.years, diff.months, diff.days
-            )
-            return custom_years_of_experience
-        else:
-            return ""
+        total_duration = relativedelta(years=0, months=0, days=0)
+        last_personal_grade = None
 
+        # for i in range(len(transitions)):
+        for transition in transitions:
+            # transition = transitions[i]
+            personal_grade = frappe.db.get_value('Designation', transition.designation, 'custom_personal_grade')
+            
+            if last_personal_grade is None:
+                last_personal_grade = personal_grade
 
+            if personal_grade != last_personal_grade:
+                break
+
+            if transition.duration is None:
+                from_date = transition.from_date
+                to_date = datetime.now().date()  # Get current date
+                transition_duration = get_duration(from_date, to_date)
+                transition_duration = parse_duration(transition_duration)
+            else:
+                transition_duration = parse_duration(transition.duration)
+
+            # duration = parse_duration(transition.duration)
+            total_duration += transition_duration 
+
+        total_duration = normalize_relativedelta(total_duration)
+        total_duration = format_duration(total_duration)
+        return total_duration
 
     @property
     def custom_business_unit(self):
@@ -70,6 +89,33 @@ class EmployeeNXPO(EmployeeMaster):
                 "Department", self.custom_directorate, "department_name", cache=True
             ))
         return ", ".join(names)
+
+def parse_duration(duration_str):
+    # Assuming duration_str is in the format 'X Years Y Months Z Days'
+    years, months, days = 0, 0, 0
+    if 'Years' in duration_str:
+        years = int(duration_str.split(' Years ')[0])
+        duration_str = duration_str.split(' Years ')[1]
+    if 'Months' in duration_str:
+        months = int(duration_str.split(' Months ')[0])
+        duration_str = duration_str.split(' Months ')[1]
+    if 'Days' in duration_str:
+        days = int(duration_str.split(' Days')[0])
+    return relativedelta(years=years, months=months, days=days)
+
+def format_duration(rd):
+    return f"{rd.years} Years {rd.months} Months {rd.days} Days"
+
+def normalize_relativedelta(rd):
+    temp_start_date = datetime(1, 1, 1)
+    normalized_date = temp_start_date + rd
+    normalized_rd = relativedelta(normalized_date, temp_start_date)
+    return normalized_rd
+
+# Helper function to calculate duration between two dates
+def get_duration(from_date, to_date):
+    delta = relativedelta(to_date, from_date)
+    return f"{delta.years} Years {delta.months} Months {delta.days} Days"
 
 def update_employee_data(doc, method=None):
     # Date pass probation
@@ -142,17 +188,17 @@ def get_employee_transition_html(employee):
     )
     for rec in trans:
         rec["directorate"] = frappe.get_value(
-			"Department",
-			rec["directorate"],
-			"department_name",  # To remove - N suffix
-			cache=True
-		)
+            "Department",
+            rec["directorate"],
+            "department_name",  # To remove - N suffix
+            cache=True
+        )
         rec["department"] = frappe.get_value(
-			"Department",
-			rec["department"],
-			"department_name",  # To remove - N suffix
-			cache=True
-		)
+            "Department",
+            rec["department"],
+            "department_name",  # To remove - N suffix
+            cache=True
+        )
     return frappe.render_template("nxpo_hrms/custom/employee/employee_transition.html", {"data": trans})
 
 @frappe.whitelist()
@@ -213,17 +259,17 @@ def get_employee_special_assignment(employee):
 
     for esa in employee_special_assignment:
         esa["directorate"] = frappe.get_value(
-			"Department",
-			esa["directorate"],
-			"department_name",  # To remove - N suffix
-			cache=True
-		)
+            "Department",
+            esa["directorate"],
+            "department_name",  # To remove - N suffix
+            cache=True
+        )
         esa["department"] = frappe.get_value(
-			"Department",
-			esa["department"],
-			"department_name",  # To remove - N suffix
-			cache=True
-		)
+            "Department",
+            esa["department"],
+            "department_name",  # To remove - N suffix
+            cache=True
+        )
 
     return frappe.render_template("nxpo_hrms/custom/employee/employee_special_assignment.html", {"data": employee_special_assignment})
 

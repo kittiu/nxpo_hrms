@@ -36,6 +36,13 @@ frappe.ui.form.on("Employee", {
 				}
 			};
 		});
+		frm.set_query('custom_bank_branch', function() {
+            return {
+                filters: [
+                    ['Bank Branch', 'bank', '=', frm.doc.custom_bank]
+                ]
+            };
+        });
 	},
 	// Onchange 1 remove 2 remove 3
 	custom_assignment_designation_1: function(frm) {
