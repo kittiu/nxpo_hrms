@@ -82,7 +82,7 @@ def get_sum_bonus(filters, type_bonus=None):
             fieldname='SUM(amount)'
             )
         split_tax_deduct_amount = round(row.get('split_tax_deduct_amount', 0), 2)
-        sum_net_bonus_paid = (sum_net_bonus_paid or 0) - row['split_tax_deduct_amount']
+        sum_net_bonus_paid = (sum_net_bonus_paid or 0) - split_tax_deduct_amount
         bonus_paid = bonus_paid + (sum_net_bonus_paid or 0)
         bonus_paid = round(bonus_paid, 2)
 
