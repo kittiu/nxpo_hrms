@@ -251,7 +251,7 @@ def get_holiday(holiday_list=None, weekly_holiday=None):
 def get_employee_family(employee=None):
     sql = """
         select parent as employee, prefix, first_name, last_name, citizen_id,
-            relationship, date_of_birth, custom_gender, age, phone
+            relationship, date_of_birth, custom_gender, phone
         from `tabEmployee Family Members`
         where 1 = 1
     """
