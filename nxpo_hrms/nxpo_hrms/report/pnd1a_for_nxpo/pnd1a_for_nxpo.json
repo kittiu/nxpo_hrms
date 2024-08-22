@@ -81,12 +81,12 @@
  "modified": "2024-08-07 12:17:00.408847",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
- "name": "PND1a NXPO",
+ "name": "PND1a For NXPO",
  "owner": "Administrator",
  "prepared_report": 0,
  "query": "select \n    '401N' as tax_type,\n    c.tax_id,\n    row_number() over(order by a.employee) as idx,\n    a.employee,\n    replace(e.custom_citizen_id, '-', '') as citizen_id,\n    e.salutation,\n    e.first_name,\n    e.last_name,\n    a.pay_amount,\n    a.deduct_amount,\n    '1' as tax_cond\nfrom\n(select \n    ss.company,\n    ss.employee,\n    sum(round(ss.gross_pay, 2)) as pay_amount,\n    sum(round(sd.amount, 2)) as deduct_amount\nfrom `tabSalary Slip` ss\n    join `tabSalary Detail` sd on sd.parent = ss.name\n    join `tabSalary Component` sc\n        on sc.name = sd.salary_component\n        and sc.is_income_tax_component = true\nwhere ss.docstatus = %(docstatus)s\n    and posting_date >= %(from_date)s and posting_date <= %(to_date)s\n    and ss.company = %(company)s\ngroup by ss.company, ss.employee\norder by ss.employee) a\njoin `tabCompany` c on c.name = a.company\njoin `tabPayroll Period` p on p.name = %(payroll_period)s\njoin `tabEmployee` e on e.name = a.employee\n",
  "ref_doctype": "Salary Slip",
- "report_name": "PND1a NXPO",
+ "report_name": "PND1a For NXPO",
  "report_type": "Script Report",
  "roles": [
   {

@@ -192,6 +192,7 @@ doctype_js = {
     "Leave Allocation": "public/js/leave_allocation.js",
     "Additional Salary": "public/js/additional_salary.js",
     "Attendance": "public/js/attendance.js",
+    "Leave Application": "public/js/leave_application.js",
 }
 doctype_tree_js = {
     "Department" : "public/js/department_tree.js"
