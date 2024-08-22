@@ -113,7 +113,7 @@ def get_data(filters):
                 ss.posting_date,
                 round(ss.gross_pay, 2) as pay_amount,
                 round(sd.amount, 2) as deduct_amount,
-                1 as tax_cond
+                sd.salary_component
             from `tabSalary Slip` ss join `tabEmployee` emp on ss.employee = emp.name
                 join `tabCompany` c on ss.company = c.name
                 join `tabSalary Detail` sd on sd.parent = ss.name
@@ -128,6 +128,12 @@ def get_data(filters):
         as_dict=True,
     )
     data = query_data
+
+    for row in data:
+        if 'เงินชดเชย' in row['salary_component']:
+            row['tax_cond'] = 2
+        else:
+            row['tax_cond'] = 1
 
     return data
 
