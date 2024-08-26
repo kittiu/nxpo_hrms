@@ -1,13 +1,21 @@
 # Copyright (c) 2024, Ecosoft and contributors
 # For license information, please see license.txt
+import datetime
 
 import frappe
 from frappe import _
 from frappe.model.document import Document
-from frappe.utils import getdate
+from frappe.utils import (
+	date_diff,
+	flt,
+	getdate,
+)
 from datetime import timedelta
+
 from frappe.desk.form.assign_to import add as add_assignment
 from collections import Counter
+from hrms.hr.doctype.leave_application.leave_application import get_holidays
+
 
 
 class WFARequest(Document):
@@ -113,6 +121,21 @@ class WFARequest(Document):
 			frappe.db.rollback()
 			self.db_set("status", "Pending")
 			self.add_comment("Label", _("Failed create WFA Request as attendances: {}").format(str(e)))
+
+	@frappe.whitelist()
+	def get_number_of_leave_days_for_wfa(
+		self,
+		from_date: datetime.date,
+		to_date: datetime.date,
+		employee: str| None = None,
+		holiday_list: str | None = None,
+	) -> float:
+		number_of_days = 0
+		number_of_days = date_diff(to_date, from_date) + 1
+		number_of_days = flt(number_of_days) - flt(
+				get_holidays(employee, from_date, to_date, holiday_list=holiday_list)
+			)
+		return number_of_days
 
 def auto_create_attendance_requests():
 	# Find all WFA requested submitted but not completed
