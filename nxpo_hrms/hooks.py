@@ -196,6 +196,10 @@ doctype_js = {
 doctype_tree_js = {
     "Department" : "public/js/department_tree.js"
 }
+
+doctype_list_js = {
+    "Employee Tax Exemption Declaration": "public/js/employee_tax_exemption_declaration.js",
+}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
 # Svg Icons
@@ -284,6 +288,7 @@ override_doctype_class = {
     "Salary Slip": "nxpo_hrms.custom.salary_slip.SalarySlipNXPO",
 	"Salary Structure Assignment": "nxpo_hrms.custom.salary_structure_assignment.SalaryStructureAssignmentNXPO",
     "Leave Policy Assignment": "nxpo_hrms.custom.leave_policy_assignment.LeavePolicyAssignmentNXPO",
+    "Employee Tax Exemption Declaration": "nxpo_hrms.custom.employee_tax_exemption_declaration.EmployeeTaxExemptionDeclarationNXPO",
 }
 
 # Document Events
