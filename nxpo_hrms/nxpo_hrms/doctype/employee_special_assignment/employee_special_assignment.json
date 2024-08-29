@@ -68,7 +68,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Assignment Type",
-   "options": "\n\u0e23\u0e31\u0e01\u0e29\u0e32\u0e01\u0e32\u0e23\n\u0e23\u0e31\u0e01\u0e29\u0e32\u0e01\u0e32\u0e23\u0e41\u0e17\u0e19\n\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e2b\u0e19\u0e49\u0e32\u0e0a\u0e48\u0e27\u0e22",
+   "options": "\n\u0e23\u0e31\u0e01\u0e29\u0e32\u0e01\u0e32\u0e23\n\u0e23\u0e31\u0e01\u0e29\u0e32\u0e01\u0e32\u0e23\u0e41\u0e17\u0e19\n\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e2b\u0e19\u0e49\u0e32\u0e17\u0e35\u0e48\u0e0a\u0e48\u0e27\u0e22",
    "reqd": 1
   },
   {
@@ -137,7 +137,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-23 12:29:25.160585",
+ "modified": "2024-08-29 10:07:56.120540",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Special Assignment",

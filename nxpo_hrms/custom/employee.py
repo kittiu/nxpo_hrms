@@ -199,6 +199,16 @@ def get_employee_transition_html(employee):
             "department_name",  # To remove - N suffix
             cache=True
         )
+        if rec['duration'] is None:
+            date = today()
+            diff = relativedelta(getdate(date), getdate(rec['from_date']))
+            custom_duration = _("{0} Years {1} Months {2} Days").format(
+                diff.years, diff.months, diff.days
+            )
+            rec['duration'] = custom_duration
+  
+
+
     return frappe.render_template("nxpo_hrms/custom/employee/employee_transition.html", {"data": trans})
 
 @frappe.whitelist()
@@ -225,7 +235,7 @@ def get_education_html(employee):
     educations = frappe.get_all(
         "Employee Education",
         fields=[
-            "school_univ as school",
+            "custom_schooluniversity as school",
             "custom_degree as degree",
             "custom_major as major",
             "custom_year_of_admission as admission_year",

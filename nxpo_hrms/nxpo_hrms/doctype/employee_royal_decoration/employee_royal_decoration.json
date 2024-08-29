@@ -9,7 +9,7 @@
   "employee",
   "employee_name",
   "column_break_anel",
-  "fiscal_year",
+  "proposal_date",
   "offered_royal_decoration",
   "section_break_wycq",
   "received_royal_decoration",
@@ -26,15 +26,6 @@
    "options": "Employee",
    "reqd": 1,
    "search_index": 1
-  },
-  {
-   "description": "\u0e1b\u0e35\u0e17\u0e35\u0e48\u0e40\u0e2a\u0e19\u0e2d\u0e43\u0e2b\u0e49\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e23\u0e32\u0e0a",
-   "fieldname": "fiscal_year",
-   "fieldtype": "Link",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
-   "label": "Proposal Year",
-   "options": "Fiscal Year"
   },
   {
    "fetch_from": "employee.employee_name",
@@ -83,11 +74,17 @@
   {
    "fieldname": "column_break_anel",
    "fieldtype": "Column Break"
+  },
+  {
+   "description": "\u0e1b\u0e35\u0e17\u0e35\u0e48\u0e40\u0e2a\u0e19\u0e2d\u0e43\u0e2b\u0e49\u0e44\u0e14\u0e49\u0e23\u0e31\u0e1a\u0e40\u0e04\u0e23\u0e37\u0e48\u0e2d\u0e07\u0e23\u0e32\u0e0a",
+   "fieldname": "proposal_date",
+   "fieldtype": "Date",
+   "label": "Proposal Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-22 16:43:34.933125",
+ "modified": "2024-08-29 15:03:06.170441",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Royal Decoration",
