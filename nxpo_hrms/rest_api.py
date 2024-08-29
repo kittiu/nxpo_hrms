@@ -40,7 +40,7 @@ ECM_TO_FRAPPE = {
     "bank_branch_name": "custom_bank_branch",
     "education": {
         "edu_level": "custom_degree",
-        "edu_educational": "qualification",
+        "edu_educational": "custom_qualification_new",
         "edu_datestart": "custom_year_of_admission",
         "edu_dateend": "custom_year_of_graduation",
         "edu_academy": "school_univ",
@@ -257,5 +257,27 @@ def get_employee_family(employee=None):
     """
     if employee is not None:
         sql += " and parent = '{0}'".format(employee)
+    data = frappe.db.sql(sql, as_dict=True)
+    return data
+
+@frappe.whitelist(methods=["GET"])
+def get_employee_education(employee=None):
+    sql = """
+        select emp.employee as employee_code,
+            emp.first_name as first_name,
+            emp.last_name as last_name,
+            edu.custom_degree as edu_level,
+            edu.custom_qualification_new as edu_educational,
+            edu.custom_major as edu_major,
+            edu.custom_country as edu_country,
+            edu.custom_schooluniversity as edu_academy,
+            edu.custom_gpa as edu_gpa,
+            edu.custom_year_of_admission as edu_datestart,
+            edu.custom_year_of_graduation as edu_dateend
+        from `tabEmployee` emp join `tabEmployee Education` edu on emp.name = edu.parent
+        where 1 = 1
+    """
+    if employee is not None:
+        sql += " and edu.parent = '{0}'".format(employee)
     data = frappe.db.sql(sql, as_dict=True)
     return data
