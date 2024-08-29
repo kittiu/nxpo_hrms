@@ -43,7 +43,7 @@ ECM_TO_FRAPPE = {
         "edu_educational": "custom_qualification_new",
         "edu_datestart": "custom_year_of_admission",
         "edu_dateend": "custom_year_of_graduation",
-        "edu_academy": "school_univ",
+        "edu_academy": "custom_schooluniversity",
         "edu_country": "custom_country",
         "edu_major": "custom_major",
         "edu_gpa": "custom_gpa",
