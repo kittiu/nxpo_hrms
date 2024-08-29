@@ -46,6 +46,7 @@ ECM_TO_FRAPPE = {
         "edu_academy": "custom_schooluniversity",
         "edu_country": "custom_country",
         "edu_major": "custom_major",
+        "edu_subject": "maj_opt_subj",
         "edu_gpa": "custom_gpa",
     },
     "status": "status"
@@ -269,6 +270,7 @@ def get_employee_education(employee=None):
             edu.custom_degree as edu_level,
             edu.custom_qualification_new as edu_educational,
             edu.custom_major as edu_major,
+            edu.maj_opt_subj as edu_subject,
             edu.custom_country as edu_country,
             edu.custom_schooluniversity as edu_academy,
             edu.custom_gpa as edu_gpa,
