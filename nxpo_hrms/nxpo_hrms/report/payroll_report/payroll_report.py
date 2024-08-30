@@ -123,6 +123,12 @@ def get_columns(filters):
         "width": 0
         },
         {
+        "fieldname": "e8",
+        "fieldtype": "Currency",
+        "label": "ค่าตอบแทนเหมาจ่าย",
+        "width": 0
+        },
+        {
         "fieldname": "d1",
         "fieldtype": "Currency",
         "label": "ภาษี",
@@ -216,6 +222,7 @@ def get_data(filters):
 
     query = f"""
         SELECT
+            ss.name as salary_slip_id,
             ss.employee,
             emp.custom_prefix as prefix,
             emp.employee_name,
@@ -237,6 +244,7 @@ def get_data(filters):
             d4.amount AS d4,
             d5.amount AS d5,
             d6.amount AS d6,
+            e8.amount AS e8,
             ss.net_pay,
             pvd_com.amount AS pvd_com,
             ss.gross_pay,
@@ -262,6 +270,7 @@ def get_data(filters):
         LEFT OUTER JOIN `tabSalary Detail` d5 ON d5.parenttype = 'Salary Slip' AND d5.parent = ss.name AND d5.salary_component = 'กยศ.'
         LEFT OUTER JOIN `tabSalary Detail` d6 ON d6.parenttype = 'Salary Slip' AND d6.parent = ss.name AND d6.salary_component = 'เงินหักอื่นๆ'
         LEFT OUTER JOIN `tabSalary Detail` pvd_com ON pvd_com.parenttype = 'Salary Slip' AND pvd_com.parent = ss.name AND pvd_com.salary_component = 'กองทุนบริษัทสมทบ'
+        LEFT OUTER JOIN `tabSalary Detail` e8 ON e8.parenttype = 'Salary Slip' AND e8.parent = ss.name AND e8.salary_component = 'ค่าตอบแทนเหมาจ่าย'
         WHERE ss.docstatus = %(docstatus)s
             AND ss.start_date >= %(from_date)s
             AND ss.end_date <= %(to_date)s
@@ -281,6 +290,7 @@ def get_data(filters):
     sum_e5 = 0
     sum_e6 = 0
     sum_e7 = 0
+    sum_e8 = 0
     sum_d1 = 0
     sum_d2 = 0
     sum_d3 = 0
@@ -328,6 +338,7 @@ def get_data(filters):
         sum_e6 += row['e6'] if row['e6'] is not None else 0
         sum_e5 += row['e5'] if row['e5'] is not None else 0
         sum_e7 += row['e7'] if row['e7'] is not None else 0
+        sum_e8 += row['e8'] if row['e8'] is not None else 0
         sum_d1 += row['d1'] if row['d1'] is not None else 0
         sum_d2 += row['d2'] if row['d2'] is not None else 0
         sum_d4 += row['d4'] if row['d4'] is not None else 0
@@ -346,7 +357,6 @@ def get_data(filters):
         sum_deductions += row['total_deduction'] if row['total_deduction'] is not None else 0
         sum_pvd_com += row['pvd_com'] if row['pvd_com'] is not None else 0
 
-
     # Append the total row
     total_row = {
         'employee': 'Total',
@@ -357,6 +367,7 @@ def get_data(filters):
         'e6': sum_e6,
         'e5': sum_e5,
         'e7': sum_e7,
+        'e8': sum_e8,
         'd1': sum_d1,
         'd2': sum_d2,
         'd4': sum_d4,
