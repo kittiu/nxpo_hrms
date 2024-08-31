@@ -289,6 +289,7 @@ override_doctype_class = {
 	"Salary Structure Assignment": "nxpo_hrms.custom.salary_structure_assignment.SalaryStructureAssignmentNXPO",
     "Leave Policy Assignment": "nxpo_hrms.custom.leave_policy_assignment.LeavePolicyAssignmentNXPO",
     "Employee Tax Exemption Declaration": "nxpo_hrms.custom.employee_tax_exemption_declaration.EmployeeTaxExemptionDeclarationNXPO",
+    "Attendance Request": "nxpo_hrms.custom.attendance_request.AttendanceRequestNXPO",
 }
 
 # Document Events
@@ -327,12 +328,6 @@ doc_events = {
     "WFA Request": {  # Reusing exact same logic for approver as Leave Application
         "validate": "nxpo_hrms.custom.leave_application.compute_approver",
         "on_update": "nxpo_hrms.custom.leave_application.share_to_approver",
-    },
-    "Attendance": {
-        "validate": "nxpo_hrms.custom.attendance.validate_status_wfh",
-    },
-    "Attendance Request": {
-        "validate": "nxpo_hrms.custom.attendance_request.validate_status_wfh",
     },
 }
 
