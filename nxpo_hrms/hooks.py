@@ -340,7 +340,7 @@ doc_events = {
 # ---------------
 
 scheduler_events = {
-    "daily": [
+    "hourly": [
         "nxpo_hrms.nxpo_hrms.doctype.wfa_request.wfa_request.auto_create_attendance_requests",
         "nxpo_hrms.nxpo_hrms.doctype.employee_special_assignment.employee_special_assignment.job_update_active",
     ],
