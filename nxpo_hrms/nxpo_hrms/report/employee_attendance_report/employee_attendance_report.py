@@ -87,9 +87,9 @@ def get_data(filters):
                 wfa.development,
                 wfa.name as wfa_id
             from `tabAttendance` atd
-            join `tabAttendance Request` atdr on atd.attendance_request = atdr.name
-            join `tabWFA Request` wfa on atdr.custom_wfa_request = wfa.name
-            join `tabEmployee` emp on atd.employee = emp.name
+            left join `tabAttendance Request` atdr on atd.attendance_request = atdr.name
+            left join `tabWFA Request` wfa on atdr.custom_wfa_request = wfa.name
+            left join `tabEmployee` emp on atd.employee = emp.name
             where atd.company = %(company)s 
                 AND atd.attendance_date >= %(from_date)s 
                 AND atd.attendance_date <= %(to_date)s 
