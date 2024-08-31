@@ -192,6 +192,7 @@ doctype_js = {
     "Leave Allocation": "public/js/leave_allocation.js",
     "Additional Salary": "public/js/additional_salary.js",
     "Attendance": "public/js/attendance.js",
+    "Employee Attendance Tool": "public/js/employee_attendance_tool.js",
 }
 doctype_tree_js = {
     "Department" : "public/js/department_tree.js"
@@ -290,6 +291,7 @@ override_doctype_class = {
     "Leave Policy Assignment": "nxpo_hrms.custom.leave_policy_assignment.LeavePolicyAssignmentNXPO",
     "Employee Tax Exemption Declaration": "nxpo_hrms.custom.employee_tax_exemption_declaration.EmployeeTaxExemptionDeclarationNXPO",
     "Attendance Request": "nxpo_hrms.custom.attendance_request.AttendanceRequestNXPO",
+    "Attendance": "nxpo_hrms.custom.attendance.AttendanceNXPO",
 }
 
 # Document Events
