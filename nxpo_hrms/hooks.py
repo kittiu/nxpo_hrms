@@ -353,6 +353,7 @@ scheduler_events = {
 #
 override_whitelisted_methods = {
     "frappe.core.doctype.user.user.get_all_roles": "nxpo_hrms.custom.user.get_all_roles",
+    "hrms.hr.doctype.employee_attendance_tool.employee_attendance_tool.get_employees": "nxpo_hrms.custom.employee_attendance_tool.get_employees"
 }
 #
 # each overriding function accepts a `data` argument;
