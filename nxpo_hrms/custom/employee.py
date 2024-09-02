@@ -28,49 +28,7 @@ class EmployeeNXPO(EmployeeMaster):
 
     @property
     def custom_years_of_current_designation(self):
-        transitions = frappe.get_all(
-            "Employee Transition",
-            fields=[
-                "employee",
-                "designation",
-                "duration",
-                "transition_date as from_date",
-                "end_date as to_date",
-            ],
-            filters={
-                "employee": self.employee,
-                "docstatus": 1,
-            },
-            order_by="transition_date desc",
-        )
-
-        total_duration = relativedelta(years=0, months=0, days=0)
-        last_personal_grade = None
-
-        # for i in range(len(transitions)):
-        for transition in transitions:
-            # transition = transitions[i]
-            personal_grade = frappe.db.get_value('Designation', transition.designation, 'custom_personal_grade')
-            
-            if last_personal_grade is None:
-                last_personal_grade = personal_grade
-
-            if personal_grade != last_personal_grade:
-                break
-
-            if transition.duration is None:
-                from_date = transition.from_date
-                to_date = datetime.now().date()  # Get current date
-                transition_duration = get_duration(from_date, to_date)
-                transition_duration = parse_duration(transition_duration)
-            else:
-                transition_duration = parse_duration(transition.duration)
-
-            # duration = parse_duration(transition.duration)
-            total_duration += transition_duration 
-
-        total_duration = normalize_relativedelta(total_duration)
-        total_duration = format_duration(total_duration)
+        total_duration = get_custom_years_of_current_designation(self.employee)
         return total_duration
 
     @property
@@ -89,6 +47,53 @@ class EmployeeNXPO(EmployeeMaster):
                 "Department", self.custom_directorate, "department_name", cache=True
             ))
         return ", ".join(names)
+    
+
+def get_custom_years_of_current_designation(employee_code):
+    transitions = frappe.get_all(
+        "Employee Transition",
+        fields=[
+                "employee",
+                "designation",
+                "duration",
+                "transition_date as from_date",
+                "end_date as to_date",
+            ],
+            filters={
+                "employee": employee_code,
+                "docstatus": 1,
+            },
+            order_by="transition_date desc",
+    )
+
+    total_duration = relativedelta(years=0, months=0, days=0)
+    last_personal_grade = None
+
+    # for i in range(len(transitions)):
+    for transition in transitions:
+        # transition = transitions[i]
+        personal_grade = frappe.db.get_value('Designation', transition.designation, 'custom_personal_grade')
+            
+        if last_personal_grade is None:
+            last_personal_grade = personal_grade
+
+        if personal_grade != last_personal_grade:
+            break
+
+        if transition.duration is None:
+            from_date = transition.from_date
+            to_date = datetime.now().date()  # Get current date
+            transition_duration = get_duration(from_date, to_date)
+            transition_duration = parse_duration(transition_duration)
+        else:
+            transition_duration = parse_duration(transition.duration)
+
+        # duration = parse_duration(transition.duration)
+        total_duration += transition_duration 
+
+    total_duration = normalize_relativedelta(total_duration)
+    total_duration = format_duration(total_duration)
+    return total_duration
 
 def parse_duration(duration_str):
     # Assuming duration_str is in the format 'X Years Y Months Z Days'
@@ -164,7 +169,18 @@ def update_permanent_address(doc, method=None):
 
 @frappe.whitelist()
 def get_employee_basic_html(employee):
+    
     data = json.loads(employee)
+
+    # Convert date_of_birth to a date object
+    date_of_birth = datetime.strptime(data['date_of_birth'], '%Y-%m-%d').date()
+
+    # Calculate age
+    today = datetime.today().date()
+    age = today.year - date_of_birth.year - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
+
+    data['age'] = f"{age} ปี"
+
     return frappe.render_template("nxpo_hrms/custom/employee/basic.html", {"data": data})
 
 @frappe.whitelist()
@@ -178,7 +194,8 @@ def get_employee_transition_html(employee):
             "designation",
             "transition_date as from_date",
             "end_date as to_date",
-            "duration"
+            "duration",
+            "organization"
         ],
         filters={
             "docstatus": 1,

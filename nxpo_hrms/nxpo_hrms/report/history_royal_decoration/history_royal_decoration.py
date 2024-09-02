@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
+from nxpo_hrms.custom.employee import get_custom_years_of_current_designation
 
 
 def execute(filters=None):
@@ -67,6 +68,12 @@ def get_columns(filters):
                 "width": 0
             },
             {
+                "fieldname": "years_of_current_designation",
+                "fieldtype": "Data",
+                "label": "ระยะเวลาการครองตำแหน่ง",
+                "width": 0
+            },
+            {
                 "fieldname": "received_date",
                 "fieldtype": "Data",
                 "label": "ปีที่เคยได้รับเครื่องราช",
@@ -123,6 +130,9 @@ def get_data(filters):
     )
 
     data = query_data
+    for row in data:
+        row['years_of_current_designation'] = get_custom_years_of_current_designation(row['employee_code'])
+        
     return data
 
 def get_conditions(filters):
