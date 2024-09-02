@@ -75,7 +75,7 @@ def sum_amount_ss_component(company, start_date, end_date, salary_component):
 		.on(ss.name == sd.parent)
 		.select(Sum(sd.amount))
 		.where(
-			(ss.docstatus == 1)
+			(ss.docstatus.isin([0, 1]))
 			& (ss.company == company)
 			& (ss.start_date >= start_date)
 			& (ss.end_date <= end_date)
