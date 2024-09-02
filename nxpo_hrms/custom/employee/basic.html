@@ -1,5 +1,6 @@
 <div class="print-heading">
-	<h2 style="background-color: rgb(238, 238, 238);; padding: 10px; border-radius: 10px;">
+	<!-- <h2 class="bg-secondary" style="padding: 10px; border-radius: 10px;"> -->
+	<h2 class="text-dark" style="background-color: rgb(238, 238, 238); padding: 10px; border-radius: 10px;">
 		<div>{{ data.name }} : {{ data.custom_prefix or "" }} {{ data.first_name or "" }} {{ data.last_name or "" }}</div>
 	</h2>
 	<br/>
@@ -35,6 +36,18 @@
 				{{ data.custom_citizen_id or "" }}
 			</div>
 		</div>
+
+
+		<div class="row  data-field">
+			<div class="col-xs-5">
+				<label><b>อายุ:</b></label>
+			</div>
+			<div class="col-xs-7">
+				{{ data.age or "" }}
+			</div>
+		</div>
+
+		
 	</div>
 	<div class="col-xs-4 column-break">
 		<div class="row  data-field">
@@ -79,6 +92,7 @@
 				{{ data.grade or "" }}
 			</div>
 		</div>
+
 		<div class="row  data-field">
 			<div class="col-xs-5">
 				<label><b>สถานะ:</b></label>
@@ -171,3 +185,24 @@
 		</div>
 	</div>
 </div>
+
+<script>
+    // Detect the current theme and set the appropriate class
+    function setHeaderBackground() {
+        let header = document.getElementById("dynamic-header");
+
+        // Check the theme applied in Frappe
+        let theme = document.body.dataset.theme;
+
+        if (theme === "Frappe Light") {
+            header.classList.add("bg-light");
+            header.classList.remove("bg-dark");
+        } else if (theme === "Timeless Night") {
+            header.classList.add("bg-dark");
+            header.classList.remove("bg-light");
+        }
+    }
+
+    // Run the function on page load
+    document.addEventListener("DOMContentLoaded", setHeaderBackground);
+</script>

@@ -1,15 +1,16 @@
 
 <h4><u>ประวัติการทำงานในสำนักงาน</u></h4>
 <table class="table table-bordered table-condensed">
-	<thead style="background-color: rgb(238, 238, 238);;">
+	<thead class="text-dark" style="background-color: rgb(238, 238, 238);;">
 		<tr>
-			<th>กลุ่มงาน</th>
-			<th>ฝ่าย</th>
-			<th>ตำแหน่ง</th>
+			<th style="width: 25%;">กลุ่มงาน</th>
+			<th style="width: 10%;">ฝ่าย</th>
+			<th style="width: 15%;">ตำแหน่ง</th>
+			<th style="width: 15%;">หน่วยงาน</th>
 			<!-- <th>สถานะตำแหน่ง</th> -->
-			<th>เริ่มต้น</th>
-			<th>สิ้นสุด</th>
-			<th>อายุงาน</th>
+			<th style="width: 10%;">เริ่มต้น</th>
+			<th style="width: 10%;">สิ้นสุด</th>
+			<th style="width: 15%;">อายุงาน</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -25,6 +26,7 @@
 			<td class="value">{{ d.directorate or "" }}</td>
 			<td class="value">{{ d.department or "" }}</td>
 			<td class="value">{{ d.designation or "" }}</td>
+			<td class="value">{{ d.organization or "" }}</td>
 			<!-- <td class="value">{{ status_designation or "" }}</td> -->
 			<td class="value">{{ frappe.format(d.from_date, "Date") or ""}}</td>
 			<td class="value">{{ frappe.format(d.to_date, "Date") or "ปัจจุบัน" }}</td>

@@ -22,6 +22,7 @@
   "set_end_date_manually",
   "end_date",
   "duration",
+  "organization",
   "new_section",
   "designation",
   "business_unit",
@@ -229,12 +230,18 @@
    "fieldname": "reference_doc",
    "fieldtype": "Small Text",
    "label": "Reference Doc."
+  },
+  {
+   "description": "\u0e2b\u0e19\u0e48\u0e27\u0e22\u0e07\u0e32\u0e19\u0e17\u0e35\u0e48\u0e2a\u0e31\u0e07\u0e01\u0e31\u0e14",
+   "fieldname": "organization",
+   "fieldtype": "Data",
+   "label": "Organization"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-08-30 17:02:52.401581",
+ "modified": "2024-09-02 12:42:30.559323",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Transition",
