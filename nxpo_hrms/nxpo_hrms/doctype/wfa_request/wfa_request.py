@@ -90,7 +90,7 @@ class WFARequest(Document):
 		wfa_dates = [d[0] for d in wfa_dates]
 		week_list += list(map(lambda d: d.isocalendar()[1], wfa_dates))
 		week_exceed = [str(k) for (k, v) in Counter(week_list).items() if v > wfa_days_per_week]
-		if week_exceed:
+		if week_exceed and self.type == 'WFA':
 			frappe.throw(
 				_("Your WFA request is exceeding {} days on the week {}").format(
 					wfa_days_per_week,
