@@ -126,7 +126,8 @@ def update_employee_data(doc, method=None):
     # Date pass probation
     doc.custom_date_pass_probation = (
         getdate(doc.date_of_joining) +
-        relativedelta(days=doc.custom_probation_days)
+        relativedelta(days=doc.custom_probation_days) -
+        relativedelta(days=1)
     )
     # Relieving Date from Effective Date
     doc.relieving_date = doc.custom_exit_effective_date and (
