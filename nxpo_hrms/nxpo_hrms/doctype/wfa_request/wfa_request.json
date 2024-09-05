@@ -113,7 +113,7 @@
    "fieldname": "type",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "\nWFA\nDevelopment",
+   "options": "\nWork From Anywhere\nDevelopment\nBackdate Request",
    "reqd": 1
   },
   {
@@ -133,7 +133,7 @@
    "link_fieldname": "custom_wfa_request"
   }
  ],
- "modified": "2024-08-29 12:16:44.724886",
+ "modified": "2024-09-05 16:04:34.481005",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "WFA Request",

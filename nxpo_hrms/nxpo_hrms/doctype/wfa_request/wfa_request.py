@@ -90,7 +90,7 @@ class WFARequest(Document):
 		wfa_dates = [d[0] for d in wfa_dates]
 		week_list += list(map(lambda d: d.isocalendar()[1], wfa_dates))
 		week_exceed = [str(k) for (k, v) in Counter(week_list).items() if v > wfa_days_per_week]
-		if week_exceed and self.type == 'WFA':
+		if week_exceed and self.type == "Work From Anywhere":
 			frappe.throw(
 				_("Your WFA request is exceeding {} days on the week {}").format(
 					wfa_days_per_week,
@@ -101,6 +101,9 @@ class WFARequest(Document):
 	@frappe.whitelist()
 	def create_attendance_requests(self):
 		try:
+			reason = "Work From Home"
+			if self.type == "Backdate Request":
+				reason = "On Duty"
 			for plan in self.plan_dates:
 				attend = frappe.new_doc("Attendance Request")
 				attend.update({
@@ -108,7 +111,7 @@ class WFARequest(Document):
 					"company": self.company,
 					"from_date": plan.from_date,
 					"to_date": plan.to_date,
-					"reason": "Work From Home",
+					"reason": reason,
 					"explanation": self.note,
 					"half_day": plan.half_day,
 					"half_day_date": plan.half_day_date,

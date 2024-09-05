@@ -49,7 +49,7 @@ frappe.ui.form.on("Employee Attendance Tool", {
 			{
 				name: "work_from_anywhere",
 				id: "work_from_anywhere",
-				content: __("WFA"),
+				content: __("Work From Anywhere"),
 				editable: false,
 				sortable: false,
 				focusable: false,
