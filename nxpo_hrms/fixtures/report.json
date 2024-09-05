@@ -33,6 +33,7 @@
     "parenttype": "Report",
     "role": "HR User"
    }
-  ]
+  ],
+  "timeout": 0
  }
 ]
