@@ -196,17 +196,14 @@ def get_columns(filters):
     # Company ID on KTB  > 56-71 
     result_10 = add_space_character(16)
 
-    # Company ID on KTB  > 56-71 
-    result_11 = add_space_character(16)
-
     # space  > 72-91 
-    result_12 = add_space_character(20)
+    result_11 = add_space_character(20)
 
     # space > 92-498 
-    result_13 = add_space_character(407)
+    result_12 = add_space_character(407)
 
 
-    label = result_1 + result_2 + result_3 + result_4 + result_5 + result_6 + result_7 + result_8 + result_9 + result_10 + result_11 + result_12 + result_13
+    label = result_1 + result_2 + result_3 + result_4 + result_5 + result_6 + result_7 + result_8 + result_9 + result_10 + result_11 + result_12
 
     columns = [
         {
@@ -248,7 +245,9 @@ def get_data(filters):
             ss.custom_split_tax_deduction_on,
             ss.custom_main_tax_deduct_amount as main_tax_deduct_amount,
             ss.custom_split_tax_deduct_amount as split_tax_deduct_amount,
-            ss.payroll_entry
+            ss.payroll_entry,
+            emp.first_name,
+            emp.last_name
         FROM `tabSalary Slip` ss
         join `tabEmployee` emp on ss.employee = emp.employee 
         WHERE ss.docstatus = %(docstatus)s
@@ -373,7 +372,8 @@ def get_data(filters):
         result_15 = "0000000000"
 
         # ชือผู้รับโอน > 93-192
-        name_result_16= row['employee_name']
+        # name_result_16 = row['employee_name']
+        name_result_16 = row['first_name'] + '  ' + row['last_name']
         result_16 = chk_character(name_result_16, 100)
 
         # ชื่อผู้โอน > 193-292
@@ -402,15 +402,18 @@ def get_data(filters):
         # เลขที่อ้างอิงกำหนดโดยธนาคาร > 393-398
         result_24 = "000001"
 
-        # สถานะของรายการ
+        # สถานะของรายการ > 399-400
         result_25 = "09"
+
+        # space > 401-498
+        result_26 = add_space_character(98)
 
         # Combine the results into a single string
         results = [
             result_1, result_2, result_3, result_4, result_5, result_6,
             result_7, result_8, result_9, result_10, result_11, result_12,
             result_13, result_14, result_15, result_16, result_17, result_18,
-            result_19, result_20, result_21, result_22, result_23, result_24, result_25
+            result_19, result_20, result_21, result_22, result_23, result_24, result_25, result_26
         ]
 
         result_mix = "".join(results)

@@ -173,7 +173,7 @@ def get_columns(filters):
         {
         "fieldname": "pvd_com",
         "fieldtype": "Currency",
-        "label": "กองทุนบริษัทสมทบ",
+        "label": "กองทุนสำนักงานสะสม",
         "width": 0
         },
         {
@@ -269,7 +269,7 @@ def get_data(filters):
         LEFT OUTER JOIN `tabSalary Detail` d4 ON d4.parenttype = 'Salary Slip' AND d4.parent = ss.name AND d4.salary_component = 'ธนาคารอาคารสงเคราะห์'
         LEFT OUTER JOIN `tabSalary Detail` d5 ON d5.parenttype = 'Salary Slip' AND d5.parent = ss.name AND d5.salary_component = 'กยศ.'
         LEFT OUTER JOIN `tabSalary Detail` d6 ON d6.parenttype = 'Salary Slip' AND d6.parent = ss.name AND d6.salary_component = 'เงินหักอื่นๆ'
-        LEFT OUTER JOIN `tabSalary Detail` pvd_com ON pvd_com.parenttype = 'Salary Slip' AND pvd_com.parent = ss.name AND pvd_com.salary_component = 'กองทุนบริษัทสมทบ'
+        LEFT OUTER JOIN `tabSalary Detail` pvd_com ON pvd_com.parenttype = 'Salary Slip' AND pvd_com.parent = ss.name AND pvd_com.salary_component = 'กองทุนสำนักงานสะสม'
         LEFT OUTER JOIN `tabSalary Detail` e8 ON e8.parenttype = 'Salary Slip' AND e8.parent = ss.name AND e8.salary_component = 'ค่าตอบแทนเหมาจ่าย'
         WHERE ss.docstatus = %(docstatus)s
             AND ss.start_date >= %(from_date)s
