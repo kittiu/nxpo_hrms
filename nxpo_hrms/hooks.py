@@ -6,14 +6,6 @@ app_email = "kittiu@ecosoft.co.th"
 app_license = "mit"
 # required_apps = []
 
-# Monkey patching
-# ------------------
-# 1. Get Employee on Payroll Entry
-import hrms.payroll.doctype.payroll_entry.payroll_entry as pe
-import nxpo_hrms.custom.payroll_entry as custom_pe
-pe.get_filtered_employees = custom_pe.get_filtered_employees
-
-
 fixtures = [
     {
         "doctype": "Workflow State",
