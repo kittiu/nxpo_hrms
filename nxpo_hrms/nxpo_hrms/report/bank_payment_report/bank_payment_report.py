@@ -51,14 +51,18 @@ def format_total_net_pay(total_net_pay, total_length=19):
     combined = integer_part + decimal_part
     return combined.zfill(total_length)
 
-def get_sum_bonus(filters, type_bonus=None):
+def get_sum_bonus(filters, type_bonus=None, salary_slip_list=[]):
     date_field = 'custom_date_for_split_tax_component' if filters.get('nob') == 'bonus' else 'posting_date'
 
     ssl_bonus = frappe.get_all('Salary Slip', 
+        # filters={
+        #     'company': filters.get('company'), 
+        #     'docstatus': filters.get('docstatus'),
+        #     date_field: filters.get('date'),
+        #     'custom_split_tax_deduction_on': ['is', 'set'],
+        # }, 
         filters={
-            'company': filters.get('company'), 
-            'docstatus': filters.get('docstatus'),
-            date_field: filters.get('date'),
+            'name': ['in', salary_slip_list],
             'custom_split_tax_deduction_on': ['is', 'set'],
         }, 
         fields=[
@@ -101,9 +105,9 @@ def get_sum_bonus(filters, type_bonus=None):
         excluded_bonus = round(excluded_bonus, 2)
         
     
-    if type_bonus is 'bonus_paid':
+    if type_bonus == 'bonus_paid':
         return bonus_paid
-    elif type_bonus is 'excluded_bonus': 
+    elif type_bonus == 'excluded_bonus': 
         return excluded_bonus
 
 
@@ -111,39 +115,62 @@ def get_columns(filters):
     label = ""
     count_batch = 0
 
-    if filters.get('nob') == 'bonus':
-        count_batch = frappe.db.count('Salary Slip', {
-            'company': filters.get('company'), 
-            'docstatus': filters.get('docstatus'),
-            'custom_date_for_split_tax_component': filters.get('date'),
-            'custom_split_tax_deduction_on': ['is', 'set']
-        })
-    else:
-        count_batch = frappe.db.count('Salary Slip', {
-            'company': filters.get('company'), 
-            'docstatus': filters.get('docstatus'),
-            'posting_date': filters.get('date'),
-        })
+    bank_payment_export_list = frappe.db.get_all(
+        'Bank Payment Export Salary Slips', 
+        filters={'parent': filters['bank_payment_export']}, 
+        fields=['salary_slip']
+    )
+    bank_payment_export_type, bank_payment_export_date = frappe.db.get_value(
+        'Bank Payment Export', 
+        filters['bank_payment_export'], 
+        fieldname='type, posting_date'
+    )
+
+    # Extract only the 'salary_slip' values into an array
+    salary_slip_list = [item['salary_slip'] for item in bank_payment_export_list]
+
+    # if filters.get('nob') == 'bonus':
+    #     count_batch = frappe.db.count('Salary Slip', {
+    #         'company': filters.get('company'), 
+    #         'docstatus': filters.get('docstatus'),
+    #         'custom_date_for_split_tax_component': filters.get('date'),
+    #         'custom_split_tax_deduction_on': ['is', 'set']
+    #     })
+    # else:
+    #     count_batch = frappe.db.count('Salary Slip', {
+    #         'company': filters.get('company'), 
+    #         'docstatus': filters.get('docstatus'),
+    #         'posting_date': filters.get('date'),
+    #     })
         
+    count_batch = frappe.db.count('Bank Payment Export Salary Slips', {
+            'parent': filters.get('bank_payment_export'), 
+    })
     # Calculate the total net pay
+    # sum_net_pay = frappe.db.get_value('Salary Slip', 
+    #     filters={
+    #         'company': filters.get('company'), 
+    #         'docstatus': filters.get('docstatus'),
+    #         'posting_date': filters.get('date'),
+    #         'custom_split_tax_deduction_on': ['is', 'null']
+    #     }, 
+    #     fieldname='SUM(net_pay)'
+    # )
     sum_net_pay = frappe.db.get_value('Salary Slip', 
         filters={
-            'company': filters.get('company'), 
-            'docstatus': filters.get('docstatus'),
-            'posting_date': filters.get('date'),
+            'name': ['in', salary_slip_list],
             'custom_split_tax_deduction_on': ['is', 'null']
         }, 
         fieldname='SUM(net_pay)'
     )
-    # print('sum_net_pay', sum_net_pay)
 
-    sum_bonus_paid = get_sum_bonus(filters, 'bonus_paid')
+    sum_bonus_paid = get_sum_bonus(filters, 'bonus_paid', salary_slip_list)
     # print('sum_bonus_paid', sum_bonus_paid)
-    sum_excluded_bonus = get_sum_bonus(filters, 'excluded_bonus')
+    sum_excluded_bonus = get_sum_bonus(filters, 'excluded_bonus', salary_slip_list)
     # print('sum_excluded_bonus', sum_excluded_bonus)
 
     total_net_pay = 0
-    if filters.get('nob') == 'normal':
+    if bank_payment_export_type == 'Normal':
         total_net_pay = (sum_net_pay or 0) + (sum_excluded_bonus or 0)
     else: 
         total_net_pay = (sum_bonus_paid or 0)
@@ -158,13 +185,11 @@ def get_columns(filters):
     #     fieldname='posting_date'
     # )
     posting_date_transform =  "00000000"
-    if filters.get('date'):
-        # Convert the string to a datetime object
-        date_str = filters.get('date')
-        date_obj = datetime.strptime(date_str, '%Y-%m-%d')  # Adjust the format based on your date string format
+ 
+    date_obj = bank_payment_export_date  # No need to convert with strptime
 
-        # Now apply strftime to the datetime object
-        posting_date_transform = date_obj.strftime('%d%m%Y')
+    # Now apply strftime to the datetime object
+    posting_date_transform = date_obj.strftime('%d%m%Y')
 
     # Field Type > 1-2 (Fixed)
     result_1 = "10"
@@ -231,6 +256,16 @@ def get_data(filters):
 
     # if same_month != True:
     #     return data
+
+    bank_payment_export_list = frappe.db.get_all(
+        'Bank Payment Export Salary Slips', 
+        filters={'parent': filters['bank_payment_export']}, 
+        fields=['salary_slip']
+    )
+    
+    # Extract only the 'salary_slip' values into an array
+    salary_slip_list = [item['salary_slip'] for item in bank_payment_export_list]
+
     conditions = get_conditions(filters)
 
     query = f"""
@@ -250,11 +285,11 @@ def get_data(filters):
             emp.last_name
         FROM `tabSalary Slip` ss
         join `tabEmployee` emp on ss.employee = emp.employee 
-        WHERE ss.docstatus = %(docstatus)s
-            AND ss.company = %(company)s 
-            {('AND ' + conditions) if conditions else ''}
+        WHERE ss.name IN %(salary_slip_names)s
         """
     
+
+    filters['salary_slip_names'] = salary_slip_list
     query_data = frappe.db.sql(query, filters, as_dict=True)
 
     data = query_data
