@@ -11,7 +11,7 @@ class BankPaymentExport(Document):
 
     def on_submit(self):
         if not self.bank_sal_slip:
-            frappe.throw(_("Submission Error: No salary slips found in the bank payment export."))
+            frappe.throw(_("The report can’t be exported due to no salary slip found in the selected posting date."))
 
     @frappe.whitelist()
     def fill_sal_slip(self):
@@ -25,6 +25,19 @@ class BankPaymentExport(Document):
             error_msg = _("No Salary Slip From This Posting Date")
             frappe.throw(error_msg, title=_("No Salary Slip found"))
         self.set("bank_sal_slip", sal_slip)
+
+    @frappe.whitelist()
+    def get_url_report(self):
+
+        # Get default company for the current user
+        default_company = frappe.defaults.get_user_default("Company")
+        bank_payment_export = self.name
+        
+        # Construct the report URL with the default company as a parameter
+        custom_url = frappe.utils.get_url(f"/app/query-report/Bank%20Payment%20Report?company={default_company}&bank_payment_export={bank_payment_export}")
+
+
+        return custom_url
 
 
 def get_sal_slip(filters):
