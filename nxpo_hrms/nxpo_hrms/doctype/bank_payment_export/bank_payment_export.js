@@ -8,7 +8,7 @@ frappe.ui.form.on("Bank Payment Export", {
 		}).toggleClass("btn-primary", !(frm.doc.bank_sal_slip || []).length);
 
 		if (frm.doc.docstatus === 1) {
-			frm.add_custom_button(__("Go to Report"), function () {
+			frm.add_custom_button(__("Bank Payment Report"), function () {
 				frm.events.go_report(frm);
 			}).addClass("btn-primary");
 		}
@@ -21,7 +21,7 @@ frappe.ui.form.on("Bank Payment Export", {
 				doc: frm.doc,
 				method: "get_url_report",
 				freeze: true,
-				freeze_message: __("Go to Report"),
+				freeze_message: __("Bank Payment Report"),
 			})
 			.then((r) => {
 				window.open(r.message, '_blank');

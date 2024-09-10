@@ -192,6 +192,8 @@ doctype_tree_js = {
 
 doctype_list_js = {
     "Employee Tax Exemption Declaration": "public/js/employee_tax_exemption_declaration.js",
+    "Leave Allocation": "public/js/leave_allocation.js",
+
 }
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
