@@ -50,7 +50,7 @@ def get_sal_slip(filters):
                 ss.name as salary_slip,
                 ss.employee as employee
             from `tabSalary Slip` ss
-            where ss.docstatus = 1
+            where ss.docstatus IN (1, 0)
             {('AND ' + conditions) if conditions else ''}
         """,
         filters,

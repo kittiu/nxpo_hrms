@@ -428,13 +428,10 @@ def get_latest_salary_structure(employee, start, end):
         FROM `tabSalary Structure Assignment`
         WHERE docstatus = 1 
             AND employee = %(employee)s
-            AND from_date >= %(start)s 
-            AND from_date <= %(end)s 
         ORDER BY from_date DESC
         LIMIT 1
     """
     result = frappe.db.sql(query, {'employee': employee, 'start': start, 'end': end}, as_dict=True)
-    
     if result:
         return result[0]['base']
     else:
