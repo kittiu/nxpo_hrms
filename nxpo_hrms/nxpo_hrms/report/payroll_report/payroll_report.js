@@ -13,24 +13,24 @@ frappe.query_reports["Payroll Report"] = {
 			label: __("From Date"),
 			fieldtype: "Date",
 			reqd: 1,
-            default: frappe.datetime.month_start(),
+			default: frappe.datetime.month_start(),
 		},
 		{
 			fieldname: "to_date",
 			label: __("To Date"),
 			fieldtype: "Date",
 			reqd: 1,
-            default: frappe.datetime.month_end(),
+			default: frappe.datetime.month_end(),
 		},
 		{
 			fieldname: "docstatus",
 			label: __("Document Status"),
 			fieldtype: "Select",
 			options: [
-                {value: 0, label: "Draft"},
-                {value: 1, label: "Submitted"},
-                {value: 2, label: "Cancelled"},
-            ],
+				{ value: 0, label: "Draft" },
+				{ value: 1, label: "Submitted" },
+				{ value: 2, label: "Cancelled" },
+			],
 			default: 1,
 			reqd: 1,
 		},
@@ -39,12 +39,12 @@ frappe.query_reports["Payroll Report"] = {
 			label: __("Employee Status"),
 			fieldtype: "Select",
 			options: [
-				{value: "", label: __("Select Employee Status")},
-                {value: "Active", label: "Active"},
-                {value: "Inactive", label: "Inactive"},
-                {value: "Suspended", label: "Suspended"},
-				{value: "Left", label: "Left"},
-            ],
+				{ value: "", label: __("Select Employee Status") },
+				{ value: "Active", label: "Active" },
+				{ value: "Inactive", label: "Inactive" },
+				{ value: "Suspended", label: "Suspended" },
+				{ value: "Left", label: "Left" },
+			],
 			reqd: 0,
 		},
 		{
@@ -72,42 +72,48 @@ frappe.query_reports["Payroll Report"] = {
 			label: __("PMU or NXPO"),
 			fieldtype: "Select",
 			options: [
-				{value: "", label: __("Select PMU or NXPO")},
-				{value: "pmu", label: "PMU"},
-				{value: "nxpo", label: "NXPO"},
-        
-            ],
+				{ value: "", label: __("Select PMU or NXPO") },
+				{ value: "pmu", label: "PMU" },
+				{ value: "nxpo", label: "NXPO" },
+
+			],
 			reqd: 0,
 		},
-    ],
-    onload: function(report) {
-        function toggleDirectorateField() {
-            let pmu_or_nxpo_value = report.get_values().pmu_or_nxpo;
-            let directorate_field = report.page.fields_dict.directorate;
-            if (pmu_or_nxpo_value) {
-                directorate_field.df.read_only = 1;
-            } else {
-                directorate_field.df.read_only = 0;
-            }
-            directorate_field.refresh();
-        }
+	],
+	onload: function (report) {
+		function toggleDirectorateField() {
+			let pmu_or_nxpo_value = report.get_values().pmu_or_nxpo;
+			let directorate_field = report.page.fields_dict.directorate;
+			if (pmu_or_nxpo_value) {
+				directorate_field.df.read_only = 1;
+			} else {
+				directorate_field.df.read_only = 0;
+			}
+			directorate_field.refresh();
+		}
 
-        // Initial toggle based on current value
-        toggleDirectorateField();
+		// Initial toggle based on current value
+		toggleDirectorateField();
 
-        // Set up an event listener to handle changes
-        report.page.fields_dict.pmu_or_nxpo.$input.on("change", toggleDirectorateField);
-    },
+		// Set up an event listener to handle changes
+		report.page.fields_dict.pmu_or_nxpo.$input.on("change", toggleDirectorateField);
+	},
 
-    formatter: function (value, row, column, data, default_formatter) {
+	formatter: function (value, row, column, data, default_formatter) {
+
 		value = default_formatter(value, row, column, data);
-		if (column.fieldname.includes(__("percentile"))) {
+		if (data && column.fieldname === 'custom_percentile') {
 			if (data[column.fieldname] < 0) {
 				value = "<span style='color:red'>" + value + "</span>";
 			} else if (data[column.fieldname] > 0) {
 				value = "<span style='color:green'>" + value + "</span>";
+			} else {
+				value = "<span>" + value + "</span>";
 			}
 		}
 		return value;
+
+
+
 	},
 };

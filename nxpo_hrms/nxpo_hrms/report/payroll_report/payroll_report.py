@@ -173,7 +173,7 @@ def get_columns(filters):
         {
         "fieldname": "pvd_com",
         "fieldtype": "Currency",
-        "label": "กองทุนสำนักงานสะสม",
+        "label": "กองทุนฯสำนักงานสมทบ",
         "width": 0
         },
         {
@@ -200,18 +200,20 @@ def get_columns(filters):
         "label": "Max",
         "width": 0
         },
+
         {
-        "fieldname": "percentile",
-        "fieldtype": "Float",
-        "label": "Percentile",
-        "width": 0
+            "fieldname": "custom_percentile",
+            "fieldtype": "Data",
+            "label": "Percentile",
+            "width": 0
         },
         {
         "fieldname": "posting_date",
         "fieldtype": "Date",
         "label": "Posting Date",
         "width": 0
-        }
+        },
+
     ]
 
     return columns
@@ -317,6 +319,7 @@ def get_data(filters):
         custom_min = row.get('custom_min', 0)
         custom_max = row.get('custom_max', 0)
         custom_base = base_salary if base_salary is not None else 0
+        # row['custom_percentile'] = 5
 
         if base_salary is not None:
             if custom_min != custom_max:
@@ -324,11 +327,12 @@ def get_data(filters):
                 result2 = custom_max - custom_min
                 result3 = result1 / result2
                 result4 = result3 * 100
-                row['percentile'] = result4
+                result4 = round(result4, 4)
+                row['custom_percentile'] = f"{result4}"
             else: 
-                row['percentile'] = None
+                row['custom_percentile'] = 0
         else:
-            row['percentile'] = None
+            row['custom_percentile'] = 0
         
         # Calculate total amounts
         sum_e1 += row['e1'] if row['e1'] is not None else 0
@@ -358,38 +362,38 @@ def get_data(filters):
         sum_pvd_com += row['pvd_com'] if row['pvd_com'] is not None else 0
 
     # Append the total row
-    total_row = {
-        'employee': 'Total',
-        'e1': sum_e1,
-        'e2': sum_e2,
-        'e3': sum_e3,
-        'e4': sum_e4,
-        'e6': sum_e6,
-        'e5': sum_e5,
-        'e7': sum_e7,
-        'e8': sum_e8,
-        'd1': sum_d1,
-        'd2': sum_d2,
-        'd4': sum_d4,
-        'd3': sum_d3,
-        'd5': sum_d5,
-        'd6': sum_d6,
+    # total_row = {
+    #     'employee': 'Total',
+    #     'e1': sum_e1,
+    #     'e2': sum_e2,
+    #     'e3': sum_e3,
+    #     'e4': sum_e4,
+    #     'e6': sum_e6,
+    #     'e5': sum_e5,
+    #     'e7': sum_e7,
+    #     'e8': sum_e8,
+    #     'd1': sum_d1,
+    #     'd2': sum_d2,
+    #     'd4': sum_d4,
+    #     'd3': sum_d3,
+    #     'd5': sum_d5,
+    #     'd6': sum_d6,
 
-        'base_salary': sum_base,
+    #     'base_salary': sum_base,
 
-        'custom_min': sum_custom_min,
-        'custom_max': sum_custom_max,
+    #     'custom_min': sum_custom_min,
+    #     'custom_max': sum_custom_max,
 
-        'net_pay': sum_net_pay,
-        'gross_pay': sum_gross_pay,
-        'total_deduction': sum_deductions,
-        'pvd_com': sum_pvd_com,
+    #     'net_pay': sum_net_pay,
+    #     'gross_pay': sum_gross_pay,
+    #     'total_deduction': sum_deductions,
+    #     'pvd_com': sum_pvd_com,
         
-        'percentile': None
+    #     'custom_percentile': None
 
 
-    }
-    data.append(total_row)
+    # }
+    # data.append(total_row)
 
     return data
 

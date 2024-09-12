@@ -14,7 +14,6 @@ frappe.ui.form.on("Bank Payment Export", {
 		}
 	},
 
-	
 	go_report: function (frm) {
 		return frappe
 			.call({
@@ -28,7 +27,7 @@ frappe.ui.form.on("Bank Payment Export", {
 			});
 	},
 
-    get_salary_slip_from_date: function (frm) {
+	get_salary_slip_from_date: function (frm) {
 		return frappe
 			.call({
 				doc: frm.doc,
@@ -37,7 +36,7 @@ frappe.ui.form.on("Bank Payment Export", {
 				freeze_message: __("Fetching Salary Slip"),
 			})
 			.then((r) => {
-                // console.log('r', r);
+				// console.log('r', r);
 				// if (r.docs?.[0]?.custom_payroll_period_employees) {
 				frm.dirty();
 				// frm.save();
@@ -49,4 +48,20 @@ frappe.ui.form.on("Bank Payment Export", {
 
 });
 
+
+
+frappe.ui.form.on("Bank Payment Export Salary Slips", {
+
+	// Triggered when a row is removed from the child table
+	bank_sal_slip_remove: function (frm, cdt, cdn) {
+		// Calculate the total net pay after a row is removed
+		let total_net_pay = frm.doc.bank_sal_slip.reduce((total, row) => {
+			return total + (row.net_pay || 0); // Add net_pay values, handle undefined values
+		}, 0);
+
+		frm.set_value("total_net_pay",total_net_pay);
+
+	},
+
+});
 

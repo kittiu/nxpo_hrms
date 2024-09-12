@@ -69,9 +69,10 @@ def get_columns(filters):
         },
         {
             "fieldname": "pvd_emp_percent",
-            "fieldtype": "Int",
+            "fieldtype": "Data",
             "label": "% สะสม",
-            "width": 0
+            "width": 0,
+            "align": "right" 
         },
         {
             "fieldname": "pvd_com",
@@ -81,9 +82,10 @@ def get_columns(filters):
         },
         {
             "fieldname": "pvd_com_percent",
-            "fieldtype": "Int",
+            "fieldtype": "Data",
             "label": "% สมทบ",
-            "width": 0
+            "width": 0,
+            "align": "right" 
         },
         {
             "fieldname": "pvd_total",
@@ -156,6 +158,20 @@ def get_data(filters):
     sum_pvd_total = 0
 
     for row in data:
+        pvd_emp_percent = row['pvd_emp_percent']
+            # Convert to int if the value is a whole number, otherwise keep it as float
+        if pvd_emp_percent.is_integer():
+            row['pvd_emp_percent'] = f"{int(pvd_emp_percent)}"
+        else:
+            row['pvd_emp_percent'] = f"{pvd_emp_percent}"
+
+        pvd_com_percent = row['pvd_com_percent']
+        if pvd_com_percent.is_integer():
+            row['pvd_com_percent'] = f"{int(pvd_com_percent)}"
+        else:
+            row['pvd_com_percent'] = f"{pvd_com_percent}"
+
+
         if row['salary']:
             sum_salary += row['salary']
 
@@ -173,22 +189,22 @@ def get_data(filters):
         
 
     # Add a new set of data (example)
-    total_data = {
-        'idx': 'Total',
-        'employee': '',
-        'employee_name': '',
-        'salary': sum_salary,
-        'back_salary': sum_back_salary,
-        'pvd_start_date': '',
-        'pvd_emp': sum_pvd_emp,
-        'pvd_emp_percent': None,
-        'pvd_com': sum_pvd_com,
-        'pvd_com_percent': None,
-        'pvd_total': sum_pvd_total,
-        'posting_date': '',
-        'prefix': ''
-    }
-    data.append(total_data)
+    # total_data = {
+    #     'idx': 'Total',
+    #     'employee': '',
+    #     'employee_name': '',
+    #     'salary': sum_salary,
+    #     'back_salary': sum_back_salary,
+    #     'pvd_start_date': '',
+    #     'pvd_emp': sum_pvd_emp,
+    #     'pvd_emp_percent': None,
+    #     'pvd_com': sum_pvd_com,
+    #     'pvd_com_percent': None,
+    #     'pvd_total': sum_pvd_total,
+    #     'posting_date': '',
+    #     'prefix': ''
+    # }
+    # data.append(total_data)
 
     
     return data

@@ -20,11 +20,16 @@ class BankPaymentExport(Document):
             nob=self.type,
         )
         sal_slip = get_sal_slip(filters)
+        print('sal_slip', sal_slip)
         self.set("bank_sal_slip", [])
         if not sal_slip:
             error_msg = _("No Salary Slip From This Posting Date")
             frappe.throw(error_msg, title=_("No Salary Slip found"))
         self.set("bank_sal_slip", sal_slip)
+
+        # Sum the net_pay values
+        total_net_pay = sum(row['net_pay'] for row in sal_slip)
+        self.set("total_net_pay", total_net_pay)
 
     @frappe.whitelist()
     def get_url_report(self):
@@ -48,7 +53,10 @@ def get_sal_slip(filters):
         f"""
             select
                 ss.name as salary_slip,
-                ss.employee as employee
+                ss.employee as employee,
+                ss.net_pay,
+                ss.custom_split_tax_deduction_on as split_tax_deduction_on,
+                ss.custom_split_tax_deduct_amount as split_tax_deduct_amount
             from `tabSalary Slip` ss
             where ss.docstatus IN (1, 0)
             {('AND ' + conditions) if conditions else ''}
@@ -57,6 +65,25 @@ def get_sal_slip(filters):
         as_dict=True,
     )
     data = query_data
+
+    for row in data:
+        if filters['nob'] == 'Bonus' :
+            
+            sum_net_bonus_paid = frappe.db.get_value('Salary Detail', 
+                filters={
+                    'parent': row['salary_slip'], 
+                    'parentfield': 'earnings',
+                    'salary_component': row['split_tax_deduction_on']
+                }, 
+                fieldname='SUM(amount)'
+                )
+            
+            # Ensure sum_net_bonus_paid is not None
+            if sum_net_bonus_paid is None:
+                sum_net_bonus_paid = 0.0
+
+            # Perform the subtraction
+            row['net_pay'] = sum_net_bonus_paid - row['split_tax_deduct_amount']
 
     return data
 

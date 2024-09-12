@@ -9,6 +9,7 @@
   "posting_date",
   "column_break_yhan",
   "type",
+  "total_net_pay",
   "section_break_ybbn",
   "bank_sal_slip",
   "amended_from"
@@ -51,12 +52,18 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
+  },
+  {
+   "fieldname": "total_net_pay",
+   "fieldtype": "Currency",
+   "label": "Total Net Pay",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-06 11:33:50.790483",
+ "modified": "2024-09-12 16:58:20.701376",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Bank Payment Export",
