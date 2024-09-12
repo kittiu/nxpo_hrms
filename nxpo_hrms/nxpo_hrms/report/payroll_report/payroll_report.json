@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "columns": [
   {
    "fieldname": "employee",
@@ -176,11 +176,11 @@
  "docstatus": 0,
  "doctype": "Report",
  "filters": [],
- "idx": 10,
+ "idx": 11,
  "is_standard": "Yes",
  "letter_head": "NXPO",
  "letterhead": null,
- "modified": "2024-08-01 16:03:38.646314",
+ "modified": "2024-09-12 15:20:15.423349",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Payroll Report",

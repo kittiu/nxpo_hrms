@@ -1,5 +1,5 @@
 {
- "add_total_row": 0,
+ "add_total_row": 1,
  "columns": [
   {
    "fieldname": "idx",
@@ -80,11 +80,11 @@
  "docstatus": 0,
  "doctype": "Report",
  "filters": [],
- "idx": 17,
+ "idx": 18,
  "is_standard": "Yes",
  "letter_head": "NXPO",
  "letterhead": null,
- "modified": "2024-07-12 14:46:17.173235",
+ "modified": "2024-09-12 15:12:50.822599",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "PVD Report",
