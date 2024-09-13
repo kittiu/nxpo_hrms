@@ -140,7 +140,7 @@ def get_data(filters):
         LEFT JOIN `tabSalary Detail` pvd_com ON pvd_com.parenttype = 'Salary Slip' 
             AND pvd_com.parentfield = 'deductions' 
             AND pvd_com.parent = ss.name 
-            AND pvd_com.salary_component = 'กองทุนสำนักงานสะสม'
+            AND pvd_com.salary_component = 'กองทุนสำรองเลี้ยงชีพสำนักงานสมทบ'
         WHERE ss.docstatus = %(docstatus)s
             AND ss.start_date = %(from_date)s
             AND ss.end_date = %(to_date)s
