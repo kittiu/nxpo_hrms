@@ -60,3 +60,20 @@ def get_permission_query_conditions(user):
     if "Payroll User" in roles:
         restrict = ""
     return restrict
+
+def set_print_format_as_custom():
+    # Set as custom, so user can disable it in production
+    print_formats = [
+        "Salary Slip Excluded Bonus EN",
+        "Salary Slip Excluded Bonus TH",
+        "Salary Slip Bonus Paid EN",
+        "Additional Salary Period Slip EN",
+        "Salary Slip Bonus Paid TH",
+        "Additional Salary Period Slip TH",
+        "Tax Computation Report",
+        "Salary Slip with Year to Date",
+        "Salary Slip based on Timesheet",
+        "Salary Slip Standard",
+    ]
+    for print_format in print_formats:
+        frappe.db.set_value("Print Format", print_format, "standard", "No")

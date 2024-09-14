@@ -240,6 +240,8 @@ jinja = {
 # before_uninstall = "nxpo_hrms.uninstall.before_uninstall"
 # after_uninstall = "nxpo_hrms.uninstall.after_uninstall"
 
+after_migrate = ["nxpo_hrms.custom.salary_slip.set_print_format_as_custom"]
+
 # Integration Setup
 # ------------------
 # To set up dependencies/integrations with other apps
