@@ -335,11 +335,11 @@ def get_data(filters):
         # รหัสธนาคารต้นทาง > 28-30
         result_7 = "006"
 
-        # รหัสสาขาธนาคารต้นทาง > 31-34
-        result_8 = branch_code if branch_code else "0000"
+        # รหัสสาขาธนาคารต้นทาง > 31-35
+        result_8 = add_zero_front(branch_code, 5) if branch_code  else "00000"
 
-        # เลขที่บัญชีเงินฝากธนาคารต้นทาง > 35-45
-        result_9 = bank_account_no if add_zero_front(bank_account_no, 11) else "00000000000" 
+        # เลขที่บัญชีเงินฝากธนาคารต้นทาง > 36-45
+        result_9 = add_zero_front(bank_account_no, 10)  if bank_account_no  else "00000000000" 
 
         row_posting_date_transform = "00000000"
         if row['custom_split_tax_deduction_on'] and row['payroll_entry'] and filters.get('nob') == 'bonus':
