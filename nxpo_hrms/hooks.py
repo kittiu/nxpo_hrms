@@ -313,9 +313,9 @@ doc_events = {
             "nxpo_hrms.custom.salary_slip.validate_no_salary",
         ]
     },
-    # "Department": {
-    #     "validate": "nxpo_hrms.custom.department.validate_department",
-    # },
+    "Employee Tax Exemption Declaration": {
+        "validate": "nxpo_hrms.custom.employee_tax_exemption_declaration.update_pvd_amount",
+    },
     "User": {
         "validate": "nxpo_hrms.custom.user.create_user_own_role",
     },

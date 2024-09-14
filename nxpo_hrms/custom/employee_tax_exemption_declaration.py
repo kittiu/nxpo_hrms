@@ -3,7 +3,6 @@ from datetime import date
 import frappe
 from frappe import _, msgprint
 from frappe.utils.background_jobs import enqueue
-from frappe.model.document import Document
 
 from hrms.payroll.doctype.employee_tax_exemption_declaration.employee_tax_exemption_declaration import EmployeeTaxExemptionDeclaration
 
@@ -77,3 +76,8 @@ def email_employee_tax_exemption_declarations(names) -> None:
     for name in names:
         employee_tax_exemption_declaration = frappe.get_doc("Employee Tax Exemption Declaration", name)
         employee_tax_exemption_declaration.email_employee_tax_exemption_declaration()
+
+def update_pvd_amount(doc, method):
+    employee = frappe.get_cached_doc("Employee", doc.employee)
+    if employee.custom_pvd_employee:
+        doc.custom_pvd_contribution = (doc.custom_yearly_salary or 0) * employee.custom_pvd_employee / 100
