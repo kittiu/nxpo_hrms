@@ -170,18 +170,16 @@ def update_permanent_address(doc, method=None):
 
 @frappe.whitelist()
 def get_employee_basic_html(employee):
-    
     data = json.loads(employee)
-
-    # Convert date_of_birth to a date object
-    date_of_birth = datetime.strptime(data['date_of_birth'], '%Y-%m-%d').date()
-
-    # Calculate age
-    today = datetime.today().date()
-    age = today.year - date_of_birth.year - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
-
-    data['age'] = f"{age} ปี"
-
+    if data.get('date_of_birth'):
+        # Convert date_of_birth to a date object
+        date_of_birth = datetime.strptime(data['date_of_birth'], '%Y-%m-%d').date()
+        # Calculate age
+        today = datetime.today().date()
+        age = today.year - date_of_birth.year - ((today.month, today.day) < (date_of_birth.month, date_of_birth.day))
+        data['age'] = f"{age} ปี"
+    else:
+        data['age'] = f"- ปี"
     return frappe.render_template("nxpo_hrms/custom/employee/basic.html", {"data": data})
 
 @frappe.whitelist()
