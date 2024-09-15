@@ -61,13 +61,6 @@ class WFARequest(Document):
 			doc.validate_request_overlap()
 		# Set Pending
 		self.db_set("status", "Pending")
-		# Assign Approver to get notified
-		add_assignment({
-			"assign_to": [self.approver],
-			"doctype": self.doctype,
-			"name": self.name,
-			"description": self.note,
-		})
 
 	def on_cancel(self):
 		self.db_set("status", "Cancelled")
