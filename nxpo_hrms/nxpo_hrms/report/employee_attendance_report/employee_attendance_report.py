@@ -73,7 +73,17 @@ def get_columns(filters):
 def get_data(filters):
     data = []
     conditions = get_conditions(filters)
-
+    # Ensure User Permission
+    attendances = frappe.get_list(
+        "Attendance",
+        filters={
+            "company": ["=", filters["company"]],
+            "attendance_date": [
+                "between",
+                [filters["from_date"], filters["to_date"]]],
+        },
+        pluck="name"
+    )
     query_data = frappe.db.sql(
         f"""
             select
@@ -94,6 +104,7 @@ def get_data(filters):
                 AND atd.attendance_date >= %(from_date)s 
                 AND atd.attendance_date <= %(to_date)s 
                 {('AND ' + conditions) if conditions else ''}
+                {('AND atd.name IN {}'.format(tuple(attendances)) if attendances else '')}
         """,
         filters,
         as_dict=True,
