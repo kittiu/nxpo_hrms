@@ -2,6 +2,9 @@
 # For license information, please see license.txt
 
 import frappe
+from datetime import datetime
+from dateutil.relativedelta import relativedelta
+
 
 
 def execute(filters=None):
@@ -69,7 +72,7 @@ def get_columns(filters):
             },
             {
                 "fieldname": "posting_date",
-                "fieldtype": "Date",
+                "fieldtype": "Data",
                 "label": "วันเดือนปีที่จ่าย",
                 "width": 0
             },
@@ -134,6 +137,12 @@ def get_data(filters):
             row['tax_cond'] = 2
         else:
             row['tax_cond'] = 1
+        if row['posting_date']:
+            # Add 543 years to the posting_date
+            posting_date_converted = row['posting_date'] + relativedelta(years=543)
+            # Convert the date object to the desired format DDMMYYYY
+            formatted_date = posting_date_converted.strftime('%d%m%Y')
+            row['posting_date'] = formatted_date
 
     return data
 

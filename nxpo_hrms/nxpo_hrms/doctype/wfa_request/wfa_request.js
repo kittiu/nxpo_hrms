@@ -77,9 +77,9 @@ frappe.ui.form.on("WFA Request Line", {
     from_date: function (frm, cdt, cdn) {
         var row = locals[cdt][cdn];
         row.to_date = row.from_date
+        let company = frappe.defaults.get_default("company");
 
         if (row.from_date && row.to_date) {
-            let company = frappe.defaults.get_default("company");
 
             frappe.db.get_value('Company', company, 'default_holiday_list', function (value) {
                 if (value && value.default_holiday_list) {
@@ -99,6 +99,19 @@ frappe.ui.form.on("WFA Request Line", {
                             refresh_field("plan_dates")
                         }
                     });
+                    frappe.call({
+                        method: "get_sum_total_days",
+                        doc: frm.doc,
+                        args: {
+                            holiday_list: holiday_list
+                        },
+                        callback: function (response) {
+                            var total_day = response.message
+                            frm.set_value("total_days", total_day)
+                            frm.refresh_field("total_days"); 
+                        }
+                    });
+
                 } else {
                     row.days = moment(row.to_date).diff(row.from_date, "days") + 1
                     refresh_field("plan_dates")
@@ -111,9 +124,10 @@ frappe.ui.form.on("WFA Request Line", {
     to_date: function (frm, cdt, cdn) {
 
         var row = locals[cdt][cdn];
+        let company = frappe.defaults.get_default("company");
 
         if (row.from_date && row.to_date) {
-            let company = frappe.defaults.get_default("company");
+            
             frappe.db.get_value('Company', company, 'default_holiday_list', function (value) {
                 if (value && value.default_holiday_list) {
                     let holiday_list = value.default_holiday_list;
@@ -133,11 +147,29 @@ frappe.ui.form.on("WFA Request Line", {
                             refresh_field("plan_dates")
                         }
                     });
+
+                    frappe.call({
+                        method: "get_sum_total_days",
+                        doc: frm.doc,
+                        args: {
+                            holiday_list: holiday_list
+                        },
+                        callback: function (response) {
+                            var total_day = response.message
+                            frm.set_value("total_days", total_day)
+                            frm.refresh_field("total_days"); 
+                        }
+                    });
+
                 } else {
                     row.days = moment(row.to_date).diff(row.from_date, "days") + 1
                     refresh_field("plan_dates")
                 }
             });
+
+
+
+
         }
     },
 
