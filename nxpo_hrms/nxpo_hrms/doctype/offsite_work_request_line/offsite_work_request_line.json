@@ -61,7 +61,7 @@
  "modified": "2024-08-06 13:06:21.983420",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
- "name": "WFA Request Line",
+ "name": "Offsite Work Request Line",
  "owner": "Administrator",
  "permissions": [],
  "sort_field": "modified",

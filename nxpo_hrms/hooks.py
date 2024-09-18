@@ -28,7 +28,7 @@ fixtures = [
                 "in",
                 (
                     "NXPO Leave Application",
-                    "NXPO WFA Request",
+                    "NXPO Offsite Work Request",
                 )
             ]
         ]
@@ -104,7 +104,7 @@ fixtures = [
                 "in",
                 (
                     "Company-custom_policy",
-                    "Company-custom_wfa_days_per_week",
+                    "Company-custom_owr_days_per_week",
                 )
             ]
         ]
@@ -323,7 +323,7 @@ doc_events = {
         "validate": "nxpo_hrms.custom.leave_application.compute_approver",
         "on_update": "nxpo_hrms.custom.leave_application.share_to_approver",
     },
-    "WFA Request": {  # Reusing exact same logic for approver as Leave Application
+    "Offsite Work Request": {  # Reusing exact same logic for approver as Leave Application
         "validate": "nxpo_hrms.custom.leave_application.compute_approver",
         "on_update": "nxpo_hrms.custom.leave_application.share_to_approver",
     },
@@ -334,7 +334,7 @@ doc_events = {
 
 scheduler_events = {
     "hourly": [
-        "nxpo_hrms.nxpo_hrms.doctype.wfa_request.wfa_request.auto_create_attendance_requests",
+        "nxpo_hrms.nxpo_hrms.doctype.offsite_work_request.offsite_work_request.auto_create_attendance_requests",
         "nxpo_hrms.nxpo_hrms.doctype.employee_special_assignment.employee_special_assignment.job_update_active",
     ],
 }

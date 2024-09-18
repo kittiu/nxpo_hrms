@@ -5,5 +5,5 @@
 from frappe.tests.utils import FrappeTestCase
 
 
-class TestWFARequest(FrappeTestCase):
+class TestOffsiteWorkRequest(FrappeTestCase):
 	pass

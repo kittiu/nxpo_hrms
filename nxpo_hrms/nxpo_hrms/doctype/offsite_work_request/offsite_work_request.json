@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "format:WFA-{employee}-{###}",
+ "autoname": "format:OWR-{employee}-{###}",
  "creation": "2024-05-10 15:28:00.586446",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -31,7 +31,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "WFA Request",
+   "options": "Offsite Work Request",
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
@@ -55,11 +55,11 @@
    "fieldtype": "Section Break"
   },
   {
-   "description": "Future attendance request will be converted into WFA attendance when time arrives.",
+   "description": "Future attendance request will be converted into OWR attendance when time arrives.",
    "fieldname": "plan_dates",
    "fieldtype": "Table",
    "label": "Attendance Requests",
-   "options": "WFA Request Line",
+   "options": "Offsite Work Request Line",
    "reqd": 1
   },
   {
@@ -72,7 +72,7 @@
    "fieldname": "total_days",
    "fieldtype": "Int",
    "in_list_view": 1,
-   "label": "Total WFA Days",
+   "label": "Total OWR Days",
    "read_only": 1
   },
   {
@@ -130,13 +130,13 @@
  "links": [
   {
    "link_doctype": "Attendance Request",
-   "link_fieldname": "custom_wfa_request"
+   "link_fieldname": "custom_offsite_work_request"
   }
  ],
- "modified": "2024-09-05 16:04:34.481005",
+ "modified": "2024-09-18 22:45:38.119037",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
- "name": "WFA Request",
+ "name": "Offsite Work Request",
  "naming_rule": "Expression",
  "owner": "Administrator",
  "permissions": [

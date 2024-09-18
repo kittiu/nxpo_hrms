@@ -1,7 +1,7 @@
 // Copyright (c) 2024, Ecosoft and contributors
 // For license information, please see license.txt
 
-frappe.ui.form.on("WFA Request", {
+frappe.ui.form.on("Offsite Work Request", {
 
     refresh: function (frm) {
         // hide [+] button from linked document
@@ -41,7 +41,7 @@ frappe.ui.form.on("WFA Request", {
 
     add_view_attendance_button: function (frm) {
         frappe.db.get_list("Attendance Request", {
-            filters: { custom_wfa_request: frm.doc.name },
+            filters: { custom_offsite_work_request: frm.doc.name },
             fields: ["name"]
         }).then((res) => {
             let requests = [];
@@ -49,7 +49,7 @@ frappe.ui.form.on("WFA Request", {
                 requests.push(request.name);
             });
             if (requests && requests.length) {
-                frm.add_custom_button(__("View All WFA Attendances"), function () {
+                frm.add_custom_button(__("View All Offsite Work Attendances"), function () {
                     frappe.set_route("List", "Attendance", { attendance_request: ["in", requests] });
                 });
             }
@@ -72,7 +72,7 @@ frappe.ui.form.on("WFA Request", {
 });
 
 
-frappe.ui.form.on("WFA Request Line", {
+frappe.ui.form.on("Offsite Work Request Line", {
 
     from_date: function (frm, cdt, cdn) {
         var row = locals[cdt][cdn];
@@ -85,7 +85,7 @@ frappe.ui.form.on("WFA Request Line", {
                 if (value && value.default_holiday_list) {
                     let holiday_list = value.default_holiday_list;
                     frappe.call({
-                        method: "get_number_of_leave_days_for_wfa",
+                        method: "get_number_of_leave_days_for_owr",
                         doc: frm.doc,
                         args: {
                             from_date: row.from_date,
@@ -133,7 +133,7 @@ frappe.ui.form.on("WFA Request Line", {
                     let holiday_list = value.default_holiday_list;
 
                     frappe.call({
-                        method: "get_number_of_leave_days_for_wfa",
+                        method: "get_number_of_leave_days_for_owr",
                         doc: frm.doc,
                         args: {
                             from_date: row.from_date,

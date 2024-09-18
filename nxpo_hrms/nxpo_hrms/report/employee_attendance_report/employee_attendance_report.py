@@ -49,9 +49,9 @@ def get_columns(filters):
                 "width": 0
             },
             {
-                "fieldname": "wfa_id",
+                "fieldname": "owr_id",
                 "fieldtype": "Data",
-                "label": "WFA Requests",
+                "label": "Offsite Work Requests",
                 "width": 0
             },
             {
@@ -93,12 +93,12 @@ def get_data(filters):
                 atd.attendance_date,
                 atd.status,
                 atd.custom_work_from_anywhere,
-                wfa.type,
-                wfa.development,
-                wfa.name as wfa_id
+                owr.type,
+                owr.development,
+                owr.name as owr_id
             from `tabAttendance` atd
             left join `tabAttendance Request` atdr on atd.attendance_request = atdr.name
-            left join `tabWFA Request` wfa on atdr.custom_wfa_request = wfa.name
+            left join `tabOffsite Work Request` owr on atdr.custom_offsite_work_request = owr.name
             left join `tabEmployee` emp on atd.employee = emp.name
             where atd.company = %(company)s 
                 AND atd.attendance_date >= %(from_date)s 
@@ -119,8 +119,8 @@ def get_conditions(filters):
     if filters.get("atd_status"):
         conditions.append("atd.status = %(atd_status)s")
     
-    if filters.get("is_wfa"):
-        conditions.append("atd.custom_work_from_anywhere = %(is_wfa)s")
+    if filters.get("is_owr"):
+        conditions.append("atd.custom_work_from_anywhere = %(is_owr)s")
     
     if filters.get("employee_f"):
         conditions.append("atd.employee = %(employee_f)s")

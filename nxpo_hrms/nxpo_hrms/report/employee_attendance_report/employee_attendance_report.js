@@ -46,7 +46,7 @@ frappe.query_reports["Employee Attendance Report"] = {
 			reqd: 0,
 		},
 		{
-			fieldname: "is_wfa",
+			fieldname: "is_owr",
 			label: __("Work From Anywhere"),
 			fieldtype: "Check",
 			reqd: 0,
