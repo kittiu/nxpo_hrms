@@ -9,6 +9,7 @@ from frappe.utils import (
     date_diff,
     flt,
     getdate,
+    today
 )
 from datetime import timedelta
 
@@ -39,11 +40,8 @@ class OffsiteWorkRequest(Document):
                 getdate(plan.from_date) + timedelta(days=x)
                 for x in range((getdate(plan.to_date) - getdate(plan.from_date)).days + 1)
             ]
-        
         overlap_dates = self.get_date_overlap_remove_holiday(holiday_list, dates)
-
         unique_days = len(list(set(overlap_dates)))
-
         if unique_days != self.total_days:
             frappe.throw(_("Please make sure that all selected dates are not overlapping"))
         
@@ -57,6 +55,15 @@ class OffsiteWorkRequest(Document):
                     frappe.throw(_("Half day date should be in between from date and to date"))
             else:
                 plan.half_day_date = None
+        
+        # 5. For backdate request, no future date allowed.
+        if self.type == "Backdate Request":
+            if any([
+                getdate(plan.from_date) > getdate(today())
+                or getdate(plan.to_date) > getdate(today())
+                for plan in self.plan_dates
+            ]):
+                frappe.throw(_("Backdate request should not have future date"))
 
     def on_submit(self):
         # Validate
@@ -100,7 +107,6 @@ class OffsiteWorkRequest(Document):
 
     @frappe.whitelist()
     def create_attendance_requests(self):
-        print('create_attendance_requests')
         try:
             reason = "Work From Home"
             if self.type == "Backdate Request":
