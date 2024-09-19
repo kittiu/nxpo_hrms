@@ -161,7 +161,7 @@ fixtures = [
 
 # include js, css files in header of desk.html
 # app_include_css = "/assets/nxpo_hrms/css/nxpo_hrms.css"
-# app_include_js = "/assets/nxpo_hrms/js/nxpo_hrms.js"
+app_include_js = "nxpo_hrms.bundle.js"
 
 # include js, css files in header of web template
 # web_include_css = "/assets/nxpo_hrms/css/nxpo_hrms.css"
@@ -185,6 +185,7 @@ doctype_js = {
     "Additional Salary": "public/js/additional_salary.js",
     "Attendance": "public/js/attendance.js",
     "Employee Attendance Tool": "public/js/employee_attendance_tool.js",
+    "Leave Application": "public/js/leave_application.js",
 }
 doctype_tree_js = {
     "Department" : "public/js/department_tree.js"
