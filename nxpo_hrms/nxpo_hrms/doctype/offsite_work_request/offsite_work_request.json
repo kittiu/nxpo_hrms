@@ -10,7 +10,7 @@
   "custom_approver",
   "column_break_uvrv",
   "type",
-  "development",
+  "event",
   "total_days",
   "column_break_jbgd",
   "company",
@@ -113,16 +113,16 @@
    "fieldname": "type",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "\nWork From Anywhere\nDevelopment\nBackdate Request",
+   "options": "\nWork From Anywhere\nEvent\nBackdate Request",
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.type==='Development';",
-   "fieldname": "development",
+   "depends_on": "eval:doc.type==='Event';",
+   "fieldname": "event",
    "fieldtype": "Select",
-   "label": "Development",
-   "mandatory_depends_on": "eval:doc.type==='Development';",
-   "options": "\n\u0e01\u0e32\u0e23\u0e1b\u0e0f\u0e34\u0e1a\u0e31\u0e15\u0e34\u0e07\u0e32\u0e19\u0e19\u0e2d\u0e01\u0e2a\u0e16\u0e32\u0e19\u0e17\u0e35\u0e48\n\u0e2d\u0e1a\u0e23\u0e21/\u0e2a\u0e31\u0e21\u0e21\u0e19\u0e32\n\u0e1b\u0e23\u0e30\u0e0a\u0e38\u0e21"
+   "label": "Event",
+   "mandatory_depends_on": "eval:doc.type==='Event';",
+   "options": "\nSeminar\nMeeting\nSite Visit\nOthers"
   }
  ],
  "index_web_pages_for_search": 1,
@@ -133,7 +133,7 @@
    "link_fieldname": "custom_offsite_work_request"
   }
  ],
- "modified": "2024-09-18 22:45:38.119037",
+ "modified": "2024-09-19 20:48:52.829836",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Offsite Work Request",
@@ -198,6 +198,7 @@
    "title": "Completed"
   }
  ],
+ "title_field": "employee_name",
  "track_changes": 1,
  "track_seen": 1
 }

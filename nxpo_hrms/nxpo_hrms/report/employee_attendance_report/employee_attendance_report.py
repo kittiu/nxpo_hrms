@@ -61,9 +61,9 @@ def get_columns(filters):
                 "width": 0
             },
             {
-                "fieldname": "development",
+                "fieldname": "event",
                 "fieldtype": "Data",
-                "label": "Development",
+                "label": "Event",
                 "width": 0
             },
     ]
@@ -94,7 +94,7 @@ def get_data(filters):
                 atd.status,
                 atd.custom_work_from_anywhere,
                 owr.type,
-                owr.development,
+                owr.event,
                 owr.name as owr_id
             from `tabAttendance` atd
             left join `tabAttendance Request` atdr on atd.attendance_request = atdr.name

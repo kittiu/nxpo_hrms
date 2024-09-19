@@ -16,9 +16,9 @@ frappe.ui.form.on("Offsite Work Request", {
         }
     },
 
-    // Onchange field Type will change field Development to null
+    // Onchange field Type will change field Event to null
     type: function (frm) {
-        frm.set_value("development", null)
+        frm.set_value("event", null)
     },
 
     // employee: async function (frm) {
