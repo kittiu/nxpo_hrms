@@ -59,8 +59,8 @@ class OffsiteWorkRequest(Document):
         # 5. For backdate request, no future date allowed.
         if self.type == "Backdate Request":
             if any([
-                getdate(plan.from_date) > getdate(today())
-                or getdate(plan.to_date) > getdate(today())
+                getdate(plan.from_date) >= getdate(today())
+                or getdate(plan.to_date) >= getdate(today())
                 for plan in self.plan_dates
             ]):
                 frappe.throw(_("Backdate request should not have future date"))
