@@ -418,3 +418,4 @@ override_whitelisted_methods = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+company_data_to_be_ignored = ["Department"]
