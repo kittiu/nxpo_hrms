@@ -7,6 +7,7 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "company",
   "employee",
   "employee_name",
   "amount_per_round",
@@ -49,7 +50,6 @@
   {
    "fieldname": "round",
    "fieldtype": "Int",
-   "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Round",
    "read_only": 1
@@ -70,6 +70,7 @@
    "fieldname": "balance",
    "fieldtype": "Currency",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Budget Balance",
    "read_only": 1
   },
@@ -125,8 +126,6 @@
    "description": "\u0e04\u0e23\u0e31\u0e49\u0e07\u0e17\u0e35\u0e48 (\u0e43\u0e19\u0e23\u0e2d\u0e1a\u0e40\u0e14\u0e35\u0e22\u0e27\u0e01\u0e31\u0e19\u0e19\u0e35\u0e49)",
    "fieldname": "time",
    "fieldtype": "Int",
-   "in_list_view": 1,
-   "in_standard_filter": 1,
    "label": "Time",
    "read_only": 1
   },
@@ -141,11 +140,19 @@
    "label": "Tailor Type",
    "options": "\u0e0a\u0e38\u0e14\u0e02\u0e32\u0e27\n\u0e0a\u0e38\u0e14\u0e2a\u0e39\u0e17\n\u0e2d\u0e37\u0e48\u0e19\u0e46",
    "reqd": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-20 11:05:44.920725",
+ "modified": "2024-09-20 19:48:08.181305",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Tailor Tracker",
