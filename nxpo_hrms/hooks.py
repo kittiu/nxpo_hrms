@@ -105,6 +105,7 @@ fixtures = [
                 (
                     "Company-custom_policy",
                     "Company-custom_owr_days_per_week",
+                    "Offsite Work Request-workflow_state",
                 )
             ]
         ]
