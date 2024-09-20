@@ -90,8 +90,7 @@ def get_custom_years_of_current_designation(employee_code):
 
         # duration = parse_duration(transition.duration)
         total_duration += transition_duration 
-
-    total_duration = normalize_relativedelta(total_duration)
+        
     total_duration = format_duration(total_duration)
     return total_duration
 
@@ -110,12 +109,6 @@ def parse_duration(duration_str):
 
 def format_duration(rd):
     return f"{rd.years} Years {rd.months} Months {rd.days} Days"
-
-def normalize_relativedelta(rd):
-    temp_start_date = datetime(1, 1, 1)
-    normalized_date = temp_start_date + rd
-    normalized_rd = relativedelta(normalized_date, temp_start_date)
-    return normalized_rd
 
 # Helper function to calculate duration between two dates
 def get_duration(from_date, to_date):
