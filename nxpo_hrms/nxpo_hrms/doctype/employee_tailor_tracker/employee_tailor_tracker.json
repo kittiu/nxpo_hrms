@@ -139,13 +139,13 @@
    "fieldname": "tailor_type",
    "fieldtype": "Select",
    "label": "Tailor Type",
-   "options": "\u0e0a\u0e38\u0e14\u0e02\u0e32\u0e27\n\u0e0a\u0e38\u0e14\u0e2a\u0e39\u0e17",
+   "options": "\u0e0a\u0e38\u0e14\u0e02\u0e32\u0e27\n\u0e0a\u0e38\u0e14\u0e2a\u0e39\u0e17\n\u0e2d\u0e37\u0e48\u0e19\u0e46",
    "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-26 09:52:49.622982",
+ "modified": "2024-09-20 11:05:44.920725",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Tailor Tracker",
