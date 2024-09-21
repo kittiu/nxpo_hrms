@@ -8,6 +8,7 @@
  "field_order": [
   "employee",
   "employee_name",
+  "company",
   "column_break_anel",
   "proposal_date",
   "offered_royal_decoration",
@@ -80,11 +81,19 @@
    "fieldname": "proposal_date",
    "fieldtype": "Date",
    "label": "Proposal Date"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-29 15:03:06.170441",
+ "modified": "2024-09-21 10:17:25.154395",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Royal Decoration",

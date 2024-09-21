@@ -6,11 +6,12 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "company",
   "employee",
-  "start_date",
+  "employee_name",
   "attached_evidence",
   "column_break_mtxt",
-  "employee_name",
+  "start_date",
   "end_date",
   "violation_details"
  ],
@@ -59,11 +60,19 @@
    "fieldname": "end_date",
    "fieldtype": "Date",
    "label": "End Date"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-26 10:57:51.012834",
+ "modified": "2024-09-21 10:23:31.076709",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Disciplinary Violation",

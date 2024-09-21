@@ -5,22 +5,20 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "employee",
+  "company",
   "column_break_xyaz",
+  "employee",
   "prefix",
-  "column_break_alyh",
   "full_name",
   "section_break_iztj",
   "title",
   "column_break_xspc",
   "type",
-  "column_break_mvbe",
   "attach_file",
   "section_break_sogl",
   "base_salary",
   "column_break_hcdt",
-  "other_details",
-  "column_break_kjci"
+  "other_details"
  ],
  "fields": [
   {
@@ -41,10 +39,6 @@
    "fieldtype": "Data",
    "label": "Prefix",
    "read_only": 1
-  },
-  {
-   "fieldname": "column_break_alyh",
-   "fieldtype": "Column Break"
   },
   {
    "fetch_from": "employee.employee_name",
@@ -79,10 +73,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_mvbe",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "attach_file",
    "fieldtype": "Attach",
    "label": "Attach File"
@@ -108,13 +98,17 @@
    "label": "Other Details"
   },
   {
-   "fieldname": "column_break_kjci",
-   "fieldtype": "Column Break"
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-05 09:47:09.019693",
+ "modified": "2024-09-21 10:21:29.114959",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Confidential Recruitment Information",

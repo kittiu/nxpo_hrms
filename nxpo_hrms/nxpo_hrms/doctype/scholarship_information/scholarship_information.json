@@ -6,6 +6,7 @@
  "engine": "InnoDB",
  "field_order": [
   "primary_information_section",
+  "company",
   "type_of_information",
   "column_break_okhv",
   "employee",
@@ -199,11 +200,19 @@
    "fieldtype": "Link",
    "label": "Prefix",
    "options": "Employee Prefix"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Company",
+   "options": "Company",
+   "remember_last_selected_value": 1,
+   "reqd": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-20 12:18:26.189204",
+ "modified": "2024-09-21 10:32:09.759586",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Scholarship Information",
