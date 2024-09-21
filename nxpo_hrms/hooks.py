@@ -418,4 +418,18 @@ override_whitelisted_methods = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
-company_data_to_be_ignored = ["Department"]
+company_data_to_be_ignored = [
+    "Department",
+    "Leave Period",
+    "Payroll Period",
+    "Salary Structure",
+    "Leave Allocation",
+    "Leave Policy Assignment",
+    "Employee Tax Exemption Declaration",
+    "Additional Salary",
+    "Salary Structure Assignment",
+    "Payroll Entry",
+    "Salary Slip",
+    "Org Structure",
+    "Employee Transition",  
+]
