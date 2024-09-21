@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_import": 1,
- "autoname": "autoincrement",
+ "autoname": "naming_series:",
  "creation": "2024-06-19 11:16:30.611046",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -13,7 +13,8 @@
   "column_break_mtxt",
   "start_date",
   "end_date",
-  "violation_details"
+  "violation_details",
+  "naming_series"
  ],
  "fields": [
   {
@@ -68,15 +69,23 @@
    "options": "Company",
    "remember_last_selected_value": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "HR-EDV-.YYYY.-",
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-21 10:23:31.076709",
+ "modified": "2024-09-21 16:19:24.930712",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Disciplinary Violation",
- "naming_rule": "Autoincrement",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

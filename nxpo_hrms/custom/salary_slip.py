@@ -8,6 +8,10 @@ from hrms.payroll.doctype.salary_slip.salary_slip import calculate_tax_by_tax_sl
 
 class SalarySlipNXPO(SalarySlipThaiPayroll):
 
+    def autoname(self):
+        # Do not set name for Salary Slip, use custom field naming_series instead
+        pass
+
     def calculate_variable_based_on_taxable_salary(self, tax_component):
         tax_amount = super().calculate_variable_based_on_taxable_salary(tax_component)
         split_amount = self.calculate_split_tax(tax_component, self.total_structured_tax_amount)

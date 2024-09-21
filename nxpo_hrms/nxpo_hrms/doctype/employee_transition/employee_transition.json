@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_import": 1,
- "autoname": "format:HR-TS-{####}",
+ "autoname": "naming_series:",
  "creation": "2024-06-20 19:46:13.826537",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -23,6 +23,7 @@
   "end_date",
   "duration",
   "organization",
+  "naming_series",
   "new_section",
   "designation",
   "business_unit",
@@ -235,16 +236,25 @@
    "fieldname": "organization",
    "fieldtype": "Data",
    "label": "Organization"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "HR-TS-.YYYY.-",
+   "reqd": 0,
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-03 15:02:20.257279",
+ "modified": "2024-09-21 14:00:50.494054",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Transition",
- "naming_rule": "Expression",
+ "naming_rule": "By \"Naming Series\" field",
  "nsm_parent_field": "parent_employee_transition",
  "owner": "Administrator",
  "permissions": [

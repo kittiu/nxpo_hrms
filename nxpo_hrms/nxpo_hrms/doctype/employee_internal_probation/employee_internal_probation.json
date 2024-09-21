@@ -2,7 +2,7 @@
  "actions": [],
  "allow_import": 1,
  "allow_rename": 1,
- "autoname": "format:HR-IP-{###}",
+ "autoname": "naming_series:",
  "creation": "2024-04-26 15:29:52.347492",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -25,6 +25,7 @@
   "probation_department",
   "section_break_3pta",
   "column_break_xwbs",
+  "naming_series",
   "column_break_rlbz",
   "amended_from"
  ],
@@ -156,6 +157,15 @@
    "options": "Company",
    "remember_last_selected_value": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "HR-IP-.YYYY.-",
+   "reqd": 0,
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -166,11 +176,11 @@
    "link_fieldname": "employee_internal_probation"
   }
  ],
- "modified": "2024-09-21 10:24:56.344989",
+ "modified": "2024-09-21 13:52:55.940475",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Internal Probation",
- "naming_rule": "Expression",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

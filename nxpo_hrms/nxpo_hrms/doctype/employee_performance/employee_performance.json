@@ -1,24 +1,24 @@
 {
  "actions": [],
- "autoname": "autoincrement",
+ "autoname": "naming_series:",
  "creation": "2024-06-30 09:36:25.081565",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "employee_name",
-  "department",
-  "fiscal_year",
-  "column_break_larf",
-  "employee",
-  "directorate",
-  "ref_doc_number",
-  "column_break_hdnp",
-  "designation",
   "company",
-  "grade",
-  "column_break_ybeo",
+  "employee",
+  "employee_name",
   "employee_grade",
-  "score"
+  "column_break_larf",
+  "fiscal_year",
+  "directorate",
+  "department",
+  "designation",
+  "column_break_ybeo",
+  "grade",
+  "score",
+  "ref_doc_number",
+  "naming_series"
  ],
  "fields": [
   {
@@ -102,21 +102,25 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_hdnp",
+   "fieldname": "column_break_ybeo",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_ybeo",
-   "fieldtype": "Column Break"
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "HR-PERF-.YYYY.-",
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-07-24 16:26:47.402652",
+ "modified": "2024-09-21 16:21:27.259661",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Performance",
- "naming_rule": "Autoincrement",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

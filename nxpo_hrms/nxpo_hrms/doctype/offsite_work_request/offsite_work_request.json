@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "format:OWR-{employee}-{###}",
+ "autoname": "naming_series:",
  "creation": "2024-05-10 15:28:00.586446",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -15,6 +15,7 @@
   "column_break_jbgd",
   "company",
   "status",
+  "naming_series",
   "section_break_csge",
   "plan_dates",
   "note",
@@ -124,6 +125,15 @@
    "label": "Event",
    "mandatory_depends_on": "eval:doc.type==='Event';",
    "options": "\nSeminar\nMeeting\nSite Visit\nOthers"
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "OR-.YYYY.-",
+   "reqd": 0,
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -134,11 +144,11 @@
    "link_fieldname": "custom_offsite_work_request"
   }
  ],
- "modified": "2024-09-20 17:55:35.196723",
+ "modified": "2024-09-21 11:41:06.003457",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Offsite Work Request",
- "naming_rule": "Expression",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

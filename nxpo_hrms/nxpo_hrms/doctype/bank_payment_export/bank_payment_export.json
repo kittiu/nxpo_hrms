@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "BPE-.#####",
+ "autoname": "naming_series:",
  "creation": "2024-09-05 16:02:24.073939",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -11,6 +11,7 @@
   "column_break_yhan",
   "type",
   "total_net_pay",
+  "naming_series",
   "section_break_ybbn",
   "bank_sal_slip",
   "amended_from"
@@ -67,16 +68,25 @@
    "options": "Company",
    "remember_last_selected_value": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "HR-PE-.YYYY.-",
+   "reqd": 0,
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-21 10:28:59.045283",
+ "modified": "2024-09-21 14:22:58.419067",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Bank Payment Export",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

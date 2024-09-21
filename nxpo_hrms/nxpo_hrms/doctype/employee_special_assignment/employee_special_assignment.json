@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "autoincrement",
+ "autoname": "naming_series:",
  "creation": "2024-06-23 10:19:36.016746",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -20,7 +20,8 @@
   "column_break_lvvh",
   "subdepartment",
   "department",
-  "directorate"
+  "directorate",
+  "naming_series"
  ],
  "fields": [
   {
@@ -133,15 +134,23 @@
    "fieldtype": "Data",
    "label": "Duration",
    "read_only": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "HR-SASS-.YYYY.-",
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-08-29 10:07:56.120540",
+ "modified": "2024-09-21 16:20:52.005632",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Special Assignment",
- "naming_rule": "Autoincrement",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

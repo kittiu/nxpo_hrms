@@ -1,14 +1,14 @@
 {
  "actions": [],
  "allow_import": 1,
- "autoname": "autoincrement",
+ "autoname": "naming_series:",
  "creation": "2024-06-17 09:05:43.706815",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "company",
   "employee",
   "employee_name",
-  "company",
   "column_break_anel",
   "proposal_date",
   "offered_royal_decoration",
@@ -16,7 +16,8 @@
   "received_royal_decoration",
   "remarks",
   "column_break_mnps",
-  "received_date"
+  "received_date",
+  "naming_series"
  ],
  "fields": [
   {
@@ -89,15 +90,23 @@
    "options": "Company",
    "remember_last_selected_value": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "no_copy": 1,
+   "options": "HR-ROYAL-.YYYY.-",
+   "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-21 10:17:25.154395",
+ "modified": "2024-09-21 16:19:58.427649",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Employee Royal Decoration",
- "naming_rule": "Autoincrement",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {

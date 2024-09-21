@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "autoincrement",
+ "autoname": "hash",
  "creation": "2024-07-25 12:11:40.755314",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -212,11 +212,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-21 10:32:09.759586",
+ "modified": "2024-09-21 16:18:34.188566",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Scholarship Information",
- "naming_rule": "Autoincrement",
+ "naming_rule": "Random",
  "owner": "Administrator",
  "permissions": [
   {
