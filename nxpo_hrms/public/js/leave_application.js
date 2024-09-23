@@ -1,7 +1,12 @@
 // Turn off existing function
 frappe.ui.form.off("Leave Application", "make_dashboard");
 // Turn on new function
-frappe.ui.form.on('Leave Application', {
+frappe.ui.form.on("Leave Application", {
+
+	half_day: function (frm) {
+		frm.set_value("custom_hours", "4");
+	},
+
 	make_dashboard: function (frm) {
 		let leave_details;
 		let lwps;

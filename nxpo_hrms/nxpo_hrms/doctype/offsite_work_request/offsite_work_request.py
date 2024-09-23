@@ -173,8 +173,6 @@ class OffsiteWorkRequest(Document):
     def get_sum_total_days(self, holiday_list):
         for plan in self.plan_dates:
             plan.days = self.get_number_of_leave_days_for_owr(plan.from_date, plan.to_date, self.employee, holiday_list)
-            if plan.days <= 0:
-                frappe.throw(_("To Date before From Date is not allowed!"))
         self.total_days = sum([x.days for x in self.plan_dates])
         return self.total_days
 
