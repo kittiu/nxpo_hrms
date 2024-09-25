@@ -32,8 +32,8 @@
    "fieldname": "type",
    "fieldtype": "Select",
    "in_list_view": 1,
-   "label": "Type",
-   "options": "Normal\nBonus",
+   "label": "Period Type",
+   "options": "Normal\nAdditional",
    "reqd": 1
   },
   {
@@ -75,14 +75,13 @@
    "label": "Naming Series",
    "no_copy": 1,
    "options": "HR-PE-.YYYY.-",
-   "reqd": 0,
    "set_only_once": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2024-09-21 14:22:58.419067",
+ "modified": "2024-09-25 11:11:58.661054",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Bank Payment Export",

@@ -67,7 +67,7 @@ def get_sal_slip(filters):
     data = query_data
 
     for row in data:
-        if filters['nob'] == 'Bonus' :
+        if filters['nob'] == 'Additional' :
             
             sum_net_bonus_paid = frappe.db.get_value('Salary Detail', 
                 filters={
@@ -92,7 +92,7 @@ def get_conditions(filters):
     if filters.get("nob") == 'Normal':
         conditions.append("ss.posting_date = %(posting_date)s")
 
-    if filters.get("nob") == 'Bonus':
+    if filters.get("nob") == 'Additional':
         conditions.append("ss.custom_date_for_split_tax_component = %(posting_date)s")
 
 
