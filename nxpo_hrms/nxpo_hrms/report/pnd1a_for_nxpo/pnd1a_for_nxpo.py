@@ -64,43 +64,49 @@ def get_columns(filters):
                 {
                     "fieldname": "custom_house_no",
                     "fieldtype": "Data",
-                    "label": "House No.",
+                    "label": "เลขที่",
                     "width": 0
                 },
                 {
-                    "fieldname": "custom_house_no",
+                    "fieldname": "custom_village_building",
                     "fieldtype": "Data",
-                    "label": "House No.",
+                    "label": "หมู่บ้าน/อาคาร",
+                    "width": 0
+                },
+                {
+                    "fieldname": "custom_soi",
+                    "fieldtype": "Data",
+                    "label": "ซอย",
                     "width": 0
                 },
                 {
                     "fieldname": "custom_street",
                     "fieldtype": "Data",
-                    "label": 'Street',
+                    "label": "ถนน",
                     "width": 0
                 },
                 {
                     "fieldname": "custom_subdistrict",
                     "fieldtype": "Data",
-                    "label": 'Subdistrict',
+                    "label": "แขวง/ตำบล",
                     "width": 0
                 },
                 {
                     "fieldname": "custom_district",
                     "fieldtype": "Data",
-                    "label": 'District',
+                    "label": "เขต/อำเภอ",
                     "width": 0
                 },
                 {
                     "fieldname": "custom_province",
                     "fieldtype": "Data",
-                    "label": 'Province',
+                    "label": "จังหวัด",
                     "width": 0
                 },
                 {
                     "fieldname": "custom_zip_code",
                     "fieldtype": "Data",
-                    "label": 'ZIP Code',
+                    "label": "รหัสไปรษณีย์",
                     "width": 0
                 },
                 {
@@ -154,6 +160,8 @@ def get_data(filters):
                 a.deduct_amount,
                 '1' as tax_cond,
                 e.custom_house_no,
+                e.custom_village_building,
+                e.custom_soi,
                 e.custom_street,
                 e.custom_subdistrict,
                 e.custom_district,
@@ -213,6 +221,8 @@ def get_data(filters):
                 a.deduct_amount,
                 '2' as tax_cond,
                 e.custom_house_no,
+                e.custom_village_building,
+                e.custom_soi,
                 e.custom_street,
                 e.custom_subdistrict,
                 e.custom_district,

@@ -138,6 +138,7 @@ def get_last_valid_integer(input_string):
 def update_current_address(doc, method=None):
     addrs = [
         doc.custom_house_no,
+        doc.custom_village_building,
         doc.custom_soi,
         doc.custom_street,
         doc.custom_subdistrict,
@@ -151,6 +152,7 @@ def update_current_address(doc, method=None):
 def update_permanent_address(doc, method=None):
     addrs = [
         doc.custom_perm_house_no,
+        doc.custom_perm_village_building,
         doc.custom_perm_soi,
         doc.custom_perm_street,
         doc.custom_perm_subdistrict,
