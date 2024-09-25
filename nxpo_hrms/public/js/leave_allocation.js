@@ -3,7 +3,7 @@
 
 frappe.ui.form.on("Leave Allocation", {
 	refresh: function (frm) {
-		if (frm.doc.carry_forward) {
+		if (frm.doc.carry_forward || frm.is_new()) {
 			frm.toggle_display("custom_add_unused_leave", false);
 			frm.toggle_display("custom_total_unused_leave", false);
 		} else {
@@ -19,7 +19,7 @@ frappe.ui.form.on("Leave Allocation", {
 	},
 
 	custom_add_unused_leave: function (frm) {
-		if (!frm.doc.custom_is_add_unused_leave) {
+		if (!frm.doc.custom_is_add_unused_leave && frm.doc.from_date && frm.doc.to_date && frm.doc.employee && frm.doc.leave_type) {
 			frm.call({
 				method: 'nxpo_hrms.custom.leave_allocation.get_unused_leave',
 				args: {
@@ -40,7 +40,7 @@ frappe.ui.form.on("Leave Allocation", {
 
 	},
 	custom_cancel_unused_leave: function (frm) {
-		if (frm.doc.custom_is_add_unused_leave) {
+		if (frm.doc.custom_is_add_unused_leave && frm.doc.from_date && frm.doc.to_date && frm.doc.employee && frm.doc.leave_type) {
 			frm.set_value('custom_total_unused_leave', 0)
 			frm.set_value('total_leaves_allocated', frm.doc.new_leaves_allocated)
 			frm.set_value('custom_is_add_unused_leave', 0)
