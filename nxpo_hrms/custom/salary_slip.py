@@ -56,15 +56,6 @@ def validate_no_salary(doc, method=None):
         frappe.throw(_("Cannot create Salary Slip for Employee with Employee Type - No Salary"))
 
 
-def get_permission_query_conditions(user):
-    # This script ensure that only user with rol Payroll User can access all Salary Slips
-    employee = frappe.db.get_value("Employee", {"user_id": user}, "name", cache=True)
-    restrict = "employee = %s" % frappe.db.escape(employee)
-    roles = frappe.db.get_all("Has Role", filters=dict(parent=user), pluck="role")
-    if "Payroll User" in roles:
-        restrict = ""
-    return restrict
-
 def set_print_format_as_custom():
     # Set as custom, so user can disable it in production
     print_formats = [
