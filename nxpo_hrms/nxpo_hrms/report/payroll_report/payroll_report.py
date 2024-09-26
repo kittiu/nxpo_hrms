@@ -400,6 +400,9 @@ def get_data(filters):
 def get_conditions(filters):
     conditions = ""
 
+    if filters.get("period_type") == 'Additional':
+        conditions += f" and ss.custom_split_tax_deduction_on is not null"
+
     if filters.get("status_emp"):
         conditions += f"and emp.status = %(status_emp)s"
     

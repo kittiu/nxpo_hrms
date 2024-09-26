@@ -79,6 +79,18 @@ frappe.query_reports["Payroll Report"] = {
 			],
 			reqd: 0,
 		},
+		{
+			fieldname: "period_type",
+			label: __("Period Type"),
+			fieldtype: "Select",
+			options: [
+				{ value: "Normal", label: "Normal" },
+				{ value: "Additional", label: "Additional" },
+
+			],
+			reqd: 0,
+			default: 'Normal',
+		},
 	],
 	onload: function (report) {
 		function toggleDirectorateField() {
