@@ -1,6 +1,6 @@
 {
  "actions": [],
- "autoname": "hash",
+ "autoname": "naming_series:",
  "creation": "2024-07-25 12:11:40.755314",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -8,6 +8,7 @@
   "primary_information_section",
   "company",
   "type_of_information",
+  "naming_series",
   "column_break_okhv",
   "employee",
   "prefix",
@@ -208,15 +209,21 @@
    "options": "Company",
    "remember_last_selected_value": 1,
    "reqd": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "HR-SCH-"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-09-21 16:18:34.188566",
+ "modified": "2024-09-29 22:45:50.325174",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Scholarship Information",
- "naming_rule": "Random",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
