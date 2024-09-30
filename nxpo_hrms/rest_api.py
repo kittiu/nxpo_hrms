@@ -287,3 +287,37 @@ def get_employee_education(employee=None):
         sql += " and edu.parent = '{0}'".format(employee)
     data = frappe.db.sql(sql, as_dict=True)
     return data
+
+
+@frappe.whitelist(methods=["GET"])
+def get_notification_log(for_employee=None, from_date=None, to_date=None, read=None):
+    sql = """
+        select log.creation, log.`type`, log.document_type as doctype, log.document_name as docname,
+        log.subject, log.email_content as content,
+        log.from_user, log.for_user,
+        from_emp.employee as from_emp_id, from_emp.employee_name as from_emp_name,
+        for_emp.employee as for_emp_id, for_emp.employee_name as for_emp_name,
+        `read`
+        from `tabNotification Log` log
+        left outer join `tabEmployee` from_emp on from_emp.user_id = log.from_user
+        left outer join `tabEmployee` for_emp on for_emp.user_id = log.for_user
+        where 1 = 1
+    """
+    if for_employee is not None:
+        sql += " and for_emp.employee = '{0}'".format(for_employee)
+    if from_date is not None:
+        sql += " and log.creation >= '{0}'".format(from_date)
+    if to_date is not None:
+        sql += " and log.creation <= '{0}'".format(to_date)
+    if read == '0':
+        sql += " and `read` = 0"
+    if read == '1':
+        sql += " and `read` = 1"
+    sql += " order by creation desc"
+    data = frappe.db.sql(sql, as_dict=True)
+    for m in data:
+        if m.get("doctype") and m.get("docname"):
+            m["url"] = frappe.utils.get_url_to_form(m["doctype"], m["docname"])
+        else:
+            m["url"] = ""
+    return data
