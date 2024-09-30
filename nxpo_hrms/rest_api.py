@@ -321,3 +321,39 @@ def get_notification_log(for_employee=None, from_date=None, to_date=None, read=N
         else:
             m["url"] = ""
     return data
+
+@frappe.whitelist(methods=["GET"])
+def get_workflow_action(for_employee=None, from_date=None, to_date=None, status=None):
+    sql = """
+        select distinct wa.creation, wa.reference_doctype as doctype, wa.reference_name as docname,
+        emp.user_id, emp.employee, emp.employee_name, wa.status, wa.workflow_state
+        from `tabWorkflow Action` wa 
+        join `tabWorkflow Action Permitted Role` wapr
+            on wapr.parent = wa.name and wapr.parenttype = 'Workflow Action'
+        join (select e.employee, e.employee_name, r.parent as user_id, r.role
+            from `tabEmployee` e
+            join `tabHas Role` r on r.parent = e.user_id
+            where r.parenttype = 'User'
+        ) emp
+        on emp.role = wapr.role
+        where 1=1
+    """
+    if for_employee is not None:
+        sql += " and emp.employee = '{0}'".format(for_employee)
+    if from_date is not None:
+        sql += " and wa.creation >= '{0}'".format(from_date)
+    if to_date is not None:
+        sql += " and wa.creation <= '{0}'".format(to_date)
+    if status is not None:
+        sql += " and wa.status = '{0}'".format(status)
+    sql += " order by creation desc"
+    data = frappe.db.sql(sql, as_dict=True)
+    for m in data:
+        if m.get("doctype") and m.get("docname"):
+            m["url"] = frappe.utils.get_url_to_form(m["doctype"], m["docname"])
+        else:
+            m["url"] = ""
+    return data
+
+
+
