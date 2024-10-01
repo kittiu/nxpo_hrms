@@ -8,8 +8,11 @@ from nxpo_hrms.custom.payroll_entry import get_filtered_employees
 pe.get_filtered_employees = get_filtered_employees
 
 # 2. Remove App Permission
-import hrms.hr.utils as x
-import erpnext as y
-from nxpo_hrms.custom.permission import remove_app_permission
-x.check_app_permission = remove_app_permission
-y.check_app_permission = remove_app_permission
+import hrms.hooks as a
+import erpnext.hooks as b
+import wiki.hooks as c
+import drive.hooks as d
+a.add_to_apps_screen = []
+b.add_to_apps_screen = []
+c.add_to_apps_screen = []
+d.add_to_apps_screen = []

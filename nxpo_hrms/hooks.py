@@ -6,16 +6,6 @@ app_email = "kittiu@ecosoft.co.th"
 app_license = "mit"
 # required_apps = []
 
-add_to_apps_screen = [
-	{
-		"name": "nxpohr",
-		"logo": "/assets/nxpo_hrms/images/nxpo.jpg",
-		"title": "NXPO HR",
-		"route": "/app/frappe-employee",
-		"has_permission": "nxpo_hrms.custom.permission.has_app_permission",
-	}
-]
-
 fixtures = [
     {
         "doctype": "Workflow State",
