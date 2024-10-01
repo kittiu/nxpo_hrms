@@ -1,0 +1,137 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "autoname": "format:{Salary Certificate}-{####}",
+ "creation": "2024-10-01 14:12:16.895362",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "date_of_signing",
+  "employee",
+  "salary_structure_assignment",
+  "base_salary",
+  "column_break_qeju",
+  "salutation",
+  "first_name",
+  "last_name",
+  "column_break_bmym",
+  "designation",
+  "department",
+  "directorate",
+  "date_of_joining"
+ ],
+ "fields": [
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Employee",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.first_name",
+   "fieldname": "first_name",
+   "fieldtype": "Data",
+   "in_preview": 1,
+   "label": "First Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.salutation",
+   "fieldname": "salutation",
+   "fieldtype": "Data",
+   "label": "Salutation",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.last_name",
+   "fieldname": "last_name",
+   "fieldtype": "Data",
+   "in_preview": 1,
+   "label": "Last Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Data",
+   "label": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.date_of_joining",
+   "fieldname": "date_of_joining",
+   "fieldtype": "Data",
+   "label": "Date of Joining",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.designation",
+   "fieldname": "designation",
+   "fieldtype": "Data",
+   "label": "Designation",
+   "read_only": 1
+  },
+  {
+   "fieldname": "date_of_signing",
+   "fieldtype": "Date",
+   "label": "Date of signing",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "employee.custom_directorate",
+   "fieldname": "directorate",
+   "fieldtype": "Data",
+   "label": "Directorate",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_qeju",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_bmym",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "salary_structure_assignment",
+   "fieldtype": "Link",
+   "label": "Salary Structure Assignment",
+   "options": "Salary Structure Assignment"
+  },
+  {
+   "fetch_from": "salary_structure_assignment.base",
+   "fieldname": "base_salary",
+   "fieldtype": "Link",
+   "label": "Base Salary",
+   "options": "Salary Structure Assignment",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2024-10-01 18:05:03.078560",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Salary Certificate",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

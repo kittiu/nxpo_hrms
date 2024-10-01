@@ -1,5 +1,5 @@
 (() => {
-  // frappe-html:/home/kittiu/frappe-bench/apps/nxpo_hrms/nxpo_hrms/public/js/templates/nxpo_leave_application_dashboard.html
+  // frappe-html:/home/ecosoft/frappe-bench/apps/nxpo_hrms/nxpo_hrms/public/js/templates/nxpo_leave_application_dashboard.html
   frappe.templates["nxpo_leave_application_dashboard"] = `
 {% if not jQuery.isEmptyObject(data) %}
 <table class="table table-bordered small">
@@ -32,4 +32,4 @@
 {% endif %}
 `;
 })();
-//# sourceMappingURL=nxpo_hrms.bundle.UZZ6AISM.js.map
+//# sourceMappingURL=nxpo_hrms.bundle.J7GQWR4I.js.map
