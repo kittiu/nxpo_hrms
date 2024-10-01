@@ -110,8 +110,14 @@
   }
  ],
  "index_web_pages_for_search": 1,
- "links": [],
- "modified": "2024-10-01 18:05:03.078560",
+ "links": [
+  {
+   "group": "Salary Certificate",
+   "link_doctype": "Employee",
+   "link_fieldname": "First_name"
+  }
+ ],
+ "modified": "2024-10-01 18:43:11.188295",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Salary Certificate",
