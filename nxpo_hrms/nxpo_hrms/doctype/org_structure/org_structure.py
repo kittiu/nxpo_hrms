@@ -57,6 +57,8 @@ class OrgStructure(Document):
 	
 	def _apply_org_structure(self):
 		dept_names = [i.level_1 or i.level_2 or i.level_3 or i.level_4 for i in self.items]
+		root_dept = frappe.db.get_value("Department", {"is_group": 1, "parent_department": None}, "name")
+		dept_names.append(root_dept)
 		# disable every department not in the list
 		to_disable = frappe.get_all(
 			"Department",
@@ -72,7 +74,7 @@ class OrgStructure(Document):
 		prev_levels = {}
 		for idx, i in enumerate(self.items):
 			dept_name, level = get_dept_and_level(i)
-			parent_dept = prev_levels[level-1] if level > 1 else "All Departments"
+			parent_dept = prev_levels[level-1] if level > 1 else root_dept
 			frappe.db.set_value("Department", dept_name, {
 				"is_group": 1,
 				"disabled": 0,
