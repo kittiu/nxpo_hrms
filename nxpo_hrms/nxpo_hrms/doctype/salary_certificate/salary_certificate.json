@@ -1,24 +1,32 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:{Salary Certificate}-{####}",
+ "autoname": "format:SLC-{employee}-{#}",
  "creation": "2024-10-01 14:12:16.895362",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "date_of_signing",
   "employee",
-  "salary_structure_assignment",
-  "base_salary",
+  "date_of_signing",
   "column_break_qeju",
-  "salutation",
+  "from_date",
+  "column_break_bmym",
+  "amended_from",
+  "section_break_dntn",
+  "prefix",
   "first_name",
   "last_name",
-  "column_break_bmym",
-  "designation",
+  "column_break_ryxu",
+  "company",
   "department",
+  "department_name",
   "directorate",
-  "date_of_joining"
+  "directorate_name",
+  "designation",
+  "column_break_ssgt",
+  "date_of_joining",
+  "salary_structure_assignment",
+  "base_salary"
  ],
  "fields": [
   {
@@ -38,25 +46,11 @@
    "read_only": 1
   },
   {
-   "fetch_from": "employee.salutation",
-   "fieldname": "salutation",
-   "fieldtype": "Data",
-   "label": "Salutation",
-   "read_only": 1
-  },
-  {
    "fetch_from": "employee.last_name",
    "fieldname": "last_name",
    "fieldtype": "Data",
    "in_preview": 1,
    "label": "Last Name",
-   "read_only": 1
-  },
-  {
-   "fetch_from": "employee.department",
-   "fieldname": "department",
-   "fieldtype": "Data",
-   "label": "Department",
    "read_only": 1
   },
   {
@@ -82,8 +76,9 @@
   {
    "fetch_from": "employee.custom_directorate",
    "fieldname": "directorate",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "label": "Directorate",
+   "options": "Department",
    "read_only": 1
   },
   {
@@ -98,18 +93,86 @@
    "fieldname": "salary_structure_assignment",
    "fieldtype": "Link",
    "label": "Salary Structure Assignment",
-   "options": "Salary Structure Assignment"
+   "options": "Salary Structure Assignment",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.company",
+   "fieldname": "company",
+   "fieldtype": "Data",
+   "label": "Company",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Salary Certificate",
+   "print_hide": 1,
+   "read_only": 1,
+   "search_index": 1
+  },
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_dntn",
+   "fieldtype": "Section Break",
+   "label": "Employee Detail"
+  },
+  {
+   "fieldname": "column_break_ryxu",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "column_break_ssgt",
+   "fieldtype": "Column Break"
   },
   {
    "fetch_from": "salary_structure_assignment.base",
    "fieldname": "base_salary",
-   "fieldtype": "Link",
+   "fieldtype": "Data",
    "label": "Base Salary",
-   "options": "Salary Structure Assignment",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "department.department_name",
+   "fieldname": "department_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Department Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "directorate.department_name",
+   "fieldname": "directorate_name",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Directorate Name",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.department",
+   "fieldname": "department",
+   "fieldtype": "Link",
+   "label": "Department ",
+   "options": "Department",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "employee.custom_prefix",
+   "fieldname": "prefix",
+   "fieldtype": "Data",
+   "label": "Prefix",
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
+ "is_submittable": 1,
  "links": [
   {
    "group": "Salary Certificate",
@@ -117,7 +180,7 @@
    "link_fieldname": "First_name"
   }
  ],
- "modified": "2024-10-01 18:43:11.188295",
+ "modified": "2024-10-03 19:47:41.351411",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Salary Certificate",
@@ -134,6 +197,29 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Payroll User",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "cancel": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Employee",
+   "share": 1,
+   "submit": 1,
    "write": 1
   }
  ],
