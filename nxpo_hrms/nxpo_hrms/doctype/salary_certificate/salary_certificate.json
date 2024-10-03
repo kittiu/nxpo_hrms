@@ -1,23 +1,24 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:SLC-{employee}-{#}",
+ "autoname": "naming_series:",
  "creation": "2024-10-01 14:12:16.895362",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "salary_certificate_section",
   "employee",
-  "date_of_signing",
+  "employee_name",
+  "naming_series",
   "column_break_qeju",
-  "from_date",
-  "column_break_bmym",
-  "amended_from",
+  "company",
+  "date_of_certification",
+  "approver",
   "section_break_dntn",
   "prefix",
   "first_name",
   "last_name",
   "column_break_ryxu",
-  "company",
   "department",
   "department_name",
   "directorate",
@@ -26,13 +27,16 @@
   "column_break_ssgt",
   "date_of_joining",
   "salary_structure_assignment",
-  "base_salary"
+  "base_salary",
+  "section_break_houj",
+  "amended_from"
  ],
  "fields": [
   {
    "fieldname": "employee",
    "fieldtype": "Link",
    "in_list_view": 1,
+   "in_standard_filter": 1,
    "label": "Employee",
    "options": "Employee",
    "reqd": 1
@@ -56,7 +60,7 @@
   {
    "fetch_from": "employee.date_of_joining",
    "fieldname": "date_of_joining",
-   "fieldtype": "Data",
+   "fieldtype": "Date",
    "label": "Date of Joining",
    "read_only": 1
   },
@@ -68,9 +72,9 @@
    "read_only": 1
   },
   {
-   "fieldname": "date_of_signing",
+   "fieldname": "date_of_certification",
    "fieldtype": "Date",
-   "label": "Date of signing",
+   "label": "Date of Certification",
    "reqd": 1
   },
   {
@@ -86,10 +90,6 @@
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "column_break_bmym",
-   "fieldtype": "Column Break"
-  },
-  {
    "fieldname": "salary_structure_assignment",
    "fieldtype": "Link",
    "label": "Salary Structure Assignment",
@@ -99,9 +99,11 @@
   {
    "fetch_from": "employee.company",
    "fieldname": "company",
-   "fieldtype": "Data",
+   "fieldtype": "Link",
    "label": "Company",
-   "read_only": 1
+   "options": "Company",
+   "read_only": 1,
+   "set_only_once": 1
   },
   {
    "fieldname": "amended_from",
@@ -112,12 +114,6 @@
    "print_hide": 1,
    "read_only": 1,
    "search_index": 1
-  },
-  {
-   "fieldname": "from_date",
-   "fieldtype": "Date",
-   "label": "From Date",
-   "reqd": 1
   },
   {
    "fieldname": "section_break_dntn",
@@ -135,7 +131,7 @@
   {
    "fetch_from": "salary_structure_assignment.base",
    "fieldname": "base_salary",
-   "fieldtype": "Data",
+   "fieldtype": "Currency",
    "label": "Base Salary",
    "read_only": 1
   },
@@ -169,22 +165,47 @@
    "fieldtype": "Data",
    "label": "Prefix",
    "read_only": 1
+  },
+  {
+   "fetch_from": "employee.employee_name",
+   "fieldname": "employee_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Employee Name",
+   "read_only": 1
+  },
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Naming Series",
+   "options": "SLC-.{employee}.-.#",
+   "reqd": 1
+  },
+  {
+   "fieldname": "salary_certificate_section",
+   "fieldtype": "Section Break",
+   "label": "Salary Certificate"
+  },
+  {
+   "description": "This user will be given rights to see and submit this document.",
+   "fieldname": "approver",
+   "fieldtype": "Link",
+   "label": "Approver",
+   "options": "User"
+  },
+  {
+   "fieldname": "section_break_houj",
+   "fieldtype": "Section Break"
   }
  ],
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
- "links": [
-  {
-   "group": "Salary Certificate",
-   "link_doctype": "Employee",
-   "link_fieldname": "First_name"
-  }
- ],
- "modified": "2024-10-03 19:47:41.351411",
+ "links": [],
+ "modified": "2024-10-03 23:06:20.936200",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Salary Certificate",
- "naming_rule": "Expression",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
@@ -209,21 +230,10 @@
    "role": "Payroll User",
    "share": 1,
    "write": 1
-  },
-  {
-   "cancel": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Employee",
-   "share": 1,
-   "submit": 1,
-   "write": 1
   }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "track_changes": 1
 }
