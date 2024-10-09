@@ -295,5 +295,39 @@ def get_employee_special_assignment(employee):
     return frappe.render_template("nxpo_hrms/custom/employee/employee_special_assignment.html", {"data": employee_special_assignment})
 
 
+@frappe.whitelist()
+def create_user(employee, user=None, email=None):
+    """ Override """
+    emp = frappe.get_doc("Employee", employee)
+    if email:
+        emp.prefered_email = email
+    user = frappe.new_doc("User")
+    user.update(
+		{
+			"name": " ".join([emp.custom_first_name_en, emp.custom_last_name_en]),
+			"email": emp.prefered_email,
+			"enabled": 1,
+			"first_name": emp.custom_first_name_en,
+			"last_name": emp.custom_last_name_en,
+			"gender": emp.gender,
+			"birth_date": emp.date_of_birth,
+			"phone": emp.cell_number,
+			"bio": emp.bio,
+            # Just add Leave Approver role to avoid role warning
+            "roles": [{"doctype": "Has Role", "role": "Leave Approver"}],
+            # kittiu: Override default
+            "send_welcome_email": 0,  
+            # --
+		}
+	)
+    user.insert(ignore_permissions=True)
+    emp.user_id = user.name
+    emp.save(ignore_permissions=True)
+    # Set default profile
+    user.reload()
+    user.role_profile_name = "Employee"
+    user.module_profile = "Employee"
+    user.save(ignore_permissions=True)
+    return user.name
 
 
