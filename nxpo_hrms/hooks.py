@@ -113,7 +113,19 @@ fixtures = [
     {
         "doctype": "Role",
         "filters": [
-            ["name", "in", ["Payroll User"]]
+            ["name", "in", ["Payroll User", "User Admin"]]
+        ]
+    },
+    {
+        "doctype": "Custom DocPerm",
+        "filters": [
+            ["name", "in", [
+                "umrsa4svvl",
+                "umrs35nh8j",
+                "umrsmga4pc",
+                "suhbscgpa6",
+                "stusri3f4n",
+            ]]
         ]
     },
 ]
@@ -319,7 +331,10 @@ doc_events = {
         "validate": "nxpo_hrms.custom.employee_tax_exemption_declaration.update_pvd_amount",
     },
     "User": {
-        "validate": "nxpo_hrms.custom.user.create_user_own_role",
+        "validate": [
+            "nxpo_hrms.custom.user.create_user_own_role",
+            "nxpo_hrms.custom.user.validate_update_role_profile",
+        ]
     },
     "Leave Application": {
         "validate": "nxpo_hrms.custom.leave_application.compute_approver",

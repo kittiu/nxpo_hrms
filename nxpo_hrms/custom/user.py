@@ -46,3 +46,12 @@ def create_user_own_role(user, method):
 	# Assign
 	user.append_roles(role.name)
 
+
+def validate_update_role_profile(doc, method):
+	"""If user is has role User Admin, make sure he/she cannot change role_profile"""
+	if doc.name != frappe.session.user:
+		return
+	if "User Admin" in frappe.get_roles():
+		doc_before_save = doc.get_doc_before_save()
+		if doc.role_profile_name != doc_before_save.role_profile_name:
+			frappe.throw("User Admin cannot change his/her own Role Profile")
