@@ -7578,7 +7578,7 @@
    "property": "allow_rename",
    "property_type": "Check",
    "row_name": null,
-   "value": "0"
+   "value": "1"
   },
   {
    "_assign": null,
