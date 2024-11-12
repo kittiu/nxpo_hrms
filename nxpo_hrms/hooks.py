@@ -205,9 +205,7 @@ doctype_tree_js = {
 }
 
 doctype_list_js = {
-    "Employee Tax Exemption Declaration": "public/js/employee_tax_exemption_declaration.js",
     "Leave Allocation": "public/js/leave_allocation.js",
-
 }
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
 
@@ -299,7 +297,6 @@ override_doctype_class = {
     "Salary Slip": "nxpo_hrms.custom.salary_slip.SalarySlipNXPO",
 	"Salary Structure Assignment": "nxpo_hrms.custom.salary_structure_assignment.SalaryStructureAssignmentNXPO",
     "Leave Policy Assignment": "nxpo_hrms.custom.leave_policy_assignment.LeavePolicyAssignmentNXPO",
-    "Employee Tax Exemption Declaration": "nxpo_hrms.custom.employee_tax_exemption_declaration.EmployeeTaxExemptionDeclarationNXPO",
     "Attendance Request": "nxpo_hrms.custom.attendance_request.AttendanceRequestNXPO",
     "Attendance": "nxpo_hrms.custom.attendance.AttendanceNXPO",
 }
@@ -327,10 +324,6 @@ doc_events = {
             "nxpo_hrms.custom.salary_slip.validate_no_salary",
         ]
     },
-    # Redmine #5868
-    # "Employee Tax Exemption Declaration": {
-    #     "validate": "nxpo_hrms.custom.employee_tax_exemption_declaration.update_pvd_amount",
-    # },
     "User": {
         "validate": [
             "nxpo_hrms.custom.user.create_user_own_role",
