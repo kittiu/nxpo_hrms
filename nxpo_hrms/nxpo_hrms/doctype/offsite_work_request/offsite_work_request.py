@@ -28,7 +28,7 @@ class OffsiteWorkRequest(Document):
         for plan in self.plan_dates:
             # plan.days = (getdate(plan.to_date) - getdate(plan.from_date)).days + 1
             plan.days = self.get_number_of_leave_days_for_owr(plan.from_date, plan.to_date, self.employee, holiday_list)
-            if plan.days <= 0:
+            if plan.days < 0:
                 frappe.throw(_("To Date before From Date is not allowed!"))
         # Total days
         self.total_days = sum([x.days for x in self.plan_dates])
@@ -42,7 +42,7 @@ class OffsiteWorkRequest(Document):
             ]
         overlap_dates = self.get_date_overlap_remove_holiday(holiday_list, dates)
         unique_days = len(list(set(overlap_dates)))
-        if unique_days != self.total_days:
+        if unique_days != self.total_days and not frappe.flags.sync_tigersoft:
             frappe.throw(_("Please make sure that all selected dates are not overlapping"))
         
         # 3. Validate no more than OWR policy
@@ -97,7 +97,7 @@ class OffsiteWorkRequest(Document):
         owr_dates = [d[0] for d in owr_dates]
         week_list += list(map(lambda d: d.isocalendar()[1], owr_dates))
         week_exceed = [str(k) for (k, v) in Counter(week_list).items() if v > owr_days_per_week]
-        if week_exceed and self.type == "Work From Anywhere":
+        if week_exceed and self.type == "Work From Anywhere" and not frappe.flags.sync_tigersoft:
             frappe.throw(
                 _("Your Offsite Work Request is exceeding {} days on the week {}").format(
                     owr_days_per_week,

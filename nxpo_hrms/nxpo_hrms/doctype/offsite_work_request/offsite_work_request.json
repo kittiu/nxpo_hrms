@@ -20,7 +20,9 @@
   "plan_dates",
   "note",
   "section_break_nkna",
-  "amended_from"
+  "amended_from",
+  "column_break_qstg",
+  "tigersoft_approve_date"
  ],
  "fields": [
   {
@@ -133,6 +135,16 @@
    "no_copy": 1,
    "options": "OR-.YYYY.-",
    "set_only_once": 1
+  },
+  {
+   "fieldname": "column_break_qstg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "tigersoft_approve_date",
+   "fieldtype": "Datetime",
+   "label": "Tigersoft Approve Date",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -143,7 +155,7 @@
    "link_fieldname": "custom_offsite_work_request"
   }
  ],
- "modified": "2024-09-23 19:54:53.627232",
+ "modified": "2024-11-24 15:32:49.190138",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Offsite Work Request",

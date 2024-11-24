@@ -347,6 +347,10 @@ scheduler_events = {
     "hourly": [
         "nxpo_hrms.nxpo_hrms.doctype.offsite_work_request.offsite_work_request.auto_create_attendance_requests",
         "nxpo_hrms.nxpo_hrms.doctype.employee_special_assignment.employee_special_assignment.job_update_active",
+        "nxpo_hrms.nxpo_hrms.doctype.tigersoft_connector.tigersoft_connector.sync_employee_checkin",
+    ],
+    "daily": [
+        "nxpo_hrms.nxpo_hrms.doctype.tigersoft_connector.tigersoft_connector.sync_offsite_work_request",
     ],
 }
 

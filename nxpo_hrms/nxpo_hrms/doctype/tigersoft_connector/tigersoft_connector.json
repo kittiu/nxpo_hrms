@@ -1,0 +1,106 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-11-24 10:44:24.401164",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "ip_address",
+  "db_name",
+  "port",
+  "column_break_jamt",
+  "user",
+  "password",
+  "section_break_ughr",
+  "sync_employee_checkin",
+  "column_break_frcc",
+  "sync_offsite_work_request",
+  "column_break_jwcg",
+  "sync_leave_application"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "description": "Sync only new checkin. To re-sync, make sure the Employee Checkins are deleted first.",
+   "fieldname": "sync_employee_checkin",
+   "fieldtype": "Check",
+   "label": "Sync Employee Checkin"
+  },
+  {
+   "fieldname": "ip_address",
+   "fieldtype": "Data",
+   "label": "IP Address"
+  },
+  {
+   "fieldname": "column_break_jamt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ughr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "db_name",
+   "fieldtype": "Data",
+   "label": "DB Name"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Data",
+   "label": "User"
+  },
+  {
+   "fieldname": "password",
+   "fieldtype": "Data",
+   "label": "Password"
+  },
+  {
+   "fieldname": "port",
+   "fieldtype": "Data",
+   "label": "Port"
+  },
+  {
+   "fieldname": "column_break_frcc",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "sync_offsite_work_request",
+   "fieldtype": "Check",
+   "label": "Sync Offsite Work Request"
+  },
+  {
+   "fieldname": "column_break_jwcg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "sync_leave_application",
+   "fieldtype": "Check",
+   "label": "Sync Leave Application"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-11-24 15:10:02.245386",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Tigersoft Connector",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
