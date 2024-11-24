@@ -4,7 +4,7 @@ app_publisher = "Ecosoft"
 app_description = "NXPO HRMS"
 app_email = "kittiu@ecosoft.co.th"
 app_license = "mit"
-# required_apps = []
+required_apps = ["thai_leave"]
 
 fixtures = [
     {
@@ -299,6 +299,7 @@ override_doctype_class = {
     "Leave Policy Assignment": "nxpo_hrms.custom.leave_policy_assignment.LeavePolicyAssignmentNXPO",
     "Attendance Request": "nxpo_hrms.custom.attendance_request.AttendanceRequestNXPO",
     "Attendance": "nxpo_hrms.custom.attendance.AttendanceNXPO",
+    "Leave Application": "nxpo_hrms.custom.leave_application.LeaveApplicationNXPO",
 }
 
 # Document Events
@@ -351,6 +352,7 @@ scheduler_events = {
     ],
     "daily": [
         "nxpo_hrms.nxpo_hrms.doctype.tigersoft_connector.tigersoft_connector.sync_offsite_work_request",
+        "nxpo_hrms.nxpo_hrms.doctype.tigersoft_connector.tigersoft_connector.sync_leave_application",
     ],
 }
 

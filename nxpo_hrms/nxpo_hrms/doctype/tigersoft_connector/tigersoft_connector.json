@@ -11,17 +11,22 @@
   "column_break_jamt",
   "user",
   "password",
+  "sync_start_date",
   "section_break_ughr",
   "sync_employee_checkin",
-  "column_break_frcc",
+  "section_break_ypnn",
   "sync_offsite_work_request",
-  "column_break_jwcg",
-  "sync_leave_application"
+  "column_break_trqh",
+  "offsite_work_mapping",
+  "section_break_ltwm",
+  "sync_leave_application",
+  "column_break_teir",
+  "leave_type_mapping"
  ],
  "fields": [
   {
    "default": "0",
-   "description": "Sync only new checkin. To re-sync, make sure the Employee Checkins are deleted first.",
+   "description": "Sync only new checkin, based on checkin date.",
    "fieldname": "sync_employee_checkin",
    "fieldtype": "Check",
    "label": "Sync Employee Checkin"
@@ -60,30 +65,60 @@
    "label": "Port"
   },
   {
-   "fieldname": "column_break_frcc",
-   "fieldtype": "Column Break"
-  },
-  {
    "default": "0",
+   "description": "Sync only new OWR, based on Tigersoft Approve Date.",
    "fieldname": "sync_offsite_work_request",
    "fieldtype": "Check",
    "label": "Sync Offsite Work Request"
   },
   {
-   "fieldname": "column_break_jwcg",
-   "fieldtype": "Column Break"
-  },
-  {
    "default": "0",
+   "description": "Sync only new Leave Application, based on Tigersoft Approve Date.",
    "fieldname": "sync_leave_application",
    "fieldtype": "Check",
    "label": "Sync Leave Application"
+  },
+  {
+   "description": "Only date from Tigersoft, starting on this date will be synced.",
+   "fieldname": "sync_start_date",
+   "fieldtype": "Date",
+   "label": "Sync Start Date"
+  },
+  {
+   "fieldname": "section_break_ypnn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_ltwm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_trqh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "offsite_work_mapping",
+   "fieldtype": "Code",
+   "label": "Offsite Work Mapping",
+   "max_height": "100px",
+   "options": "Python"
+  },
+  {
+   "fieldname": "column_break_teir",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "leave_type_mapping",
+   "fieldtype": "Code",
+   "label": "Leave Type Mapping",
+   "max_height": "100px",
+   "options": "Python"
   }
  ],
  "index_web_pages_for_search": 1,
  "issingle": 1,
  "links": [],
- "modified": "2024-11-24 15:10:02.245386",
+ "modified": "2024-11-25 08:25:32.487599",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Tigersoft Connector",
