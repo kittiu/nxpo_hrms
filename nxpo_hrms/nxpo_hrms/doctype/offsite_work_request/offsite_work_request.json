@@ -126,7 +126,7 @@
    "fieldtype": "Select",
    "label": "Event",
    "mandatory_depends_on": "eval:doc.type==='Event';",
-   "options": "\nSeminar\nMeeting\nSite Visit\nTraining\nOthers"
+   "options": "\nSeminar\nMeeting\nSite Visit\nTraining\nOversea Travel\nOthers"
   },
   {
    "fieldname": "naming_series",
@@ -155,7 +155,7 @@
    "link_fieldname": "custom_offsite_work_request"
   }
  ],
- "modified": "2024-11-24 15:32:49.190138",
+ "modified": "2024-11-30 17:05:00.520668",
  "modified_by": "Administrator",
  "module": "NXPO HRMS",
  "name": "Offsite Work Request",

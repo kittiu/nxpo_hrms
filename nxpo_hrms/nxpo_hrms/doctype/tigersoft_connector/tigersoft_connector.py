@@ -2,10 +2,11 @@
 # For license information, please see license.txt
 
 import frappe
+from frappe import _
 from frappe.model.document import Document
 import pymssql
 import math
-from hrms.hr.doctype.leave_application.leave_application import OverlapError
+import ast
 
 
 class TigersoftConnector(Document):
@@ -77,12 +78,18 @@ def sync_offsite_work_request():
 		return
 	mssql = settings._cr()
 	
-	# Get latest approved OWR for all employee
+	# Get latest approved date OWR for all employee, so to sync only new ones
 	emp_last_offsite_works = frappe.db.sql("""
 		select e.employee, max(r.tigersoft_approve_date)  from `tabEmployee` e
 		left outer join `tabOffsite Work Request` r on r.employee = e.name
 		group by e.employee
 	""")
+
+	doc = frappe.get_single("Tigersoft Connector")
+	map_leave = ast.literal_eval(doc.offsite_work_mapping or "{}")
+	leave_names = tuple(map_leave.keys())
+	if not leave_names:
+		return
 	
 	# Loop through each employee and create owr transactions
 	for employee, last_approve in emp_last_offsite_works:
@@ -97,8 +104,8 @@ def sync_offsite_work_request():
 				approve_date
 			from frappe_vwTigerLeaveForm
 			where approve = 'A' and status_delete = 0
-			and leave_name in ('ปฏิบัติงานนอกสถานที่', 'ฝึกอบรม/สัมมนา', 'W@A', 'เดินทางไปต่างประเทศส่วนตัว (วันหยุด)')
-		"""
+			and leave_name in %s
+		""" % str(leave_names)
 		if last_approve:
 			mssql.execute(sql + """
 				and employee_code = %s and approve_date > %s
@@ -113,12 +120,6 @@ def sync_offsite_work_request():
 		if not rows:
 			continue
 
-		map_leave = {
-			"ปฏิบัติงานนอกสถานที่": ("Event", "Site Visit"),
-			"ฝึกอบรม/สัมมนา": ("Event", "Seminar"),
-			"W@A": ("Work From Anywhere", ""),
-			"เดินทางไปต่างประเทศส่วนตัว (วันหยุด)": ("Event", "Others"),
-		}
 		for (
 			employee_code,
 			leave_name,
@@ -162,15 +163,22 @@ def sync_leave_application():
 		left outer join `tabLeave Application` l on l.employee = e.name
 		group by e.employee
 	""")
-	
+
+	doc = frappe.get_single("Tigersoft Connector")
+	map_leave = ast.literal_eval(doc.leave_type_mapping or "{}")
+	leave_names = tuple(map_leave.keys())
+	if not leave_names:
+		return
+
 	# Loop through each employee and create owr transactions
 	for employee, last_approve in emp_last_leave_apps:
+		z = last_approve
 		sql = """
 			select
 				employee_code,
 				leave_name, leave_memo, leave_type_name,
 				leave_date_start, leave_date_end,
-				case when leave_type_name like 'ลาช่วง%'
+				case when leave_type_name like 'ลาช่วง%%'
               		then DATEPART(HOUR, CONVERT(TIME, leave_time_total))
 					+ DATEPART(MINUTE, CONVERT(TIME, leave_time_total)) / 60
             	else
@@ -179,8 +187,8 @@ def sync_leave_application():
 				approve_date
 			from frappe_vwTigerLeaveForm
 			where approve = 'A' and status_delete = 0 
-			and leave_name not in ('ปฏิบัติงานนอกสถานที่', 'ฝึกอบรม/สัมมนา', 'W@A', 'เดินทางไปต่างประเทศส่วนตัว (วันหยุด)')
-		"""
+			and leave_name in %s
+		""" % str(leave_names)
 		if last_approve:
 			mssql.execute(sql + """
 				and employee_code = %s and approve_date > %s
@@ -195,14 +203,6 @@ def sync_leave_application():
 		if not rows:
 			continue
 
-		map_leave = {
-			"ลากิจ": "ลากิจ",
-			"ลาป่วย": "ลาป่วย",
-			"ลาพักร้อน": "ลาพักร้อน",
-			"ลาบวช": "ลาอุปสมบท (พนักงานชาย)",
-			"ลาคลอด": "ลาคลอดบุตร (พนักงานสตรี)",
-			# WAITING FOR MORE MAPPING
-		}
 		for (
 			employee_code,
 			leave_name,
