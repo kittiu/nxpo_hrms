@@ -4,9 +4,12 @@
 import frappe
 from frappe import _
 from frappe.model.document import Document
-import pymssql
 import math
 import ast
+try:
+	import pymssql
+except:
+	pass
 
 
 class TigersoftConnector(Document):
