@@ -2,6 +2,48 @@ import frappe
 from frappe import _
 from frappe.utils import get_link_to_form
 from .user import OWN_ROLE_PREFIX
+from thai_leave.custom.leave_application import LeaveApplicationThai
+from hrms.hr.doctype.leave_application.leave_application import get_approved_leaves_for_period, get_holidays, date_diff, getdate
+
+
+class LeaveApplicationNXPO(LeaveApplicationThai):
+	
+    def validate_applicable_after(self):
+        # Override because, the applicable after is not just working day
+        # Skip validation if syncing with TigerSoft
+        if frappe.flags.sync_tigersoft:
+            return
+        # --
+        if self.leave_type:
+            leave_type = frappe.get_doc("Leave Type", self.leave_type)
+            if leave_type.applicable_after > 0:
+                date_of_joining = frappe.db.get_value("Employee", self.employee, "date_of_joining")
+                number_of_days = date_diff(getdate(self.from_date), date_of_joining)
+                if number_of_days >= 0:
+                    if number_of_days < leave_type.applicable_after:
+                        frappe.throw(
+                            _("{0} applicable after {1} working days").format(
+                                self.leave_type, leave_type.applicable_after
+                            )
+                        )
+
+    def validate_dates_across_allocation(self):
+        # Skip validation if syncing with TigerSoft
+        if frappe.flags.sync_tigersoft:
+            return
+        super().validate_dates_across_allocation()
+
+    def validate_leave_overlap(self):
+        # Skip validation if syncing with TigerSoft
+        if frappe.flags.sync_tigersoft:
+            return
+        super().validate_leave_overlap()
+
+    def show_insufficient_balance_message(self, leave_balance_for_consumption: float) -> None:
+        # Skip validation if syncing with TigerSoft
+        if frappe.flags.sync_tigersoft:
+            return
+        super().show_insufficient_balance_message(leave_balance_for_consumption)
 
 
 def get_employee_role(employee, employee_name):
@@ -18,7 +60,7 @@ def get_employee_role(employee, employee_name):
 
 def compute_approver(doc, method):
     doc.custom_approver = get_leave_approver_role(doc)
-    if not doc.custom_approver:
+    if not doc.custom_approver and not frappe.flags.sync_tigersoft:
         frappe.throw(_("Approver not found for {}: {}").format(
             get_link_to_form("Employee", doc.employee),
             doc.employee_name
@@ -54,7 +96,9 @@ def get_leave_approver_role(leave):
 
 def share_to_approver(doc, method):
     # Share with approvers to allow access
-    approver = doc.custom_approver.replace(OWN_ROLE_PREFIX, "")
+    approver = ""
+    if doc.custom_approver and not frappe.flags.sync_tigersoft:
+        approver = doc.custom_approver.replace(OWN_ROLE_PREFIX, "")
     shared_users = [x.user for x in frappe.share.get_users(doc.doctype, doc.name)]
     # For shared users not in approvers list, remove share
     for user in (set(shared_users) - set([approver])):

@@ -1,0 +1,141 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2024-11-24 10:44:24.401164",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "ip_address",
+  "db_name",
+  "port",
+  "column_break_jamt",
+  "user",
+  "password",
+  "sync_start_date",
+  "section_break_ughr",
+  "sync_employee_checkin",
+  "section_break_ypnn",
+  "sync_offsite_work_request",
+  "column_break_trqh",
+  "offsite_work_mapping",
+  "section_break_ltwm",
+  "sync_leave_application",
+  "column_break_teir",
+  "leave_type_mapping"
+ ],
+ "fields": [
+  {
+   "default": "0",
+   "description": "Sync only new checkin, based on checkin date.",
+   "fieldname": "sync_employee_checkin",
+   "fieldtype": "Check",
+   "label": "Sync Employee Checkin"
+  },
+  {
+   "fieldname": "ip_address",
+   "fieldtype": "Data",
+   "label": "IP Address"
+  },
+  {
+   "fieldname": "column_break_jamt",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ughr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "db_name",
+   "fieldtype": "Data",
+   "label": "DB Name"
+  },
+  {
+   "fieldname": "user",
+   "fieldtype": "Data",
+   "label": "User"
+  },
+  {
+   "fieldname": "password",
+   "fieldtype": "Data",
+   "label": "Password"
+  },
+  {
+   "fieldname": "port",
+   "fieldtype": "Data",
+   "label": "Port"
+  },
+  {
+   "default": "0",
+   "description": "Sync only new OWR, based on Tigersoft Approve Date.",
+   "fieldname": "sync_offsite_work_request",
+   "fieldtype": "Check",
+   "label": "Sync Offsite Work Request"
+  },
+  {
+   "default": "0",
+   "description": "Sync only new Leave Application, based on Tigersoft Approve Date.",
+   "fieldname": "sync_leave_application",
+   "fieldtype": "Check",
+   "label": "Sync Leave Application"
+  },
+  {
+   "description": "Only date from Tigersoft, starting on this date will be synced.",
+   "fieldname": "sync_start_date",
+   "fieldtype": "Date",
+   "label": "Sync Start Date"
+  },
+  {
+   "fieldname": "section_break_ypnn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "section_break_ltwm",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_trqh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "offsite_work_mapping",
+   "fieldtype": "Code",
+   "label": "Offsite Work Mapping",
+   "max_height": "100px",
+   "options": "Python"
+  },
+  {
+   "fieldname": "column_break_teir",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "leave_type_mapping",
+   "fieldtype": "Code",
+   "label": "Leave Type Mapping",
+   "max_height": "100px",
+   "options": "Python"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2024-11-30 18:36:50.226949",
+ "modified_by": "Administrator",
+ "module": "NXPO HRMS",
+ "name": "Tigersoft Connector",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
