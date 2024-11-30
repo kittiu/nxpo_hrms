@@ -119,7 +119,7 @@ def get_columns(filters):
         {
         "fieldname": "e7",
         "fieldtype": "Currency",
-        "label": "เงินได้อื่นก่อนภาษี",
+        "label": "เงินได้อื่นๆ ก่อนภาษี",
         "width": 0
         },
         {
@@ -257,14 +257,14 @@ def get_data(filters):
             emp.employment_type
         FROM `tabSalary Slip` ss
         JOIN `tabEmployee` emp ON ss.employee = emp.name
-        JOIN `tabEmployee Grade` gd ON gd.name = emp.grade
+        LEFT OUTER JOIN `tabEmployee Grade` gd ON gd.name = emp.grade
         LEFT OUTER JOIN `tabSalary Detail` e1 ON e1.parenttype = 'Salary Slip' AND e1.parent = ss.name AND e1.salary_component = 'เงินเดือน'
         LEFT OUTER JOIN `tabSalary Detail` e2 ON e2.parenttype = 'Salary Slip' AND e2.parent = ss.name AND e2.salary_component = 'เงินชดเชย 1'
         LEFT OUTER JOIN `tabSalary Detail` e3 ON e3.parenttype = 'Salary Slip' AND e3.parent = ss.name AND e3.salary_component = 'เงินชดเชย 2'
         LEFT OUTER JOIN `tabSalary Detail` e4 ON e4.parenttype = 'Salary Slip' AND e4.parent = ss.name AND e4.salary_component = 'ประโยชน์ตอบแทนอื่น'
         LEFT OUTER JOIN `tabSalary Detail` e5 ON e5.parenttype = 'Salary Slip' AND e5.parent = ss.name AND e5.salary_component = 'เงินเพิ่มพิเศษ'
         LEFT OUTER JOIN `tabSalary Detail` e6 ON e6.parenttype = 'Salary Slip' AND e6.parent = ss.name AND e6.salary_component = 'ตกเบิก'
-        LEFT OUTER JOIN `tabSalary Detail` e7 ON e7.parenttype = 'Salary Slip' AND e7.parent = ss.name AND e7.salary_component = 'เงินได้อื่นก่อนภาษี'
+        LEFT OUTER JOIN `tabSalary Detail` e7 ON e7.parenttype = 'Salary Slip' AND e7.parent = ss.name AND e7.salary_component = 'เงินได้อื่นๆ ก่อนภาษี'
         LEFT OUTER JOIN `tabSalary Detail` d1 ON d1.parenttype = 'Salary Slip' AND d1.parent = ss.name AND d1.salary_component = 'ภาษี'
         LEFT OUTER JOIN `tabSalary Detail` d2 ON d2.parenttype = 'Salary Slip' AND d2.parent = ss.name AND d2.salary_component = 'กองทุนสำรองเลี้ยงชีพ'
         LEFT OUTER JOIN `tabSalary Detail` d3 ON d3.parenttype = 'Salary Slip' AND d3.parent = ss.name AND d3.salary_component = 'สหกรณ์ออมทรัพย์ วท.'
