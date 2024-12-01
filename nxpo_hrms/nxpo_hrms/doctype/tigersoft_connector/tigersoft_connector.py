@@ -175,7 +175,6 @@ def sync_leave_application():
 
 	# Loop through each employee and create owr transactions
 	for employee, last_approve in emp_last_leave_apps:
-		z = last_approve
 		sql = """
 			select
 				employee_code,
