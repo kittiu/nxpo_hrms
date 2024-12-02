@@ -201,8 +201,20 @@ def get_data(filters):
     data = query_data
     
     for row in data:
-        print('ss_id', row['ss_id'])
-        print('salary_component', row['salary_component'])
+        # Case opening amount
+        ss_name = frappe.get_all(
+            "Salary Slip", {
+                "employee": row["employee"],
+                "posting_date": ["<=", filters["to_date"]],
+                "docstatus": 1,
+            },
+            order_by="posting_date desc",
+            pluck="name",
+            limit=1
+        )
+        ss = frappe.get_cached_doc("Salary Slip", ss_name[0])
+        row["pay_amount"] += ss.get_opening_for("taxable_earnings_till_date", None, None)
+        row["deduct_amount"] += ss.get_opening_for("tax_deducted_till_date", None, None)
         data_res.append(row)
 
 
