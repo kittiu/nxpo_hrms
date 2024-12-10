@@ -299,6 +299,7 @@ def get_data(filters):
     sum_d4 = 0
     sum_d5 = 0
     sum_d6 = 0
+    sum_other_income = 0
     
     sum_custom_min = 0
     sum_custom_max = 0
@@ -315,6 +316,8 @@ def get_data(filters):
         end = filters.get('to_date')
         base_salary = get_latest_salary_structure(employee, start, end)
         row['base_salary'] = base_salary
+        row['other_income'] = (row['e4'] if row['e4'] is not None else 0) + (row['e7'] if row['e7'] is not None else 0)
+
 
         custom_min = row.get('custom_min', 0)
         custom_max = row.get('custom_max', 0)
@@ -334,6 +337,7 @@ def get_data(filters):
         else:
             row['custom_percentile'] = 0
         
+
         # Calculate total amounts
         sum_e1 += row['e1'] if row['e1'] is not None else 0
         sum_e2 += row['e2'] if row['e2'] is not None else 0
@@ -360,40 +364,6 @@ def get_data(filters):
         sum_gross_pay += row['gross_pay'] if row['gross_pay'] is not None else 0
         sum_deductions += row['total_deduction'] if row['total_deduction'] is not None else 0
         sum_pvd_com += row['pvd_com'] if row['pvd_com'] is not None else 0
-
-    # Append the total row
-    # total_row = {
-    #     'employee': 'Total',
-    #     'e1': sum_e1,
-    #     'e2': sum_e2,
-    #     'e3': sum_e3,
-    #     'e4': sum_e4,
-    #     'e6': sum_e6,
-    #     'e5': sum_e5,
-    #     'e7': sum_e7,
-    #     'e8': sum_e8,
-    #     'd1': sum_d1,
-    #     'd2': sum_d2,
-    #     'd4': sum_d4,
-    #     'd3': sum_d3,
-    #     'd5': sum_d5,
-    #     'd6': sum_d6,
-
-    #     'base_salary': sum_base,
-
-    #     'custom_min': sum_custom_min,
-    #     'custom_max': sum_custom_max,
-
-    #     'net_pay': sum_net_pay,
-    #     'gross_pay': sum_gross_pay,
-    #     'total_deduction': sum_deductions,
-    #     'pvd_com': sum_pvd_com,
-        
-    #     'custom_percentile': None
-
-
-    # }
-    # data.append(total_row)
 
     return data
 

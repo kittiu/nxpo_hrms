@@ -76,6 +76,13 @@ frappe.query_reports["PND1a For NXPO"] = {
             ],
 			reqd: 0,
 		},
+		{
+			fieldname: "is_use_ssa",
+			label: __("Use SSA Opening Income and Tax for Left Employee"),
+			fieldtype: "Check",
+			reqd: 0,
+			width: "500px",
+		},
 
 	],
 	onload: function(report) {
