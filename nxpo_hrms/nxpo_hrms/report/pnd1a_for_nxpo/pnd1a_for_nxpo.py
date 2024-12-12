@@ -2,6 +2,7 @@
 # For license information, please see license.txt
 
 import frappe
+from datetime import datetime
 
 
 def execute(filters=None):
@@ -271,12 +272,89 @@ def get_data(filters):
         as_dict=True,
     )
 
-
     data2 = query_data_2
 
     for row2 in data2:
+        row2['idx'] = len(data_res) + 1
         data_res.append(row2)
+
+    if filters.get("is_use_ssa"):
+        query_ssa = frappe.db.sql(
+        """
+            SELECT 
+                ssa.employee
+            FROM 
+                `tabSalary Structure Assignment` ssa
+            WHERE 
+                ssa.taxable_earnings_till_date IS NOT NULL
+                AND ssa.tax_deducted_till_date IS NOT NULL
+            GROUP BY 
+                ssa.employee
+        """,
+            as_dict=True,
+        )
+        data_ssa = query_ssa
         
+        # Convert the lists into sets for efficient comparison
+        employees_set = set([row['employee'] for row in data_res])
+        ssa_set = set([row['employee'] for row in data_ssa])
+        # Find employees without SSA information
+        employees_without_ssa =  ssa_set - employees_set
+
+        employees_without_ssa = list(employees_without_ssa)
+
+        current_year = datetime.now().year
+        query_ssa2 = frappe.db.sql(
+            """
+            SELECT 
+                '401N' as tax_type,
+                c.tax_id,
+                row_number() over(order by ssa.employee) as idx,
+                replace(emp.custom_citizen_id, '-', '') as citizen_id,
+                ssa.employee,
+                ssa.company,
+                emp.custom_prefix as prefix,
+                emp.first_name,
+                emp.last_name,
+                emp.custom_directorate,
+                ssa.taxable_earnings_till_date as pay_amount,
+                ssa.tax_deducted_till_date as deduct_amount,
+                '1' as tax_cond,
+                emp.custom_house_no,
+                emp.custom_village_building,
+                emp.custom_soi,
+                emp.custom_street,
+                emp.custom_subdistrict,
+                emp.custom_district,
+                emp.custom_province,
+                emp.custom_zip_code
+            FROM 
+                `tabSalary Structure Assignment` ssa
+
+            left outer join `tabEmployee` emp on emp.name = ssa.employee
+            left outer join `tabCompany` c on c.name = ssa.company
+
+            WHERE 
+                ssa.taxable_earnings_till_date IS NOT NULL
+                AND ssa.tax_deducted_till_date IS NOT NULL
+                AND ssa.employee IN %(employee_ids)s
+                AND ssa.from_date = (
+                    SELECT MAX(sub_ssa.from_date)
+                    FROM `tabSalary Structure Assignment` sub_ssa
+                    WHERE sub_ssa.employee = ssa.employee
+                )
+                AND YEAR(emp.relieving_date) = %(current_year)s
+
+            """,
+            {"employee_ids": tuple(employees_without_ssa), "current_year": current_year},
+            as_dict=True,
+        )
+        data_ssa2 = query_ssa2
+
+        for row_ssa in data_ssa2:
+            row_ssa['idx'] = len(data_res) + 1
+            data_res.append(row_ssa)
+
     return data_res
 
 def get_conditions(filters):

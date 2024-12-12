@@ -186,7 +186,7 @@ var report_columns = report.get_columns_for_print();
 {% let sum_total_deduction = 0 %}
 {% let sum_net_pay = 0 %}
 {% let sum_pvd_com = 0 %}
-
+{% let sum_other_income = 0 %}
 
 <body>
 <div class="page-break">
@@ -244,6 +244,7 @@ var report_columns = report.get_columns_for_print();
 							{% sum_total_deduction += row['total_deduction'] %}
 							{% sum_net_pay += row['net_pay'] %}
 							{% sum_pvd_com += row['pvd_com'] %}
+							{% sum_other_income += row['other_income'] %}
 
 							<tr>
 								<td class="text-left" style="font-size: 7px;">
@@ -277,7 +278,7 @@ var report_columns = report.get_columns_for_print();
 								</td>
 								<td class="text-right">
 									<div class="value">
-										<label style="font-size: 7px;">{%= format_number(row['e7'], null, 2) || 0.00 %}</label>
+										<label style="font-size: 7px;">{%= format_number(row['other_income'], null, 2) || 0.00 %}</label>
 									</div>
 								</td>
 								<td class="text-right">
@@ -348,7 +349,7 @@ var report_columns = report.get_columns_for_print();
 							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_e1, null, 2) || 0.00 %}</label></th>
 							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_e6, null, 2) || 0.00 %}</label></th>
 							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_e5, null, 2) || 0.00 %}</label></th>
-							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_e7, null, 2) || 0.00 %}</label></th>
+							<th data-fieldtype="Table" style="width: 6%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_other_income, null, 2) || 0.00 %}</label></th>
 							<th data-fieldtype="Table" style="width: 5%;"><label style="text-align: right; font-size: 7px;">{%= format_number(sum_e8, null, 2) || 0.00 %}</label></th>
 							<th data-fieldtype="Table" style="width: 4%;"><label style="text-align: right; font-size: 7px; color: red;">{%= format_number(sum_d1, null, 2) || 0.00 %}</label></th>
 							<th data-fieldtype="Table" style="width: 7%;"><label style="text-align: right; font-size: 7px; color: red;">{%= format_number(sum_d2, null, 2) || 0.00 %}</label></th>
