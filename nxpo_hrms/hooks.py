@@ -240,7 +240,9 @@ jinja = {
 	"methods": [
         "nxpo_hrms.custom.payroll_entry.sum_amount_ss_component",
 	    "nxpo_hrms.utils.thai_date",
-        "nxpo_hrms.utils.get_employee_name_by_user"
+        "nxpo_hrms.utils.get_employee_name_by_user",
+		"nxpo_hrms.utils.amount_in_bahttext",
+		"nxpo_hrms.utils.full_thai_date",
     ]
 }
 
