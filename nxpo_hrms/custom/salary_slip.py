@@ -4,6 +4,7 @@ import frappe
 from frappe import _
 from thai_payroll.custom.salary_slip import SalarySlipThaiPayroll
 from hrms.payroll.doctype.salary_slip.salary_slip import calculate_tax_by_tax_slab
+from thai_payroll.custom.salary_slip import get_pvd_contribution
 
 
 class SalarySlipNXPO(SalarySlipThaiPayroll):
@@ -48,6 +49,10 @@ class SalarySlipNXPO(SalarySlipThaiPayroll):
             # Return only tax amount on split tax earning component
             return split_addl_earning_tax - total_structured_tax_amount
         return 0.0
+    
+    @property
+    def custom_pvd_till_date(self):
+        return self.pvd_contribution_till_date
 
 
 def validate_no_salary(doc, method=None):
