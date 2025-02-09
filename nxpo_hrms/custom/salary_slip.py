@@ -4,7 +4,6 @@ import frappe
 from frappe import _
 from thai_payroll.custom.salary_slip import SalarySlipThaiPayroll
 from hrms.payroll.doctype.salary_slip.salary_slip import calculate_tax_by_tax_slab
-from thai_payroll.custom.salary_slip import get_pvd_contribution
 
 
 class SalarySlipNXPO(SalarySlipThaiPayroll):
