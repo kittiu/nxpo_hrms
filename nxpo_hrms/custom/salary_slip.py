@@ -9,6 +9,11 @@ from thai_payroll.custom.salary_slip import get_pvd_contribution
 
 class SalarySlipNXPO(SalarySlipThaiPayroll):
 
+    def insert(self):
+        super().insert()
+        self.validate()  # This is a bug in core system, we need to recompute for additional salary case
+        self.save()
+
     def autoname(self):
         # Do not set name for Salary Slip, use custom field naming_series instead
         pass
