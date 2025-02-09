@@ -9,8 +9,10 @@ from hrms.payroll.doctype.salary_slip.salary_slip import calculate_tax_by_tax_sl
 class SalarySlipNXPO(SalarySlipThaiPayroll):
 
     def insert(self):
+        # This part can be removed if the core issue is fixed
+        # https://github.com/frappe/hrms/pull/2772
         super().insert()
-        self.validate()  # This is a bug in core system, we need to recompute for additional salary case
+        self.process_salary_structure()
         self.save()
 
     def autoname(self):
