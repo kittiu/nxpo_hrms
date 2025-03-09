@@ -57,7 +57,7 @@ def get_unused_leave(data):
     # Extract the total leaves from the result
     total_leaves = result[0][0] if result else 0
 
-    return total_leaves
+    return total_leaves or 0
 
 
 @frappe.whitelist()
@@ -75,7 +75,7 @@ def update_leave_allocation_unused_leave(names, action):
         is_add_unused_leave = 0
 
     for name in names:
-        total_unused_leave_value = '0'
+        total_unused_leave_value = 0
         leave_allocation_data = frappe.db.get_value("Leave Allocation", name, "*", cache=True)
         
         if is_add_unused_leave == 1:
@@ -83,7 +83,8 @@ def update_leave_allocation_unused_leave(names, action):
 
         frappe.db.set_value('Leave Allocation', name, {
             'custom_total_unused_leave': total_unused_leave_value,
-            'custom_is_add_unused_leave': is_add_unused_leave
+            'custom_is_add_unused_leave': is_add_unused_leave,
+            'total_leaves_allocated': leave_allocation_data.new_leaves_allocated + total_unused_leave_value,
         })
     frappe.db.commit() 
 
