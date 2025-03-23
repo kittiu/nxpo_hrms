@@ -6,33 +6,33 @@ app_email = "kittiu@ecosoft.co.th"
 app_license = "mit"
 required_apps = ["thai_leave"]
 
-fixtures = [
-    {
-        "doctype": "Workflow State",
-        "filters": [
-            [
-                "name",
-                "in",
-                (
-                    "Pending Approval",
-                    "Cancelled",
-                )
-            ]
-        ]
-    },
-    {
-        "doctype": "Workflow",
-        "filters": [
-            [
-                "name",
-                "in",
-                (
-                    "NXPO Leave Application",
-                    "NXPO Offsite Work Request",
-                )
-            ]
-        ]
-    },
+# fixtures = [
+#     {
+#         "doctype": "Workflow State",
+#         "filters": [
+#             [
+#                 "name",
+#                 "in",
+#                 (
+#                     "Pending Approval",
+#                     "Cancelled",
+#                 )
+#             ]
+#         ]
+#     },
+#     {
+#         "doctype": "Workflow",
+#         "filters": [
+#             [
+#                 "name",
+#                 "in",
+#                 (
+#                     "NXPO Leave Application",
+#                     "NXPO Offsite Work Request",
+#                 )
+#             ]
+#         ]
+#     },
     # {
     #     "doctype": "Recruitment Type",
     #     "filters": [
@@ -84,52 +84,52 @@ fixtures = [
     #         ]
     #     ]
     # },
-    {
-        "doctype": "Report",
-        "filters": [
-            [
-                "name",
-                "in",
-                (
-                    "PND1a NXPO",
-                )
-            ]
-        ]
-    },
-    {
-        "doctype": "Custom Field",
-        "filters": [
-            [
-                "name",
-                "in",
-                (
-                    "Company-custom_policy",
-                    "Company-custom_owr_days_per_week",
-                    "Offsite Work Request-workflow_state",
-                    "Withholding Tax Cert Employee-custom_naming_series",
-                )
-            ]
-        ]
-    },
-    {
-        "doctype": "Role",
-        "filters": [
-            ["name", "in", ["Payroll User", "User Admin"]]
-        ]
-    },
-    {
-        "doctype": "Custom DocPerm",
-        "filters": [
-            ["name", "in", [
-                "umrsa4svvl",
-                "umrs35nh8j",
-                "umrsmga4pc",
-                "suhbscgpa6",
-                "stusri3f4n",
-            ]]
-        ]
-    },
-]
+#     {
+#         "doctype": "Report",
+#         "filters": [
+#             [
+#                 "name",
+#                 "in",
+#                 (
+#                     "PND1a NXPO",
+#                 )
+#             ]
+#         ]
+#     },
+#     {
+#         "doctype": "Custom Field",
+#         "filters": [
+#             [
+#                 "name",
+#                 "in",
+#                 (
+#                     "Company-custom_policy",
+#                     "Company-custom_owr_days_per_week",
+#                     "Offsite Work Request-workflow_state",
+#                     "Withholding Tax Cert Employee-custom_naming_series",
+#                 )
+#             ]
+#         ]
+#     },
+#     {
+#         "doctype": "Role",
+#         "filters": [
+#             ["name", "in", ["Payroll User", "User Admin"]]
+#         ]
+#     },
+#     {
+#         "doctype": "Custom DocPerm",
+#         "filters": [
+#             ["name", "in", [
+#                 "umrsa4svvl",
+#                 "umrs35nh8j",
+#                 "umrsmga4pc",
+#                 "suhbscgpa6",
+#                 "stusri3f4n",
+#             ]]
+#         ]
+#     },
+# ]
 
 # fixtures = [
 #     {
